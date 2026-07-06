@@ -38,11 +38,11 @@ allshowtv:
 sharedit:
   name: "쉐어드IT"
   base_url: "https://www.sharedit.co.kr"
-  listing_url: "https://www.sharedit.co.kr/webinars"
+  listing_url: "https://www.sharedit.co.kr/seminars?category_code=webinars"
   requires_js: true          # site returns 402 to plain HTTP clients
   requires_login: false
   scraper: sharedit
-  wait_selector: "body"
+  wait_selector: "a[href^='/seminars/']"
   login:
     url: "https://www.sharedit.co.kr/login"
     user_selector: "input[name='email'], input[name='userid'], #userid"
@@ -110,11 +110,11 @@ talkit:
 dubiz:
   name: "두비즈"
   base_url: "https://dubiz.co.kr"
-  listing_url: "https://dubiz.co.kr/webinar"
+  listing_url: "https://dubiz.co.kr/onoffmix/"
   requires_js: true
   requires_login: false
   scraper: dubiz
-  wait_selector: "body"
+  wait_selector: "a[href*='/Event/']"
   login:
     url: "https://dubiz.co.kr/member/login"
     user_selector: "input[name='email'], input[name='id']"

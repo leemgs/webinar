@@ -10,15 +10,18 @@
 | `allshowtv` | 올쇼TV | https://www.allshowtv.com | ✅ 실서비스 검증됨 |
 | `ddtube` | DD튜브 | https://www.ddtube.co.kr | ✅ 실서비스 검증됨(상세페이지 보강) |
 | `talkit` | 토크아이티 | https://talkit.tv | ✅ 실서비스 검증됨 |
-| `sharedit` | 쉐어드IT | https://www.sharedit.co.kr | ⚙️ 셀렉터 튜닝 필요 |
+| `sharedit` | 쉐어드IT | https://www.sharedit.co.kr | ✅ 실서비스 검증됨(제목 [MMDD] 코드 활용) |
+| `dubiz` | 두비즈 | https://dubiz.co.kr | 🟡 코드 작성 완료, 라이브 미검증(사내 프록시 차단) |
 | `e4ds` | e4ds | https://www.e4ds.com/webinar.asp | ⚙️ 로그인 필요 |
-| `dubiz` | 두비즈 | https://dubiz.co.kr | ⚙️ 셀렉터 튜닝 필요 |
 | `cloit` | CLOIT:ON | https://webinar.cloit.com | ⚙️ SPA, 현재 세션 없음 |
 
-> ✅ 3개 사이트는 실제 사이트에서 정상 수집을 확인했습니다. ⚙️ 나머지 4개는
-> 프레임워크·설정은 준비돼 있으나 실제 DOM/로그인에 맞춘 셀렉터 튜닝이 필요합니다
-> (`config/sites.yaml` 및 `src/webinar/scrapers/*.py`). 셀렉터가 안 맞으면 해당 사이트는
-> **빈 결과**를 내도록 설계돼 있어(날짜 파싱 실패 시 스킵) 잘못된 데이터가 올라가지 않습니다.
+> ✅ 4개 사이트는 실제 사이트에서 정상 수집을 확인했습니다.
+> 🟡 두비즈는 관찰된 구조(`/onoffmix/` → `/Event/NNN`)로 스크래퍼를 작성했으나
+> **사내 보안 프록시가 dubiz.co.kr을 차단**해 개발 환경에서 라이브 검증은 못 했습니다
+> — GitHub Actions(사외망)에서는 접근 가능하므로 첫 실행 후 확인하세요.
+> ⚙️ e4ds는 로그인, CLOIT:ON은 현재 대기 세션이 없어 셀렉터 검증이 보류 상태입니다.
+> 셀렉터가 안 맞으면 해당 사이트는 **빈 결과**를 내도록 설계돼 있어(날짜 파싱 실패 시 스킵)
+> 잘못된 데이터가 올라가지 않습니다.
 
 ## 동작 방식
 

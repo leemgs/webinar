@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-06T17:07:56.500983+09:00",
-  "count": 16,
+  "generated_at": "2026-07-06T17:44:43.467546+09:00",
+  "count": 20,
   "webinars": [
     {
       "source": "ddtube",
@@ -183,6 +183,21 @@
       "id": "allshowtv-38e6975c1a42"
     },
     {
+      "source": "sharedit",
+      "title": "Okta for AI Agent 론칭 웨비나",
+      "url": "https://www.sharedit.co.kr/seminars/2315",
+      "start_kst": "2026-07-15T00:00:00+09:00",
+      "end_kst": "2026-07-15T01:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.sharedit.co.kr/seminars/2315",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "id": "sharedit-6760bf5627d4"
+    },
+    {
       "source": "talkit",
       "title": "SW 공학 기반의 AI 에이전트 코딩 [박준성 회장/한국소프트웨어기술진흥협회]",
       "url": "https://talkit.tv/main/events/3701",
@@ -196,6 +211,21 @@
       "registered": false,
       "prizes": [],
       "id": "talkit-dbcbf51206d0"
+    },
+    {
+      "source": "sharedit",
+      "title": "보안 담당자들은 DLP 운영에 지치는 이유는?",
+      "url": "https://www.sharedit.co.kr/seminars/2318",
+      "start_kst": "2026-07-21T00:00:00+09:00",
+      "end_kst": "2026-07-21T01:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.sharedit.co.kr/seminars/2318",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "id": "sharedit-13201d62f18c"
     },
     {
       "source": "talkit",
@@ -241,6 +271,36 @@
       "registered": false,
       "prizes": [],
       "id": "ddtube-cc77278a6d1c"
+    },
+    {
+      "source": "sharedit",
+      "title": "AI 시대, 운영 가능한 보안은 어떤 모습이어야 하나?",
+      "url": "https://www.sharedit.co.kr/seminars/2319",
+      "start_kst": "2026-07-29T00:00:00+09:00",
+      "end_kst": "2026-07-29T01:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.sharedit.co.kr/seminars/2319",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "id": "sharedit-1ea31c53c6e6"
+    },
+    {
+      "source": "sharedit",
+      "title": "웹격리 RBI로 실현하는 안전한 망분리 완화",
+      "url": "https://www.sharedit.co.kr/seminars/2322",
+      "start_kst": "2026-08-06T00:00:00+09:00",
+      "end_kst": "2026-08-06T01:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.sharedit.co.kr/seminars/2322",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "id": "sharedit-e17a66871934"
     }
   ]
 }

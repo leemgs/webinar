@@ -144,6 +144,52 @@ def test_allshowtv_title_and_host():
     assert w.start_kst.startswith("2026-07-08T15:00")
 
 
+# --- sharedit listing scraper ---------------------------------------------
+SHAREDIT_HTML = """
+<html><body>
+  <nav class="tab"><a href="/seminars?category_code=webinars">웨비나</a></nav>
+  <ul class="list">
+    <div class="tag"><a title="[0729] AI 시대, 운영 가능한 보안은?" href="/seminars/2319">29일 (수)</a></div>
+    <div class="tag"><a title="Databricks Data + AI 러닝 페스티벌 2026" href="/seminars/2312">10일 (금)</a></div>
+    <div class="tag"><a title="[0729] AI 시대, 운영 가능한 보안은?" href="/seminars/2319">29일 (수)</a></div>
+  </ul>
+</body></html>
+"""
+
+
+def test_sharedit_scraper():
+    scraper = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    items = scraper.parse(SHAREDIT_HTML)
+    # nav link filtered, duplicate /seminars/2319 deduped -> 2 items
+    assert len(items) == 2
+    by_url = {w.url: w for w in items}
+    a = by_url["https://www.sharedit.co.kr/seminars/2319"]
+    assert a.title == "AI 시대, 운영 가능한 보안은?"      # [MMDD] stripped
+    assert a.start_kst.startswith("2026-07-29")            # from [0729] code
+
+
+# --- dubiz anchor-card scraper --------------------------------------------
+DUBIZ_HTML = """
+<html><body>
+  <a href="/Event/503">
+    <h3>생명 과학 산업의 미래: 자동화에서 자율 운영으로</h3>
+    <span>7월 16일(목) 10:30</span> <span>D-10</span>
+  </a>
+  <a href="/Event/502"><h3>제조 디지털 트랜스포메이션 웨비나</h3><span>7월 21일(화) 10:00</span></a>
+  <a href="/Replay/">리플레이</a>
+</body></html>
+"""
+
+
+def test_dubiz_scraper():
+    scraper = get_scraper("dubiz", {"base_url": "https://dubiz.co.kr"})
+    items = scraper.parse(DUBIZ_HTML)
+    assert len(items) == 2  # /Replay/ nav link excluded (no /Event/, no date)
+    w = next(x for x in items if x.url.endswith("/Event/503"))
+    assert "생명 과학" in w.title
+    assert w.start_kst.startswith("2026-07-16T10:30")
+
+
 # --- prize extraction ------------------------------------------------------
 def test_extract_prizes():
     text = "생방송 시청 후 설문 참여자 추첨하여 스타벅스 기프티콘을 드립니다."
