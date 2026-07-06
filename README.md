@@ -36,30 +36,44 @@
 홈페이지(`docs/`)는 `webinars.json`을 읽어 **월별 달력 / 목록** 뷰, **출처·경품 필터**,
 **경품 상세**, **구글 캘린더 추가 링크**를 제공합니다.
 
-## 로컬 실행
+## 요구사항
+
+- **Python 3.11+** (CI는 3.11 사용, 로컬 3.12 검증)
+- **Playwright Chromium** — `python -m playwright install chromium`
+  (리눅스에서 시스템 라이브러리가 없으면 `--with-deps` 필요, sudo 요구)
+- 의존성은 [requirements.txt](requirements.txt)에 **버전 고정**되어 재현 가능
+
+## 로컬 실행 (재현 절차)
 
 ```bash
+# 1) 클론
+git clone https://github.com/leemgs/webinar-auto-registration.git
+cd webinar-auto-registration
+
+# 2) 가상환경 + 의존성 (버전 고정)
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python -m playwright install chromium
+python -m playwright install chromium      # 필요시: --with-deps
 
+# 3) 소스 경로 (pytest.ini에도 pythonpath=src 설정됨)
 export PYTHONPATH=src
 
-# 공개 일정 스크래핑 + 데이터/홈페이지 생성
+# 4) 테스트 (오프라인, 브라우저 불필요)
+pytest                                      # 14 tests
+
+# 5) 공개 일정 스크래핑 + data/·docs/ 생성
 python -m webinar.pipeline -v
+python -m webinar.pipeline --site ddtube --site talkit -v   # 특정 사이트만
 
-# 특정 사이트만
-python -m webinar.pipeline --site ddtube --site talkit -v
-
-# 등록 플로우 시뮬레이션(제출 안 함)
+# 6) 등록 플로우 시뮬레이션 (실제 제출 안 함)
 python -m webinar.registrar --dry-run --site ddtube -v
 
-# 홈페이지 미리보기
-python -m http.server -d docs 8000   # http://localhost:8000
-
-# 테스트
-pytest
+# 7) 홈페이지 미리보기 → http://localhost:8000
+python -m http.server -d docs 8000
 ```
+
+> `data/webinars.json`은 **커밋되는 결과물**(진실의 원천)입니다. `pipeline`은 기존
+> 데이터와 **병합**하고(등록 상태·수동 경품 보존), 60일 지난 과거 웨비나는 정리합니다.
 
 ## 구글 캘린더 설정 (OAuth 리프레시 토큰)
 
@@ -140,6 +154,33 @@ data/webinars.json 수집 결과(진실의 원천)
 docs/              GitHub Pages 홈페이지
 tests/             오프라인 파서 테스트
 ```
+
+## 새 사이트 추가 / 스크래퍼 관리
+
+1. `config/sites.yaml` 에 사이트 항목 추가 (`base_url`, `listing_url`, `wait_selector`, `login`, `register`).
+2. `src/webinar/scrapers/<key>.py` 에 `Scraper(BaseScraper)` 작성 — `parse(html) -> list[Webinar]` 만 구현하면 됩니다. 공통 헬퍼 활용:
+   - `self.select_cards(soup, [selectors])` / `self.cards_to_webinars(cards, ...)`
+   - 날짜/시간 파서 `parse_date`, `parse_time` (한글 "7월 8일", `D-2`, "오후 2:00" 등 지원)
+   - `require_date=True`(기본): 날짜 파싱 실패 시 항목을 버려 **오탐 방지**
+3. `src/webinar/scrapers/__init__.py` 의 `SCRAPER_MODULES` 에 키 등록.
+4. `tests/test_parsers.py` 에 저장한 HTML 스니펫으로 **오프라인 테스트** 추가(브라우저 불필요).
+
+> 스크래퍼 설계 원칙: **fetch(브라우저)와 parse(HTML)를 분리** → parse는 픽스처로
+> 결정적 테스트 가능. 봇 차단/JS 렌더링은 실제 브라우저(Playwright)로 처리.
+> 사이트 개편 시 대부분 `config/sites.yaml` 의 셀렉터만 손보면 됩니다.
+
+## 문제 해결
+
+- **git push 실패 `Empty reply from server`**: 일부 사내 프록시가 HTTP/2 push(POST)를
+  끊습니다. HTTP/1.1 강제로 해결 — `git -c http.version=HTTP/1.1 push`.
+  (읽기 전용 fetch/ls-remote는 HTTP/2로도 동작)
+- **특정 사이트 수집 결과가 계속 0건**: 셀렉터 문제이기 전에 **네트워크 차단**을
+  먼저 확인하세요. 사내 보안 프록시가 외부 사이트(예: dubiz.co.kr)를 막으면 응답이
+  차단 안내 페이지로 옵니다. GitHub Actions(사외망)에서는 접근됩니다.
+- **`playwright` 브라우저 오류**: `python -m playwright install chromium` (리눅스 CI는
+  `--with-deps`). 워크플로우는 `--with-deps chromium` 를 사용합니다.
+- **개별 사이트 실패가 전체를 막지 않음**: 각 스크래퍼/단계는 예외를 흡수하고 로그만
+  남기도록 설계돼, 하루치 작업이 한 사이트 때문에 중단되지 않습니다.
 
 ## 주의
 
