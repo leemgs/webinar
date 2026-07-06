@@ -1,0 +1,144 @@
+# ---------------------------------------------------------------------------
+# Per-site configuration for scraping + auto-registration.
+#
+# Selectors are centralized here so they can be tuned without touching Python.
+# `register.enabled` is false by default; flip to true once the login flow has
+# been verified against a live account (credentials come from env, see .env.example).
+#
+# Fields:
+#   name            display name (Korean)
+#   base_url        site root
+#   listing_url     page listing upcoming webinars
+#   requires_js     true  -> must render with a real browser before parsing
+#   requires_login  true  -> listing/detail not visible without a session
+#   scraper         python module key in src/webinar/scrapers/
+#   wait_selector   (optional) CSS selector to await before scraping (SPA hydration)
+#   login:          login form flow (used by registrar)
+#   register:       registration button flow (used by registrar)
+# ---------------------------------------------------------------------------
+
+allshowtv:
+  name: "올쇼TV"
+  base_url: "https://www.allshowtv.com"
+  listing_url: "https://www.allshowtv.com"
+  requires_js: true
+  requires_login: false
+  scraper: allshowtv
+  wait_selector: "body"
+  login:
+    url: "https://www.allshowtv.com/member/login"
+    user_selector: "input[name='email'], input[name='id'], #id"
+    pass_selector: "input[name='password'], input[type='password'], #password"
+    submit_selector: "button[type='submit'], .btn_login"
+  register:
+    enabled: false
+    button_selector: ".btn_apply, a:has-text('신청'), button:has-text('신청')"
+    confirm_selector: "button:has-text('확인'), button:has-text('신청완료')"
+
+sharedit:
+  name: "쉐어드IT"
+  base_url: "https://www.sharedit.co.kr"
+  listing_url: "https://www.sharedit.co.kr/seminars?category_code=webinars"
+  requires_js: true          # site returns 402 to plain HTTP clients
+  requires_login: false
+  scraper: sharedit
+  wait_selector: "a[href^='/seminars/']"
+  login:
+    url: "https://www.sharedit.co.kr/login"
+    user_selector: "input[name='email'], input[name='userid'], #userid"
+    pass_selector: "input[type='password']"
+    submit_selector: "button[type='submit'], .btn-login"
+  register:
+    enabled: false
+    button_selector: "a:has-text('신청'), button:has-text('신청')"
+    confirm_selector: "button:has-text('확인')"
+
+ddtube:
+  name: "DD튜브"
+  base_url: "https://www.ddtube.co.kr"
+  listing_url: "https://www.ddtube.co.kr"
+  requires_js: true
+  requires_login: false
+  scraper: ddtube
+  wait_selector: "body"
+  login:
+    url: "https://www.ddtube.co.kr/login"
+    user_selector: "input[name='email'], input[name='id']"
+    pass_selector: "input[type='password']"
+    submit_selector: "button[type='submit']"
+  register:
+    enabled: false
+    button_selector: ".btn_apply, a:has-text('사전등록'), button:has-text('신청')"
+    confirm_selector: "button:has-text('확인'), button:has-text('완료')"
+
+e4ds:
+  name: "e4ds"
+  base_url: "https://www.e4ds.com"
+  listing_url: "https://www.e4ds.com/webinar.asp"
+  requires_js: true
+  requires_login: true        # details require a logged-in session
+  scraper: e4ds
+  wait_selector: "body"
+  login:
+    url: "https://www.e4ds.com/login.asp"
+    user_selector: "input[name='mem_id'], #mem_id"
+    pass_selector: "input[name='mem_pass'], input[type='password']"
+    submit_selector: "input[type='submit'], button[type='submit']"
+  register:
+    enabled: false
+    button_selector: "a:has-text('신청'), button:has-text('신청')"
+    confirm_selector: "button:has-text('확인')"
+
+talkit:
+  name: "토크아이티"
+  base_url: "https://talkit.tv"
+  listing_url: "https://talkit.tv/main/webinars/upcoming"
+  requires_js: true
+  requires_login: false
+  scraper: talkit
+  wait_selector: "a[href*='/main/events/']"
+  login:
+    url: "https://talkit.tv/Member/Login"
+    user_selector: "input[name='email'], input[name='id'], #id"
+    pass_selector: "input[type='password']"
+    submit_selector: "button[type='submit'], .btn_login"
+  register:
+    enabled: false
+    button_selector: "a:has-text('사전신청'), button:has-text('신청')"
+    confirm_selector: "button:has-text('확인')"
+
+dubiz:
+  name: "두비즈"
+  base_url: "https://dubiz.co.kr"
+  listing_url: "https://dubiz.co.kr/onoffmix/"
+  requires_js: true
+  requires_login: false
+  scraper: dubiz
+  wait_selector: "a[href*='/Event/']"
+  login:
+    url: "https://dubiz.co.kr/member/login"
+    user_selector: "input[name='email'], input[name='id']"
+    pass_selector: "input[type='password']"
+    submit_selector: "button[type='submit'], .btn-login"
+  register:
+    enabled: false
+    button_selector: "a:has-text('신청'), button:has-text('사전등록')"
+    confirm_selector: "button:has-text('확인')"
+
+cloit:
+  name: "CLOIT:ON"
+  base_url: "https://webinar.cloit.com"
+  listing_url: "https://webinar.cloit.com"
+  requires_js: true           # JS-rendered SPA
+  requires_login: false
+  scraper: cloit
+  wait_selector: "body"
+  login:
+    url: "https://webinar.cloit.com/login"
+    user_selector: "input[name='email'], input[type='email']"
+    pass_selector: "input[type='password']"
+    submit_selector: "button[type='submit']"
+  register:
+    enabled: false
+    button_selector: "button:has-text('신청'), a:has-text('신청')"
+    confirm_selector: "button:has-text('확인')"

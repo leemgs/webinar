@@ -1,0 +1,90 @@
+name: Daily webinar sync
+
+on:
+  schedule:
+    # 23:00 UTC = 08:00 KST, once per day
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Registration dry-run (no submit)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: webinar-daily
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: src
+      # Google Calendar
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+      GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
+      # Per-site credentials (blank secrets => that site is skipped for registration)
+      SITE_ALLSHOWTV_USER: ${{ secrets.SITE_ALLSHOWTV_USER }}
+      SITE_ALLSHOWTV_PASS: ${{ secrets.SITE_ALLSHOWTV_PASS }}
+      SITE_SHAREDIT_USER: ${{ secrets.SITE_SHAREDIT_USER }}
+      SITE_SHAREDIT_PASS: ${{ secrets.SITE_SHAREDIT_PASS }}
+      SITE_DDTUBE_USER: ${{ secrets.SITE_DDTUBE_USER }}
+      SITE_DDTUBE_PASS: ${{ secrets.SITE_DDTUBE_PASS }}
+      SITE_E4DS_USER: ${{ secrets.SITE_E4DS_USER }}
+      SITE_E4DS_PASS: ${{ secrets.SITE_E4DS_PASS }}
+      SITE_TALKIT_USER: ${{ secrets.SITE_TALKIT_USER }}
+      SITE_TALKIT_PASS: ${{ secrets.SITE_TALKIT_PASS }}
+      SITE_DUBIZ_USER: ${{ secrets.SITE_DUBIZ_USER }}
+      SITE_DUBIZ_PASS: ${{ secrets.SITE_DUBIZ_PASS }}
+      SITE_CLOIT_USER: ${{ secrets.SITE_CLOIT_USER }}
+      SITE_CLOIT_PASS: ${{ secrets.SITE_CLOIT_PASS }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Chromium
+        run: python -m playwright install --with-deps chromium
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Scrape webinars + publish dataset
+        run: python -m webinar.pipeline -v
+
+      - name: Auto-register (enabled sites only)
+        run: python -m webinar.registrar ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }} -v
+        continue-on-error: true
+
+      - name: Sync Google Calendar
+        run: python -m webinar.calendar_sync -v
+        continue-on-error: true
+
+      - name: Refresh docs data (json + ics)
+        run: python -m webinar.pipeline --no-publish -v && cp data/webinars.json docs/webinars.json && python -m webinar.ics_export
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/webinars.json docs/webinars.json docs/webinars.ics
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: daily webinar sync $(date -u +%Y-%m-%d)"
+            git push
+          fi

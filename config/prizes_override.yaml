@@ -1,0 +1,23 @@
+# ---------------------------------------------------------------------------
+# Manual prize (경품) overrides, keyed by webinar id (see data/webinars.json).
+#
+# Prize info is often only visible on detail pages or after login, so the
+# auto-scraper is best-effort. Add/curate entries here to correct or enrich it.
+# Entries here are MERGED over scraped prizes (override wins on same type).
+#
+# type: one of survey | question | consult | attendance
+#   survey     = 설문 참여 경품
+#   question   = 질문/댓글 경품
+#   consult    = 상담 신청 경품
+#   attendance = 시청/참석 경품
+#
+# Example:
+#
+# "ddtube:https://www.ddtube.co.kr/d2107/":
+#   - type: survey
+#     item: "스타벅스 아메리카노"
+#     condition: "시청 후 설문 참여자 추첨 20명"
+#   - type: attendance
+#     item: "배달의민족 상품권 1만원"
+#     condition: "생방송 시청 인증"
+# ---------------------------------------------------------------------------

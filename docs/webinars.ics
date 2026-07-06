@@ -1,0 +1,143 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//webinar-auto-registration//KR//
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:웨비나 일정
+X-WR-TIMEZONE:Asia/Seoul
+BEGIN:VEVENT
+UID:ddtube-1465547421ba@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260708T050000Z
+DTEND:20260708T060000Z
+SUMMARY:[웨비나] [Synology] 차세대 올플래시 NVMe 스토리지로 구현하는 핵심 워크로드 혁신
+DESCRIPTION:신청: https://www.ddtube.co.kr/d2107/
+URL:https://www.ddtube.co.kr/d2107/
+END:VEVENT
+BEGIN:VEVENT
+UID:allshowtv-c772d7ec8ac2@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260708T060000Z
+DTEND:20260708T070000Z
+SUMMARY:[웨비나] Copilot 이후\, 기업은 왜 Entrerprise AI Platform 체계로 가는가? Copilot + AI Agent 활용 전략
+DESCRIPTION:주최: 엠클라우드브리지\n신청: https://www.allshowtv.com/detail.html?idx=1735
+URL:https://www.allshowtv.com/detail.html?idx=1735
+END:VEVENT
+BEGIN:VEVENT
+UID:allshowtv-464a7cf4f1a2@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260709T050000Z
+DTEND:20260709T060000Z
+SUMMARY:[웨비나] Copilot & Agent Day
+DESCRIPTION:주최: 한국마이크로소프트\n신청: https://www.allshowtv.com/detail.html?idx=1732
+URL:https://www.allshowtv.com/detail.html?idx=1732
+END:VEVENT
+BEGIN:VEVENT
+UID:ddtube-ab07cd0e4d50@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260709T050000Z
+DTEND:20260709T060000Z
+SUMMARY:[웨비나] [Black Duck x KMS Technology] 2026 OSSRA Report로 보는 오픈소스 보안 리스크와 대응 전략
+DESCRIPTION:신청: https://www.ddtube.co.kr/d2108/
+URL:https://www.ddtube.co.kr/d2108/
+END:VEVENT
+BEGIN:VEVENT
+UID:talkit-a13fca0310e7@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260709T050000Z
+DTEND:20260709T060000Z
+SUMMARY:[웨비나] 미토스가 촉발한 AI 기반 Identity 공격 위험과 Silverfort 대응 전략 [네오아이앤이]
+DESCRIPTION:신청: https://talkit.tv/main/events/3697
+URL:https://talkit.tv/main/events/3697
+END:VEVENT
+BEGIN:VEVENT
+UID:talkit-c288487a78a6@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260710T050000Z
+DTEND:20260710T060000Z
+SUMMARY:[웨비나] AI가 공간을 읽는다 - 설계자동화 대변혁의 시작
+DESCRIPTION:신청: https://talkit.tv/main/events/3702
+URL:https://talkit.tv/main/events/3702
+END:VEVENT
+BEGIN:VEVENT
+UID:allshowtv-38e6975c1a42@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260714T050000Z
+DTEND:20260714T060000Z
+SUMMARY:[웨비나] Perforce P4 Plan(Helix Plan)으로 완성하는 애자일 마스터 클래스
+DESCRIPTION:주최: 플래티어\n신청: https://www.allshowtv.com/detail.html?idx=1733
+URL:https://www.allshowtv.com/detail.html?idx=1733
+END:VEVENT
+BEGIN:VEVENT
+UID:sharedit-6760bf5627d4@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260714T150000Z
+DTEND:20260714T160000Z
+SUMMARY:[웨비나] Okta for AI Agent 론칭 웨비나
+DESCRIPTION:신청: https://www.sharedit.co.kr/seminars/2315
+URL:https://www.sharedit.co.kr/seminars/2315
+END:VEVENT
+BEGIN:VEVENT
+UID:talkit-dbcbf51206d0@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260715T050000Z
+DTEND:20260715T060000Z
+SUMMARY:[웨비나] SW 공학 기반의 AI 에이전트 코딩 [박준성 회장/한국소프트웨어기술진흥협회]
+DESCRIPTION:신청: https://talkit.tv/main/events/3701
+URL:https://talkit.tv/main/events/3701
+END:VEVENT
+BEGIN:VEVENT
+UID:sharedit-13201d62f18c@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260720T150000Z
+DTEND:20260720T160000Z
+SUMMARY:[웨비나] 보안 담당자들은 DLP 운영에 지치는 이유는?
+DESCRIPTION:신청: https://www.sharedit.co.kr/seminars/2318
+URL:https://www.sharedit.co.kr/seminars/2318
+END:VEVENT
+BEGIN:VEVENT
+UID:talkit-2f9a51c39a78@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260721T050000Z
+DTEND:20260721T060000Z
+SUMMARY:[웨비나] 고강성 연속섬유 3D 프린팅으로 항공우주·방위산업의 제조혁신을 앞당기다!
+DESCRIPTION:신청: https://talkit.tv/main/events/3700
+URL:https://talkit.tv/main/events/3700
+END:VEVENT
+BEGIN:VEVENT
+UID:ddtube-ac66b3a52e79@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260722T043000Z
+DTEND:20260722T053000Z
+SUMMARY:[웨비나] [Data Innovation for AI 2026] AI 시대 DB 전략과 데이터 플랫폼 혁신
+DESCRIPTION:신청: https://www.ddtube.co.kr/d2109/
+URL:https://www.ddtube.co.kr/d2109/
+END:VEVENT
+BEGIN:VEVENT
+UID:ddtube-cc77278a6d1c@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260723T050000Z
+DTEND:20260723T060000Z
+SUMMARY:[웨비나] [한국IBM] 기획부터 배포까지 바이브코딩하는 AI-powered SDLC 파트너\, IBM Bob
+DESCRIPTION:신청: https://www.ddtube.co.kr/d2110/
+URL:https://www.ddtube.co.kr/d2110/
+END:VEVENT
+BEGIN:VEVENT
+UID:sharedit-1ea31c53c6e6@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260728T150000Z
+DTEND:20260728T160000Z
+SUMMARY:[웨비나] AI 시대\, 운영 가능한 보안은 어떤 모습이어야 하나?
+DESCRIPTION:신청: https://www.sharedit.co.kr/seminars/2319
+URL:https://www.sharedit.co.kr/seminars/2319
+END:VEVENT
+BEGIN:VEVENT
+UID:sharedit-e17a66871934@webinar-auto-registration
+DTSTAMP:20260706T084443Z
+DTSTART:20260805T150000Z
+DTEND:20260805T160000Z
+SUMMARY:[웨비나] 웹격리 RBI로 실현하는 안전한 망분리 완화
+DESCRIPTION:신청: https://www.sharedit.co.kr/seminars/2322
+URL:https://www.sharedit.co.kr/seminars/2322
+END:VEVENT
+END:VCALENDAR
