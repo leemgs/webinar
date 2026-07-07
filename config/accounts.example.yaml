@@ -38,3 +38,7 @@ dubiz:
 cloit:
   user: ""
   pass: ""
+
+eventus:
+  user: ""
+  pass: ""
