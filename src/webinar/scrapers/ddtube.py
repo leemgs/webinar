@@ -65,21 +65,10 @@ class Scraper(BaseScraper):
             webinar.start_kst = start
             webinar.end_kst = add_hours_iso(start, 1.0)
         # collect images: prize/event banners (by filename) + a title banner thumbnail
-        prize_imgs, banner = [], ""
-        for im in soup.select("img"):
-            src = im.get("src") or im.get("data-src") or ""
-            if not src or src.startswith("data:"):
-                continue
-            src = self.abs_url(src)
-            if src.startswith("http://"):  # avoid mixed-content on https Pages
-                src = "https://" + src[len("http://"):]
-            if prizes.is_prize_image(src):
-                if src not in prize_imgs:
-                    prize_imgs.append(src)
-            elif not banner and "2560" in src:  # the wide title banner
-                banner = src
-        webinar.prize_images = prize_imgs
+        imgs = self.detail_images(soup)
+        webinar.prize_images = [u for u in imgs if prizes.is_prize_image(u)]
         og = soup.select_one("meta[property='og:image']")
+        banner = next((u for u in imgs if "2560" in u), "")  # wide title banner
         webinar.thumbnail = (og.get("content") if og and og.get("content") else "") or banner
 
     def fetch(self, browser):

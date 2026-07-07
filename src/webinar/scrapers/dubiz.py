@@ -8,7 +8,11 @@ are anchors to /Event/NNN with a title and a date like "7월 16일(목) 10:30".
 """
 from __future__ import annotations
 
+import logging
+
 from .base import BaseScraper
+
+log = logging.getLogger(__name__)
 
 
 class Scraper(BaseScraper):
@@ -32,3 +36,14 @@ class Scraper(BaseScraper):
             title_sel="h3, h4, .tit, .title, strong, .subject",
             host_sel=".host, .company, .org",
         )
+
+    def fetch(self, browser):
+        # enrich each /Event/NNN detail page for prize-named banner images.
+        # (dubiz is blocked on some corporate proxies; this runs in CI.)
+        items = super().fetch(browser)
+        for w in items:
+            try:
+                self.enrich_from_detail(browser, w)
+            except Exception as e:
+                log.warning("[dubiz] enrich failed for %s: %s", w.url, e)
+        return items
