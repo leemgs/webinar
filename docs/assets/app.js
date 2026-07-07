@@ -158,7 +158,7 @@ function renderCalendar() {
       ev.className = "ev";
       ev.style.background = SRC_HEX[w.source] || "#666";
       const gift = (w.prizes && w.prizes.length) ? '<span class="gift">🎁</span>' : "";
-      ev.innerHTML = `${gift}<span>${fmtTime(w.start_kst)} ${escapeHtml(w.title)}</span>`;
+      ev.innerHTML = `${gift}<span class="ev-title">${fmtTime(w.start_kst)} ${escapeHtml(w.title)}</span>`;
       ev.title = w.title;
       ev.onclick = () => openModal(w);
       cell.appendChild(ev);
@@ -240,13 +240,16 @@ function gcalLink(w) {
 
 function openModal(w) {
   const body = $("#modal-body");
+  // Always show a 경품 section: list known prizes, else a "check the source" note.
   const prizeHtml = (w.prizes || []).length
     ? `<div class="modal-prizes"><h4>🎁 경품 정보</h4>${w.prizes.map((p) => `
         <div class="prize-item">
           <div class="p-head"><span class="badge" style="background:${PRIZES[p.type]?.hex || '#888'}">${PRIZES[p.type]?.name || p.type}</span>${p.item ? `<strong>${escapeHtml(p.item)}</strong>` : ""}</div>
           ${p.condition ? `<div class="p-cond">${escapeHtml(p.condition)}</div>` : ""}
         </div>`).join("")}</div>`
-    : "";
+    : `<div class="modal-prizes"><h4>🎁 경품 정보</h4>
+        <div class="prize-empty">경품 정보가 아직 확인되지 않았습니다. 아래 <b>사이트에서 신청</b>에서 설문·시청·상담 경품(예: 스타벅스 쿠폰·태블릿 등)을 확인하세요.</div>
+       </div>`;
 
   const gcal = gcalLink(w);
   body.innerHTML = `
