@@ -50,6 +50,7 @@ class Webinar:
     tags: list[str] = field(default_factory=list)
     registered: bool = False
     prizes: list[Prize] = field(default_factory=list)
+    prize_images: list[str] = field(default_factory=list)  # 경품 안내 배너 이미지 URL
     id: str = ""  # stable hash; filled in __post_init__
 
     def __post_init__(self) -> None:
@@ -82,5 +83,6 @@ class Webinar:
             tags=list(d.get("tags", [])),
             registered=bool(d.get("registered", False)),
             prizes=prizes,
+            prize_images=list(d.get("prize_images", [])),
             id=d.get("id", ""),
         )

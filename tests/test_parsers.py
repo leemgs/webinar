@@ -219,6 +219,15 @@ def test_extract_prizes_empty():
     assert prizes.extract_prizes("그냥 일반 웨비나 소개 문구") == []
 
 
+def test_is_prize_image():
+    assert prizes.is_prize_image("https://x/2026/06/event.jpg")
+    assert prizes.is_prize_image("https://x/synology_participate.jpg")
+    assert prizes.is_prize_image("https://x/uploads/참여방법_Orange5.jpg")
+    assert not prizes.is_prize_image("https://x/2026/06/logo.jpg")
+    assert not prizes.is_prize_image("https://x/2560-1440-1024x576.jpg")
+    assert not prizes.is_prize_image("")
+
+
 # --- credentials precedence -----------------------------------------------
 def test_site_credentials_from_env(monkeypatch):
     monkeypatch.setenv("SITE_FOO_USER", "u1")

@@ -22,6 +22,19 @@ _KEYWORDS = [
 # sentence fragments that likely describe a giveaway
 _PRIZE_HINT = re.compile(r"(경품|추첨|기프티콘|상품권|커피|아메리카노|백화점|이벤트)")
 
+# image filename cues that mark a 경품/이벤트/참여방법 banner (prize info as image)
+_PRIZE_IMG = re.compile(
+    r"(event|gift|present|prize|경품|이벤트|추첨|참여방법|participat|benefit|혜택)",
+    re.IGNORECASE,
+)
+
+
+def is_prize_image(url: str) -> bool:
+    """True if an image URL looks like a 경품/이벤트/참여방법 banner (by filename)."""
+    if not url or url.startswith("data:"):
+        return False
+    return bool(_PRIZE_IMG.search(url))
+
 
 def extract_prizes(text: str) -> list[Prize]:
     """Scan free text for giveaway hints and classify them by type."""

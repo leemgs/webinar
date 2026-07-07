@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T18:50:55.820633+09:00",
+  "generated_at": "2026-07-07T19:31:47.334804+09:00",
   "count": 24,
   "webinars": [
     {
@@ -11,10 +11,13 @@
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2102/",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/04/th2560_f-1-1024x576.png",
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/02/참여방법_0402.jpg"
+      ],
       "id": "ddtube-ef9a32f98d72"
     },
     {
@@ -30,6 +33,10 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/04/260611_AIWAVE2026_virtual_event.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/04/참여방법_Blue4.jpg"
+      ],
       "id": "ddtube-fed0f3a59330"
     },
     {
@@ -41,10 +48,14 @@
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2104/",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/05/썸네일-2560px-1024x576.png",
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/05/260616_planit_event-1.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/05/260616_planit_참여방법.jpg"
+      ],
       "id": "ddtube-1b1ebaefaae0"
     },
     {
@@ -56,10 +67,13 @@
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2105/",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/05/2560-1440-2-1024x576.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/05/참여방법-e1780044889439-1024x409.png"
+      ],
       "id": "ddtube-2e43213d07a9"
     },
     {
@@ -75,6 +89,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/EVENT_F.png"
+      ],
       "id": "ddtube-3aeb21a7eda2"
     },
     {
@@ -86,10 +103,14 @@
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2107/",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/06/2560-1440-1024x576.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/synology_event_ffff.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/synology_participate.jpg"
+      ],
       "id": "ddtube-1465547421ba"
     },
     {
@@ -105,6 +126,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "allshowtv-c772d7ec8ac2"
     },
     {
@@ -120,6 +142,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "allshowtv-464a7cf4f1a2"
     },
     {
@@ -131,10 +154,14 @@
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2108/",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/06/썸네일_2560_F-1024x576.png",
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/이벤트-1.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/참여방법.jpg"
+      ],
       "id": "ddtube-ab07cd0e4d50"
     },
     {
@@ -150,6 +177,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "sharedit-5f9d97b6d148"
     },
     {
@@ -165,6 +193,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "talkit-a13fca0310e7"
     },
     {
@@ -180,6 +209,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "talkit-c288487a78a6"
     },
     {
@@ -195,6 +225,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "allshowtv-38e6975c1a42"
     },
     {
@@ -210,6 +241,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "sharedit-6760bf5627d4"
     },
     {
@@ -225,6 +257,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "talkit-dbcbf51206d0"
     },
     {
@@ -240,6 +273,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "sharedit-7ba36d8d02ed"
     },
     {
@@ -255,6 +289,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "sharedit-13201d62f18c"
     },
     {
@@ -270,6 +305,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "talkit-2f9a51c39a78"
     },
     {
@@ -285,6 +321,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "sharedit-61b2cd7d7e04"
     },
     {
@@ -296,10 +333,14 @@
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2109/",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/06/2560-1440-2-1024x576.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/event.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/참여방법_Orange5.jpg"
+      ],
       "id": "ddtube-ac66b3a52e79"
     },
     {
@@ -311,10 +352,14 @@
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2110/",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260723_IBM-Bob_썸네일-2560-1024x576.png",
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260723_IBM-Bob_event.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/07/참여방법_Blue5.jpg"
+      ],
       "id": "ddtube-cc77278a6d1c"
     },
     {
@@ -330,6 +375,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "talkit-3f1df48b135e"
     },
     {
@@ -345,6 +391,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "sharedit-1ea31c53c6e6"
     },
     {
@@ -360,6 +407,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
+      "prize_images": [],
       "id": "sharedit-e17a66871934"
     }
   ]

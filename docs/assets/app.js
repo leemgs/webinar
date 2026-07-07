@@ -240,16 +240,19 @@ function gcalLink(w) {
 
 function openModal(w) {
   const body = $("#modal-body");
-  // Always show a 경품 section: list known prizes, else a "check the source" note.
-  const prizeHtml = (w.prizes || []).length
-    ? `<div class="modal-prizes"><h4>🎁 경품 정보</h4>${w.prizes.map((p) => `
+  // 경품 섹션: 텍스트 경품(배지) + 경품 안내 이미지(배너)를 함께 표시, 없으면 안내.
+  const prizeItems = (w.prizes || []).map((p) => `
         <div class="prize-item">
           <div class="p-head"><span class="badge" style="background:${PRIZES[p.type]?.hex || '#888'}">${PRIZES[p.type]?.name || p.type}</span>${p.item ? `<strong>${escapeHtml(p.item)}</strong>` : ""}</div>
           ${p.condition ? `<div class="p-cond">${escapeHtml(p.condition)}</div>` : ""}
-        </div>`).join("")}</div>`
-    : `<div class="modal-prizes"><h4>🎁 경품 정보</h4>
-        <div class="prize-empty">경품 안내는 주최 측이 <b>홍보 이미지</b>로만 제공하는 경우가 많습니다. ${w.thumbnail ? "위 <b>홍보 배너</b> 또는 " : ""}아래 <b>사이트에서 신청</b>에서 설문·시청·상담 경품(예: 스타벅스 쿠폰·태블릿 등)을 확인하세요.</div>
-       </div>`;
+        </div>`).join("");
+  const prizeImgs = (w.prize_images || [])
+    .map((src) => `<img class="prize-img" src="${encodeURI(src)}" alt="${escapeHtml(w.title)} 경품 안내" loading="lazy">`)
+    .join("");
+  const prizeInner = prizeItems || prizeImgs
+    ? prizeItems + prizeImgs
+    : `<div class="prize-empty">경품 안내는 주최 측이 <b>홍보 이미지</b>로만 제공하는 경우가 많습니다. ${w.thumbnail ? "위 <b>홍보 배너</b> 또는 " : ""}아래 <b>사이트에서 신청</b>에서 설문·시청·상담 경품(예: 스타벅스 쿠폰·태블릿 등)을 확인하세요.</div>`;
+  const prizeHtml = `<div class="modal-prizes"><h4>🎁 경품 정보</h4>${prizeInner}</div>`;
 
   const gcal = gcalLink(w);
   body.innerHTML = `
