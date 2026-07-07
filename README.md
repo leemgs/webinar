@@ -3,6 +3,66 @@
 국내 IT 웨비나를 **매일 자동으로 수집·등록**하고, **구글 캘린더에 추가**하며,
 **월별 일정 + 경품 정보 홈페이지**(GitHub Pages)로 공개하는 프로젝트입니다.
 
+---
+
+## 🧩 한눈에 보기
+
+7개 웨비나 사이트에서 일정을 **수집**하고, 하나의 데이터(`data/webinars.json`)로 **정리**한 뒤,
+**등록·캘린더·홈페이지** 세 갈래로 **활용**하는 단일 파이프라인입니다. 매일 GitHub Actions가 돌립니다.
+
+```mermaid
+flowchart LR
+    subgraph SRC["🌐 웨비나 사이트 (7)"]
+        S1["올쇼TV · DD튜브<br/>토크아이티 · 쉐어드IT"]
+        S2["두비즈 · e4ds<br/>CLOIT:ON"]
+    end
+
+    subgraph PIPE["🐍 pipeline.py · Playwright"]
+        direction LR
+        SC["📡 scrapers<br/><b>수집</b><br/>파싱·정규화"]
+        PR["🎁 prizes<br/><b>경품 추출</b>"]
+        MG["🗃️ storage<br/><b>병합·정리</b>"]
+        SC --> PR --> MG
+    end
+
+    DB[("📄 data/webinars.json<br/><b>진실의 원천</b>")]
+
+    subgraph OUT["🎯 활용"]
+        RG["📝 registrar<br/>사전등록"]
+        CAL["📅 calendar_sync<br/>구글 캘린더"]
+        WEB["🌐 docs/ 홈페이지<br/>+ webinars.ics"]
+    end
+
+    S1 --> SC
+    S2 --> SC
+    MG --> DB
+    DB --> RG
+    DB --> CAL
+    DB --> WEB
+    RG -. "등록 상태 기록" .-> DB
+    CRON["⏰ GitHub Actions<br/>매일 08:00 KST"] -. "트리거" .-> PIPE
+
+    style SC fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a
+    style PR fill:#fef3c7,stroke:#f59e0b,color:#78350f
+    style MG fill:#e9d5ff,stroke:#a855f7,color:#581c87
+    style DB fill:#dcfce7,stroke:#22c55e,color:#14532d
+    style WEB fill:#dcfce7,stroke:#22c55e,color:#14532d
+    style RG fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
+    style CAL fill:#fef3c7,stroke:#f59e0b,color:#78350f
+```
+
+| 단계 | 모듈 | 한 줄 설명 |
+|---|---|---|
+| 📡 **수집** | [`scrapers/`](src/webinar/scrapers) | 7개 사이트에서 제목·일시·링크·썸네일 파싱 (봇 차단/JS는 Playwright로) |
+| 🎁 **경품 추출** | [`prizes.py`](src/webinar/prizes.py) | 설문/질문/상담/참석 경품 키워드 추출 + 수동 오버라이드 병합 |
+| 🗃️ **정리** | [`storage.py`](src/webinar/storage.py) | 기존 데이터와 병합(등록 상태·경품 보존), 60일 지난 항목 정리 |
+| 📝 **등록** | [`registrar.py`](src/webinar/registrar.py) | (활성 사이트) 로그인 후 사전등록, 멱등 |
+| 📅 **캘린더** | [`calendar_sync.py`](src/webinar/calendar_sync.py) | 구글 캘린더 upsert(중복 없음) + [`ics_export.py`](src/webinar/ics_export.py) 백업 |
+| 🌐 **공개** | [`docs/`](docs) | 월별 달력/목록·필터·경품·구글캘린더 링크 홈페이지 (GitHub Pages) |
+| ⏰ **자동화** | [`daily.yml`](.github/workflows/daily.yml) | 매일 08:00 KST cron으로 위 전 과정 실행·커밋 |
+
+---
+
 ## 대상 사이트
 
 | 키 | 이름 | 주소 | 스크래퍼 상태 |
@@ -23,18 +83,43 @@
 > 셀렉터가 안 맞으면 해당 사이트는 **빈 결과**를 내도록 설계돼 있어(날짜 파싱 실패 시 스킵)
 > 잘못된 데이터가 올라가지 않습니다.
 
-## 동작 방식
+## 동작 흐름 (Operation Flow)
 
-```
-매일 08:00 KST (GitHub Actions cron)
-  1. pipeline.py     → 7개 사이트 스크래핑 → 경품 추출 → data/webinars.json 생성
-  2. registrar.py    → (활성화된 사이트) 로그인 후 사전등록
-  3. calendar_sync.py→ 등록한 웨비나를 구글 캘린더에 추가(멱등)
-  4. docs/ 갱신       → webinars.json + webinars.ics 재생성 후 커밋
+매일 1회, GitHub Actions가 아래 순서로 실행합니다. 각 단계는 독립적으로 실패를 흡수하므로
+한 사이트/한 단계가 실패해도 나머지는 계속 진행됩니다.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant CR as ⏰ Actions cron
+    participant PP as 🐍 pipeline.py
+    participant ST as 🌐 웨비나 사이트
+    participant DB as 📄 webinars.json
+    participant RG as 📝 registrar
+    participant GC as 📅 Google Calendar
+    participant PG as 🌐 docs/ (Pages)
+
+    CR->>PP: 매일 08:00 KST 실행
+    PP->>ST: 7개 사이트 스크래핑
+    ST-->>PP: 웨비나 목록(제목·일시·링크)
+    PP->>PP: 경품 추출 + 기존 데이터 병합·정리
+    PP->>DB: webinars.json 저장
+    PP->>RG: (enabled·계정 있는 사이트) 등록 요청
+    RG->>ST: 로그인 → 사전등록 제출
+    RG->>DB: registered=true 기록
+    PP->>GC: 등록 웨비나 캘린더 upsert(멱등)
+    PP->>PG: webinars.json / webinars.ics 갱신 후 커밋
+    Note over PG: GitHub Pages가 홈페이지 자동 갱신
 ```
 
-홈페이지(`docs/`)는 `webinars.json`을 읽어 **월별 달력 / 목록** 뷰, **출처·경품 필터**,
-**경품 상세**, **구글 캘린더 추가 링크**를 제공합니다.
+1. **수집** — `pipeline.py`가 7개 사이트를 스크래핑하고 경품을 추출합니다.
+2. **정리** — 기존 `data/webinars.json`과 병합(등록 상태·수동 경품 보존), 60일 지난 항목 정리.
+3. **등록** — 계정이 있고 `register.enabled: true`인 사이트에 로그인 후 사전등록(멱등).
+4. **캘린더** — 등록 웨비나를 구글 캘린더에 upsert하고 `webinars.ics` 백업 피드 생성.
+5. **공개** — `docs/`의 데이터를 갱신·커밋 → GitHub Pages 홈페이지 자동 반영.
+
+> 홈페이지(`docs/`)는 `webinars.json`을 읽어 **월별 달력 / 목록** 뷰, **출처·경품 필터**,
+> **경품 상세**, **구글 캘린더 추가 링크**를 제공합니다.
 
 ## 요구사항
 
