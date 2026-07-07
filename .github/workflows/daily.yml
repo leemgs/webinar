@@ -43,6 +43,8 @@ jobs:
       SITE_DUBIZ_PASS: ${{ secrets.SITE_DUBIZ_PASS }}
       SITE_CLOIT_USER: ${{ secrets.SITE_CLOIT_USER }}
       SITE_CLOIT_PASS: ${{ secrets.SITE_CLOIT_PASS }}
+      SITE_EVENTUS_USER: ${{ secrets.SITE_EVENTUS_USER }}
+      SITE_EVENTUS_PASS: ${{ secrets.SITE_EVENTUS_PASS }}
 
     steps:
       - uses: actions/checkout@v4

@@ -219,6 +219,30 @@ def test_extract_prizes_empty():
     assert prizes.extract_prizes("그냥 일반 웨비나 소개 문구") == []
 
 
+# --- eventus (event-us.kr) scraper -----------------------------------------
+def test_eventus_resolve_date():
+    from webinar.scrapers.eventus import Scraper as Eventus
+
+    ref = date(2026, 7, 7)
+    assert Eventus._resolve_date("07월09일(목) 오후 2시", ref) == date(2026, 7, 9)
+    assert Eventus._resolve_date("03월23일", ref) is None  # far past -> dropped
+    # year-end wrap (Dec viewing Jan) within 120 days -> next year
+    assert Eventus._resolve_date("01월05일", date(2026, 12, 20)) == date(2027, 1, 5)
+    assert Eventus._resolve_date("날짜 없음", ref) is None
+
+
+def test_eventus_title_prefers_alt():
+    from bs4 import BeautifulSoup
+    from webinar.scrapers.eventus import Scraper as Eventus
+
+    node = BeautifulSoup(
+        '<div><img alt="기본" src="x/event-default-img.jpg">'
+        '<img alt="Finance AX Roadmap" src="https://cdn/a.png"></div>',
+        "html.parser",
+    ).div
+    assert Eventus._title(node) == "Finance AX Roadmap"  # skips default-img alt
+
+
 def test_is_prize_image():
     assert prizes.is_prize_image("https://x/2026/06/event.jpg")
     assert prizes.is_prize_image("https://x/synology_participate.jpg")
