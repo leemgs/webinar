@@ -176,6 +176,8 @@ a:hover { text-decoration: underline; }
 .modal-close { position: absolute; top: 10px; right: 12px; border: 0; background: transparent;
   font-size: 1.6rem; color: var(--text-muted); cursor: pointer; line-height: 1; }
 .modal-body h3 { margin: 0 8px 10px 0; font-size: 1.15rem; }
+.modal-thumb { display: block; width: 100%; height: auto; border-radius: 10px;
+  margin-bottom: 12px; background: var(--surface-2); }
 .modal-row { display: flex; gap: 8px; margin: 6px 0; font-size: 0.9rem; }
 .modal-row .k { color: var(--text-muted); flex: 0 0 64px; }
 .modal-prizes { margin-top: 14px; }

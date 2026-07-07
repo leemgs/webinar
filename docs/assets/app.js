@@ -248,13 +248,14 @@ function openModal(w) {
           ${p.condition ? `<div class="p-cond">${escapeHtml(p.condition)}</div>` : ""}
         </div>`).join("")}</div>`
     : `<div class="modal-prizes"><h4>🎁 경품 정보</h4>
-        <div class="prize-empty">경품 정보가 아직 확인되지 않았습니다. 아래 <b>사이트에서 신청</b>에서 설문·시청·상담 경품(예: 스타벅스 쿠폰·태블릿 등)을 확인하세요.</div>
+        <div class="prize-empty">경품 안내는 주최 측이 <b>홍보 이미지</b>로만 제공하는 경우가 많습니다. ${w.thumbnail ? "위 <b>홍보 배너</b> 또는 " : ""}아래 <b>사이트에서 신청</b>에서 설문·시청·상담 경품(예: 스타벅스 쿠폰·태블릿 등)을 확인하세요.</div>
        </div>`;
 
   const gcal = gcalLink(w);
   body.innerHTML = `
     <div class="modal-body">
       <h3>${escapeHtml(w.title)}</h3>
+      ${w.thumbnail ? `<img class="modal-thumb" src="${encodeURI(w.thumbnail)}" alt="${escapeHtml(w.title)} 홍보 이미지" loading="lazy">` : ""}
       <div class="modal-row"><span class="k">출처</span><span><span class="src-tag" style="background:${SRC_HEX[w.source] || '#666'}">${SOURCES[w.source]?.name || w.source}</span></span></div>
       <div class="modal-row"><span class="k">일시</span><span>${fmtDateTime(w.start_kst)}</span></div>
       ${w.host ? `<div class="modal-row"><span class="k">주최</span><span>${escapeHtml(w.host)}</span></div>` : ""}
