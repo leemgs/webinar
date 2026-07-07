@@ -49,7 +49,7 @@ def _event_lines(w: Webinar, stamp: str) -> list[str]:
 
     lines = [
         "BEGIN:VEVENT",
-        f"UID:{w.id}@webinar-auto-registration",
+        f"UID:{w.id}@webinar",
         f"DTSTAMP:{stamp}",
         f"DTSTART:{_fmt(w.start_kst)}",
         f"DTEND:{_fmt(w.end_kst or w.start_kst)}",
@@ -70,7 +70,7 @@ def export(path=None) -> str:
     out = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
-        "PRODID:-//webinar-auto-registration//KR//",
+        "PRODID:-//webinar//KR//",
         "CALSCALE:GREGORIAN",
         "METHOD:PUBLISH",
         "X-WR-CALNAME:웨비나 일정",
