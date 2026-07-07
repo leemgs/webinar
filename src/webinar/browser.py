@@ -85,6 +85,7 @@ class Browser:
         wait_selector: Optional[str] = None,
         wait_ms: int = 2500,
         timeout_ms: int = 30000,
+        click_selector: Optional[str] = None,
     ) -> str:
         """Navigate to `url`, let JS render, and return the page HTML.
 
@@ -98,6 +99,13 @@ class Browser:
                         page.wait_for_selector(wait_selector, timeout=timeout_ms)
                     except Exception:
                         log.warning("wait_selector %r not found on %s", wait_selector, url)
+                # optionally reveal content behind a tab/accordion (e.g. 경품 안내)
+                if click_selector:
+                    try:
+                        page.click(click_selector, timeout=5000)
+                        page.wait_for_timeout(800)
+                    except Exception:
+                        log.debug("click_selector %r not clickable on %s", click_selector, url)
                 # allow SPA XHR/hydration to settle
                 page.wait_for_timeout(wait_ms)
                 return page.content()

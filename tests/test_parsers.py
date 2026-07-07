@@ -243,6 +243,47 @@ def test_eventus_title_prefers_alt():
     assert Eventus._title(node) == "Finance AX Roadmap"  # skips default-img alt
 
 
+def test_select_prize_images_by_selector():
+    # allshowtv: 경품 안내 section is <div class="gift"><img ...></div>
+    sc = get_scraper("allshowtv", {"base_url": "https://www.allshowtv.com"})
+    soup = sc.soup(
+        '<div class="gift"><h4>경품 안내</h4>'
+        '<img src="/img/prize.jpg"></div><img src="/img/other.png">'
+    )
+    assert sc.select_prize_images(soup, ".gift img") == [
+        "https://www.allshowtv.com/img/prize.jpg"
+    ]
+
+
+def test_select_prize_images_by_filename():
+    sc = get_scraper("ddtube", {"base_url": "https://www.ddtube.co.kr"})
+    soup = sc.soup(
+        '<img src="http://www.ddtube.co.kr/a/event.jpg">'  # http -> https upgraded
+        '<img src="/logo.png">'
+    )
+    assert sc.select_prize_images(soup) == ["https://www.ddtube.co.kr/a/event.jpg"]
+
+
+def test_unwrap_next_image():
+    from webinar.scrapers.base import BaseScraper
+
+    src = "/main/_next/image?url=https%3A%2F%2Ftalkit.tv%2Fuserfiles%2Fimages%2Ffile1.jpg&w=1920&q=75"
+    assert BaseScraper._unwrap_next_image(src) == "https://talkit.tv/userfiles/images/file1.jpg"
+    assert BaseScraper._unwrap_next_image("https://x/a.jpg") == "https://x/a.jpg"
+
+
+def test_talkit_giveaway_prize_selector():
+    # the giveaway tab panel's image, with a Next.js proxy URL, is unwrapped
+    sc = get_scraper("talkit", {"base_url": "https://talkit.tv"})
+    soup = sc.soup(
+        '<div id="radix-x-content-giveaway">'
+        '<img src="/main/_next/image?url=https%3A%2F%2Ftalkit.tv%2Fuserfiles%2Fimages%2Fgift.jpg&w=1920"></div>'
+    )
+    assert sc.select_prize_images(soup, "[id$='-content-giveaway'] img") == [
+        "https://talkit.tv/userfiles/images/gift.jpg"
+    ]
+
+
 def test_is_prize_image():
     assert prizes.is_prize_image("https://x/2026/06/event.jpg")
     assert prizes.is_prize_image("https://x/synology_participate.jpg")

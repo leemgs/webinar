@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T19:55:21.401400+09:00",
+  "generated_at": "2026-07-08T08:32:24.919577+09:00",
   "count": 32,
   "webinars": [
     {
@@ -126,24 +126,10 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/06/05/main_05104446063524.jpg"
+      ],
       "id": "allshowtv-c772d7ec8ac2"
-    },
-    {
-      "source": "eventus",
-      "title": "2026 SIC",
-      "url": "https://event-us.kr/sic2026/event/129128",
-      "start_kst": "2026-07-09T00:00:00+09:00",
-      "end_kst": "2026-07-09T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/sic2026/event/129128",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/sic2026/129128/ProjectInfo/Cover/bae8de5996004b908089fb6355a24231.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-bea1a218253b"
     },
     {
       "source": "allshowtv",
@@ -181,22 +167,6 @@
       "id": "ddtube-ab07cd0e4d50"
     },
     {
-      "source": "eventus",
-      "title": "Finance AX Roadmap",
-      "url": "https://event-us.kr/live/event/128767",
-      "start_kst": "2026-07-09T14:00:00+09:00",
-      "end_kst": "2026-07-09T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/live/event/128767",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Images/searchpage/9fc1ba1b3b564b2eadf60a6155b45265.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-92721dbc6845"
-    },
-    {
       "source": "sharedit",
       "title": "전 세계 최대 규모의 데이터+AI 컨퍼런스 Databricks Data+AI Summit 2026의 모든 것, 단 3시간 요약으로 지금 바로 확인하세요.",
       "url": "https://www.sharedit.co.kr/seminars/2320",
@@ -225,7 +195,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1781960008717.jpg"
+      ],
       "id": "talkit-a13fca0310e7"
     },
     {
@@ -273,7 +245,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/06/02/main_02162417682287.jpg"
+      ],
       "id": "allshowtv-38e6975c1a42"
     },
     {
@@ -305,7 +279,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1782685448995.jpg"
+      ],
       "id": "talkit-dbcbf51206d0"
     },
     {
@@ -323,6 +299,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "sharedit-7ba36d8d02ed"
+    },
+    {
+      "source": "eventus",
+      "title": "(2기) AX Discovery l AX 전략기획 전문가 2급 자격증 과정",
+      "url": "https://event-us.kr/thewhhylab/event/126212",
+      "start_kst": "2026-07-18T00:00:00+09:00",
+      "end_kst": "2026-07-18T01:00:00+09:00",
+      "host": "",
+      "register_url": "https://event-us.kr/thewhhylab/event/126212",
+      "description": "",
+      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/thewhhylab/126212/ProjectInfo/Cover/787158fbb17f40ae93e3390ec2e80c34.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "eventus-768deb1b15b1"
     },
     {
       "source": "eventus",
@@ -355,22 +347,6 @@
       "prizes": [],
       "prize_images": [],
       "id": "eventus-1d0e47ec9fba"
-    },
-    {
-      "source": "eventus",
-      "title": "🔥총 상금 2,500만｜ 2026 코드게이트 AI 스타트업 해커톤 참가팀 모집(~7/8)",
-      "url": "https://event-us.kr/hancomedu/event/126525",
-      "start_kst": "2026-07-21T00:00:00+09:00",
-      "end_kst": "2026-07-21T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/hancomedu/event/126525",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/hancomedu/126525/ProjectInfo/Cover/1d5c8c00a51644f6a84812badc526780.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-09c4611954de"
     },
     {
       "source": "sharedit",
@@ -487,7 +463,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1783440581298.jpg"
+      ],
       "id": "talkit-3f1df48b135e"
     },
     {
@@ -505,6 +483,44 @@
       "prizes": [],
       "prize_images": [],
       "id": "sharedit-1ea31c53c6e6"
+    },
+    {
+      "source": "eventus",
+      "title": "B2B 이벤트 트렌드부터 실무까지",
+      "url": "https://event-us.kr/live/event/128767",
+      "start_kst": "2026-07-30T10:00:00+09:00",
+      "end_kst": "2026-07-30T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://event-us.kr/live/event/128767",
+      "description": "",
+      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Images/searchpage/b9325f59d9424df690cf490fc635a327.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [
+        {
+          "type": "attendance",
+          "item": "",
+          "condition": "B2B 이벤트 트렌드부터 실무까지"
+        }
+      ],
+      "prize_images": [],
+      "id": "eventus-92721dbc6845"
+    },
+    {
+      "source": "sharedit",
+      "title": "웹격리 RBI로 실현하는 안전한 망분리 완화",
+      "url": "https://www.sharedit.co.kr/seminars/2322",
+      "start_kst": "2026-08-06T00:00:00+09:00",
+      "end_kst": "2026-08-06T01:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.sharedit.co.kr/seminars/2322",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "sharedit-e17a66871934"
     },
     {
       "source": "eventus",

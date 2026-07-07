@@ -7,9 +7,12 @@ title with the date/time/D-day tail (e.g. "[주최] 제목 2026년 07월 08일(�
 """
 from __future__ import annotations
 
+import logging
 import re
 
 from .base import BaseScraper, clean
+
+log = logging.getLogger(__name__)
 
 # cut the title at the date tail ("... 2026년 07월 ..." or "... D-2")
 _TITLE_TAIL = re.compile(r"\s*(20\d\d\s*년|\bD\s*[-−]\s*\d+).*$")
@@ -43,6 +46,16 @@ class Scraper(BaseScraper):
         for w in webinars:
             self._tidy(w)
         return webinars
+
+    def fetch(self, browser):
+        # enrich each webinar's detail page: the "경품 안내" section is <div class="gift">
+        items = super().fetch(browser)
+        for w in items:
+            try:
+                self.enrich_from_detail(browser, w, prize_selector=".gift img")
+            except Exception as e:
+                log.warning("[allshowtv] enrich failed for %s: %s", w.url, e)
+        return items
 
     @staticmethod
     def _tidy(w) -> None:

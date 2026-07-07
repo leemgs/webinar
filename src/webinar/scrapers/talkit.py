@@ -30,14 +30,17 @@ class Scraper(BaseScraper):
         )
 
     def fetch(self, browser):
-        # Enrich each event page for prize-named banner images only. talkit shows
-        # its 경품 안내 in a JS tab with generic image filenames, so we do NOT guess
-        # a promo banner (it'd repeat a section image across events); we capture an
-        # image only when its filename clearly marks it as a prize/event banner.
+        # 경품 안내 is a Radix tab; click its trigger to render the panel, then read
+        # the Gift Event banner from the giveaway panel (id ends with -content-giveaway).
         items = super().fetch(browser)
         for w in items:
             try:
-                self.enrich_from_detail(browser, w)
+                self.enrich_from_detail(
+                    browser,
+                    w,
+                    prize_selector="[id$='-content-giveaway'] img",
+                    click_selector="[id$='-trigger-giveaway']",
+                )
             except Exception as e:
                 log.warning("[talkit] enrich failed for %s: %s", w.url, e)
         return items

@@ -198,29 +198,67 @@ class BaseScraper:
                 out.append(src)
         return out
 
-    def enrich_from_detail(self, browser, webinar, banner_substr: Optional[str] = None) -> None:
-        """Visit a webinar's detail page and pull prize/promo imagery.
+    def select_prize_images(self, soup, selector: Optional[str] = None) -> list[str]:
+        """Return prize-banner image URLs from a page (absolutized + https).
 
-        - prize_images: images whose filename looks like a 경품/이벤트/참여방법 banner
-          (see prizes.is_prize_image) — the real prize info as the site presents it.
-        - thumbnail: if not set yet and banner_substr given, the first content image
-          whose URL contains banner_substr (the promo banner, which often shows prizes).
-        Safe to call on any site: failures/blocks just leave the webinar unchanged.
+        - selector given  -> images matched by that CSS selector (structural, e.g.
+          allshowtv's `.gift img` = the "경품 안내" section). Most reliable.
+        - selector None   -> all images whose filename looks like a 경품/이벤트/
+          참여방법 banner (see prizes.is_prize_image).
         """
         from .. import prizes  # local import avoids any import-order concerns
 
+        out: list[str] = []
+        candidates = soup.select(selector) if selector else soup.select("img")
+        for im in candidates:
+            src = im.get("src") or im.get("data-src") or ""
+            if not src or src.startswith("data:"):
+                continue
+            src = self._unwrap_next_image(src)
+            src = self.https(self.abs_url(src))
+            if (selector or prizes.is_prize_image(src)) and src not in out:
+                out.append(src)
+        return out
+
+    @staticmethod
+    def _unwrap_next_image(src: str) -> str:
+        """Decode a Next.js /_next/image?url=... proxy URL to the real image URL."""
+        if "/_next/image" in src and "url=" in src:
+            from urllib.parse import urlparse, parse_qs, unquote
+
+            q = parse_qs(urlparse(src).query)
+            if q.get("url"):
+                return unquote(q["url"][0])
+        return src
+
+    def enrich_from_detail(
+        self,
+        browser,
+        webinar,
+        banner_substr: Optional[str] = None,
+        prize_selector: Optional[str] = None,
+        click_selector: Optional[str] = None,
+    ) -> None:
+        """Visit a webinar's detail page and pull prize/promo imagery.
+
+        - prize_images: from prize_selector (structural, e.g. ".gift img") when given,
+          otherwise images whose filename marks them as a prize banner.
+        - thumbnail: if not set yet and banner_substr given, the first content image
+          whose URL contains banner_substr.
+        Safe to call on any site: failures/blocks just leave the webinar unchanged.
+        """
         url = webinar.url or webinar.register_url
         if not url:
             return
-        html = browser.get_html(url, wait_selector="body")
+        html = browser.get_html(url, wait_selector="body", click_selector=click_selector)
         if not html:
             return
-        imgs = self.detail_images(self.soup(html))
-        pr = [u for u in imgs if prizes.is_prize_image(u)]
+        soup = self.soup(html)
+        pr = self.select_prize_images(soup, prize_selector)
         if pr:
             webinar.prize_images = pr
         if not webinar.thumbnail and banner_substr:
-            for u in imgs:
+            for u in self.detail_images(soup):
                 if banner_substr in u:
                     webinar.thumbnail = u
                     break
