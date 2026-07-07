@@ -149,9 +149,20 @@ SHAREDIT_HTML = """
 <html><body>
   <nav class="tab"><a href="/seminars?category_code=webinars">웨비나</a></nav>
   <ul class="list">
-    <div class="tag"><a title="[0729] AI 시대, 운영 가능한 보안은?" href="/seminars/2319">29일 (수)</a></div>
-    <div class="tag"><a title="Databricks Data + AI 러닝 페스티벌 2026" href="/seminars/2312">10일 (금)</a></div>
-    <div class="tag"><a title="[0729] AI 시대, 운영 가능한 보안은?" href="/seminars/2319">29일 (수)</a></div>
+    <li>
+      <figure style="background-image: url('https://cdn.example/2312.png');"></figure>
+      <header><span class="sponsor">Databricks</span><span class="category">웨비나</span>
+        <strong><a title="Databricks Data + AI 러닝 페스티벌 2026" href="/seminars/2312">Databricks Data + AI 러닝 페스티벌 2026</a></strong>
+      </header>
+      <dl class="info"><dt>일시</dt><dd>2026-07-22(수) 09:00 ~ 17:00</dd><dt>댓글</dt><dd>1개</dd></dl>
+    </li>
+    <li>
+      <header><span class="sponsor">Okta</span><span class="category">웨비나</span>
+        <strong><a title="[0715] Okta for AI Agent 론칭 웨비나" href="/seminars/2315">[0715] Okta for AI Agent 론칭 웨비나</a></strong>
+      </header>
+      <dl class="info"><dt>일시</dt><dd>2026-07-15(수) 14:00 ~ 15:00</dd></dl>
+    </li>
+    <div class="tag"><a title="추천 세미나 - 날짜없음" href="/seminars/9999">10일 (금) (세미나)</a></div>
   </ul>
 </body></html>
 """
@@ -160,12 +171,18 @@ SHAREDIT_HTML = """
 def test_sharedit_scraper():
     scraper = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
     items = scraper.parse(SHAREDIT_HTML)
-    # nav link filtered, duplicate /seminars/2319 deduped -> 2 items
+    # 2 real <li> webinars captured (recommendation tag w/o 일시 dropped)
     assert len(items) == 2
     by_url = {w.url: w for w in items}
-    a = by_url["https://www.sharedit.co.kr/seminars/2319"]
-    assert a.title == "AI 시대, 운영 가능한 보안은?"      # [MMDD] stripped
-    assert a.start_kst.startswith("2026-07-29")            # from [0729] code
+    # date comes from <dl class="info"> 일시 (no [MMDD] in this title)
+    db = by_url["https://www.sharedit.co.kr/seminars/2312"]
+    assert db.start_kst.startswith("2026-07-22T09:00")
+    assert db.host == "Databricks"
+    assert db.thumbnail == "https://cdn.example/2312.png"
+    # [MMDD] title is cleaned and still dated from 일시
+    okta = by_url["https://www.sharedit.co.kr/seminars/2315"]
+    assert okta.title == "Okta for AI Agent 론칭 웨비나"
+    assert okta.start_kst.startswith("2026-07-15T14:00")
 
 
 # --- dubiz anchor-card scraper --------------------------------------------

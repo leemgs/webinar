@@ -4,59 +4,70 @@ The site returns HTTP 402 to plain HTTP clients and its /seminars/NNNN detail
 pages sit behind a "please wait" bot challenge, so everything is extracted from
 the listing page (fetched with a real browser).
 
-Listing items look like:
-    <div class="tag">
-      <a title="[0729] AI 시대, 운영 가능한 보안은?" href="/seminars/2319">29일 (화)</a>
-    </div>
+Each webinar is a list item like:
+    <li>
+      <figure style="background-image: url('...thumb.png')"></figure>
+      <header>
+        <span class="sponsor">Databricks</span>
+        <span class="category">웨비나</span>
+        <strong><a title="..." href="/seminars/2312">...</a></strong>
+      </header>
+      <dl class="info"><dt>일시</dt><dd>2026-07-22(수) 09:00 ~ 17:00</dd> ...</dl>
+    </li>
 
-Dates come from a [MMDD] code embedded in the title when present, otherwise from
-the day-of-month in the anchor text combined with the current KST month.
+The authoritative date/time is the `일시` value in <dl class="info">. A [MMDD]
+code in the title is used as a fallback.
 """
 from __future__ import annotations
 
 import re
-from datetime import date
 
 from .base import (
     BaseScraper,
     clean,
+    is_noise_title,
     now_kst,
+    parse_date,
     parse_time,
     to_iso_kst,
     add_hours_iso,
 )
+from datetime import date
 
 DETAIL_RE = re.compile(r"^/seminars/\d+$")
-MMDD_RE = re.compile(r"\[(\d{2})(\d{2})\]")          # [0729] -> 07-29
-DAY_RE = re.compile(r"(\d{1,2})\s*일")               # "29일 (화)" -> 29
+MMDD_RE = re.compile(r"\[(\d{2})(\d{2})\]")  # [0729] -> 07-29
+_BG_URL = re.compile(r"url\(['\"]?([^'\")]+)")
 
 
 class Scraper(BaseScraper):
     def parse(self, html):
         soup = self.soup(html)
-        ref = now_kst().date()
         webinars = []
         seen = set()
 
-        for a in soup.select("a[href]"):
+        for li in soup.select("li"):
+            a = li.select_one("a[href^='/seminars/']")
+            if not a:
+                continue
             href = a.get("href", "").split("?")[0]
             if not DETAIL_RE.match(href):
                 continue
             title = clean(a.get("title") or a.get_text())
-            if not title or len(title) < 4:
+            if not title or is_noise_title(title):
                 continue
             url = self.abs_url(href)
             if url in seen:
                 continue
-            seen.add(url)
 
-            d = self._resolve_date(title, clean(a.get_text()), ref)
+            # authoritative date/time from <dl class="info"> 일시
+            info_text = self._info_value(li, "일시")
+            d = parse_date(info_text) or self._mmdd_date(title)
             if not d:
-                # detail pages are bot-blocked, so we can't enrich; an item
-                # with no resolvable date is unusable (and often nav/comment
-                # noise) — skip it rather than publish a dateless entry.
+                # no reliable date (detail pages are bot-blocked) -> skip
                 continue
-            t = parse_time(title) or parse_time(clean(a.get_text()))
+            t = parse_time(info_text)
+
+            seen.add(url)
             start = to_iso_kst(d, t)
             webinars.append(
                 self.new_webinar(
@@ -65,40 +76,53 @@ class Scraper(BaseScraper):
                     register_url=url,
                     start_kst=start,
                     end_kst=add_hours_iso(start, 1.0) if start else None,
+                    host=self._text(li, ".sponsor"),
+                    thumbnail=self._figure_bg(li),
                 )
             )
         return webinars
 
+    # -- helpers --
     @staticmethod
-    def _resolve_date(title: str, anchor_text: str, ref: date):
+    def _info_value(li, label: str) -> str:
+        dl = li.select_one("dl.info")
+        if not dl:
+            return ""
+        for dt in dl.find_all("dt"):
+            if label in dt.get_text():
+                dd = dt.find_next_sibling("dd")
+                return clean(dd.get_text()) if dd else ""
+        return ""
+
+    @staticmethod
+    def _text(li, sel: str) -> str:
+        el = li.select_one(sel)
+        return clean(el.get_text()) if el else ""
+
+    @staticmethod
+    def _figure_bg(li) -> str:
+        fig = li.select_one("figure")
+        if fig and fig.get("style"):
+            m = _BG_URL.search(fig["style"])
+            if m:
+                return m.group(1)
+        return ""
+
+    @staticmethod
+    def _mmdd_date(title: str):
         m = MMDD_RE.search(title)
-        if m:
-            mo, day = int(m.group(1)), int(m.group(2))
-            try:
-                cand = date(ref.year, mo, day)
-            except ValueError:
-                return None
-            # roll to next year if clearly in the past (e.g. Jan seen in Dec)
-            if (cand - ref).days < -60:
-                cand = date(ref.year + 1, mo, day)
-            return cand
-        # day-only in the anchor text -> assume current month, roll forward
-        dm = DAY_RE.search(anchor_text)
-        if dm:
-            day = int(dm.group(1))
-            for delta in (0, 1, 2):  # this month, next, month after
-                mo = ref.month + delta
-                yr = ref.year + (mo - 1) // 12
-                mo = (mo - 1) % 12 + 1
-                try:
-                    cand = date(yr, mo, day)
-                except ValueError:
-                    continue
-                if cand >= ref:
-                    return cand
-        return None
+        if not m:
+            return None
+        ref = now_kst().date()
+        mo, day = int(m.group(1)), int(m.group(2))
+        try:
+            cand = date(ref.year, mo, day)
+        except ValueError:
+            return None
+        if (cand - ref).days < -60:  # roll to next year if clearly past
+            cand = date(ref.year + 1, mo, day)
+        return cand
 
     @staticmethod
     def _clean_title(title: str) -> str:
-        # drop a leading [MMDD] code from the visible title
         return clean(MMDD_RE.sub("", title, count=1))

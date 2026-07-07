@@ -118,7 +118,8 @@ a:hover { text-decoration: underline; }
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
 .cal-cell {
   min-height: 96px; background: var(--surface-2); border-radius: 10px; padding: 6px;
-  display: flex; flex-direction: column; gap: 4px; overflow: hidden;
+  display: flex; flex-direction: column; gap: 4px;
+  /* no overflow:hidden — a busy day must show ALL its webinars, not clip them */
 }
 .cal-cell.empty { background: transparent; }
 .cal-cell .daynum { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
