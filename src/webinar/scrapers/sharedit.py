@@ -20,6 +20,7 @@ code in the title is used as a fallback.
 """
 from __future__ import annotations
 
+import logging
 import re
 
 from .base import (
@@ -34,12 +35,41 @@ from .base import (
 )
 from datetime import date
 
+log = logging.getLogger(__name__)
+
 DETAIL_RE = re.compile(r"^/seminars/\d+$")
 MMDD_RE = re.compile(r"\[(\d{2})(\d{2})\]")  # [0729] -> 07-29
 _BG_URL = re.compile(r"url\(['\"]?([^'\")]+)")
+# sharedit renders the whole webinar (title·연사·Event/경품·안내) as image slices on
+# its CDN; the 경품 섹션 is one of these. The dedicated posts page is bot-blocked, but
+# the /seminars/NNNN page (accessible) embeds the same slices.
+_SLICE_SEL = "img[src*='speedgabia.com/Webinar']:not([src*='footer'])"
 
 
 class Scraper(BaseScraper):
+    def fetch(self, browser):
+        # enrich each webinar's /seminars/NNNN page for the CDN image slices
+        # (the 경품/Event section is embedded among them). The detail page shows an
+        # intermittent "잠시만 기다리십시오" bot challenge per request, so we retry
+        # with fresh requests until it clears.
+        items = super().fetch(browser)
+        for w in items:
+            try:
+                imgs = self._fetch_slices(browser, w.url)
+                if imgs:
+                    w.prize_images = imgs
+            except Exception as e:
+                log.warning("[sharedit] enrich failed for %s: %s", w.url, e)
+        return items
+
+    def _fetch_slices(self, browser, url, tries: int = 2) -> list[str]:
+        for _ in range(tries):
+            html = browser.get_html(url, wait_selector="body", wait_ms=3000)
+            if html and "잠시만" not in html and "Just a moment" not in html:
+                return self.select_prize_images(self.soup(html), _SLICE_SEL)
+        log.info("[sharedit] bot challenge persisted for %s", url)
+        return []
+
     def parse(self, html):
         soup = self.soup(html)
         webinars = []

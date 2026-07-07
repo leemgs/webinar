@@ -264,6 +264,24 @@ def test_select_prize_images_by_filename():
     assert sc.select_prize_images(soup) == ["https://www.ddtube.co.kr/a/event.jpg"]
 
 
+def test_sharedit_slice_selector_excludes_footer():
+    # sharedit embeds the webinar (경품 포함) as CDN slices; footer is excluded
+    sc = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    soup = sc.soup(
+        '<img src="https://sharedit.speedgabia.com/Webinar/2026/okta/1.png">'
+        '<img src="https://sharedit.speedgabia.com/Webinar/2026/okta/2.png">'
+        '<img src="https://sharedit.speedgabia.com/Webinar/2026/sharedit_footer.png">'
+        '<img src="https://other/logo.png">'
+    )
+    got = sc.select_prize_images(
+        soup, "img[src*='speedgabia.com/Webinar']:not([src*='footer'])"
+    )
+    assert got == [
+        "https://sharedit.speedgabia.com/Webinar/2026/okta/1.png",
+        "https://sharedit.speedgabia.com/Webinar/2026/okta/2.png",
+    ]
+
+
 def test_unwrap_next_image():
     from webinar.scrapers.base import BaseScraper
 

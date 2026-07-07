@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T08:32:24.919577+09:00",
+  "generated_at": "2026-07-08T08:50:41.937846+09:00",
   "count": 32,
   "webinars": [
     {
@@ -486,23 +486,17 @@
     },
     {
       "source": "eventus",
-      "title": "B2B 이벤트 트렌드부터 실무까지",
+      "title": "Finance AX Roadmap",
       "url": "https://event-us.kr/live/event/128767",
-      "start_kst": "2026-07-30T10:00:00+09:00",
-      "end_kst": "2026-07-30T11:00:00+09:00",
+      "start_kst": "2026-07-30T14:00:00+09:00",
+      "end_kst": "2026-07-30T15:00:00+09:00",
       "host": "",
       "register_url": "https://event-us.kr/live/event/128767",
       "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Images/searchpage/b9325f59d9424df690cf490fc635a327.png",
+      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Images/searchpage/9fc1ba1b3b564b2eadf60a6155b45265.png",
       "tags": [],
       "registered": false,
-      "prizes": [
-        {
-          "type": "attendance",
-          "item": "",
-          "condition": "B2B 이벤트 트렌드부터 실무까지"
-        }
-      ],
+      "prizes": [],
       "prize_images": [],
       "id": "eventus-92721dbc6845"
     },
