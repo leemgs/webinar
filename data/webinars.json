@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-07T19:31:47.334804+09:00",
-  "count": 24,
+  "generated_at": "2026-07-07T19:44:27.725379+09:00",
+  "count": 23,
   "webinars": [
     {
       "source": "ddtube",
@@ -393,22 +393,6 @@
       "prizes": [],
       "prize_images": [],
       "id": "sharedit-1ea31c53c6e6"
-    },
-    {
-      "source": "sharedit",
-      "title": "웹격리 RBI로 실현하는 안전한 망분리 완화",
-      "url": "https://www.sharedit.co.kr/seminars/2322",
-      "start_kst": "2026-08-06T00:00:00+09:00",
-      "end_kst": "2026-08-06T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.sharedit.co.kr/seminars/2322",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "sharedit-e17a66871934"
     }
   ]
 }

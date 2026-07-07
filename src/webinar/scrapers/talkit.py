@@ -3,9 +3,11 @@
 Cards are anchors to /main/events/NNN containing an <h3> title and a <time>
 element like "7월 9일(목) 오후 2:00~3:00".
 """
-from __future__ import annotations
+import logging
 
 from .base import BaseScraper
+
+log = logging.getLogger(__name__)
 
 
 class Scraper(BaseScraper):
@@ -26,3 +28,16 @@ class Scraper(BaseScraper):
             title_sel="h3, h4, .tit, .title, .subject",
             host_sel=".host, .company, .speaker",
         )
+
+    def fetch(self, browser):
+        # Enrich each event page for prize-named banner images only. talkit shows
+        # its 경품 안내 in a JS tab with generic image filenames, so we do NOT guess
+        # a promo banner (it'd repeat a section image across events); we capture an
+        # image only when its filename clearly marks it as a prize/event banner.
+        items = super().fetch(browser)
+        for w in items:
+            try:
+                self.enrich_from_detail(browser, w)
+            except Exception as e:
+                log.warning("[talkit] enrich failed for %s: %s", w.url, e)
+        return items

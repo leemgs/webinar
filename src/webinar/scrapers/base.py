@@ -181,6 +181,50 @@ class BaseScraper:
             return ""
         return urljoin(self.base_url + "/", href)
 
+    @staticmethod
+    def https(url: str) -> str:
+        """Upgrade http->https so images don't get blocked on the https Pages site."""
+        return "https://" + url[len("http://"):] if url.startswith("http://") else url
+
+    def detail_images(self, soup) -> list[str]:
+        """All usable <img> srcs on a page, absolutized + https, de-duplicated."""
+        out: list[str] = []
+        for im in soup.select("img"):
+            src = im.get("src") or im.get("data-src") or ""
+            if not src or src.startswith("data:"):
+                continue
+            src = self.https(self.abs_url(src))
+            if src not in out:
+                out.append(src)
+        return out
+
+    def enrich_from_detail(self, browser, webinar, banner_substr: Optional[str] = None) -> None:
+        """Visit a webinar's detail page and pull prize/promo imagery.
+
+        - prize_images: images whose filename looks like a 경품/이벤트/참여방법 banner
+          (see prizes.is_prize_image) — the real prize info as the site presents it.
+        - thumbnail: if not set yet and banner_substr given, the first content image
+          whose URL contains banner_substr (the promo banner, which often shows prizes).
+        Safe to call on any site: failures/blocks just leave the webinar unchanged.
+        """
+        from .. import prizes  # local import avoids any import-order concerns
+
+        url = webinar.url or webinar.register_url
+        if not url:
+            return
+        html = browser.get_html(url, wait_selector="body")
+        if not html:
+            return
+        imgs = self.detail_images(self.soup(html))
+        pr = [u for u in imgs if prizes.is_prize_image(u)]
+        if pr:
+            webinar.prize_images = pr
+        if not webinar.thumbnail and banner_substr:
+            for u in imgs:
+                if banner_substr in u:
+                    webinar.thumbnail = u
+                    break
+
     def new_webinar(self, **kwargs) -> Webinar:
         kwargs.setdefault("source", self.key)
         return Webinar(**kwargs)
