@@ -5,7 +5,7 @@ from datetime import date
 
 from webinar.scrapers.base import parse_date, parse_time
 from webinar.scrapers import get_scraper
-from webinar import prizes
+from webinar import prizes, config
 
 
 REF = date(2026, 7, 6)
@@ -200,3 +200,17 @@ def test_extract_prizes():
 
 def test_extract_prizes_empty():
     assert prizes.extract_prizes("그냥 일반 웨비나 소개 문구") == []
+
+
+# --- credentials precedence -----------------------------------------------
+def test_site_credentials_from_env(monkeypatch):
+    monkeypatch.setenv("SITE_FOO_USER", "u1")
+    monkeypatch.setenv("SITE_FOO_PASS", "p1")
+    assert config.site_credentials("foo") == ("u1", "p1")
+
+
+def test_site_credentials_absent(monkeypatch):
+    monkeypatch.delenv("SITE_BAR_USER", raising=False)
+    monkeypatch.delenv("SITE_BAR_PASS", raising=False)
+    # no config/accounts.yaml in the test env -> both None
+    assert config.site_credentials("bar") == (None, None)

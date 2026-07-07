@@ -1,0 +1,40 @@
+# ---------------------------------------------------------------------------
+# 로컬 계정 파일 예시.  ➜  이 파일을 config/accounts.yaml 로 복사해서 채우세요.
+#
+#   cp config/accounts.example.yaml config/accounts.yaml
+#
+# ⚠️ config/accounts.yaml 은 .gitignore 로 제외되어 커밋되지 않습니다.
+#    (이 저장소는 공개이므로 비밀번호를 커밋되는 파일에 절대 넣지 마세요.)
+#
+# 사이트 URL/셀렉터는 config/sites.yaml 에 있습니다. 이 파일은 아이디/암호만 담습니다.
+# 우선순위: 환경변수(SITE_<KEY>_USER/PASS, .env·GitHub Secrets) > 이 파일.
+# 계정이 없는 사이트는 그냥 비워두면 됩니다(수집은 계속, 등록만 스킵).
+# ---------------------------------------------------------------------------
+
+allshowtv:
+  user: "your-id@example.com"
+  pass: "your-password"
+
+sharedit:
+  user: ""
+  pass: ""
+
+ddtube:
+  user: ""
+  pass: ""
+
+e4ds:
+  user: ""
+  pass: ""
+
+talkit:
+  user: ""
+  pass: ""
+
+dubiz:
+  user: ""
+  pass: ""
+
+cloit:
+  user: ""
+  pass: ""

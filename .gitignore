@@ -2,6 +2,9 @@
 .env
 *.env
 !.env.example
+# Local per-site credentials (never commit; repo is public)
+config/accounts.yaml
+config/accounts.local.yaml
 
 # Python
 __pycache__/

@@ -23,6 +23,7 @@ DOCS_DIR = ROOT / "docs"
 
 SITES_YAML = CONFIG_DIR / "sites.yaml"
 PRIZES_OVERRIDE_YAML = CONFIG_DIR / "prizes_override.yaml"
+ACCOUNTS_YAML = CONFIG_DIR / "accounts.yaml"  # local, git-ignored (see accounts.example.yaml)
 WEBINARS_JSON = DATA_DIR / "webinars.json"
 
 
@@ -41,10 +42,34 @@ def load_prize_overrides() -> dict[str, list[dict[str, Any]]]:
         return yaml.safe_load(f) or {}
 
 
+@lru_cache(maxsize=1)
+def load_accounts() -> dict[str, dict[str, Any]]:
+    """Return the parsed, git-ignored config/accounts.yaml, or {} if absent.
+
+    Shape: {site_key: {user: ..., pass: ...}}. Optional convenience file for
+    local runs; GitHub Actions should use encrypted Secrets (env vars) instead.
+    """
+    if not ACCOUNTS_YAML.exists():
+        return {}
+    with open(ACCOUNTS_YAML, encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
 def site_credentials(site_key: str) -> tuple[str | None, str | None]:
-    """Return (user, pass) for a site from env, or (None, None) if unset."""
+    """Return (user, pass) for a site.
+
+    Precedence: environment variables (SITE_<KEY>_USER/PASS — used by GitHub
+    Actions Secrets and .env) first, then the local config/accounts.yaml file.
+    Returns (None, None) if unset in both.
+    """
     prefix = f"SITE_{site_key.upper()}"
-    return os.getenv(f"{prefix}_USER"), os.getenv(f"{prefix}_PASS")
+    user = os.getenv(f"{prefix}_USER")
+    password = os.getenv(f"{prefix}_PASS")
+    if user and password:
+        return user, password
+    acct = load_accounts().get(site_key) or {}
+    # env still wins per-field when present; fall back to file otherwise
+    return user or acct.get("user"), password or acct.get("pass")
 
 
 def google_config() -> dict[str, str | None]:

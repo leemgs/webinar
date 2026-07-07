@@ -49,10 +49,8 @@ def parse_date(text: str, ref: Optional[date] = None) -> Optional[date]:
         except ValueError:
             return None
 
-    m = _DDAY.search(text)
-    if m:
-        return ref + timedelta(days=int(m.group(1)))
-
+    # Prefer an explicit calendar date over a relative D-day badge: cards often
+    # show both (e.g. "7월 16일(목) 10:30  D-10") and the calendar date is truth.
     m = _MD.search(text) or _MD_SLASH.search(text)
     if m:
         mo, d = int(m.group(1)), int(m.group(2))
@@ -67,6 +65,10 @@ def parse_date(text: str, ref: Optional[date] = None) -> Optional[date]:
             except ValueError:
                 return None
         return candidate
+
+    m = _DDAY.search(text)
+    if m:
+        return ref + timedelta(days=int(m.group(1)))
     return None
 
 
