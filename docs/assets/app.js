@@ -194,11 +194,13 @@ function renderList() {
       wrap.classList.add("is-today");
       anchored = true;
     }
+    const isToday = k === todayKey;
+    if (isToday) wrap.classList.add("today-group");  // highlight today's webinars
     const d = parseDate(groups[k][0].start_kst);
     const wd = ["일", "월", "화", "수", "목", "금", "토"][d.getDay()];
     const h = document.createElement("h3");
     h.textContent = `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()} (${wd})`;
-    if (k === todayKey) h.textContent += "  · 오늘";
+    if (isToday) h.innerHTML = escapeHtml(h.textContent) + ' <span class="today-badge">오늘</span>';
     wrap.appendChild(h);
 
     for (const w of groups[k]) {

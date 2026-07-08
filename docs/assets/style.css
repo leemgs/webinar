@@ -148,6 +148,22 @@ a:hover { text-decoration: underline; }
 #list-view { display: flex; flex-direction: column; gap: 18px; }
 .list-day.is-today { scroll-margin-top: 12px; }
 .list-day.is-today h3 { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* highlight TODAY's webinars so they stand out at a glance */
+.list-day.today-group {
+  background: var(--accent-weak);
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  padding: 12px 16px;
+  scroll-margin-top: 12px;
+}
+.list-day.today-group h3 { color: var(--accent); border-bottom-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.list-day.today-group .list-card { background: var(--surface); }
+.today-badge {
+  display: inline-block; margin-left: 6px; padding: 1px 9px; border-radius: 999px;
+  background: var(--accent); color: #fff; font-size: 0.72rem; font-weight: 700;
+  vertical-align: middle;
+}
 .list-day h3 {
   margin: 0 0 8px; font-size: 0.95rem; color: var(--text-muted);
   border-bottom: 1px solid var(--border); padding-bottom: 6px;
