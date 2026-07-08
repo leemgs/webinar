@@ -142,21 +142,3 @@ cloit:
     enabled: false
     button_selector: "button:has-text('신청'), a:has-text('신청')"
     confirm_selector: "button:has-text('확인')"
-
-eventus:
-  name: "이벤터스"
-  base_url: "https://event-us.kr"
-  listing_url: "https://event-us.kr/search?category=IT%2F%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D"
-  requires_js: true           # Vue-rendered search page
-  requires_login: false
-  scraper: eventus
-  wait_selector: "a[href*='/event/']"
-  login:
-    url: "https://event-us.kr/login"
-    user_selector: "input[type='email'], input[name='email']"
-    pass_selector: "input[type='password']"
-    submit_selector: "button[type='submit']"
-  register:
-    enabled: false
-    button_selector: "a:has-text('신청'), button:has-text('참가 신청')"
-    confirm_selector: "button:has-text('확인')"

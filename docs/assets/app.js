@@ -9,11 +9,10 @@ const SOURCES = {
   talkit: { name: "토크아이티", color: "var(--c-talkit)" },
   dubiz: { name: "두비즈", color: "var(--c-dubiz)" },
   cloit: { name: "CLOIT:ON", color: "var(--c-cloit)" },
-  eventus: { name: "이벤터스", color: "var(--c-eventus)" },
 };
 const SRC_HEX = {
   allshowtv: "#e8590c", sharedit: "#2f9e44", ddtube: "#1971c2", e4ds: "#9c36b5",
-  talkit: "#e8478b", dubiz: "#0c8599", cloit: "#f08c00", eventus: "#e03131",
+  talkit: "#e8478b", dubiz: "#0c8599", cloit: "#f08c00",
 };
 const PRIZES = {
   survey: { name: "설문", color: "var(--p-survey)", hex: "#1971c2" },

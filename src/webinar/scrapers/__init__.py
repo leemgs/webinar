@@ -16,7 +16,6 @@ SCRAPER_MODULES = {
     "talkit": "talkit",
     "dubiz": "dubiz",
     "cloit": "cloit",
-    "eventus": "eventus",
 }
 
 

@@ -38,12 +38,13 @@ class Scraper(BaseScraper):
         )
 
     def fetch(self, browser):
-        # enrich each /Event/NNN detail page for prize-named banner images.
-        # (dubiz is blocked on some corporate proxies; this runs in CI.)
+        # enrich each /Event/NNN detail page: 경품 안내 is <h2>경품 안내</h2><img ...>
+        # (generic filename, so match by heading proximity).
+        # dubiz is blocked on some corporate proxies; this runs in CI.
         items = super().fetch(browser)
         for w in items:
             try:
-                self.enrich_from_detail(browser, w)
+                self.enrich_from_detail(browser, w, prize_heading="경품")
             except Exception as e:
                 log.warning("[dubiz] enrich failed for %s: %s", w.url, e)
         return items
