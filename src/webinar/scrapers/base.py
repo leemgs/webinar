@@ -220,6 +220,38 @@ class BaseScraper:
                 out.append(src)
         return out
 
+    def prize_images_near_heading(
+        self, soup, keyword: str = "경품", max_imgs: int = 4
+    ) -> list[str]:
+        """Collect images that follow a "경품 안내"-style heading.
+
+        For sites whose 경품 image has a generic filename but sits right after a
+        heading like <h2>경품 안내</h2> (e.g. dubiz). Walks forward in document
+        order from the heading, gathering <img> until the next heading.
+        """
+        out: list[str] = []
+        heading_re = re.compile(r"^h[1-6]$")
+        for h in soup.find_all(heading_re):
+            if keyword not in clean(h.get_text()) or len(clean(h.get_text())) > 12:
+                continue
+            steps = 0
+            for el in h.next_elements:
+                name = getattr(el, "name", None)
+                if name and heading_re.match(name):
+                    break  # reached the next section
+                if name == "img":
+                    src = el.get("src") or el.get("data-src") or ""
+                    if src and not src.startswith("data:"):
+                        src = self.https(self.abs_url(self._unwrap_next_image(src)))
+                        if src not in out:
+                            out.append(src)
+                steps += 1
+                if steps > 400 or len(out) >= max_imgs:
+                    break
+            if out:
+                break
+        return out
+
     @staticmethod
     def _unwrap_next_image(src: str) -> str:
         """Decode a Next.js /_next/image?url=... proxy URL to the real image URL."""
@@ -237,14 +269,17 @@ class BaseScraper:
         webinar,
         banner_substr: Optional[str] = None,
         prize_selector: Optional[str] = None,
+        prize_heading: Optional[str] = None,
         click_selector: Optional[str] = None,
     ) -> None:
         """Visit a webinar's detail page and pull prize/promo imagery.
 
-        - prize_images: from prize_selector (structural, e.g. ".gift img") when given,
-          otherwise images whose filename marks them as a prize banner.
-        - thumbnail: if not set yet and banner_substr given, the first content image
-          whose URL contains banner_substr.
+        prize_images strategy (first that applies):
+        - prize_selector  -> images matched by a CSS selector (e.g. ".gift img").
+        - prize_heading   -> images following a "경품 안내"-style heading (e.g. dubiz).
+        - neither         -> images whose filename marks them as a prize banner.
+        thumbnail: if not set yet and banner_substr given, the first content image
+        whose URL contains banner_substr.
         Safe to call on any site: failures/blocks just leave the webinar unchanged.
         """
         url = webinar.url or webinar.register_url
@@ -254,7 +289,12 @@ class BaseScraper:
         if not html:
             return
         soup = self.soup(html)
-        pr = self.select_prize_images(soup, prize_selector)
+        if prize_selector:
+            pr = self.select_prize_images(soup, prize_selector)
+        elif prize_heading:
+            pr = self.prize_images_near_heading(soup, prize_heading)
+        else:
+            pr = self.select_prize_images(soup)
         if pr:
             webinar.prize_images = pr
         if not webinar.thumbnail and banner_substr:

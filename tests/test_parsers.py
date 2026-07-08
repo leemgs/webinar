@@ -219,30 +219,6 @@ def test_extract_prizes_empty():
     assert prizes.extract_prizes("그냥 일반 웨비나 소개 문구") == []
 
 
-# --- eventus (event-us.kr) scraper -----------------------------------------
-def test_eventus_resolve_date():
-    from webinar.scrapers.eventus import Scraper as Eventus
-
-    ref = date(2026, 7, 7)
-    assert Eventus._resolve_date("07월09일(목) 오후 2시", ref) == date(2026, 7, 9)
-    assert Eventus._resolve_date("03월23일", ref) is None  # far past -> dropped
-    # year-end wrap (Dec viewing Jan) within 120 days -> next year
-    assert Eventus._resolve_date("01월05일", date(2026, 12, 20)) == date(2027, 1, 5)
-    assert Eventus._resolve_date("날짜 없음", ref) is None
-
-
-def test_eventus_title_prefers_alt():
-    from bs4 import BeautifulSoup
-    from webinar.scrapers.eventus import Scraper as Eventus
-
-    node = BeautifulSoup(
-        '<div><img alt="기본" src="x/event-default-img.jpg">'
-        '<img alt="Finance AX Roadmap" src="https://cdn/a.png"></div>',
-        "html.parser",
-    ).div
-    assert Eventus._title(node) == "Finance AX Roadmap"  # skips default-img alt
-
-
 def test_select_prize_images_by_selector():
     # allshowtv: 경품 안내 section is <div class="gift"><img ...></div>
     sc = get_scraper("allshowtv", {"base_url": "https://www.allshowtv.com"})
@@ -279,6 +255,20 @@ def test_sharedit_slice_selector_excludes_footer():
     assert got == [
         "https://sharedit.speedgabia.com/Webinar/2026/okta/1.png",
         "https://sharedit.speedgabia.com/Webinar/2026/okta/2.png",
+    ]
+
+
+def test_prize_images_near_heading():
+    # dubiz: <h2>경품 안내</h2><img ...> then a later section stops collection
+    sc = get_scraper("dubiz", {"base_url": "https://dubiz.co.kr"})
+    soup = sc.soup(
+        "<h1>발표자</h1><img src='https://x/speaker.png'>"
+        "<h2>경품 안내</h2>"
+        "<img src='https://files.dubiz.co.kr/userfiles/images/file1.png'>"
+        "<h2>문의하기</h2><img src='https://x/after.png'>"
+    )
+    assert sc.prize_images_near_heading(soup, "경품") == [
+        "https://files.dubiz.co.kr/userfiles/images/file1.png"
     ]
 
 

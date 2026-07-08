@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-08T08:50:41.937846+09:00",
-  "count": 32,
+  "generated_at": "2026-07-08T09:05:29.090687+09:00",
+  "count": 24,
   "webinars": [
     {
       "source": "ddtube",
@@ -217,22 +217,6 @@
       "id": "talkit-c288487a78a6"
     },
     {
-      "source": "eventus",
-      "title": "SIPE 다섯 번째 컨퍼런스 - 사담콘 야호, 파라미터나 줘야지",
-      "url": "https://event-us.kr/sipe/event/128290",
-      "start_kst": "2026-07-11T00:00:00+09:00",
-      "end_kst": "2026-07-11T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/sipe/event/128290",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/sipe/128290/ProjectInfo/Cover/b43f89d88335428b9008d99681d92f9b.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-9f6b6e7a6472"
-    },
-    {
       "source": "allshowtv",
       "title": "Perforce P4 Plan(Helix Plan)으로 완성하는 애자일 마스터 클래스",
       "url": "https://www.allshowtv.com/detail.html?idx=1733",
@@ -299,54 +283,6 @@
       "prizes": [],
       "prize_images": [],
       "id": "sharedit-7ba36d8d02ed"
-    },
-    {
-      "source": "eventus",
-      "title": "(2기) AX Discovery l AX 전략기획 전문가 2급 자격증 과정",
-      "url": "https://event-us.kr/thewhhylab/event/126212",
-      "start_kst": "2026-07-18T00:00:00+09:00",
-      "end_kst": "2026-07-18T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/thewhhylab/event/126212",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/thewhhylab/126212/ProjectInfo/Cover/787158fbb17f40ae93e3390ec2e80c34.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-768deb1b15b1"
-    },
-    {
-      "source": "eventus",
-      "title": "월간 AX: 7월",
-      "url": "https://event-us.kr/FKH3nHkjmPGh/event/129202",
-      "start_kst": "2026-07-20T00:00:00+09:00",
-      "end_kst": "2026-07-20T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/FKH3nHkjmPGh/event/129202",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/FKH3nHkjmPGh/129202/ProjectInfo/Cover/0cfbb008f1cf4fe495644265fc63dc56.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-5a3ac7970356"
-    },
-    {
-      "source": "eventus",
-      "title": "누구나 만드는 AI 서비스 시대 | VIZEND DAY 2026",
-      "url": "https://event-us.kr/nextree/event/128758",
-      "start_kst": "2026-07-21T00:00:00+09:00",
-      "end_kst": "2026-07-21T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/nextree/event/128758",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/nextree/128758/ProjectInfo/Cover/d3f60d56b54c4e58b3025731351ed8c2.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-1d0e47ec9fba"
     },
     {
       "source": "sharedit",
@@ -435,22 +371,6 @@
       "id": "ddtube-cc77278a6d1c"
     },
     {
-      "source": "eventus",
-      "title": "2026 ETRI EMBEDDED SW 맞춤형 교육(ETRI SW-SoC 융합아카데미)",
-      "url": "https://event-us.kr/thepict/event/127788",
-      "start_kst": "2026-07-27T00:00:00+09:00",
-      "end_kst": "2026-07-27T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/thepict/event/127788",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/thepict/127788/ProjectInfo/Cover/475349037f334dc2af114eb1181665f6.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-d40d9651e7fc"
-    },
-    {
       "source": "talkit",
       "title": "망분리 완화, 섀도우 AI 시대, DSPM으로 완성하는 데이터중심 보안 전략 [동훈아이텍, BigID]",
       "url": "https://talkit.tv/main/events/3704",
@@ -485,22 +405,6 @@
       "id": "sharedit-1ea31c53c6e6"
     },
     {
-      "source": "eventus",
-      "title": "Finance AX Roadmap",
-      "url": "https://event-us.kr/live/event/128767",
-      "start_kst": "2026-07-30T14:00:00+09:00",
-      "end_kst": "2026-07-30T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/live/event/128767",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Images/searchpage/9fc1ba1b3b564b2eadf60a6155b45265.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-92721dbc6845"
-    },
-    {
       "source": "sharedit",
       "title": "웹격리 RBI로 실현하는 안전한 망분리 완화",
       "url": "https://www.sharedit.co.kr/seminars/2322",
@@ -515,38 +419,6 @@
       "prizes": [],
       "prize_images": [],
       "id": "sharedit-e17a66871934"
-    },
-    {
-      "source": "eventus",
-      "title": "지그재그 세미나 5회 - 온톨로지로 만나는 휴먼 네트워킹",
-      "url": "https://event-us.kr/zigzag/event/129917",
-      "start_kst": "2026-08-08T00:00:00+09:00",
-      "end_kst": "2026-08-08T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/zigzag/event/129917",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/zigzag/129917/ProjectInfo/Cover/73c038fda5e645ab81eca0b61500dbeb.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-c172501520b2"
-    },
-    {
-      "source": "eventus",
-      "title": "당신의 꿈을 이루세요! 비전공자들에게도 IT 취업의 도전의 기회를 엽니다",
-      "url": "https://event-us.kr/xatGHS7KPUfk/event/74773",
-      "start_kst": "2026-11-18T00:00:00+09:00",
-      "end_kst": "2026-11-18T01:00:00+09:00",
-      "host": "",
-      "register_url": "https://event-us.kr/xatGHS7KPUfk/event/74773",
-      "description": "",
-      "thumbnail": "https://eventusstorage.blob.core.windows.net/evs/Image/xatGHS7KPUfk/74773/ProjectInfo/Cover/a8c67f8a2a3a460b8d9f05cccdf0bc23.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "eventus-5a7eac94b1c6"
     }
   ]
 }
