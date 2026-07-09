@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-08T09:29:16.835059+09:00",
-  "count": 23,
+  "generated_at": "2026-07-09T09:23:47.518066+09:00",
+  "count": 24,
   "webinars": [
     {
       "source": "ddtube",
@@ -407,6 +407,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "sharedit-1ea31c53c6e6"
+    },
+    {
+      "source": "allshowtv",
+      "title": "의료 데이터의 안전한 관리와 보호를 위한 통합 인프라 전략",
+      "url": "https://www.allshowtv.com/detail.html?idx=1740",
+      "start_kst": "2026-09-03T14:00:00+09:00",
+      "end_kst": "2026-09-03T15:00:00+09:00",
+      "host": "Synology",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1740",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/07/08/main_08134622917963.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/07/08/main_08133707630884.jpg"
+      ],
+      "id": "allshowtv-572f3f1d2ff0"
     }
   ]
 }
