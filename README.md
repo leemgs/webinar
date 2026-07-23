@@ -253,6 +253,15 @@ work:
 
 **New repository secret** 버튼을 눌러 아래 이름/값을 **하나씩** 추가하세요.
 
+### 값은 어디서 가져오나 — 발급처 한눈에
+
+| Secret 이름 | 접속할 사이트 | 가져오는 방법 |
+|---|---|---|
+| `GOOGLE_CLIENT_ID`<br/>`GOOGLE_CLIENT_SECRET` | 👉 [Google Cloud Console — 사용자 인증 정보](https://console.cloud.google.com/apis/credentials) | **+ 사용자 인증 정보 만들기 → OAuth 클라이언트 ID → 데스크톱 앱**으로 생성하면 두 값이 함께 표시됩니다. 처음이라면 먼저 [프로젝트 생성](https://console.cloud.google.com/projectcreate) → [Calendar API 활성화](https://console.cloud.google.com/apis/library/calendar-json.googleapis.com) → [OAuth 동의 화면 구성](https://console.cloud.google.com/apis/credentials/consent) 순서로 진행하세요([1~4단계 상세](#1단계--google-cloud-프로젝트-만들기)). |
+| `GOOGLE_REFRESH_TOKEN` | (사이트 아님) 로컬 터미널 + 구글 로그인 창 | 위 두 값을 환경변수로 넣고 `python scripts/get_google_token.py` 실행 → 브라우저에 <https://accounts.google.com> 로그인/동의 창이 뜨고, 동의하면 터미널에 토큰이 출력됩니다([5단계 상세](#5단계--리프레시-토큰-발급-로컬에서-1회)). |
+| `GOOGLE_CALENDAR_ID` | 👉 [Google Calendar 설정](https://calendar.google.com/calendar/u/0/r/settings) | 기본 개인 캘린더면 그냥 `primary` 입력(사이트 접속 불필요). 특정 캘린더면 왼쪽에서 캘린더 선택 → **"캘린더 통합"** 섹션의 **캘린더 ID** 복사([6단계 상세](#6단계--대상-캘린더-id-확인-google_calendar_id)). |
+| `GOOGLE_ACCOUNTS_YAML` | 위 발급처들을 **계정마다 반복** | 새 사이트는 없습니다. sync 할 구글 계정마다 위 절차(클라이언트 ID·시크릿은 공용 가능, 리프레시 토큰은 **해당 계정으로 로그인**해 발급)를 반복한 뒤, [`config/google.example.yaml`](config/google.example.yaml) 형식의 YAML로 묶어 통째로 넣습니다. |
+
 ### 필수 — 구글 캘린더 (안 넣으면 캘린더 동기화만 스킵)
 
 | Secret 이름 | 용도 (출처) | 설명 |
