@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-22T09:05:24.076332+09:00",
-  "count": 31,
+  "generated_at": "2026-07-23T09:13:19.136316+09:00",
+  "count": 32,
   "webinars": [
     {
       "source": "ddtube",
@@ -497,6 +497,24 @@
         "https://talkit.tv/userfiles/images/file1783707094581.jpg"
       ],
       "id": "talkit-632002031648"
+    },
+    {
+      "source": "talkit",
+      "title": "가상화 인프라의 새로운 선택: VM·컨테이너 통합과 안전한 마이그레이션 [수세코리아]",
+      "url": "https://talkit.tv/main/events/3708",
+      "start_kst": "2026-08-11T14:00:00+09:00",
+      "end_kst": "2026-08-11T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3708",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1784723766219.jpg"
+      ],
+      "id": "talkit-0d4e93fb317b"
     },
     {
       "source": "talkit",
