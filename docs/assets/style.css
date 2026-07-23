@@ -76,7 +76,33 @@ a:hover { text-decoration: underline; }
   padding: 6px 12px; border-radius: 999px; font-size: 0.85rem;
 }
 .ics-link:hover { background: rgba(255,255,255,0.28); text-decoration: none; }
+.ics-box { display: flex; align-items: center; gap: 6px; }
+.help-btn {
+  width: 22px; height: 22px; padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  background: rgba(255,255,255,0.18); color: #fff; font-size: 0.82rem; font-weight: 700;
+  line-height: 1; display: inline-flex; align-items: center; justify-content: center;
+}
+.help-btn:hover { background: rgba(255,255,255,0.34); }
 .updated { font-size: 0.78rem; opacity: 0.85; }
+
+/* ICS 구독 도움말 팝업 */
+.ics-help-intro { margin: 0 0 12px; font-size: 0.9rem; line-height: 1.55; color: var(--text); }
+.ics-url-box {
+  display: flex; align-items: center; gap: 8px; margin: 0 0 14px;
+  background: var(--accent-weak); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px;
+}
+.ics-url-box code {
+  flex: 1 1 auto; min-width: 0; overflow-x: auto; white-space: nowrap;
+  font-size: 0.82rem; color: var(--accent, #1971c2);
+}
+.ics-url-box .btn { flex: 0 0 auto; padding: 5px 12px; font-size: 0.82rem; }
+.ics-steps { margin: 0 0 14px; padding-left: 20px; }
+.ics-steps li { margin: 8px 0; font-size: 0.9rem; line-height: 1.55; }
+.ics-help-note {
+  margin: 0; font-size: 0.82rem; line-height: 1.5; color: var(--text-muted, #868e96);
+  border-top: 1px solid var(--border, #dee2e6); padding-top: 12px;
+}
 
 /* controls */
 .controls {

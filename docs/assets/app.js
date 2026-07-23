@@ -286,6 +286,41 @@ function openModal(w) {
 
 function closeModal() { $("#modal").classList.add("hidden"); }
 
+// --- ICS subscription help --------------------------------------------------
+function openIcsHelp() {
+  const icsUrl = new URL("webinars.ics", location.href).href;
+  const body = $("#modal-body");
+  body.innerHTML = `
+    <div class="modal-body ics-help">
+      <h3>📅 구글 캘린더에 웨비나 일정 구독하기</h3>
+      <p class="ics-help-intro">아래 ICS 주소를 구글 캘린더에 <b>URL로 추가</b>하면, 이 사이트의 웨비나 일정이 <b>자동으로 구독</b>되어 매일 갱신됩니다. 로그인·설치 없이 무료로 이용할 수 있어요.</p>
+      <div class="ics-url-box">
+        <code id="ics-url">${escapeHtml(icsUrl)}</code>
+        <button class="btn" id="ics-copy" type="button">복사</button>
+      </div>
+      <ol class="ics-steps">
+        <li>웹브라우저(PC 권장)에서 <a href="https://calendar.google.com/" target="_blank" rel="noopener">구글 캘린더</a>를 엽니다.</li>
+        <li>왼쪽 <b>"다른 캘린더"</b> 옆의 <b>+</b> 버튼을 클릭한 뒤 <b>"URL로 추가"</b>를 선택합니다.</li>
+        <li>위 ICS 주소를 붙여넣고 <b>"캘린더 추가"</b>를 클릭합니다.</li>
+        <li>완료! "다른 캘린더" 목록에 <b>웨비나 일정</b>이 추가되며, 이후 자동으로 갱신됩니다.</li>
+      </ol>
+      <p class="ics-help-note">⏱️ 구글의 외부 URL 캘린더 새로고침은 다소 느릴 수 있습니다(보통 몇 시간~하루). 스마트폰 앱에서는 PC/웹에서 구독한 캘린더가 <b>설정 → 캘린더 표시</b>에 켜져 있어야 보입니다.</p>
+    </div>`;
+  $("#modal").classList.remove("hidden");
+  const copyBtn = $("#ics-copy");
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      const done = () => {
+        copyBtn.textContent = "복사됨 ✓";
+        setTimeout(() => (copyBtn.textContent = "복사"), 1500);
+      };
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(icsUrl).then(done).catch(() => {});
+      }
+    };
+  }
+}
+
 // --- render orchestration ---------------------------------------------------
 function render() {
   renderFilters();
@@ -332,6 +367,8 @@ function bindEvents() {
   $("#today-btn").onclick = () => { state.cursor = new Date(); render(); };
   document.querySelectorAll("[data-close]").forEach((el) => (el.onclick = closeModal));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+  const icsHelp = $("#ics-help");
+  if (icsHelp) icsHelp.onclick = (e) => { e.preventDefault(); openIcsHelp(); };
 }
 
 async function load() {
