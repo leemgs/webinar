@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-24T12:11:05.993181+09:00",
-  "count": 32,
+  "generated_at": "2026-07-25T09:16:39.238595+09:00",
+  "count": 34,
   "webinars": [
     {
       "source": "ddtube",
@@ -529,7 +529,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file178493086992.jpg"
+      ],
       "id": "talkit-84c08e710e38"
     },
     {
@@ -550,6 +552,42 @@
         "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260813_IBM-FlashSystem_참여방법.jpg"
       ],
       "id": "ddtube-e3df7d8f039c"
+    },
+    {
+      "source": "talkit",
+      "title": "ERP를 DX·AX 기반으로 전환하는 제조 ERP 혁신 전략 [현대오토에버]",
+      "url": "https://talkit.tv/main/events/3709",
+      "start_kst": "2026-08-13T14:00:00+09:00",
+      "end_kst": "2026-08-13T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3709",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1784729876567.jpg"
+      ],
+      "id": "talkit-12a43e7bda5c"
+    },
+    {
+      "source": "talkit",
+      "title": "설비 자동화를 넘어 자율 생산으로: 제조 Physical AI 현실적 구현 전략 [라온피플]",
+      "url": "https://talkit.tv/main/events/3711",
+      "start_kst": "2026-08-25T14:00:00+09:00",
+      "end_kst": "2026-08-25T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3711",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1784898245684.jpg"
+      ],
+      "id": "talkit-0e7203a5de15"
     },
     {
       "source": "allshowtv",
