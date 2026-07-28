@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-27T09:12:34.689766+09:00",
-  "count": 34,
+  "generated_at": "2026-07-28T09:12:24.834319+09:00",
+  "count": 35,
   "webinars": [
     {
       "source": "ddtube",
@@ -517,6 +517,24 @@
       "id": "talkit-0d4e93fb317b"
     },
     {
+      "source": "allshowtv",
+      "title": "AI 시대의 옵저버빌리티: GPU·LLM 모니터링부터 AI 기반 장애 대응까지",
+      "url": "https://www.allshowtv.com/detail.html?idx=1744",
+      "start_kst": "2026-08-11T15:00:00+09:00",
+      "end_kst": "2026-08-11T16:00:00+09:00",
+      "host": "Splunk",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1744",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/07/27/main_27094145204588.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/07/27/main_27094146273335.jpg"
+      ],
+      "id": "allshowtv-54bb84d1c1a0"
+    },
+    {
       "source": "talkit",
       "title": "Security · Migration · AI 세 가지 과제, RHEL 10이라는 하나의 답 [코오롱베니트, Red Hat]",
       "url": "https://talkit.tv/main/events/3707",
@@ -530,7 +548,7 @@
       "registered": false,
       "prizes": [],
       "prize_images": [
-        "https://talkit.tv/userfiles/images/file178493086992.jpg"
+        "https://talkit.tv/userfiles/images/file1785176495289.jpg"
       ],
       "id": "talkit-84c08e710e38"
     },
