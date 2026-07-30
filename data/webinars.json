@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-29T09:08:32.882871+09:00",
-  "count": 35,
+  "generated_at": "2026-07-30T09:09:42.144290+09:00",
+  "count": 36,
   "webinars": [
     {
       "source": "ddtube",
@@ -606,6 +606,24 @@
         "https://talkit.tv/userfiles/images/file1784898245684.jpg"
       ],
       "id": "talkit-0e7203a5de15"
+    },
+    {
+      "source": "talkit",
+      "title": "Physical AI 시대의 휴머노이드 개발 - NX 기반 통합 설계부터 가상 검증, AI 학습, 양산까지",
+      "url": "https://talkit.tv/main/events/3712",
+      "start_kst": "2026-08-26T14:00:00+09:00",
+      "end_kst": "2026-08-26T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3712",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1785249510109.jpg"
+      ],
+      "id": "talkit-6bef78f5ed45"
     },
     {
       "source": "allshowtv",
