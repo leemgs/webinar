@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-30T09:09:42.144290+09:00",
-  "count": 36,
+  "generated_at": "2026-07-31T09:15:33.997005+09:00",
+  "count": 37,
   "webinars": [
     {
       "source": "ddtube",
@@ -588,6 +588,24 @@
         "https://talkit.tv/userfiles/images/file1784729876567.jpg"
       ],
       "id": "talkit-12a43e7bda5c"
+    },
+    {
+      "source": "talkit",
+      "title": "클라우드-네이티브 AI 에이전트 코딩 [박준성 회장/한국소프트웨어기술진흥협회]",
+      "url": "https://talkit.tv/main/events/3713",
+      "start_kst": "2026-08-21T14:00:00+09:00",
+      "end_kst": "2026-08-21T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3713",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1785424156909.jpg"
+      ],
+      "id": "talkit-65f71625a839"
     },
     {
       "source": "talkit",
