@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-31T09:15:33.997005+09:00",
-  "count": 37,
+  "generated_at": "2026-08-01T09:12:31.334156+09:00",
+  "count": 39,
   "webinars": [
     {
       "source": "ddtube",
@@ -500,6 +500,24 @@
     },
     {
       "source": "talkit",
+      "title": "AI 이전과 이후, 서비스 개발·출시·운영은 어떻게 달라졌나? Real Story [황상철 대표 / 에스프레소북]",
+      "url": "https://talkit.tv/main/events/3715",
+      "start_kst": "2026-08-10T14:00:00+09:00",
+      "end_kst": "2026-08-10T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3715",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1785509605116.jpg"
+      ],
+      "id": "talkit-7eb17e1678f5"
+    },
+    {
+      "source": "talkit",
       "title": "가상화 인프라의 새로운 선택: VM·컨테이너 통합과 안전한 마이그레이션 [수세코리아]",
       "url": "https://talkit.tv/main/events/3708",
       "start_kst": "2026-08-11T14:00:00+09:00",
@@ -588,6 +606,24 @@
         "https://talkit.tv/userfiles/images/file1784729876567.jpg"
       ],
       "id": "talkit-12a43e7bda5c"
+    },
+    {
+      "source": "allshowtv",
+      "title": "체계화 된 데이터가 곧 AI 시대의 경쟁력이다",
+      "url": "https://www.allshowtv.com/detail.html?idx=1745",
+      "start_kst": "2026-08-19T14:00:00+09:00",
+      "end_kst": "2026-08-19T15:00:00+09:00",
+      "host": "㈜모두솔루션",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1745",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/07/31/main_31162621328908.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/07/31/main_31163631529167.jpg"
+      ],
+      "id": "allshowtv-71ea9e70a734"
     },
     {
       "source": "talkit",

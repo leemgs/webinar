@@ -6,8 +6,17 @@ METHOD:PUBLISH
 X-WR-CALNAME:웨비나 일정
 X-WR-TIMEZONE:Asia/Seoul
 BEGIN:VEVENT
+UID:talkit-7eb17e1678f5@webinar
+DTSTAMP:20260801T001231Z
+DTSTART:20260810T050000Z
+DTEND:20260810T060000Z
+SUMMARY:[웨비나] AI 이전과 이후\, 서비스 개발·출시·운영은 어떻게 달라졌나? Real Story [황상철 대표 / 에스프레소북]
+DESCRIPTION:신청: https://talkit.tv/main/events/3715
+URL:https://talkit.tv/main/events/3715
+END:VEVENT
+BEGIN:VEVENT
 UID:talkit-0d4e93fb317b@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260811T050000Z
 DTEND:20260811T060000Z
 SUMMARY:[웨비나] 가상화 인프라의 새로운 선택: VM·컨테이너 통합과 안전한 마이그레이션 [수세코리아]
@@ -16,7 +25,7 @@ URL:https://talkit.tv/main/events/3708
 END:VEVENT
 BEGIN:VEVENT
 UID:allshowtv-54bb84d1c1a0@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260811T060000Z
 DTEND:20260811T070000Z
 SUMMARY:[웨비나] AI 시대의 옵저버빌리티: GPU·LLM 모니터링부터 AI 기반 장애 대응까지
@@ -25,7 +34,7 @@ URL:https://www.allshowtv.com/detail.html?idx=1744
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-84c08e710e38@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260812T050000Z
 DTEND:20260812T060000Z
 SUMMARY:[웨비나] Security · Migration · AI 세 가지 과제\, RHEL 10이라는 하나의 답 [코오롱베니트\, Red Hat]
@@ -34,7 +43,7 @@ URL:https://talkit.tv/main/events/3707
 END:VEVENT
 BEGIN:VEVENT
 UID:ddtube-e3df7d8f039c@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260813T050000Z
 DTEND:20260813T060000Z
 SUMMARY:[웨비나] [한국IBM] 데이터 보호부터 자율 운영까지\, 스토리지가 AI를 입다
@@ -43,7 +52,7 @@ URL:https://www.ddtube.co.kr/d2111/
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-12a43e7bda5c@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260813T050000Z
 DTEND:20260813T060000Z
 SUMMARY:[웨비나] ERP를 DX·AX 기반으로 전환하는 제조 ERP 혁신 전략 [현대오토에버]
@@ -51,8 +60,17 @@ DESCRIPTION:신청: https://talkit.tv/main/events/3709
 URL:https://talkit.tv/main/events/3709
 END:VEVENT
 BEGIN:VEVENT
+UID:allshowtv-71ea9e70a734@webinar
+DTSTAMP:20260801T001231Z
+DTSTART:20260819T050000Z
+DTEND:20260819T060000Z
+SUMMARY:[웨비나] 체계화 된 데이터가 곧 AI 시대의 경쟁력이다
+DESCRIPTION:주최: ㈜모두솔루션\n신청: https://www.allshowtv.com/detail.html?idx=1745
+URL:https://www.allshowtv.com/detail.html?idx=1745
+END:VEVENT
+BEGIN:VEVENT
 UID:talkit-65f71625a839@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260821T050000Z
 DTEND:20260821T060000Z
 SUMMARY:[웨비나] 클라우드-네이티브 AI 에이전트 코딩 [박준성 회장/한국소프트웨어기술진흥협회]
@@ -61,7 +79,7 @@ URL:https://talkit.tv/main/events/3713
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-0e7203a5de15@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260825T050000Z
 DTEND:20260825T060000Z
 SUMMARY:[웨비나] 설비 자동화를 넘어 자율 생산으로: 제조 Physical AI 현실적 구현 전략 [라온피플]
@@ -70,7 +88,7 @@ URL:https://talkit.tv/main/events/3711
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-6bef78f5ed45@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260826T050000Z
 DTEND:20260826T060000Z
 SUMMARY:[웨비나] Physical AI 시대의 휴머노이드 개발 - NX 기반 통합 설계부터 가상 검증\, AI 학습\, 양산까지
@@ -79,7 +97,7 @@ URL:https://talkit.tv/main/events/3712
 END:VEVENT
 BEGIN:VEVENT
 UID:allshowtv-572f3f1d2ff0@webinar
-DTSTAMP:20260731T001534Z
+DTSTAMP:20260801T001231Z
 DTSTART:20260903T050000Z
 DTEND:20260903T060000Z
 SUMMARY:[웨비나] 의료 데이터의 안전한 관리와 보호를 위한 통합 인프라 전략
