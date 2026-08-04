@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-08-03T09:10:19.945300+09:00",
-  "count": 39,
+  "generated_at": "2026-08-04T09:18:58.724968+09:00",
+  "count": 40,
   "webinars": [
-    {
-      "source": "ddtube",
-      "title": "Digital Continuity 2026 버추얼 콘퍼런스",
-      "url": "https://www.ddtube.co.kr/d2102/",
-      "start_kst": "2026-06-04T10:30:00+09:00",
-      "end_kst": "2026-06-04T11:30:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2102/",
-      "description": "",
-      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/04/th2560_f-1-1024x576.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/02/참여방법_0402.jpg"
-      ],
-      "id": "ddtube-ef9a32f98d72"
-    },
     {
       "source": "ddtube",
       "title": "AI WAVE 2026 버추얼 콘퍼런스",
@@ -621,7 +603,7 @@
       "registered": false,
       "prizes": [],
       "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/07/31/main_31163631529167.jpg"
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03090103458193.jpg"
       ],
       "id": "allshowtv-71ea9e70a734"
     },
@@ -662,6 +644,24 @@
       "id": "talkit-0e7203a5de15"
     },
     {
+      "source": "allshowtv",
+      "title": "AI Native Enterprise를 지원하는 AI Ready Data 플랫폼 활용 전략",
+      "url": "https://www.allshowtv.com/detail.html?idx=1747",
+      "start_kst": "2026-08-25T15:00:00+09:00",
+      "end_kst": "2026-08-25T16:00:00+09:00",
+      "host": "엔코아",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1747",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03163159097522.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03161326826585.jpg"
+      ],
+      "id": "allshowtv-1602a1092e92"
+    },
+    {
       "source": "talkit",
       "title": "Physical AI 시대의 휴머노이드 개발 - NX 기반 통합 설계부터 가상 검증, AI 학습, 양산까지",
       "url": "https://talkit.tv/main/events/3712",
@@ -678,6 +678,24 @@
         "https://talkit.tv/userfiles/images/file1785249510109.jpg"
       ],
       "id": "talkit-6bef78f5ed45"
+    },
+    {
+      "source": "allshowtv",
+      "title": "AI 인프라 데이터 병목 개선 w/ Fusion",
+      "url": "https://www.allshowtv.com/detail.html?idx=1746",
+      "start_kst": "2026-08-26T15:00:00+09:00",
+      "end_kst": "2026-08-26T16:00:00+09:00",
+      "host": "Tuxera",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1746",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03101103410013.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03101103868813.jpg"
+      ],
+      "id": "allshowtv-33743758a6ba"
     },
     {
       "source": "allshowtv",
