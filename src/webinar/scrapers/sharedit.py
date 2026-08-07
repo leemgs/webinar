@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import logging
 import re
+from urllib.parse import urlparse
 
 from .base import (
     BaseScraper,
@@ -38,6 +39,7 @@ from datetime import date
 log = logging.getLogger(__name__)
 
 DETAIL_RE = re.compile(r"^/seminars/\d+$")
+WEBINAR_HOST_RE = re.compile(r"(^|\.)webinar\.sharedit\.co\.kr$", re.I)
 MMDD_RE = re.compile(r"\[(\d{2})(\d{2})\]")  # [0729] -> 07-29
 _BG_URL = re.compile(r"url\(['\"]?([^'\")]+)")
 # sharedit renders the whole webinar (title·연사·Event/경품·안내) as image slices on
@@ -75,22 +77,37 @@ class Scraper(BaseScraper):
         webinars = []
         seen = set()
 
-        for li in soup.select("li"):
-            a = li.select_one("a[href^='/seminars/']")
-            if not a:
+        # New campaigns are sometimes hosted on webinar.sharedit.co.kr rather
+        # than /seminars/NNNN.  Iterate links (instead of only legacy <li>s) so
+        # both card layouts are handled.
+        for a in soup.select("a[href]"):
+            href = clean(a.get("href", ""))
+            if not self._is_webinar_href(href):
                 continue
-            href = a.get("href", "").split("?")[0]
-            if not DETAIL_RE.match(href):
-                continue
-            title = clean(a.get("title") or a.get_text())
-            if not title or is_noise_title(title):
-                continue
+            parsed_href = urlparse(href)
+            if DETAIL_RE.match(parsed_href.path.rstrip("/")):
+                href = parsed_href.path.rstrip("/")
+            elif parsed_href.path.endswith("/"):
+                href = parsed_href._replace(path=parsed_href.path.rstrip("/")).geturl()
             url = self.abs_url(href)
             if url in seen:
                 continue
 
+            card = a.find_parent(["li", "article", "section"]) or a.find_parent("div") or a.parent
+            title = self._title(a, card)
+            if not title or is_noise_title(title):
+                continue
+
             # authoritative date/time from <dl class="info"> 일시
-            info_text = self._info_value(li, "일시")
+            info_text = self._info_value(card, "일시")
+            if not info_text:
+                # The campaign-domain cards do not use dl.info; their visible
+                # card text (or image alt) contains the date and time.
+                info_text = clean(card.get_text(" ")) if card else ""
+                if card:
+                    info_text += " " + " ".join(
+                        clean(img.get("alt", "")) for img in card.select("img[alt]")
+                    )
             d = parse_date(info_text) or self._mmdd_date(title)
             if not d:
                 # no reliable date (detail pages are bot-blocked) -> skip
@@ -106,13 +123,34 @@ class Scraper(BaseScraper):
                     register_url=url,
                     start_kst=start,
                     end_kst=add_hours_iso(start, 1.0) if start else None,
-                    host=self._text(li, ".sponsor"),
-                    thumbnail=self._figure_bg(li),
+                    host=self._text(card, ".sponsor"),
+                    thumbnail=self._thumbnail(card),
                 )
             )
         return webinars
 
     # -- helpers --
+    def _is_webinar_href(self, href: str) -> bool:
+        parsed = urlparse(href)
+        if DETAIL_RE.match(parsed.path.rstrip("/")):
+            return not parsed.netloc or parsed.hostname in {
+                "sharedit.co.kr",
+                "www.sharedit.co.kr",
+            }
+        return parsed.scheme in {"", "http", "https"} and bool(
+            WEBINAR_HOST_RE.search(parsed.hostname or "")
+        )
+
+    @staticmethod
+    def _title(a, card) -> str:
+        candidates = [a.get("title")]
+        if card:
+            heading = card.select_one("h1, h2, h3, h4, strong")
+            candidates.append(heading.get_text(" ") if heading else "")
+            candidates.extend(img.get("alt") for img in card.select("img[alt]"))
+        candidates.append(a.get_text(" "))
+        return next((clean(value) for value in candidates if clean(value)), "")
+
     @staticmethod
     def _info_value(li, label: str) -> str:
         dl = li.select_one("dl.info")
@@ -137,6 +175,13 @@ class Scraper(BaseScraper):
             if m:
                 return m.group(1)
         return ""
+
+    def _thumbnail(self, card) -> str:
+        bg = self._figure_bg(card)
+        if bg:
+            return self.abs_url(bg)
+        img = card.select_one("img[src]") if card else None
+        return self.abs_url(img.get("src")) if img else ""
 
     @staticmethod
     def _mmdd_date(title: str):

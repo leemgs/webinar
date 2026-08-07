@@ -185,6 +185,33 @@ def test_sharedit_scraper():
     assert okta.start_kst.startswith("2026-07-15T14:00")
 
 
+def test_sharedit_external_campaign_card():
+    """Campaigns hosted on the webinar subdomain must not be omitted."""
+    html = """
+    <section class="webinar-card">
+      <img src="/uploads/ai365.jpg"
+           alt="OpenAI 기반 Microsoft Enterprise AI Platform Ai 365 에이전트 소개">
+      <h3>OpenAI 기반 Microsoft Enterprise AI Platform Ai 365 에이전트 소개</h3>
+      <p>2026.08.26(수) 14:00 - 15:00</p>
+      <a href="https://webinar.sharedit.co.kr/ai365-agent/">자세히 보기</a>
+    </section>
+    """
+    scraper = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    items = scraper.parse(html)
+    assert len(items) == 1
+    webinar = items[0]
+    assert webinar.title.startswith("OpenAI 기반 Microsoft")
+    assert webinar.start_kst == "2026-08-26T14:00:00+09:00"
+    assert webinar.url == "https://webinar.sharedit.co.kr/ai365-agent"
+    assert webinar.thumbnail == "https://www.sharedit.co.kr/uploads/ai365.jpg"
+
+
+def test_sharedit_rejects_unrelated_external_link():
+    scraper = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    html = '<section><p>2026.08.26 14:00</p><a href="https://example.com">광고</a></section>'
+    assert scraper.parse(html) == []
+
+
 # --- dubiz anchor-card scraper --------------------------------------------
 DUBIZ_HTML = """
 <html><body>
