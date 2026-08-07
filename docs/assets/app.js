@@ -70,16 +70,6 @@ function visibleWebinars() {
 }
 
 // --- filters UI -------------------------------------------------------------
-function renderSiteLinks() {
-  const box = $("#site-links");
-  if (!box) return;
-  box.innerHTML = Object.entries(SOURCES).map(([key, meta]) => `
-    <a class="site-link" href="${meta.url}" target="_blank" rel="noopener noreferrer"
-       style="--site-color:${SRC_HEX[key]}" aria-label="${meta.name} 홈페이지 새 창에서 열기">
-      <span class="site-link-dot"></span>${meta.name}<span aria-hidden="true">↗</span>
-    </a>`).join("");
-}
-
 function renderFilters() {
   const srcBox = $("#source-filters");
   srcBox.innerHTML = "";
@@ -363,7 +353,6 @@ function escapeHtml(s) {
 
 // --- init -------------------------------------------------------------------
 function bindEvents() {
-  renderSiteLinks();
   document.querySelectorAll(".view-toggle button").forEach((btn) => {
     btn.onclick = () => {
       state.view = btn.dataset.view;
