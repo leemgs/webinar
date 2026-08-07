@@ -86,6 +86,7 @@ class Browser:
         wait_ms: int = 2500,
         timeout_ms: int = 30000,
         click_selector: Optional[str] = None,
+        exhaust_listing: bool = False,
     ) -> str:
         """Navigate to `url`, let JS render, and return the page HTML.
 
@@ -106,12 +107,55 @@ class Browser:
                         page.wait_for_timeout(800)
                     except Exception:
                         log.debug("click_selector %r not clickable on %s", click_selector, url)
+                if exhaust_listing:
+                    self._exhaust_listing(page)
                 # allow SPA XHR/hydration to settle
                 page.wait_for_timeout(wait_ms)
                 return page.content()
             except Exception as e:
                 log.warning("failed to load %s: %s", url, e)
                 return ""
+
+    @staticmethod
+    def _exhaust_listing(page, max_rounds: int = 12) -> None:
+        """Reveal lazy-loaded/paginated cards before snapshotting a listing.
+
+        Several webinar sites only hydrate cards after scrolling, while others
+        use a conventional "더보기" button.  Stop as soon as two rounds produce
+        the same document height and no enabled load-more control is present.
+        The bounded loop prevents an infinite-news-feed style page from making
+        the daily job hang.
+        """
+        stable_rounds = 0
+        previous_height = 0
+        more_selector = (
+            "button:visible:not([disabled]):has-text('더보기'), "
+            "a:visible:has-text('더보기'), "
+            "button:visible:not([disabled]):has-text('Load more')"
+        )
+        for _ in range(max_rounds):
+            clicked = False
+            try:
+                more = page.locator(more_selector).last
+                if more.count():
+                    more.click(timeout=1500)
+                    clicked = True
+            except Exception:
+                pass
+            try:
+                page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                page.wait_for_timeout(700)
+                height = page.evaluate("document.body.scrollHeight")
+            except Exception:
+                return
+            stable_rounds = stable_rounds + 1 if height == previous_height and not clicked else 0
+            previous_height = height
+            if stable_rounds >= 2:
+                break
+        try:
+            page.evaluate("window.scrollTo(0, 0)")
+        except Exception:
+            pass
 
     def save_storage_state(self, path: str) -> None:
         self._context.storage_state(path=path)

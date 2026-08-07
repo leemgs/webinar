@@ -98,6 +98,25 @@ def test_generic_card_scraper():
     assert w.url == "https://www.allshowtv.com/seminar/1"
 
 
+def test_allshowtv_collects_mixed_card_layouts_and_lazy_thumbnail():
+    """A featured-card match must not hide webinars in another card layout."""
+    html = """
+    <ul class="seminar_list"><li>
+      <a href="/detail.html?idx=1"><strong>첫 번째 웨비나</strong></a>
+      <span>2026.08.10 14:00</span>
+    </li></ul>
+    <article class="seminar">
+      <a href="/detail.html?idx=2"><h3>두 번째 웨비나</h3></a>
+      <img data-original="/lazy.jpg"><time>2026.08.11 15:00</time>
+    </article>
+    """
+    scraper = get_scraper("allshowtv", {"base_url": "https://www.allshowtv.com"})
+    items = scraper.parse(html)
+    assert {w.title for w in items} == {"첫 번째 웨비나", "두 번째 웨비나"}
+    second = next(w for w in items if w.title == "두 번째 웨비나")
+    assert second.thumbnail == "https://www.allshowtv.com/lazy.jpg"
+
+
 # --- talkit anchor-card scraper -------------------------------------------
 TALKIT_HTML = """
 <html><body>

@@ -26,7 +26,6 @@ from .base import (
 log = logging.getLogger(__name__)
 
 SLUG_RE = re.compile(r"/d(\d{3,})/?(?:$|[?#])")
-MAX_DETAILS = 30
 
 
 class Scraper(BaseScraper):
@@ -72,10 +71,14 @@ class Scraper(BaseScraper):
         webinar.thumbnail = (og.get("content") if og and og.get("content") else "") or banner
 
     def fetch(self, browser):
-        html = browser.get_html(self.listing_url, self.cfg.get("wait_selector"))
+        html = browser.get_html(
+            self.listing_url,
+            self.cfg.get("wait_selector"),
+            exhaust_listing=True,
+        )
         if not html:
             return []
-        webinars = self.parse(html)[:MAX_DETAILS]
+        webinars = self.parse(html)
         for w in webinars:
             try:
                 self._enrich(browser, w)

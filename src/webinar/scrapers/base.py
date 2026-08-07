@@ -346,7 +346,12 @@ class BaseScraper:
         img = card.select_one(img_sel)
         thumb = ""
         if img:
-            thumb = self.abs_url(img.get("src") or img.get("data-src") or "")
+            thumb = self.abs_url(
+                img.get("src")
+                or img.get("data-src")
+                or img.get("data-original")
+                or ""
+            )
 
         host = ""
         if host_sel:
@@ -373,12 +378,22 @@ class BaseScraper:
         )
 
     def select_cards(self, soup, selectors: list[str]):
-        """Return the first selector's matches that is non-empty."""
+        """Return the de-duplicated union of all matching card layouts.
+
+        Sites commonly mix featured, desktop, mobile, and ordinary cards in a
+        single listing. Returning only the first non-empty selector silently
+        omitted every later layout. ``cards_to_webinars`` performs a second
+        identity-based de-duplication after parsing.
+        """
+        cards = []
+        seen = set()
         for sel in selectors:
-            cards = soup.select(sel)
-            if cards:
-                return cards
-        return []
+            for card in soup.select(sel):
+                marker = id(card)
+                if marker not in seen:
+                    seen.add(marker)
+                    cards.append(card)
+        return cards
 
     def cards_to_webinars(self, cards, **kwargs) -> list[Webinar]:
         out: list[Webinar] = []
@@ -399,6 +414,7 @@ class BaseScraper:
         html = browser.get_html(
             self.listing_url,
             wait_selector=self.cfg.get("wait_selector"),
+            exhaust_listing=True,
         )
         if not html:
             log.warning("[%s] empty HTML from %s", self.key, self.listing_url)
