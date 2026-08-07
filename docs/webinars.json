@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-06T09:10:40.246845+09:00",
-  "count": 40,
+  "generated_at": "2026-08-07T10:49:13.297565+09:00",
+  "count": 43,
   "webinars": [
     {
       "source": "ddtube",
@@ -608,6 +608,24 @@
       "id": "allshowtv-71ea9e70a734"
     },
     {
+      "source": "allshowtv",
+      "title": "AI 시대의 의사결정을 바꾸는 수리최적화(Optimization): 실제 산업 적용 사례와 활용 전략",
+      "url": "https://www.allshowtv.com/detail.html?idx=1749",
+      "start_kst": "2026-08-20T14:00:00+09:00",
+      "end_kst": "2026-08-20T15:00:00+09:00",
+      "host": "Gurobi",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1749",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/05/main_05163805548500.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/05/main_05162217649580.jpg"
+      ],
+      "id": "allshowtv-c0e56cf9b47a"
+    },
+    {
       "source": "talkit",
       "title": "클라우드-네이티브 AI 에이전트 코딩 [박준성 회장/한국소프트웨어기술진흥협회]",
       "url": "https://talkit.tv/main/events/3713",
@@ -624,6 +642,42 @@
         "https://talkit.tv/userfiles/images/file1785424156909.jpg"
       ],
       "id": "talkit-65f71625a839"
+    },
+    {
+      "source": "talkit",
+      "title": "크리에이티브의 확장, 피지컬 AI와 에이전트가 만드는 미래",
+      "url": "https://talkit.tv/main/events/3625",
+      "start_kst": "2026-08-24T16:00:00+09:00",
+      "end_kst": "2026-08-24T17:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3625",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786013654798.jpg"
+      ],
+      "id": "talkit-f79335575605"
+    },
+    {
+      "source": "allshowtv",
+      "title": "AI 주권 시대, 도시에서 데이터센터까지",
+      "url": "https://www.allshowtv.com/detail.html?idx=1750",
+      "start_kst": "2026-08-25T14:00:00+09:00",
+      "end_kst": "2026-08-25T15:00:00+09:00",
+      "host": "오케스트로",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1750",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/06/main_06152017782038.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/06/main_06152018038929.jpg"
+      ],
+      "id": "allshowtv-b905b7bbb2b9"
     },
     {
       "source": "talkit",
