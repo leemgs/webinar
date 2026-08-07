@@ -38,11 +38,13 @@ allshowtv:
 sharedit:
   name: "쉐어드IT"
   base_url: "https://www.sharedit.co.kr"
-  listing_url: "https://www.sharedit.co.kr/seminars?category_code=webinars"
+  # 현재 웨비나 정본 목록. /seminars 목록만 조회하면 /posts/NNNN으로
+  # 등록되는 신규 웨비나(예: [0826] Ai 365)가 누락된다.
+  listing_url: "https://www.sharedit.co.kr/posts?post_type_id=4"
   requires_js: true          # site returns 402 to plain HTTP clients
   requires_login: false
   scraper: sharedit
-  wait_selector: "a[href^='/seminars/']"
+  wait_selector: "a[href^='/posts/'], a[href^='/seminars/']"
   login:
     url: "https://www.sharedit.co.kr/login"
     user_selector: "input[name='email'], input[name='userid'], #userid"

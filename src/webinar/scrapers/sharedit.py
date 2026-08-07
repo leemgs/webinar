@@ -1,8 +1,8 @@
 """쉐어드IT (sharedit.co.kr) scraper.
 
-The site returns HTTP 402 to plain HTTP clients and its /seminars/NNNN detail
-pages sit behind a "please wait" bot challenge, so everything is extracted from
-the listing page (fetched with a real browser).
+The authoritative webinar board is /posts?post_type_id=4. New entries link to
+/posts/NNNN, while older entries can still use /seminars/NNNN. The site returns
+HTTP 402 to plain HTTP clients, so the listing is fetched with a real browser.
 
 Each webinar is a list item like:
     <li>
@@ -38,7 +38,7 @@ from datetime import date
 
 log = logging.getLogger(__name__)
 
-DETAIL_RE = re.compile(r"^/seminars/\d+$")
+DETAIL_RE = re.compile(r"^/(?:posts|seminars)/\d+$")
 WEBINAR_HOST_RE = re.compile(r"(^|\.)webinar\.sharedit\.co\.kr$", re.I)
 MMDD_RE = re.compile(r"\[(\d{2})(\d{2})\]")  # [0729] -> 07-29
 _BG_URL = re.compile(r"url\(['\"]?([^'\")]+)")
@@ -77,9 +77,8 @@ class Scraper(BaseScraper):
         webinars = []
         seen = set()
 
-        # New campaigns are sometimes hosted on webinar.sharedit.co.kr rather
-        # than /seminars/NNNN.  Iterate links (instead of only legacy <li>s) so
-        # both card layouts are handled.
+        # The current board links to /posts/NNNN; legacy cards use
+        # /seminars/NNNN and some campaigns use webinar.sharedit.co.kr.
         for a in soup.select("a[href]"):
             href = clean(a.get("href", ""))
             if not self._is_webinar_href(href):
@@ -180,8 +179,12 @@ class Scraper(BaseScraper):
         bg = self._figure_bg(card)
         if bg:
             return self.abs_url(bg)
-        img = card.select_one("img[src]") if card else None
-        return self.abs_url(img.get("src")) if img else ""
+        img = card.select_one("img") if card else None
+        if not img:
+            return ""
+        return self.abs_url(
+            img.get("src") or img.get("data-src") or img.get("data-original") or ""
+        )
 
     @staticmethod
     def _mmdd_date(title: str):

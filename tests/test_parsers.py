@@ -231,6 +231,28 @@ def test_sharedit_rejects_unrelated_external_link():
     assert scraper.parse(html) == []
 
 
+def test_sharedit_posts_board_captures_august_26_webinar():
+    """The current post_type_id=4 board uses /posts/ links, not /seminars/."""
+    html = """
+    <div class="post-card">
+      <a href="/posts/2401">
+        <img data-src="https://cdn.example/ai365.jpg"
+             alt="[0826] OpenAI 기반 Microsoft Enterprise AI Platform Ai 365 에이전트 소개와 기업 교육·지식관리 Agent 활용 전략">
+        <strong>[0826] OpenAI 기반 Microsoft Enterprise AI Platform Ai 365 에이전트 소개와 기업 교육·지식관리 Agent 활용 전략</strong>
+      </a>
+      <span>2026.08.26</span><span>14:00 - 15:00</span>
+    </div>
+    """
+    scraper = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    items = scraper.parse(html)
+    assert len(items) == 1
+    webinar = items[0]
+    assert webinar.url == "https://www.sharedit.co.kr/posts/2401"
+    assert webinar.title.startswith("OpenAI 기반 Microsoft")
+    assert webinar.start_kst == "2026-08-26T14:00:00+09:00"
+    assert webinar.thumbnail == "https://cdn.example/ai365.jpg"
+
+
 # --- dubiz anchor-card scraper --------------------------------------------
 DUBIZ_HTML = """
 <html><body>

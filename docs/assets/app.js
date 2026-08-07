@@ -2,13 +2,13 @@
 
 // --- metadata ---------------------------------------------------------------
 const SOURCES = {
-  allshowtv: { name: "올쇼TV", color: "var(--c-allshowtv)" },
-  sharedit: { name: "쉐어드IT", color: "var(--c-sharedit)" },
-  ddtube: { name: "DD튜브", color: "var(--c-ddtube)" },
-  e4ds: { name: "e4ds", color: "var(--c-e4ds)" },
-  talkit: { name: "토크아이티", color: "var(--c-talkit)" },
-  dubiz: { name: "두비즈", color: "var(--c-dubiz)" },
-  cloit: { name: "CLOIT:ON", color: "var(--c-cloit)" },
+  allshowtv: { name: "올쇼TV", color: "var(--c-allshowtv)", url: "https://www.allshowtv.com" },
+  sharedit: { name: "쉐어드IT", color: "var(--c-sharedit)", url: "https://www.sharedit.co.kr/posts?post_type_id=4" },
+  ddtube: { name: "DD튜브", color: "var(--c-ddtube)", url: "https://www.ddtube.co.kr" },
+  e4ds: { name: "e4ds", color: "var(--c-e4ds)", url: "https://www.e4ds.com/webinar.asp" },
+  talkit: { name: "토크아이티", color: "var(--c-talkit)", url: "https://talkit.tv/main/webinars/upcoming" },
+  dubiz: { name: "두비즈", color: "var(--c-dubiz)", url: "https://dubiz.co.kr/onoffmix/" },
+  cloit: { name: "CLOIT:ON", color: "var(--c-cloit)", url: "https://webinar.cloit.com" },
 };
 const SRC_HEX = {
   allshowtv: "#e8590c", sharedit: "#2f9e44", ddtube: "#1971c2", e4ds: "#9c36b5",
@@ -70,6 +70,16 @@ function visibleWebinars() {
 }
 
 // --- filters UI -------------------------------------------------------------
+function renderSiteLinks() {
+  const box = $("#site-links");
+  if (!box) return;
+  box.innerHTML = Object.entries(SOURCES).map(([key, meta]) => `
+    <a class="site-link" href="${meta.url}" target="_blank" rel="noopener noreferrer"
+       style="--site-color:${SRC_HEX[key]}" aria-label="${meta.name} 홈페이지 새 창에서 열기">
+      <span class="site-link-dot"></span>${meta.name}<span aria-hidden="true">↗</span>
+    </a>`).join("");
+}
+
 function renderFilters() {
   const srcBox = $("#source-filters");
   srcBox.innerHTML = "";
@@ -353,6 +363,7 @@ function escapeHtml(s) {
 
 // --- init -------------------------------------------------------------------
 function bindEvents() {
+  renderSiteLinks();
   document.querySelectorAll(".view-toggle button").forEach((btn) => {
     btn.onclick = () => {
       state.view = btn.dataset.view;
