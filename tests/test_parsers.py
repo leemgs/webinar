@@ -253,6 +253,58 @@ def test_sharedit_posts_board_captures_august_26_webinar():
     assert webinar.thumbnail == "https://cdn.example/ai365.jpg"
 
 
+SHAREDIT_35963_DETAIL = """
+<html><head>
+  <meta property="og:title" content="[0826] OpenAI 기반 Microsoft Enterprise AI Platform Ai 365 에이전트 소개와 기업 교육·지식관리 Agent 활용 전략">
+  <meta property="og:image" content="https://cdn.example/35963.jpg">
+</head><body><article class="post-content">
+  <h1>OpenAI 기반 Microsoft Enterprise AI Platform Ai 365</h1>
+  <p>2026.08.26(수) 14:00 - 15:00</p>
+</article></body></html>
+"""
+
+
+def test_sharedit_parses_supplied_35963_detail_page():
+    scraper = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    webinar = scraper.parse_detail(
+        SHAREDIT_35963_DETAIL, "https://www.sharedit.co.kr/posts/35963"
+    )
+    assert webinar.url == "https://www.sharedit.co.kr/posts/35963"
+    assert webinar.start_kst == "2026-08-26T14:00:00+09:00"
+    assert webinar.title.startswith("OpenAI 기반 Microsoft")
+    assert webinar.thumbnail == "https://cdn.example/35963.jpg"
+
+
+def test_sharedit_retries_challenged_listing_and_enriches_known_detail():
+    listing = """
+    <div><a href="/posts/35963"><strong>[0826] Ai 365 웨비나</strong></a>
+    <span>2026.08.26</span></div>
+    """
+
+    class FakeBrowser:
+        listing_calls = 0
+
+        def get_html(self, url, **kwargs):
+            if "post_type_id=4" in url:
+                self.listing_calls += 1
+                if self.listing_calls == 1:
+                    return "<html><title>Just a moment...</title></html>"
+                return listing
+            return SHAREDIT_35963_DETAIL
+
+    scraper = get_scraper("sharedit", {
+        "base_url": "https://www.sharedit.co.kr",
+        "listing_url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+        "wait_selector": "a[href^='/posts/']",
+        "detail_urls": ["https://www.sharedit.co.kr/posts/35963"],
+    })
+    browser = FakeBrowser()
+    items = scraper.fetch(browser)
+    assert browser.listing_calls == 2
+    assert len(items) == 1
+    assert items[0].start_kst == "2026-08-26T14:00:00+09:00"
+
+
 # --- dubiz anchor-card scraper --------------------------------------------
 DUBIZ_HTML = """
 <html><body>

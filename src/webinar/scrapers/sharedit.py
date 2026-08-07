@@ -50,27 +50,115 @@ _SLICE_SEL = "img[src*='speedgabia.com/Webinar']:not([src*='footer'])"
 
 class Scraper(BaseScraper):
     def fetch(self, browser):
-        # enrich each webinar's /seminars/NNNN page for the CDN image slices
-        # (the 경품/Event section is embedded among them). The detail page shows an
-        # intermittent "잠시만 기다리십시오" bot challenge per request, so we retry
-        # with fresh requests until it clears.
-        items = super().fetch(browser)
-        for w in items:
-            try:
-                imgs = self._fetch_slices(browser, w.url)
-                if imgs:
-                    w.prize_images = imgs
-            except Exception as e:
-                log.warning("[sharedit] enrich failed for %s: %s", w.url, e)
-        return items
+        # A bot-challenge document is returned with HTTP 200 intermittently.
+        # Validate the DOM and retry rather than accepting it as an empty board.
+        listing_html = self._fetch_listing(browser)
+        items = self.parse(listing_html) if listing_html else []
+        by_url = {w.url.rstrip("/"): w for w in items}
+        for url in self.cfg.get("detail_urls", []):
+            by_url.setdefault(url.rstrip("/"), None)
 
-    def _fetch_slices(self, browser, url, tries: int = 2) -> list[str]:
+        enriched = []
+        for url, webinar in by_url.items():
+            html = self._fetch_clear_html(browser, url)
+            if html:
+                if webinar is None:
+                    webinar = self.parse_detail(html, url)
+                else:
+                    self._enrich_from_detail_html(webinar, html)
+            if webinar:
+                enriched.append(webinar)
+        log.info("[sharedit] scraped %d webinars", len(enriched))
+        return enriched
+
+    def _fetch_listing(self, browser, tries: int = 3) -> str:
+        for _ in range(tries):
+            html = browser.get_html(
+                self.listing_url,
+                wait_selector=self.cfg.get("wait_selector"),
+                wait_ms=3000,
+                exhaust_listing=True,
+            )
+            if html and not self._is_challenge(html) and re.search(
+                r'href=["\'][^"\']*/(?:posts|seminars)/\d+', html
+            ):
+                return html
+        log.warning("[sharedit] listing remained blocked or contained no webinar links")
+        return ""
+
+    def _fetch_clear_html(self, browser, url: str, tries: int = 3) -> str:
         for _ in range(tries):
             html = browser.get_html(url, wait_selector="body", wait_ms=3000)
-            if html and "잠시만" not in html and "Just a moment" not in html:
-                return self.select_prize_images(self.soup(html), _SLICE_SEL)
+            if html and not self._is_challenge(html):
+                return html
         log.info("[sharedit] bot challenge persisted for %s", url)
+        return ""
+
+    @staticmethod
+    def _is_challenge(html: str) -> bool:
+        lowered = html.lower()
+        return any(marker in lowered for marker in (
+            "잠시만 기다리십시오", "잠시만 기다려", "just a moment",
+            "cf-chl-", "challenge-platform",
+        ))
+
+    def _fetch_slices(self, browser, url, tries: int = 2) -> list[str]:
+        html = self._fetch_clear_html(browser, url, tries)
+        if html:
+            return self.select_prize_images(self.soup(html), _SLICE_SEL)
         return []
+
+    def parse_detail(self, html: str, url: str):
+        """Build one webinar from a /posts/NNNN detail page."""
+        soup = self.soup(html)
+        og_title = soup.select_one("meta[property='og:title']")
+        title = clean(og_title.get("content")) if og_title else ""
+        if not title:
+            heading = soup.select_one("h1, .post-title, .view-title")
+            title = clean(heading.get_text(" ")) if heading else ""
+        if not title or is_noise_title(title):
+            return None
+
+        content = soup.select_one("article, .post-content, .view-content, main") or soup.body
+        text = clean(content.get_text(" ")) if content else ""
+        d = parse_date(text) or self._mmdd_date(title)
+        if not d:
+            return None
+        start = to_iso_kst(d, parse_time(text))
+        og_img = soup.select_one("meta[property='og:image']")
+        thumbnail = clean(og_img.get("content")) if og_img else ""
+        webinar = self.new_webinar(
+            title=self._clean_title(title),
+            url=url.rstrip("/"),
+            register_url=url.rstrip("/"),
+            start_kst=start,
+            end_kst=add_hours_iso(start, 1.0),
+            thumbnail=self.abs_url(thumbnail),
+        )
+        self._enrich_from_detail_html(webinar, html)
+        return webinar
+
+    def _enrich_from_detail_html(self, webinar, html: str) -> None:
+        """Replace listing-only midnight times with authoritative detail data."""
+        soup = self.soup(html)
+        content = soup.select_one("article, .post-content, .view-content, main") or soup.body
+        text = clean(content.get_text(" ")) if content else ""
+        detail_date = parse_date(text)
+        detail_time = parse_time(text)
+        if detail_date or detail_time:
+            current = webinar.start_kst
+            current_date = date.fromisoformat(current[:10]) if current else None
+            start = to_iso_kst(detail_date or current_date, detail_time)
+            if start:
+                webinar.start_kst = start
+                webinar.end_kst = add_hours_iso(start, 1.0)
+        imgs = self.select_prize_images(soup, _SLICE_SEL)
+        if imgs:
+            webinar.prize_images = imgs
+        if not webinar.thumbnail:
+            og_img = soup.select_one("meta[property='og:image']")
+            if og_img and og_img.get("content"):
+                webinar.thumbnail = self.abs_url(og_img.get("content"))
 
     def parse(self, html):
         soup = self.soup(html)

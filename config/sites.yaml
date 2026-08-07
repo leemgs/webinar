@@ -45,6 +45,9 @@ sharedit:
   requires_login: false
   scraper: sharedit
   wait_selector: "a[href^='/posts/'], a[href^='/seminars/']"
+  # 목록이 봇 챌린지에 막혀도 알려진 최신 상세 글은 직접 보강한다.
+  detail_urls:
+    - "https://www.sharedit.co.kr/posts/35963"
   login:
     url: "https://www.sharedit.co.kr/login"
     user_selector: "input[name='email'], input[name='userid'], #userid"

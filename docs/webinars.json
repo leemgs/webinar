@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-07T20:36:34.270230+09:00",
-  "count": 43,
+  "generated_at": "2026-08-07T20:51:03.179491+09:00",
+  "count": 44,
   "webinars": [
     {
       "source": "ddtube",
@@ -714,6 +714,22 @@
         "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03161326826585.jpg"
       ],
       "id": "allshowtv-1602a1092e92"
+    },
+    {
+      "source": "sharedit",
+      "title": "OpenAI 기반 Microsoft Enterprise AI Platform Ai 365 에이전트 소개와 기업 교육·지식관리 Agent 활용 전략",
+      "url": "https://www.sharedit.co.kr/posts/35963",
+      "start_kst": "2026-08-26T14:00:00+09:00",
+      "end_kst": "2026-08-26T15:00:00+09:00",
+      "host": "M Cloud Bridge",
+      "register_url": "https://www.sharedit.co.kr/posts/35963",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "sharedit-b537b224cafb"
     },
     {
       "source": "talkit",
