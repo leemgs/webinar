@@ -1,26 +1,7 @@
 {
-  "generated_at": "2026-08-10T08:46:22.173984+09:00",
-  "count": 44,
+  "generated_at": "2026-08-11T08:50:03.810494+09:00",
+  "count": 46,
   "webinars": [
-    {
-      "source": "ddtube",
-      "title": "AI WAVE 2026 버추얼 콘퍼런스",
-      "url": "https://www.ddtube.co.kr/d2103/",
-      "start_kst": "2026-06-11T10:30:00+09:00",
-      "end_kst": "2026-06-11T11:30:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2103/",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/04/260611_AIWAVE2026_virtual_event.jpg",
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/04/참여방법_Blue4.jpg"
-      ],
-      "id": "ddtube-fed0f3a59330"
-    },
     {
       "source": "ddtube",
       "title": "[플랜잇파트너스] AI 프로젝트 데이터 준비 시간 80% 단축, 어떻게 가능했을까요?",
@@ -768,6 +749,42 @@
       "id": "allshowtv-33743758a6ba"
     },
     {
+      "source": "talkit",
+      "title": "사용자 경험으로 완성하는 디지털 워크스페이스 Omnissa Horizon과 eG Enterprise로 구현하는 차세대 VDI 전략",
+      "url": "https://talkit.tv/main/events/3710",
+      "start_kst": "2026-08-27T14:00:00+09:00",
+      "end_kst": "2026-08-27T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3710",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file178613343573.jpg"
+      ],
+      "id": "talkit-f13222f0af74"
+    },
+    {
+      "source": "talkit",
+      "title": "우리 회사는 안전한데, 협력사가 뚫린다면? TPRM 기반 공급망 보안 전략 [동훈아이텍, SecurityScorecard]",
+      "url": "https://talkit.tv/main/events/3717",
+      "start_kst": "2026-08-28T14:00:00+09:00",
+      "end_kst": "2026-08-28T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3717",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786360233558.jpg"
+      ],
+      "id": "talkit-c1e123d727f3"
+    },
+    {
       "source": "allshowtv",
       "title": "의료 데이터의 안전한 관리와 보호를 위한 통합 인프라 전략",
       "url": "https://www.allshowtv.com/detail.html?idx=1740",
@@ -784,6 +801,24 @@
         "https://img.etnews.com/allshowtv/tmp_upload/2026/07/08/main_08133707630884.jpg"
       ],
       "id": "allshowtv-572f3f1d2ff0"
+    },
+    {
+      "source": "talkit",
+      "title": "데이터를 옮기지 않고 AI를 가속하라: AI-Ready Data 인프라 구현 [한국넷앱]",
+      "url": "https://talkit.tv/main/events/3718",
+      "start_kst": "2026-09-15T14:00:00+09:00",
+      "end_kst": "2026-09-15T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3718",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file178636137197.jpg"
+      ],
+      "id": "talkit-aa2e8d7855ae"
     }
   ]
 }
