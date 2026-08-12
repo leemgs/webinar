@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-12T08:59:23.450178+09:00",
-  "count": 46,
+  "generated_at": "2026-08-13T08:58:46.954601+09:00",
+  "count": 48,
   "webinars": [
     {
       "source": "ddtube",
@@ -819,6 +819,42 @@
         "https://talkit.tv/userfiles/images/file178636137197.jpg"
       ],
       "id": "talkit-aa2e8d7855ae"
+    },
+    {
+      "source": "talkit",
+      "title": "Microsoft 365 기반 Enterprise AI Platform으로 구현하는 기업 업무 자동화 AI Agent 혁신 전략 [엠클라우드브리지]",
+      "url": "https://talkit.tv/main/events/3719",
+      "start_kst": "2026-09-16T14:00:00+09:00",
+      "end_kst": "2026-09-16T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3719",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786453783825.jpg"
+      ],
+      "id": "talkit-5e1699e3341f"
+    },
+    {
+      "source": "dubiz",
+      "title": "Pickit 4.1 : AI 파운데이션모델로 혁신하는 차세대 3D 로봇비전 26.09.01 (화) 14:00",
+      "url": "https://dubiz.co.kr/Event/512",
+      "start_kst": "2027-04-01T14:00:00+09:00",
+      "end_kst": "2027-04-01T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/512",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1786452972236.png"
+      ],
+      "id": "dubiz-22cdc7230fb9"
     }
   ]
 }
