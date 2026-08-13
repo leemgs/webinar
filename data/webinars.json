@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-13T08:58:46.954601+09:00",
-  "count": 48,
+  "generated_at": "2026-08-13T20:03:17.915996+09:00",
+  "count": 50,
   "webinars": [
     {
       "source": "ddtube",
@@ -785,6 +785,24 @@
       "id": "talkit-c1e123d727f3"
     },
     {
+      "source": "talkit",
+      "title": "Gemini Enterprise 인사이트: 기업 데이터와 AI 에이전트의 결합 [Google, 한진정보통신]",
+      "url": "https://talkit.tv/main/events/3720",
+      "start_kst": "2026-09-01T14:00:00+09:00",
+      "end_kst": "2026-09-01T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3720",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786538255798.jpg"
+      ],
+      "id": "talkit-2ee71757edf8"
+    },
+    {
       "source": "allshowtv",
       "title": "의료 데이터의 안전한 관리와 보호를 위한 통합 인프라 전략",
       "url": "https://www.allshowtv.com/detail.html?idx=1740",
@@ -801,6 +819,24 @@
         "https://img.etnews.com/allshowtv/tmp_upload/2026/07/08/main_08133707630884.jpg"
       ],
       "id": "allshowtv-572f3f1d2ff0"
+    },
+    {
+      "source": "talkit",
+      "title": "메시 없이, CAD 그대로 빠르게 검증 Simcenter SimSolid",
+      "url": "https://talkit.tv/main/events/3716",
+      "start_kst": "2026-09-07T14:00:00+09:00",
+      "end_kst": "2026-09-07T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3716",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786626077196.jpg"
+      ],
+      "id": "talkit-091e9d2f6089"
     },
     {
       "source": "talkit",
