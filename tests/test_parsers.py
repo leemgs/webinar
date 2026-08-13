@@ -207,6 +207,39 @@ def test_dubiz_scraper():
     assert w.start_kst.startswith("2026-07-16T10:30")
 
 
+# --- chontv detail-link scraper -------------------------------------------
+# Detail links are /{channel-slug}/{id} (e.g. /paloaltonetworks/548). Nav links
+# without a numeric id (/about, /channels, /login) are excluded; require_date
+# drops any matched link that has no parseable date.
+CHONTV_HTML = """
+<html><body>
+  <nav><a href="/about">웨비나 허브</a><a href="/channels">채널</a></nav>
+  <ul class="webinar-list">
+    <li><a href="/paloaltonetworks/548">
+      <h3>글로벌 사례로 보는 유통 기업 보안 혁신 웨비나</h3>
+      <span>2026년 07월 22일(수) 14:00~15:00</span>
+    </a></li>
+    <li><a href="https://chontv.com/event/858">
+      <h3>슈퍼컴퓨터가 클라우드를 만나면 벌어지는 일들</h3>
+      <time>2026년 08월 05일(수) 10:00~11:00</time>
+    </a></li>
+  </ul>
+  <a href="/login">로그인</a>
+</body></html>
+"""
+
+
+def test_chontv_scraper():
+    scraper = get_scraper("chontv", {"base_url": "https://chontv.com"})
+    items = scraper.parse(CHONTV_HTML)
+    assert len(items) == 2  # nav links (/about, /channels, /login) excluded
+    by_url = {w.url: w for w in items}
+    w = by_url["https://chontv.com/paloaltonetworks/548"]
+    assert "유통 기업 보안" in w.title
+    assert w.start_kst.startswith("2026-07-22T14:00")
+    assert "https://chontv.com/event/858" in by_url
+
+
 # --- prize extraction ------------------------------------------------------
 def test_extract_prizes():
     text = "생방송 시청 후 설문 참여자 추첨하여 스타벅스 기프티콘을 드립니다."

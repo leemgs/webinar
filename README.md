@@ -8,14 +8,14 @@
 
 ## 🧩 한눈에 보기
 
-7개 웨비나 사이트에서 일정을 **수집**하고, 하나의 데이터(`data/webinars.json`)로 **정리**한 뒤,
+8개 웨비나 사이트에서 일정을 **수집**하고, 하나의 데이터(`data/webinars.json`)로 **정리**한 뒤,
 **등록·캘린더·홈페이지** 세 갈래로 **활용**하는 단일 파이프라인입니다. 매일 GitHub Actions가 돌립니다.
 
 ```mermaid
 flowchart LR
-    subgraph SRC["🌐 웨비나 사이트 (7)"]
+    subgraph SRC["🌐 웨비나 사이트 (8)"]
         S1["올쇼TV · DD튜브<br/>토크아이티 · 쉐어드IT"]
-        S2["두비즈 · e4ds<br/>CLOIT:ON"]
+        S2["두비즈 · e4ds<br/>CLOIT:ON · 채널온TV"]
     end
 
     subgraph PIPE["🐍 pipeline.py · Playwright"]
@@ -54,7 +54,7 @@ flowchart LR
 
 | 단계 | 모듈 | 한 줄 설명 |
 |---|---|---|
-| 📡 **수집** | [`scrapers/`](src/webinar/scrapers) | 7개 사이트에서 제목·일시·링크·썸네일 파싱 (봇 차단/JS는 Playwright로) |
+| 📡 **수집** | [`scrapers/`](src/webinar/scrapers) | 8개 사이트에서 제목·일시·링크·썸네일 파싱 (봇 차단/JS는 Playwright로) |
 | 🎁 **경품 추출** | [`prizes.py`](src/webinar/prizes.py) | 설문/질문/상담/참석 경품 키워드 추출 + 수동 오버라이드 병합 |
 | 🗃️ **정리** | [`storage.py`](src/webinar/storage.py) | 기존 데이터와 병합(등록 상태·경품 보존), 60일 지난 항목 정리 |
 | 📝 **등록** | [`registrar.py`](src/webinar/registrar.py) | (활성 사이트) 로그인 후 사전등록, 멱등 |
@@ -75,11 +75,12 @@ flowchart LR
 | `dubiz` | 두비즈 | https://dubiz.co.kr | 🟡 코드 작성 완료, 라이브 미검증(사내 프록시 차단) |
 | `e4ds` | e4ds | https://www.e4ds.com/webinar.asp | ⚙️ 로그인 필요 |
 | `cloit` | CLOIT:ON | https://webinar.cloit.com | ⚙️ SPA, 현재 세션 없음 |
+| `chontv` | 채널온TV | https://chontv.com | 🟡 코드 작성 완료, 라이브 미검증(개발망 프록시 차단) |
 
 > ✅ 4개 사이트는 실제 사이트에서 정상 수집을 확인했습니다.
-> 🟡 두비즈는 관찰된 구조(`/onoffmix/` → `/Event/NNN`)로 스크래퍼를 작성했으나
-> **사내 보안 프록시가 dubiz.co.kr을 차단**해 개발 환경에서 라이브 검증은 못 했습니다
-> — GitHub Actions(사외망)에서는 접근 가능하므로 첫 실행 후 확인하세요.
+> 🟡 두비즈(`/onoffmix/` → `/Event/NNN`)와 채널온TV(`/{채널}/{id}`)는 관찰된 구조로
+> 스크래퍼를 작성했으나 **개발망 프록시가 두 도메인을 차단**해 개발 환경에서 라이브
+> 검증은 못 했습니다 — GitHub Actions(사외망)에서는 접근 가능하므로 첫 실행 후 확인하세요.
 > ⚙️ e4ds는 로그인, CLOIT:ON은 현재 대기 세션이 없어 셀렉터 검증이 보류 상태입니다.
 > 셀렉터가 안 맞으면 해당 사이트는 **빈 결과**를 내도록 설계돼 있어(날짜 파싱 실패 시 스킵)
 > 잘못된 데이터가 올라가지 않습니다.
@@ -101,7 +102,7 @@ sequenceDiagram
     participant PG as 🌐 docs/ (Pages)
 
     CR->>PP: 매일 08:00 KST 실행
-    PP->>ST: 7개 사이트 스크래핑
+    PP->>ST: 8개 사이트 스크래핑
     ST-->>PP: 웨비나 목록(제목·일시·링크)
     PP->>PP: 경품 추출 + 기존 데이터 병합·정리
     PP->>DB: webinars.json 저장
@@ -113,7 +114,7 @@ sequenceDiagram
     Note over PG: GitHub Pages가 홈페이지 자동 갱신
 ```
 
-1. **수집** — `pipeline.py`가 7개 사이트를 스크래핑하고 경품을 추출합니다.
+1. **수집** — `pipeline.py`가 8개 사이트를 스크래핑하고 경품을 추출합니다.
 2. **정리** — 기존 `data/webinars.json`과 병합(등록 상태·수동 경품 보존), 60일 지난 항목 정리.
 3. **등록** — 계정이 있고 `register.enabled: true`인 사이트에 로그인 후 사전등록(멱등).
 4. **캘린더** — 등록 웨비나를 지정한 구글 계정(들)의 캘린더에 upsert하고 `webinars.ics` 백업 피드 생성.
@@ -379,7 +380,7 @@ src/webinar/
   config.py        설정·시크릿 로드
   storage.py       data/webinars.json 읽기/쓰기/병합
   browser.py       Playwright 브라우저 헬퍼
-  scrapers/        사이트별 스크래퍼(base + 7개)
+  scrapers/        사이트별 스크래퍼(base + 8개)
   prizes.py        경품 추출/병합
   registrar.py     로그인 + 사전등록
   calendar_sync.py 구글 캘린더 동기화

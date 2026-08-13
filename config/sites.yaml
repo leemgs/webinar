@@ -125,6 +125,24 @@ dubiz:
     button_selector: "a:has-text('신청'), button:has-text('사전등록')"
     confirm_selector: "button:has-text('확인')"
 
+chontv:
+  name: "채널온TV"
+  base_url: "https://chontv.com"
+  listing_url: "https://chontv.com"
+  requires_js: true           # modern JS-rendered site
+  requires_login: false
+  scraper: chontv
+  wait_selector: "body"
+  login:
+    url: "https://chontv.com/login"
+    user_selector: "input[name='email'], input[type='email'], #email"
+    pass_selector: "input[type='password']"
+    submit_selector: "button[type='submit'], .btn-login"
+  register:
+    enabled: false
+    button_selector: "a:has-text('신청'), button:has-text('신청'), button:has-text('사전등록')"
+    confirm_selector: "button:has-text('확인'), button:has-text('완료')"
+
 cloit:
   name: "CLOIT:ON"
   base_url: "https://webinar.cloit.com"
