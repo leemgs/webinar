@@ -84,17 +84,29 @@ class Browser:
         url: str,
         wait_selector: Optional[str] = None,
         wait_ms: int = 2500,
-        timeout_ms: int = 30000,
+        timeout_ms: int = 45000,
         click_selector: Optional[str] = None,
         exhaust_listing: bool = False,
     ) -> str:
         """Navigate to `url`, let JS render, and return the page HTML.
 
         Returns "" on failure (so one bad site never breaks the whole run).
+
+        Navigation is resilient: if the strict "domcontentloaded" wait times out
+        (some sites — e.g. allshowtv — stall on a slow blocking sub-resource so
+        the event never fires within the budget), we retry with the lenient
+        "commit" strategy (resolves on the first response byte) and then let the
+        selector/settle waits below render the content. As a last resort we still
+        return whatever HTML is in the DOM instead of discarding the whole page.
         """
         with self.page() as page:
             try:
-                page.goto(url, wait_until="domcontentloaded", timeout=timeout_ms)
+                if not self._navigate(page, url, timeout_ms):
+                    # navigation never committed — salvage anything that rendered
+                    try:
+                        return page.content()
+                    except Exception:
+                        return ""
                 if wait_selector:
                     try:
                         page.wait_for_selector(wait_selector, timeout=timeout_ms)
@@ -115,6 +127,20 @@ class Browser:
             except Exception as e:
                 log.warning("failed to load %s: %s", url, e)
                 return ""
+
+    @staticmethod
+    def _navigate(page, url: str, timeout_ms: int) -> bool:
+        """Navigate to `url`, trying a strict then a lenient wait strategy.
+
+        Returns True once the navigation commits, False if every strategy fails.
+        """
+        for strategy in ("domcontentloaded", "commit"):
+            try:
+                page.goto(url, wait_until=strategy, timeout=timeout_ms)
+                return True
+            except Exception as e:
+                log.warning("goto(%s) failed for %s: %s", strategy, url, e)
+        return False
 
     @staticmethod
     def _exhaust_listing(page, max_rounds: int = 12) -> None:
