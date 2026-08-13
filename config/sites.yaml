@@ -20,7 +20,8 @@
 allshowtv:
   name: "올쇼TV"
   base_url: "https://www.allshowtv.com"
-  listing_url: "https://www.allshowtv.com"
+  # 루트("/")는 goto가 타임아웃되므로 실제 목록 페이지를 명시한다.
+  listing_url: "https://www.allshowtv.com/index.html"
   requires_js: true
   requires_login: false
   scraper: allshowtv
