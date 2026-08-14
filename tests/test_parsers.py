@@ -161,6 +161,26 @@ def test_allshowtv_title_and_host():
     assert w.host == "엠클라우드브리지"
     assert w.title == "Copilot 이후 기업은 왜 AI Platform 체계로 가는가?"
     assert w.start_kst.startswith("2026-07-08T15:00")
+    # explicit "15:00 ~ 16:00" range -> honour the published end time
+    assert w.end_kst.startswith("2026-07-08T16:00")
+
+
+def test_allshowtv_multi_hour_range_end_time():
+    """The published end time wins over the default 1h span (e.g. 14:00~16:30)."""
+    html = """
+    <ul class="newlist"><li>
+      <a href="/detail.html?idx=1748"><img src="/t.jpg">
+      [센드버드] 끝까지 책임지는 AI 에이전트: 도입을 넘어 운영으로
+      2026년 08월 27일(목) 14:00 ~ 16:30 D-13</a>
+    </li></ul>
+    """
+    scraper = get_scraper("allshowtv", {"base_url": "https://www.allshowtv.com"})
+    items = scraper.parse(html)
+    assert len(items) == 1
+    w = items[0]
+    assert w.host == "센드버드"
+    assert w.start_kst.startswith("2026-08-27T14:00")
+    assert w.end_kst.startswith("2026-08-27T16:30")
 
 
 # --- sharedit listing scraper ---------------------------------------------
