@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-14T09:00:40.528876+09:00",
-  "count": 50,
+  "generated_at": "2026-08-15T08:39:21.262723+09:00",
+  "count": 51,
   "webinars": [
     {
       "source": "ddtube",
@@ -840,7 +840,25 @@
     },
     {
       "source": "talkit",
-      "title": "데이터를 옮기지 않고 AI를 가속하라: AI-Ready Data 인프라 구현 [한국넷앱]",
+      "title": "신규 공장의 최대 보안 리스크, 설계 도면을 어떻게 지킬 것인가? 설계부터 현장 단말까지 [필라웨어]",
+      "url": "https://talkit.tv/main/events/3721",
+      "start_kst": "2026-09-10T14:00:00+09:00",
+      "end_kst": "2026-09-10T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3721",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786718306959.jpg"
+      ],
+      "id": "talkit-1cf8ee797ad3"
+    },
+    {
+      "source": "talkit",
+      "title": "데이터를 옮기지 않고 AI를 가속하라: 멀티클라우드 환경에서 구현하는 AI-Ready Data 인프라 [한국넷앱]",
       "url": "https://talkit.tv/main/events/3718",
       "start_kst": "2026-09-15T14:00:00+09:00",
       "end_kst": "2026-09-15T15:00:00+09:00",
