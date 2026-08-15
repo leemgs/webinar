@@ -1,26 +1,7 @@
 {
-  "generated_at": "2026-08-15T08:39:21.262723+09:00",
-  "count": 51,
+  "generated_at": "2026-08-16T08:36:25.569158+09:00",
+  "count": 50,
   "webinars": [
-    {
-      "source": "ddtube",
-      "title": "[플랜잇파트너스] AI 프로젝트 데이터 준비 시간 80% 단축, 어떻게 가능했을까요?",
-      "url": "https://www.ddtube.co.kr/d2104/",
-      "start_kst": "2026-06-16T14:00:00+09:00",
-      "end_kst": "2026-06-16T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2104/",
-      "description": "",
-      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/05/썸네일-2560px-1024x576.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/05/260616_planit_event-1.jpg",
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/05/260616_planit_참여방법.jpg"
-      ],
-      "id": "ddtube-1b1ebaefaae0"
-    },
     {
       "source": "ddtube",
       "title": "[제3회] 차세대 보안 혁신 서밋(NSIS) 2026 -Online",
