@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-16T08:36:25.569158+09:00",
-  "count": 50,
+  "generated_at": "2026-08-16T15:14:24.286196+09:00",
+  "count": 56,
   "webinars": [
     {
       "source": "ddtube",
@@ -642,6 +642,22 @@
       "id": "allshowtv-b905b7bbb2b9"
     },
     {
+      "source": "chontv",
+      "title": "탈(脫) 오라클, 고객 가치를 실현하는 맞춤형 마이그레이션 전략",
+      "url": "https://chontv.com/event/1266",
+      "start_kst": "2026-08-25T14:00:00+09:00",
+      "end_kst": "2026-08-25T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1266",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_7218cb437e0dd5913822217a4aaee334.jpg?u=1785324181",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-2f0b47a741cd"
+    },
+    {
       "source": "talkit",
       "title": "설비 자동화를 넘어 자율 생산으로: 제조 Physical AI 현실적 구현 전략 [라온피플]",
       "url": "https://talkit.tv/main/events/3711",
@@ -676,6 +692,22 @@
         "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03161326826585.jpg"
       ],
       "id": "allshowtv-1602a1092e92"
+    },
+    {
+      "source": "chontv",
+      "title": "AI 시대에 하드 드라이브 바로 알기 : 씨게이트가 제시하는 차세대 스토리지 인클로저",
+      "url": "https://chontv.com/event/1267",
+      "start_kst": "2026-08-26T14:00:00+09:00",
+      "end_kst": "2026-08-26T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1267",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_74bb047dd11304328ef9c337648bdb36.jpg?u=1785756060",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-c211ddaee8fd"
     },
     {
       "source": "sharedit",
@@ -728,6 +760,22 @@
         "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03101103868813.jpg"
       ],
       "id": "allshowtv-33743758a6ba"
+    },
+    {
+      "source": "allshowtv",
+      "title": "끝까지 책임지는 AI 에이전트: 도입을 넘어 운영으로",
+      "url": "https://www.allshowtv.com/detail.html?idx=1748",
+      "start_kst": "2026-08-27T14:00:00+09:00",
+      "end_kst": "2026-08-27T16:30:00+09:00",
+      "host": "센드버드",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1748",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/04/main_04092747303172.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-a76d8f37e323"
     },
     {
       "source": "talkit",
@@ -820,6 +868,38 @@
       "id": "talkit-091e9d2f6089"
     },
     {
+      "source": "chontv",
+      "title": "연결될수록 위험하다 —AI 팩토리 시대의 OT 보안 전략",
+      "url": "https://chontv.com/event/1274",
+      "start_kst": "2026-09-08T14:00:00+09:00",
+      "end_kst": "2026-09-08T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1274",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_5795dc7a84e8277470f6aa7fd91b91cb.png?u=1786692980",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-9726b6426103"
+    },
+    {
+      "source": "chontv",
+      "title": "The Ghost in the Machine : AI Agent 시대, 보이지 않는 Machine Identity를 어떻게 통제할 것인가?",
+      "url": "https://chontv.com/event/1271",
+      "start_kst": "2026-09-09T14:00:00+09:00",
+      "end_kst": "2026-09-09T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1271",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_d0a9b93377a9ec0e34fd712515e3bda2.jpg?u=1786152682",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-89e52513d94f"
+    },
+    {
       "source": "talkit",
       "title": "신규 공장의 최대 보안 리스크, 설계 도면을 어떻게 지킬 것인가? 설계부터 현장 단말까지 [필라웨어]",
       "url": "https://talkit.tv/main/events/3721",
@@ -872,6 +952,22 @@
         "https://talkit.tv/userfiles/images/file1786453783825.jpg"
       ],
       "id": "talkit-5e1699e3341f"
+    },
+    {
+      "source": "allshowtv",
+      "title": "금소법 시대, AI는 어떻게 약관을 지키는가",
+      "url": "https://www.allshowtv.com/detail.html?idx=1751",
+      "start_kst": "2026-09-17T15:00:00+09:00",
+      "end_kst": "2026-09-17T16:00:00+09:00",
+      "host": "Enhans",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1751",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/07/main_07150340141077.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-c196c1481a8c"
     },
     {
       "source": "dubiz",

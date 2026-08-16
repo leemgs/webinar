@@ -118,6 +118,31 @@ def parse_time(text: str) -> Optional[time]:
     return None
 
 
+# a single time token, e.g. "14:00", "오후 2:00", "오후 2시 30분"
+_TIME_TOKEN = r"(?:오전|오후)?\s*\d{1,2}(?::\d{2}|\s*시(?:\s*\d{1,2}\s*분?)?)"
+# a "start ~ end" range: two time tokens joined by ~ / - / to / 부터
+_TIME_RANGE = re.compile(
+    rf"({_TIME_TOKEN})\s*(?:~|〜|–|—|-|to|부터)\s*({_TIME_TOKEN})"
+)
+
+
+def parse_time_range(text: str) -> tuple[Optional[time], Optional[time]]:
+    """Parse a "start ~ end" time range, returning ``(start, end)``.
+
+    Honours the explicit end time a site publishes (e.g. allshowtv's
+    "14:00 ~ 16:30") instead of assuming a fixed duration. When the text has a
+    single time (or no range), ``end`` is ``None`` and callers fall back to
+    their default duration. Both tokens must be full times (with ``:`` or 시),
+    so calendar dates ("2026-07-08") and D-day badges ("D-13") never match.
+    """
+    if not text:
+        return None, None
+    m = _TIME_RANGE.search(text)
+    if m:
+        return parse_time(m.group(1)), parse_time(m.group(2))
+    return parse_time(text), None
+
+
 def to_iso_kst(d: Optional[date], t: Optional[time]) -> Optional[str]:
     """Combine date+time into an ISO-8601 KST string. Defaults time to 00:00."""
     if not d:
@@ -363,9 +388,16 @@ class BaseScraper:
         d = parse_date(text)
         if require_date and not d:
             return None
-        t = parse_time(text)
-        start = to_iso_kst(d, t)
-        end = add_hours_iso(start, default_duration_h) if start else None
+        t_start, t_end = parse_time_range(text)
+        start = to_iso_kst(d, t_start)
+        if start and t_end:
+            end = to_iso_kst(d, t_end)
+            # ignore a malformed end (e.g. an 오후 that was dropped on the end
+            # token) that lands at or before the start; keep the default span.
+            if end and end <= start:
+                end = add_hours_iso(start, default_duration_h)
+        else:
+            end = add_hours_iso(start, default_duration_h) if start else None
 
         return self.new_webinar(
             title=title,
