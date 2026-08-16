@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T16:26:36.003108+09:00",
+  "generated_at": "2026-08-16T20:30:20.099844+09:00",
   "count": 82,
   "webinars": [
     {
@@ -757,8 +757,16 @@
       "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1785511708856.jpg",
       "tags": [],
       "registered": false,
-      "prizes": [],
-      "prize_images": [],
+      "prizes": [
+        {
+          "type": "attendance",
+          "item": "",
+          "condition": "[첨마소 6탄] 첨단이 제안하는 2026년 하반기 특별한 이벤트"
+        }
+      ],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1785510484254.png"
+      ],
       "id": "dubiz-67251f8dc7d8"
     },
     {
@@ -862,7 +870,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file178637720961.png"
+      ],
       "id": "dubiz-3263b0467462"
     },
     {
@@ -1030,7 +1040,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1786114741109.png"
+      ],
       "id": "dubiz-fb590234990e"
     },
     {
@@ -1078,7 +1090,7 @@
       "host": "",
       "register_url": "https://dubiz.co.kr/Event/512",
       "description": "",
-      "thumbnail": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1786440794675.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1152,7 +1164,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1785862424799.jpg"
+      ],
       "id": "dubiz-c6a94f3dc5fc"
     },
     {
@@ -1352,7 +1366,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file178592193927.jpg"
+      ],
       "id": "dubiz-14581f5a10b5"
     },
     {
@@ -1368,7 +1384,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file178646173596.jpg"
+      ],
       "id": "dubiz-6cb69539c070"
     },
     {
