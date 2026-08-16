@@ -638,3 +638,37 @@ def test_coverage_report_flags_empty_sources(monkeypatch):
     assert "| talkit | 1 | 1 | ✅ |" in report
     assert "| e4ds | 0 | 0 | ⚠️ |" in report
     assert "**합계**" in report
+
+
+# --- e4ds D-day card scraper ----------------------------------------------
+# The Next.js listing renders a.wbt-card links with a .wbt-title and a relative
+# .wbt-dday badge ("D-11"); cards without a badge are past VOD and are skipped.
+E4DS_CARD_HTML = """
+<html><body><section class="wbt-sec"><div class="wbt-grid">
+  <a data-webinar-id="1015" href="/webinar_detail.asp?idx=1015" class="wbt-card">
+    <span class="wbt-thumb"><img src="https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1015.png"/>
+    <span class="wbt-dday">D-11</span></span>
+    <span class="wbt-title"><span>2026 고급 엔지니어 실무 마스터 클래스</span></span>
+  </a>
+  <a data-webinar-id="1013" href="/webinar_detail.asp?idx=1013" class="wbt-card">
+    <span class="wbt-thumb"><img src="https://cdn.e4ds.com/x.png"/></span>
+    <span class="wbt-title"><span>지난 VOD 웨비나</span></span>
+  </a>
+</div></section></body></html>
+"""
+
+
+def test_e4ds_dday_cards():
+    from datetime import date, timedelta
+    from webinar.scrapers.base import now_kst
+
+    scraper = get_scraper("e4ds", {"base_url": "https://www.e4ds.com"})
+    items = scraper.parse(E4DS_CARD_HTML)
+    # only the card with a D-day badge is kept; the VOD card is skipped
+    assert len(items) == 1
+    w = items[0]
+    assert w.url == "https://www.e4ds.com/webinar_detail.asp?idx=1015"
+    assert "고급 엔지니어" in w.title
+    expected = (now_kst().date() + timedelta(days=11)).isoformat()
+    assert w.start_kst.startswith(expected)
+    assert w.thumbnail.endswith("360_intv_1015.png")

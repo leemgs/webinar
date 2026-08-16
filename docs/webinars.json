@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-16T15:33:50.009178+09:00",
-  "count": 74,
+  "generated_at": "2026-08-16T16:26:36.003108+09:00",
+  "count": 82,
   "webinars": [
     {
       "source": "dubiz",
@@ -986,6 +986,22 @@
       "id": "allshowtv-33743758a6ba"
     },
     {
+      "source": "e4ds",
+      "title": "2026 고급 엔지니어 실무 마스터 클래스 - 저잡음/저전력 회로 이해 및 고급 응용 회로 설계",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1015",
+      "start_kst": "2026-08-27T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1015",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1015.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-81dea4e7d21e"
+    },
+    {
       "source": "allshowtv",
       "title": "끝까지 책임지는 AI 에이전트: 도입을 넘어 운영으로",
       "url": "https://www.allshowtv.com/detail.html?idx=1748",
@@ -1090,6 +1106,22 @@
       "id": "talkit-2ee71757edf8"
     },
     {
+      "source": "e4ds",
+      "title": "미래 자동차를 밝히는 지능형 LED 실내조명 솔루션",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1021",
+      "start_kst": "2026-09-03T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1021",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-08-05/a4d0b8b3bf2cf866.jpeg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-a23cd0c603e0"
+    },
+    {
       "source": "allshowtv",
       "title": "의료 데이터의 안전한 관리와 보호를 위한 통합 인프라 전략",
       "url": "https://www.allshowtv.com/detail.html?idx=1740",
@@ -1174,6 +1206,22 @@
       "id": "chontv-89e52513d94f"
     },
     {
+      "source": "e4ds",
+      "title": "Isolated DC-DC 컨버터 토폴로지 분석 및 최적의 선택 가이드",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1026",
+      "start_kst": "2026-09-10T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1026",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-08-09/ff3e43e460172423.jpeg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-2bc84d59f797"
+    },
+    {
       "source": "talkit",
       "title": "신규 공장의 최대 보안 리스크, 설계 도면을 어떻게 지킬 것인가? 설계부터 현장 단말까지 [필라웨어]",
       "url": "https://talkit.tv/main/events/3721",
@@ -1190,6 +1238,22 @@
         "https://talkit.tv/userfiles/images/file1786718306959.jpg"
       ],
       "id": "talkit-1cf8ee797ad3"
+    },
+    {
+      "source": "e4ds",
+      "title": "다양한 입력소스 기반 전력 시스템의 신뢰성을 높이는 ADI Power protection solution",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1020",
+      "start_kst": "2026-09-15T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1020",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1020.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-26d18e18cd33"
     },
     {
       "source": "talkit",
@@ -1226,6 +1290,38 @@
         "https://talkit.tv/userfiles/images/file1786453783825.jpg"
       ],
       "id": "talkit-5e1699e3341f"
+    },
+    {
+      "source": "e4ds",
+      "title": "2026 중급 엔지니어 실무 마스터 클래스 - 회로 설계 방법과 부품 파손 이유 및 방지 대책",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1023",
+      "start_kst": "2026-09-17T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1023",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1023.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-68d40822f79d"
+    },
+    {
+      "source": "e4ds",
+      "title": "Power & Boot Sequence 실전 측정: 첫 신호가 시스템의 운명을 결정한다",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1025",
+      "start_kst": "2026-09-17T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1025",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-08-13/cb365fedf853f5e6.jpeg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-eeae08a401ce"
     },
     {
       "source": "allshowtv",
@@ -1274,6 +1370,38 @@
       "prizes": [],
       "prize_images": [],
       "id": "dubiz-6cb69539c070"
+    },
+    {
+      "source": "e4ds",
+      "title": "[오프라인 실습] LTspice를 설계 검증 무기로 실전에서 바로 쓰는 법",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1022",
+      "start_kst": "2026-10-15T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1022",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1022.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-a898dd4cd4f6"
+    },
+    {
+      "source": "e4ds",
+      "title": "LTspice, 설치만 해두고 못 쓰고 있다면, 지금 이 90분으로 바뀝니다",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1024",
+      "start_kst": "2026-10-15T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1024",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1024.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-4002d2e23261"
     }
   ]
 }
