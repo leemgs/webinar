@@ -24,6 +24,9 @@ def now_kst() -> datetime:
 # --- date parsing ----------------------------------------------------------
 
 _YMD = re.compile(r"(20\d{2})[.\-/년\s]+(\d{1,2})[.\-/월\s]+(\d{1,2})")
+# 2-digit-year dotted date, e.g. dubiz's "26.10.02" -> 2026-10-02. Requires two
+# dots so a bare "26.10" or a product name like "Pickit 4.1" never matches.
+_YMD2 = re.compile(r"\b(\d{2})\.(\d{1,2})\.(\d{1,2})\b")
 _MD = re.compile(r"(\d{1,2})\s*월\s*(\d{1,2})\s*일")
 _MD_SLASH = re.compile(r"\b(\d{1,2})[./](\d{1,2})\b")
 _DDAY = re.compile(r"[Dd]\s*[-−]\s*(\d+)")
@@ -46,6 +49,14 @@ def parse_date(text: str, ref: Optional[date] = None) -> Optional[date]:
         y, mo, d = (int(x) for x in m.groups())
         try:
             return date(y, mo, d)
+        except ValueError:
+            return None
+
+    m = _YMD2.search(text)
+    if m:
+        yy, mo, d = (int(x) for x in m.groups())
+        try:
+            return date(2000 + yy, mo, d)
         except ValueError:
             return None
 

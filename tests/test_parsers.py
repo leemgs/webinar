@@ -27,6 +27,15 @@ def test_parse_date_dday():
     assert parse_date("D-2", ref=REF) == date(2026, 7, 8)
 
 
+def test_parse_date_yy_dotted():
+    # dubiz renders dates as YY.MM.DD, e.g. "26.10.02 (금) 13:30"
+    assert parse_date("26.10.02 (금) 13:30") == date(2026, 10, 2)
+    assert parse_date("26.07.21 (화) ~ 26.07,22 (수) 10:00") == date(2026, 7, 21)
+    # the full-date parse requires two dots, so "26.09" alone is not a YY.MM.DD
+    # match — a product name like "Pickit 4.1" never yields 2026-09-xx here
+    assert parse_date("26.09 로봇비전") != date(2026, 9, 1)
+
+
 def test_parse_date_rollover():
     # a January date viewed in December should roll to next year
     assert parse_date("1월 5일", ref=date(2026, 12, 20)) == date(2027, 1, 5)
@@ -345,6 +354,47 @@ def test_dubiz_scraper():
     w = next(x for x in items if x.url.endswith("/Event/503"))
     assert "생명 과학" in w.title
     assert w.start_kst.startswith("2026-07-16T10:30")
+
+
+# The live /onoffmix/ layout: .onoffmix_thum_item cards with the title and the
+# YY.MM.DD date in their own elements, so a product name never leaks into the
+# date scan and the double /Event/ anchor per card is not double-counted.
+DUBIZ_CARD_HTML = """
+<html><body><section class="onoffmix_wrap"><div class="row">
+  <div class="col-lg-4"><div class="onoffmix_thum_item">
+    <a class="onoffmix_thum_item_image" href="/Event/512"><img src="https://files.dubiz.co.kr/userfiles/images/f.jpg"></a>
+    <div class="onoffmix_card_info"><a href="/Event/512">
+      <p class="onoffmix_card_title">Pickit 4.1
+: 차세대 3D 로봇비전</p>
+      <p class="onoffmix_card_date">26.09.01&nbsp;(화) 14:00</p>
+    </a></div>
+  </div></div>
+  <div class="col-lg-4"><div class="onoffmix_thum_item">
+    <a class="onoffmix_thum_item_image" href="/Event/502"><img src="https://files.dubiz.co.kr/userfiles/images/g.jpg"></a>
+    <div class="onoffmix_card_info"><a href="/Event/502">
+      <p class="onoffmix_card_title">산업AX KOREA 2026 웨비나</p>
+      <p class="onoffmix_card_date">26.07.21&nbsp;(화) ~ 26.07,22&nbsp;(수) 10:00</p>
+    </a></div>
+  </div></div>
+</div></section></body></html>
+"""
+
+
+def test_dubiz_onoffmix_cards():
+    scraper = get_scraper("dubiz", {"base_url": "https://dubiz.co.kr"})
+    items = scraper.parse(DUBIZ_CARD_HTML)
+    by_url = {w.url: w for w in items}
+    assert set(by_url) == {
+        "https://dubiz.co.kr/Event/512",
+        "https://dubiz.co.kr/Event/502",
+    }
+    w = by_url["https://dubiz.co.kr/Event/512"]
+    # date comes from .onoffmix_card_date, not the "4.1" in the title
+    assert w.start_kst.startswith("2026-09-01T14:00")
+    assert w.title == "Pickit 4.1 : 차세대 3D 로봇비전"
+    assert w.thumbnail == "https://files.dubiz.co.kr/userfiles/images/f.jpg"
+    # multi-day range starts on the first date at the listed time
+    assert by_url["https://dubiz.co.kr/Event/502"].start_kst.startswith("2026-07-21T10:00")
 
 
 # --- chontv detail-link scraper -------------------------------------------
