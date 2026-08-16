@@ -1,26 +1,7 @@
 {
-  "generated_at": "2026-08-14T11:23:39.549781+09:00",
-  "count": 52,
+  "generated_at": "2026-08-16T15:09:10.102683+09:00",
+  "count": 55,
   "webinars": [
-    {
-      "source": "ddtube",
-      "title": "[플랜잇파트너스] AI 프로젝트 데이터 준비 시간 80% 단축, 어떻게 가능했을까요?",
-      "url": "https://www.ddtube.co.kr/d2104/",
-      "start_kst": "2026-06-16T14:00:00+09:00",
-      "end_kst": "2026-06-16T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2104/",
-      "description": "",
-      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/05/썸네일-2560px-1024x576.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/05/260616_planit_event-1.jpg",
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/05/260616_planit_참여방법.jpg"
-      ],
-      "id": "ddtube-1b1ebaefaae0"
-    },
     {
       "source": "ddtube",
       "title": "[제3회] 차세대 보안 혁신 서밋(NSIS) 2026 -Online",
@@ -661,6 +642,22 @@
       "id": "allshowtv-b905b7bbb2b9"
     },
     {
+      "source": "chontv",
+      "title": "탈(脫) 오라클, 고객 가치를 실현하는 맞춤형 마이그레이션 전략",
+      "url": "https://chontv.com/event/1266",
+      "start_kst": "2026-08-25T14:00:00+09:00",
+      "end_kst": "2026-08-25T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1266",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_7218cb437e0dd5913822217a4aaee334.jpg?u=1785324181",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-2f0b47a741cd"
+    },
+    {
       "source": "talkit",
       "title": "설비 자동화를 넘어 자율 생산으로: 제조 Physical AI 현실적 구현 전략 [라온피플]",
       "url": "https://talkit.tv/main/events/3711",
@@ -695,6 +692,22 @@
         "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03161326826585.jpg"
       ],
       "id": "allshowtv-1602a1092e92"
+    },
+    {
+      "source": "chontv",
+      "title": "AI 시대에 하드 드라이브 바로 알기 : 씨게이트가 제시하는 차세대 스토리지 인클로저",
+      "url": "https://chontv.com/event/1267",
+      "start_kst": "2026-08-26T14:00:00+09:00",
+      "end_kst": "2026-08-26T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1267",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_74bb047dd11304328ef9c337648bdb36.jpg?u=1785756060",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-c211ddaee8fd"
     },
     {
       "source": "sharedit",
@@ -853,6 +866,38 @@
         "https://talkit.tv/userfiles/images/file1786626077196.jpg"
       ],
       "id": "talkit-091e9d2f6089"
+    },
+    {
+      "source": "chontv",
+      "title": "연결될수록 위험하다 —AI 팩토리 시대의 OT 보안 전략",
+      "url": "https://chontv.com/event/1274",
+      "start_kst": "2026-09-08T14:00:00+09:00",
+      "end_kst": "2026-09-08T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1274",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_5795dc7a84e8277470f6aa7fd91b91cb.png?u=1786692980",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-9726b6426103"
+    },
+    {
+      "source": "chontv",
+      "title": "The Ghost in the Machine : AI Agent 시대, 보이지 않는 Machine Identity를 어떻게 통제할 것인가?",
+      "url": "https://chontv.com/event/1271",
+      "start_kst": "2026-09-09T14:00:00+09:00",
+      "end_kst": "2026-09-09T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1271",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_d0a9b93377a9ec0e34fd712515e3bda2.jpg?u=1786152682",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-89e52513d94f"
     },
     {
       "source": "talkit",

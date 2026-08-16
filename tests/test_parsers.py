@@ -380,6 +380,76 @@ def test_chontv_scraper():
     assert "https://chontv.com/event/858" in by_url
 
 
+# The live site renders JS cards keyed by data-event-no (no href); the title is
+# in .event-list-title and the schedule in .event-day. "수요레터" newsletters
+# are skipped and the same event repeated across sections is de-duplicated.
+CHONTV_EVENT_CARDS_HTML = """
+<html><body>
+  <div class="wait-events"><div class="row">
+    <div class="event-row-col">
+      <div class="thumbnail event-list-thumbnail">
+        <a class="go-event-btn" data-event-no="1266">
+          <div class="event-list-thumb-image" style="background:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1)),url(https://chontv.com/assets/data/event/thumb__x.jpg?u=1);"></div>
+        </a>
+        <div class="caption"><div class="caption-info">
+          <div class="event-list-title"><a class="go-event-btn" data-event-no="1266">탈(脫) 오라클, 맞춤형 마이그레이션 전략</a></div>
+          <div class="event-day"><i class="fa fa-clock"></i> 2026년 08월 25일(화) 14:00~15:00</div>
+        </div></div>
+      </div>
+    </div>
+    <div class="event-row-col">
+      <div class="thumbnail">
+        <a class="go-event-btn" data-event-no="1243"><div class="event-list-thumb-image"></div></a>
+        <div class="caption"><div class="caption-info">
+          <div class="event-list-title"><a class="go-event-btn" data-event-no="1243">Cyber Resilience Insight 2026</a></div>
+          <div class="event-day display-none">2026년 06월 23일(화) 14:00~16:30</div>
+        </div></div>
+      </div>
+    </div>
+  </div></div>
+  <div class="sector-events-18"><div class="row">
+    <div class="event-row-col">
+      <div class="thumbnail">
+        <a class="go-event-btn" data-event-no="1272"><div class="event-list-thumb-image"></div></a>
+        <div class="caption"><div class="caption-info">
+          <div class="event-list-title"><a class="go-event-btn" data-event-no="1272">행복은 강도가 아니라 빈도입니다 [수요레터 241회]</a></div>
+          <div class="event-day display-none">2026년 08월 12일(수)</div>
+        </div></div>
+      </div>
+    </div>
+  </div></div>
+  <div class="done-events"><div class="row">
+    <div class="event-row-col">
+      <div class="thumbnail">
+        <a class="go-event-btn" data-event-no="1266"><div class="event-list-thumb-image"></div></a>
+        <div class="caption"><div class="caption-info">
+          <div class="event-list-title"><a class="go-event-btn" data-event-no="1266">탈(脫) 오라클, 맞춤형 마이그레이션 전략</a></div>
+          <div class="event-day display-none">2026년 08월 25일(화) 14:00~15:00</div>
+        </div></div>
+      </div>
+    </div>
+  </div></div>
+</body></html>
+"""
+
+
+def test_chontv_event_no_cards():
+    scraper = get_scraper("chontv", {"base_url": "https://chontv.com"})
+    items = scraper.parse(CHONTV_EVENT_CARDS_HTML)
+    by_url = {w.url: w for w in items}
+    # newsletter (1272) skipped; duplicate 1266 collapsed -> 2 unique webinars
+    assert set(by_url) == {
+        "https://chontv.com/event/1266",
+        "https://chontv.com/event/1243",
+    }
+    w = by_url["https://chontv.com/event/1266"]
+    assert "오라클" in w.title
+    assert w.start_kst.startswith("2026-08-25T14:00")
+    assert w.thumbnail == "https://chontv.com/assets/data/event/thumb__x.jpg?u=1"
+    # explicit 14:00~16:30 range honoured over the default 1h span
+    assert by_url["https://chontv.com/event/1243"].end_kst.startswith("2026-06-23T16:30")
+
+
 # --- prize extraction ------------------------------------------------------
 def test_extract_prizes():
     text = "생방송 시청 후 설문 참여자 추첨하여 스타벅스 기프티콘을 드립니다."
