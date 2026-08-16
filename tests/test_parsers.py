@@ -619,3 +619,22 @@ def test_site_credentials_absent(monkeypatch):
     monkeypatch.delenv("SITE_BAR_PASS", raising=False)
     # no config/accounts.yaml in the test env -> both None
     assert config.site_credentials("bar") == (None, None)
+
+
+# --- coverage report -------------------------------------------------------
+def test_coverage_report_flags_empty_sources(monkeypatch):
+    from webinar import coverage
+    from webinar.models import Webinar
+
+    monkeypatch.setattr(coverage, "load_sites", lambda: {"talkit": {}, "e4ds": {}})
+    monkeypatch.setattr(
+        coverage.storage,
+        "load_webinars",
+        lambda: [Webinar(source="talkit", title="t", url="https://x/1",
+                         start_kst="2099-01-01T14:00:00+09:00")],
+    )
+    report = coverage.build_report()
+    # talkit has an entry (✅), e4ds has none (⚠️), and totals are summarised
+    assert "| talkit | 1 | 1 | ✅ |" in report
+    assert "| e4ds | 0 | 0 | ⚠️ |" in report
+    assert "**합계**" in report
