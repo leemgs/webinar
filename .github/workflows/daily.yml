@@ -74,8 +74,9 @@ jobs:
         continue-on-error: true
 
       - name: Sync Google Calendar
-        run: python -m webinar.calendar_sync -v
-        continue-on-error: true
+        # Registration is intentionally disabled for every source until each
+        # form is verified. Sync the collected schedule regardless of that flag.
+        run: python -m webinar.calendar_sync --all -v
 
       # Mirror the just-scraped + registered dataset into docs (no second scrape).
       - name: Republish docs (json + ics)

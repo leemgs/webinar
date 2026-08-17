@@ -7,8 +7,10 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 import shutil
 import sys
+from pathlib import Path
 
 from . import ics_export, prizes, storage
 from .browser import Browser
@@ -17,6 +19,23 @@ from .registrar import login
 from .scrapers import get_scraper
 
 log = logging.getLogger(__name__)
+
+
+def report_fresh_counts(source_counts: dict[str, int]) -> None:
+    """Append counts from this exact scrape to the Actions summary, if present."""
+    summary_path = os.getenv("GITHUB_STEP_SUMMARY")
+    if not summary_path:
+        return
+    lines = [
+        "### 이번 실행의 원본 수집 건수",
+        "",
+        "| 사이트 | 신규 응답 | 상태 |",
+        "| --- | ---: | :---: |",
+    ]
+    for source, count in source_counts.items():
+        lines.append(f"| {source} | {count} | {'✅' if count else '⚠️ 0건'} |")
+    with Path(summary_path).open("a", encoding="utf-8") as summary:
+        summary.write("\n".join(lines) + "\n\n")
 
 
 def scrape_site(browser: Browser, key: str, cfg: dict):
@@ -42,6 +61,7 @@ def run(site_keys: list[str] | None = None, publish: bool = True) -> list:
     keys = site_keys or list(sites.keys())
 
     scraped = []
+    source_counts: dict[str, int] = {}
     with Browser(headless=True) as browser:
         for key in keys:
             cfg = sites.get(key)
@@ -54,7 +74,19 @@ def run(site_keys: list[str] | None = None, publish: bool = True) -> list:
                 log.exception("[%s] scrape crashed: %s", key, e)
                 items = []
             log.info("[%s] %d webinars", key, len(items))
+            source_counts[key] = len(items)
             scraped.extend(items)
+
+    log.info(
+        "scrape summary: %s",
+        ", ".join(f"{key}={source_counts.get(key, 0)}" for key in keys),
+    )
+    report_fresh_counts(source_counts)
+    if not scraped and site_keys is None:
+        # Do not let a broken browser, proxy outage, or broad DOM change look
+        # like a successful daily refresh. Keeping the previous dataset is safer,
+        # and failing the job makes the collection outage visible immediately.
+        raise RuntimeError("all configured webinar sources returned zero items")
 
     # enrich prizes
     for w in scraped:

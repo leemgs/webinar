@@ -109,7 +109,7 @@ sequenceDiagram
     PP->>RG: (enabled·계정 있는 사이트) 등록 요청
     RG->>ST: 로그인 → 사전등록 제출
     RG->>DB: registered=true 기록
-    PP->>GC: 등록 웨비나를 지정 계정별 캘린더에 upsert(멱등)
+    PP->>GC: 수집한 전체 웨비나를 지정 계정별 캘린더에 upsert(멱등)
     PP->>PG: webinars.json / webinars.ics 갱신 후 커밋
     Note over PG: GitHub Pages가 홈페이지 자동 갱신
 ```
@@ -117,7 +117,7 @@ sequenceDiagram
 1. **수집** — `pipeline.py`가 8개 사이트를 스크래핑하고 경품을 추출합니다.
 2. **정리** — 기존 `data/webinars.json`과 병합(등록 상태·수동 경품 보존), 60일 지난 항목 정리.
 3. **등록** — 계정이 있고 `register.enabled: true`인 사이트에 로그인 후 사전등록(멱등).
-4. **캘린더** — 등록 웨비나를 지정한 구글 계정(들)의 캘린더에 upsert하고 `webinars.ics` 백업 피드 생성.
+4. **캘린더** — GitHub Actions는 수집한 전체 웨비나를 지정한 구글 계정(들)의 캘린더에 upsert하고 `webinars.ics` 백업 피드를 생성합니다. 로컬 명령은 기본적으로 등록 완료 일정만 대상으로 하며 `--all`로 전체 일정을 동기화합니다.
 5. **공개** — `docs/`의 데이터를 갱신·커밋 → GitHub Pages 홈페이지 자동 반영.
 
 > 홈페이지(`docs/`)는 `webinars.json`을 읽어 **월별 달력 / 목록** 뷰, **출처·경품 필터**,

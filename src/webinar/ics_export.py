@@ -6,7 +6,7 @@ without any OAuth setup — a lightweight alternative to calendar_sync.
 from __future__ import annotations
 
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from . import storage
@@ -47,12 +47,16 @@ def _event_lines(w: Webinar, stamp: str) -> list[str]:
         desc_parts.append(f"[{label}] {detail}".strip())
     desc = _escape("\n".join(desc_parts))
 
+    end_kst = w.end_kst
+    if not end_kst:
+        end_kst = (datetime.fromisoformat(w.start_kst) + timedelta(hours=1)).isoformat()
+
     lines = [
         "BEGIN:VEVENT",
         f"UID:{w.id}@webinar",
         f"DTSTAMP:{stamp}",
         f"DTSTART:{_fmt(w.start_kst)}",
-        f"DTEND:{_fmt(w.end_kst or w.start_kst)}",
+        f"DTEND:{_fmt(end_kst)}",
         f"SUMMARY:{_escape('[웨비나] ' + w.title)}",
         f"DESCRIPTION:{desc}",
     ]

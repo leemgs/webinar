@@ -124,7 +124,7 @@ def test_to_event_uses_kst_timezone():
     ev = calendar_sync._to_event(w)
     assert ev["summary"] == "[웨비나] NVMe 웨비나"
     assert ev["start"] == {"dateTime": "2026-08-01T14:00:00+09:00", "timeZone": "Asia/Seoul"}
-    assert ev["end"]["dateTime"] == "2026-08-01T14:00:00+09:00"  # no end -> start
+    assert ev["end"]["dateTime"] == "2026-08-01T15:00:00+09:00"  # valid 1h fallback
 
 
 # --- sync orchestration (fake service, no network) ---------------------------
@@ -150,6 +150,42 @@ class FakeService:
 
     def events(self):
         return FakeEvents(self.calls)
+
+
+class ResponseError(Exception):
+    def __init__(self, status):
+        self.resp = type("Response", (), {"status": status})()
+
+
+class FailingEvents(FakeEvents):
+    def __init__(self, calls, update_status):
+        super().__init__(calls)
+        self.update_status = update_status
+        self.operation = None
+
+    def update(self, calendarId, eventId, body):
+        self.calls.append(("update", calendarId, body["id"]))
+        self.operation = "update"
+        return self
+
+    def insert(self, calendarId, body):
+        self.calls.append(("insert", calendarId, body["id"]))
+        self.operation = "insert"
+        return self
+
+    def execute(self):
+        if self.operation == "update":
+            raise ResponseError(self.update_status)
+        return {}
+
+
+class FailingService:
+    def __init__(self, update_status):
+        self.calls = []
+        self.update_status = update_status
+
+    def events(self):
+        return FailingEvents(self.calls, self.update_status)
 
 
 def _future_webinar(title, registered):
@@ -204,3 +240,14 @@ def test_sync_account_filter(monkeypatch):
 def test_sync_without_accounts_is_noop(monkeypatch):
     monkeypatch.setattr(calendar_sync, "load_google_accounts", lambda: [])
     assert calendar_sync.sync() == 0
+
+
+def test_upsert_inserts_only_after_not_found():
+    webinar = _future_webinar("missing", registered=True)
+    missing = FailingService(404)
+    assert calendar_sync._upsert(missing, "primary", "acct", [webinar]) == 1
+    assert [call[0] for call in missing.calls] == ["update", "insert"]
+
+    unauthorized = FailingService(401)
+    assert calendar_sync._upsert(unauthorized, "primary", "acct", [webinar]) == 0
+    assert [call[0] for call in unauthorized.calls] == ["update"]

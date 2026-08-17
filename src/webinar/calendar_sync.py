@@ -13,7 +13,7 @@ import argparse
 import logging
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from . import storage
 from .config import load_google_accounts
@@ -81,13 +81,16 @@ def _to_event(webinar: Webinar) -> dict:
     }
     if webinar.start_kst:
         ev["start"] = {"dateTime": webinar.start_kst, "timeZone": "Asia/Seoul"}
-        end = webinar.end_kst or webinar.start_kst
+        end = webinar.end_kst or (
+            datetime.fromisoformat(webinar.start_kst) + timedelta(hours=1)
+        ).isoformat()
         ev["end"] = {"dateTime": end, "timeZone": "Asia/Seoul"}
     else:
         # all-day fallback: today
-        today = datetime.now().date().isoformat()
+        today_dt = datetime.now().date()
+        today = today_dt.isoformat()
         ev["start"] = {"date": today}
-        ev["end"] = {"date": today}
+        ev["end"] = {"date": (today_dt + timedelta(days=1)).isoformat()}
     return ev
 
 
@@ -99,8 +102,14 @@ def _upsert(svc, calendar_id: str, name: str, webinars: list[Webinar]) -> int:
         try:
             svc.events().update(calendarId=calendar_id, eventId=eid, body=body).execute()
             synced += 1
-        except Exception:
-            # not found -> insert
+        except Exception as update_error:
+            # Insert only when Google explicitly reports that the deterministic
+            # event id does not exist. Auth, quota, and network failures must not
+            # be misreported as a missing event and retried as an insert.
+            status = getattr(getattr(update_error, "resp", None), "status", None)
+            if status != 404:
+                log.warning("[%s] calendar update failed for %s: %s", name, wb.title, update_error)
+                continue
             try:
                 svc.events().insert(calendarId=calendar_id, body=body).execute()
                 synced += 1
