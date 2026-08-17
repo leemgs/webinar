@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-08-17T08:33:16.996182+09:00",
-  "count": 82,
+  "generated_at": "2026-08-17T20:36:23.567573+09:00",
+  "count": 81,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "산업 혁신을 이끄는 엣지 AI 컴퓨팅",
-      "url": "https://dubiz.co.kr/Event/497",
-      "start_kst": "2026-06-18T14:00:00+09:00",
-      "end_kst": "2026-06-18T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/497",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1779982039651.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-793907be403e"
-    },
     {
       "source": "ddtube",
       "title": "[제3회] 차세대 보안 혁신 서밋(NSIS) 2026 -Online",
