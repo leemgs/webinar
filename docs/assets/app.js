@@ -266,9 +266,9 @@ function hbars(rows) {
   const max = Math.max(1, ...rows.map((r) => r.value));
   return `<div class="hbars">${rows.map((r) => `
     <div class="hbar-row" title="${escapeHtml(r.name)}: ${r.value}건">
-      <span class="hbar-name">${escapeHtml(r.name)}</span>
+      <span class="hbar-name"><span class="hbar-dot" style="background:${r.color}"></span>${escapeHtml(r.name)}</span>
       <span class="hbar-track"><span class="hbar-fill" style="width:${(r.value / max) * 100}%;background:${r.color}"></span></span>
-      <span class="hbar-val">${r.value}</span>
+      <span class="hbar-val" style="color:${r.color}">${r.value}</span>
     </div>`).join("")}</div>`;
 }
 
@@ -277,8 +277,8 @@ function vbars(cols) {
   const max = Math.max(1, ...cols.map((c) => c.value));
   return `<div class="vbars">${cols.map((c) => `
     <div class="vbar-col${c.current ? " is-current" : ""}" title="${escapeHtml(c.label)}: ${c.value}건">
-      <span class="vbar-track"><span class="vbar-fill" style="height:${(c.value / max) * 100}%">
-        <span class="vbar-val">${c.value}</span></span></span>
+      <span class="vbar-track"><span class="vbar-fill" style="height:${(c.value / max) * 100}%;background:${c.color || "var(--accent)"}">
+        <span class="vbar-val" style="color:${c.color || "var(--accent)"}">${c.value}</span></span></span>
       <span class="vbar-label">${escapeHtml(c.label)}</span>
     </div>`).join("")}</div>`;
 }

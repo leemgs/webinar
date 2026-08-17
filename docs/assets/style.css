@@ -302,7 +302,8 @@ a:hover { text-decoration: underline; }
 /* horizontal bar chart (site / category) */
 .hbars { display: flex; flex-direction: column; gap: 9px; }
 .hbar-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 10px; }
-.hbar-name { font-size: 0.82rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar-name { font-size: 0.82rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
+.hbar-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; }
 .hbar-track { background: color-mix(in srgb, var(--text-muted) 16%, transparent); border-radius: 999px; height: 16px; overflow: hidden; }
 .hbar-fill { height: 100%; border-radius: 999px 4px 4px 999px; min-width: 3px; transition: width .5s ease; }
 .hbar-val { font-size: 0.82rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; min-width: 20px; text-align: right; }
