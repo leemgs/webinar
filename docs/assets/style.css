@@ -25,6 +25,16 @@
   --p-question: #2f9e44;
   --p-consult: #9c36b5;
   --p-attendance: #e8590c;
+
+  /* tech-category colors (validated categorical palette — light steps) */
+  --cat-1: #2a78d6; /* AI · 에이전트 */
+  --cat-2: #eb6834; /* 보안 */
+  --cat-3: #1baf7a; /* 데이터 · 분석 */
+  --cat-4: #eda100; /* 클라우드 · 인프라 */
+  --cat-5: #e87ba4; /* 제조 · 자동화 · 로봇 */
+  --cat-6: #008300; /* 반도체 · 하드웨어 */
+  --cat-7: #4a3aa7; /* 네트워크 · 통신 */
+  --cat-8: #8a94ad; /* 기타 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -38,6 +48,16 @@
     --accent: #5b8bff;
     --accent-weak: #1c2740;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+
+    /* tech-category colors — dark steps of the same palette */
+    --cat-1: #3987e5;
+    --cat-2: #d95926;
+    --cat-3: #199e70;
+    --cat-4: #c98500;
+    --cat-5: #d55181;
+    --cat-6: #008300;
+    --cat-7: #9085e9;
+    --cat-8: #9aa6bf;
   }
 }
 
@@ -259,6 +279,57 @@ a:hover { text-decoration: underline; }
 .btn:hover { text-decoration: none; filter: brightness(1.03); }
 
 .empty { text-align: center; color: var(--text-muted); padding: 40px 0; }
+
+/* dashboard */
+#dashboard-view { display: flex; flex-direction: column; gap: 20px; }
+.dash-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.kpi {
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
+  padding: 14px 16px; display: flex; flex-direction: column; gap: 4px;
+}
+.kpi .kpi-val { font-size: 1.8rem; font-weight: 800; line-height: 1.1; color: var(--text); }
+.kpi .kpi-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+.kpi .kpi-sub { font-size: 0.72rem; color: var(--text-muted); opacity: 0.85; }
+
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.card {
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+}
+.card.span-2 { grid-column: 1 / -1; }
+.card h3 { margin: 0 0 4px; font-size: 1rem; color: var(--text); }
+.card .card-sub { margin: 0 0 14px; font-size: 0.78rem; color: var(--text-muted); }
+
+/* horizontal bar chart (site / category) */
+.hbars { display: flex; flex-direction: column; gap: 9px; }
+.hbar-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 10px; }
+.hbar-name { font-size: 0.82rem; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar-track { background: color-mix(in srgb, var(--text-muted) 16%, transparent); border-radius: 999px; height: 16px; overflow: hidden; }
+.hbar-fill { height: 100%; border-radius: 999px 4px 4px 999px; min-width: 3px; transition: width .5s ease; }
+.hbar-val { font-size: 0.82rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; min-width: 20px; text-align: right; }
+
+/* vertical column chart (monthly / yearly) */
+.vbars { display: flex; align-items: flex-end; gap: 8px; height: 190px; padding-top: 18px; }
+.vbar-col { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; min-width: 0; height: 100%; }
+.vbar-track { width: 100%; display: flex; align-items: flex-end; justify-content: center; flex: 1; min-height: 0; }
+.vbar-fill {
+  width: 60%; max-width: 40px; background: var(--accent); border-radius: 4px 4px 2px 2px;
+  min-height: 3px; position: relative; transition: height .5s ease;
+}
+.vbar-fill .vbar-val {
+  position: absolute; top: -17px; left: 50%; transform: translateX(-50%);
+  font-size: 0.74rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums;
+}
+.vbar-label { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
+.vbar-col.is-current .vbar-fill { background: var(--accent); outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 1px; }
+.vbar-col.is-current .vbar-label { color: var(--accent); font-weight: 700; }
+
+.dash-note { font-size: 0.75rem; color: var(--text-muted); text-align: center; opacity: 0.8; margin: 0; }
+
+@media (max-width: 760px) {
+  .dash-kpis { grid-template-columns: repeat(2, 1fr); }
+  .dash-grid { grid-template-columns: 1fr; }
+  .hbar-row { grid-template-columns: 80px 1fr auto; }
+}
 
 /* footer */
 .site-footer { margin-top: 40px; padding: 24px 0; color: var(--text-muted); font-size: 0.82rem; text-align: center; }

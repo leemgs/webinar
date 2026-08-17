@@ -22,6 +22,34 @@ const PRIZES = {
   attendance: { name: "참석/시청", color: "var(--p-attendance)", hex: "#e8590c" },
 };
 
+// 기술 종목(카테고리): 태그가 비어 있어 제목·주최 텍스트를 키워드로 분류한다.
+// 순서 = 우선순위(먼저 매칭되는 종목으로 1건 배정 → 합계 = 전체 건수).
+const CATEGORIES = [
+  { key: "security", name: "보안", color: "var(--cat-2)",
+    re: /보안|security|제로\s?트러스트|zero\s?trust|아이덴티티|identity|인증|방화벽|침해|위협|threat|취약점|vulnerab|랜섬|ransom|\bSOC\b|crowdstrike|크라우드스트라이크|배드\s?봇|bad\s?bot|OT\s?보안|사이버|cyber|복원력|resilience|디도스|ddos|악성|malware|해킹|미토스|beyondtrust|cyberark|약관|금소법/i },
+  { key: "hardware", name: "반도체·하드웨어", color: "var(--cat-6)",
+    re: /반도체|semicon|회로|circuit|전력|power|컨버터|converter|\bFPGA\b|임베디드|embedded|\bPCB\b|\bMCU\b|센서|sensor|\bLED\b|DC-?DC|LTspice|저잡음|신호|boot\s?sequence|인클로저|enclosure|스토리지|storage|\bHBM\b|드라이브|하드\s?드라이브|웨이퍼|\bSiC\b|MOSFET|커패시터|capacitor|계측|측정|아두이노|arduino|라즈베리|보드/i },
+  { key: "factory", name: "제조·자동화·로봇", color: "var(--cat-5)",
+    re: /제조|manufactur|자동화|automat|로봇|robot|팩토리|factory|\bAMR\b|모션|motion|머신비전|machine\s?vision|품질검사|산업|industr|자율제조|스마트\s?팩토리|physical\s?ai|\bMiR\b|서보|servo|공장|물류|dematic|autostore/i },
+  { key: "cloud", name: "클라우드·인프라", color: "var(--cat-4)",
+    re: /클라우드|cloud|\bSaaS\b|쿠버네티스|kubernetes|데이터\s?센터|datacenter|인프라|infra|마이그레이션|migrat|devops|gitlab|컨테이너|container|가상화|virtual|온프레|oracle|오라클|주권/i },
+  { key: "data", name: "데이터·분석", color: "var(--cat-3)",
+    re: /데이터|\bdata\b|데이터베이스|database|\bDB\b|postgres|\bSQL\b|분석|analytic|옵저버|observ|최적화|optimiz|마이닝|파이프라인|pipeline|거버넌스|governance|\bDLP\b|토큰|의사결정/i },
+  { key: "network", name: "네트워크·통신", color: "var(--cat-7)",
+    re: /\b5G\b|네트워크|network|통신|특화망|\bAPI\b|트래픽|traffic|\bCPO\b|광학|optic|인터커넥트|interconnect|이더넷|ethernet|무선|wireless|기지국|대역폭|번역|deepl/i },
+  { key: "ai", name: "AI·에이전트", color: "var(--cat-1)",
+    re: /\bAI\b|인공지능|\bLLM\b|에이전트|agent|머신러닝|machine\s?learning|딥러닝|deep\s?learning|\bGPT\b|파운데이션|foundation|온디바이스|on-?device|gemini|copilot|생성형|generative|추론|inference|엣지|edge/i },
+  { key: "etc", name: "기타", color: "var(--cat-8)", re: null },
+];
+
+function classify(w) {
+  const text = `${w.title || ""} ${w.host || ""} ${(w.tags || []).join(" ")}`;
+  for (const c of CATEGORIES) {
+    if (c.re && c.re.test(text)) return c;
+  }
+  return CATEGORIES[CATEGORIES.length - 1]; // 기타
+}
+
 // --- state ------------------------------------------------------------------
 const state = {
   webinars: [],
@@ -229,6 +257,112 @@ function renderList() {
   if (!items.length) box.innerHTML = '<p class="empty">표시할 웨비나가 없습니다.</p>';
 }
 
+// --- dashboard --------------------------------------------------------------
+function monthKey(iso) { const d = parseDate(iso); return d ? `${d.getFullYear()}-${pad(d.getMonth() + 1)}` : null; }
+
+// horizontal bar chart: rows = [{name, value, color}] (label carries identity,
+// value is direct-labeled — satisfies the light-mode contrast relief rule)
+function hbars(rows) {
+  const max = Math.max(1, ...rows.map((r) => r.value));
+  return `<div class="hbars">${rows.map((r) => `
+    <div class="hbar-row" title="${escapeHtml(r.name)}: ${r.value}건">
+      <span class="hbar-name">${escapeHtml(r.name)}</span>
+      <span class="hbar-track"><span class="hbar-fill" style="width:${(r.value / max) * 100}%;background:${r.color}"></span></span>
+      <span class="hbar-val">${r.value}</span>
+    </div>`).join("")}</div>`;
+}
+
+// vertical column chart: cols = [{label, value, current}]
+function vbars(cols) {
+  const max = Math.max(1, ...cols.map((c) => c.value));
+  return `<div class="vbars">${cols.map((c) => `
+    <div class="vbar-col${c.current ? " is-current" : ""}" title="${escapeHtml(c.label)}: ${c.value}건">
+      <span class="vbar-track"><span class="vbar-fill" style="height:${(c.value / max) * 100}%">
+        <span class="vbar-val">${c.value}</span></span></span>
+      <span class="vbar-label">${escapeHtml(c.label)}</span>
+    </div>`).join("")}</div>`;
+}
+
+function renderDashboard() {
+  const box = $("#dashboard-view");
+  const all = state.webinars;
+  if (!all.length) { box.innerHTML = '<p class="empty">표시할 데이터가 없습니다.</p>'; return; }
+
+  const now = new Date();
+  const todayKey = dayKey(now);
+  const thisMonth = `${now.getFullYear()}-${pad(now.getMonth() + 1)}`;
+  const upcoming = all.filter((w) => (w.start_kst || "") && dayKey(parseDate(w.start_kst) || new Date(0)) >= todayKey);
+  const activeSites = new Set(all.map((w) => w.source));
+  const thisMonthCount = all.filter((w) => monthKey(w.start_kst) === thisMonth).length;
+
+  // per-source counts (identity color = each site's brand color)
+  const bySite = {};
+  for (const w of all) bySite[w.source] = (bySite[w.source] || 0) + 1;
+  const siteRows = Object.keys(SOURCES)
+    .map((k) => ({ name: SOURCES[k].name, value: bySite[k] || 0, color: SRC_HEX[k] }))
+    .sort((a, b) => b.value - a.value);
+
+  // per-category counts (기술 종목)
+  const byCat = new Map(CATEGORIES.map((c) => [c.key, 0]));
+  for (const w of all) { const c = classify(w); byCat.set(c.key, byCat.get(c.key) + 1); }
+  const catRows = CATEGORIES
+    .map((c) => ({ name: c.name, value: byCat.get(c.key), color: c.color }))
+    .filter((r) => r.value > 0)
+    .sort((a, b) => b.value - a.value);
+
+  // monthly trend: fill every month between the first and last dated webinar
+  const months = all.map((w) => monthKey(w.start_kst)).filter(Boolean).sort();
+  let monthCols = [];
+  if (months.length) {
+    const [ys, ms] = months[0].split("-").map(Number);
+    const [ye, me] = months[months.length - 1].split("-").map(Number);
+    const counts = {};
+    for (const m of months) counts[m] = (counts[m] || 0) + 1;
+    for (let y = ys, m = ms; y < ye || (y === ye && m <= me); m === 12 ? (y++, m = 1) : m++) {
+      const key = `${y}-${pad(m)}`;
+      monthCols.push({ label: `${String(y).slice(2)}.${pad(m)}`, value: counts[key] || 0, current: key === thisMonth });
+    }
+  }
+
+  // yearly totals
+  const byYear = {};
+  for (const w of all) { const y = (w.start_kst || "").slice(0, 4); if (y) byYear[y] = (byYear[y] || 0) + 1; }
+  const yearCols = Object.keys(byYear).sort()
+    .map((y) => ({ label: `${y}년`, value: byYear[y], current: y === String(now.getFullYear()) }));
+
+  box.innerHTML = `
+    <div class="dash-kpis">
+      <div class="kpi"><span class="kpi-val">${all.length}</span><span class="kpi-label">전체 웨비나</span><span class="kpi-sub">수집 누적</span></div>
+      <div class="kpi"><span class="kpi-val">${upcoming.length}</span><span class="kpi-label">예정 웨비나</span><span class="kpi-sub">오늘 이후</span></div>
+      <div class="kpi"><span class="kpi-val">${activeSites.size}<span style="font-size:1rem;color:var(--text-muted)"> / ${Object.keys(SOURCES).length}</span></span><span class="kpi-label">수집 사이트</span><span class="kpi-sub">일정 등록됨</span></div>
+      <div class="kpi"><span class="kpi-val">${thisMonthCount}</span><span class="kpi-label">이번 달 웨비나</span><span class="kpi-sub">${thisMonth}</span></div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="card">
+        <h3>사이트별 웨비나 수</h3>
+        <p class="card-sub">출처별 수집 건수 (전체 기간)</p>
+        ${hbars(siteRows)}
+      </div>
+      <div class="card">
+        <h3>기술 종목 분포</h3>
+        <p class="card-sub">제목 키워드 기반 자동 분류 · 기술 트렌드</p>
+        ${hbars(catRows)}
+      </div>
+      <div class="card span-2">
+        <h3>월별 웨비나 추이</h3>
+        <p class="card-sub">개최월 기준 건수 (강조 = 이번 달)</p>
+        ${vbars(monthCols)}
+      </div>
+      <div class="card span-2">
+        <h3>연도별 웨비나 수</h3>
+        <p class="card-sub">개최연도 기준 건수 (강조 = 올해)</p>
+        ${vbars(yearCols)}
+      </div>
+    </div>
+    <p class="dash-note">※ 기술 종목은 웨비나 제목·주최명 키워드로 자동 분류한 추정치이며, 실제 주제와 다를 수 있습니다.</p>`;
+}
+
 // --- modal ------------------------------------------------------------------
 function gcalLink(w) {
   const s = parseDate(w.start_kst);
@@ -325,17 +459,19 @@ function openIcsHelp() {
 // --- render orchestration ---------------------------------------------------
 function render() {
   renderFilters();
+  const dashView = $("#dashboard-view");
   const calView = $("#calendar-view");
   const listView = $("#list-view");
-  if (state.view === "calendar") {
-    calView.classList.remove("hidden");
-    listView.classList.add("hidden");
-    renderCalendar();
-  } else {
-    calView.classList.add("hidden");
-    listView.classList.remove("hidden");
-    renderList();
-  }
+  const filters = document.querySelector(".filters");
+  // source/prize chips only apply to calendar & list; the dashboard is a
+  // whole-dataset overview, so hide the filters there.
+  filters.classList.toggle("hidden", state.view === "dashboard");
+  dashView.classList.toggle("hidden", state.view !== "dashboard");
+  calView.classList.toggle("hidden", state.view !== "calendar");
+  listView.classList.toggle("hidden", state.view !== "list");
+  if (state.view === "dashboard") renderDashboard();
+  else if (state.view === "calendar") renderCalendar();
+  else renderList();
 }
 
 // scroll the list so today's (or the nearest upcoming) group is at the top
