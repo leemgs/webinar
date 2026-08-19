@@ -251,3 +251,17 @@ def test_upsert_inserts_only_after_not_found():
     unauthorized = FailingService(401)
     assert calendar_sync._upsert(unauthorized, "primary", "acct", [webinar]) == 0
     assert [call[0] for call in unauthorized.calls] == ["update"]
+
+
+def test_strict_upsert_surfaces_calendar_write_failures():
+    webinar = _future_webinar("unauthorized", registered=True)
+    with pytest.raises(RuntimeError, match="failed to sync 1 webinar"):
+        calendar_sync._upsert(
+            FailingService(401), "primary", "acct", [webinar], strict=True
+        )
+
+
+def test_strict_sync_requires_google_configuration(monkeypatch):
+    monkeypatch.setattr(calendar_sync, "load_google_accounts", lambda: [])
+    with pytest.raises(RuntimeError, match="no Google account configured"):
+        calendar_sync.sync(strict=True)

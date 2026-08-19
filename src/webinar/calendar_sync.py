@@ -94,8 +94,11 @@ def _to_event(webinar: Webinar) -> dict:
     return ev
 
 
-def _upsert(svc, calendar_id: str, name: str, webinars: list[Webinar]) -> int:
+def _upsert(
+    svc, calendar_id: str, name: str, webinars: list[Webinar], strict: bool = False
+) -> int:
     synced = 0
+    failures = []
     for wb in webinars:
         body = _to_event(wb)
         eid = body["id"]
@@ -109,16 +112,27 @@ def _upsert(svc, calendar_id: str, name: str, webinars: list[Webinar]) -> int:
             status = getattr(getattr(update_error, "resp", None), "status", None)
             if status != 404:
                 log.warning("[%s] calendar update failed for %s: %s", name, wb.title, update_error)
+                failures.append(wb.title)
                 continue
             try:
                 svc.events().insert(calendarId=calendar_id, body=body).execute()
                 synced += 1
             except Exception as e:
                 log.warning("[%s] calendar upsert failed for %s: %s", name, wb.title, e)
+                failures.append(wb.title)
+    if strict and failures:
+        raise RuntimeError(
+            f"[{name}] failed to sync {len(failures)} webinar(s): "
+            + ", ".join(failures[:3])
+        )
     return synced
 
 
-def sync(only_registered: bool = True, account_names: list[str] | None = None) -> int:
+def sync(
+    only_registered: bool = True,
+    account_names: list[str] | None = None,
+    strict: bool = False,
+) -> int:
     """Upsert upcoming webinars into every configured Google account's calendar.
 
     `account_names` limits the run to those accounts; a per-account
@@ -136,6 +150,8 @@ def sync(only_registered: bool = True, account_names: list[str] | None = None) -
             "no Google account configured — skipping calendar sync "
             "(see config/google.example.yaml or GOOGLE_* env vars)"
         )
+        if strict:
+            raise RuntimeError("no Google account configured for calendar sync")
         return 0
 
     upcoming = [w for w in storage.load_webinars() if storage.is_upcoming(w)]
@@ -151,8 +167,12 @@ def sync(only_registered: bool = True, account_names: list[str] | None = None) -
             svc = _service(acct)
         except Exception as e:
             log.warning("[%s] google auth failed: %s", acct["name"], e)
+            if strict:
+                raise RuntimeError(f"[{acct['name']}] Google Calendar authentication failed") from e
             continue
-        synced = _upsert(svc, acct["calendar_id"], acct["name"], webinars)
+        synced = _upsert(
+            svc, acct["calendar_id"], acct["name"], webinars, strict=strict
+        )
         log.info("[%s] calendar synced %d events -> %s", acct["name"], synced, acct["calendar_id"])
         total += synced
     log.info("calendar synced %d events across %d account(s)", total, len(accounts))
@@ -162,6 +182,11 @@ def sync(only_registered: bool = True, account_names: list[str] | None = None) -
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Sync webinars to Google Calendar")
     p.add_argument("--all", action="store_true", help="sync all upcoming, not just registered")
+    p.add_argument(
+        "--strict",
+        action="store_true",
+        help="exit with an error when credentials or any calendar write fails",
+    )
     p.add_argument(
         "--account",
         action="append",
@@ -174,7 +199,7 @@ def main(argv: list[str] | None = None) -> int:
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)s %(name)s: %(message)s",
     )
-    sync(only_registered=not args.all, account_names=args.account)
+    sync(only_registered=not args.all, account_names=args.account, strict=args.strict)
     return 0
 
 

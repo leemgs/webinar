@@ -76,10 +76,11 @@ jobs:
       - name: Sync Google Calendar
         # Registration is intentionally disabled for every source until each
         # form is verified. Sync the collected schedule regardless of that flag.
-        run: python -m webinar.calendar_sync --all -v
+        run: python -m webinar.calendar_sync --all --strict -v
 
       # Mirror the just-scraped + registered dataset into docs (no second scrape).
       - name: Republish docs (json + ics)
+        if: always()
         run: cp data/webinars.json docs/webinars.json && python -m webinar.ics_export
 
       # Per-source coverage so a silently-broken scraper (0 results) is visible.
@@ -88,6 +89,7 @@ jobs:
         run: python -m webinar.coverage >> "$GITHUB_STEP_SUMMARY"
 
       - name: Commit updated data
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

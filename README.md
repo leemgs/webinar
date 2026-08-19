@@ -159,6 +159,7 @@ python -m webinar.registrar --dry-run --site ddtube -v
 python -m webinar.calendar_sync -v                  # 설정된 모든 계정에 sync
 python -m webinar.calendar_sync --account work -v   # 지정한 계정만
 python -m webinar.calendar_sync --all -v            # 등록 여부 무관 전체 일정
+python -m webinar.calendar_sync --all --strict -v   # CI용: 인증/쓰기 실패 시 오류 종료
 
 # 7) 홈페이지 미리보기 → http://localhost:8000
 python -m http.server -d docs 8000

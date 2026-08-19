@@ -13,6 +13,7 @@
 #   requires_login  true  -> listing/detail not visible without a session
 #   scraper         python module key in src/webinar/scrapers/
 #   wait_selector   (optional) CSS selector to await before scraping (SPA hydration)
+#   allow_empty     true when a healthy listing may legitimately contain zero sessions
 #   login:          login form flow (used by registrar)
 #   register:       registration button flow (used by registrar)
 # ---------------------------------------------------------------------------
@@ -155,6 +156,7 @@ cloit:
   listing_url: "https://webinar.cloit.com"
   requires_js: true           # JS-rendered SPA
   requires_login: false
+  allow_empty: true          # 대기 중 세션이 실제로 0개일 수 있는 사이트
   scraper: cloit
   wait_selector: "body"
   login:
