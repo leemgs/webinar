@@ -25,6 +25,7 @@ def _clean_google_env(monkeypatch, tmp_path):
         monkeypatch.delenv(var, raising=False)
     # point the local google.yaml at an (absent) temp file by default
     monkeypatch.setattr(config, "GOOGLE_YAML", tmp_path / "google.yaml")
+    monkeypatch.setattr(calendar_sync, "WRITE_INTERVAL_SECONDS", 0)
 
 
 def _account(name="acct", **extra):
@@ -157,6 +158,29 @@ class ResponseError(Exception):
         self.resp = type("Response", (), {"status": status})()
 
 
+class RateLimitError(Exception):
+    def __init__(self, status=403, reason="rateLimitExceeded"):
+        self.resp = type(
+            "Response",
+            (),
+            {"status": status, "get": lambda self, key, default=None: default},
+        )()
+        self.content = f'{{"error":{{"errors":[{{"reason":"{reason}"}}]}}}}'.encode()
+
+
+class SequencedRequest:
+    def __init__(self, outcomes):
+        self.outcomes = list(outcomes)
+        self.calls = 0
+
+    def execute(self):
+        outcome = self.outcomes[self.calls]
+        self.calls += 1
+        if isinstance(outcome, Exception):
+            raise outcome
+        return outcome
+
+
 class FailingEvents(FakeEvents):
     def __init__(self, calls, update_status):
         super().__init__(calls)
@@ -265,3 +289,57 @@ def test_strict_sync_requires_google_configuration(monkeypatch):
     monkeypatch.setattr(calendar_sync, "load_google_accounts", lambda: [])
     with pytest.raises(RuntimeError, match="no Google account configured"):
         calendar_sync.sync(strict=True)
+
+
+def test_calendar_rate_limit_is_retried_with_exponential_backoff():
+    request = SequencedRequest(
+        [RateLimitError(), RateLimitError(status=429), {"id": "event"}]
+    )
+    delays = []
+
+    result = calendar_sync._execute_with_backoff(
+        request,
+        account_name="personal",
+        webinar_title="AI webinar",
+        sleeper=delays.append,
+    )
+
+    assert result == {"id": "event"}
+    assert request.calls == 3
+    assert delays == [1, 2]
+
+
+def test_calendar_non_quota_403_is_not_retried():
+    request = SequencedRequest([RateLimitError(reason="forbidden")])
+    delays = []
+
+    with pytest.raises(RateLimitError):
+        calendar_sync._execute_with_backoff(
+            request,
+            account_name="personal",
+            webinar_title="AI webinar",
+            sleeper=delays.append,
+        )
+
+    assert request.calls == 1
+    assert delays == []
+
+
+def test_upsert_paces_calendar_writes():
+    webinars = [
+        _future_webinar("first", registered=True),
+        _future_webinar("second", registered=True),
+    ]
+    delays = []
+
+    synced = calendar_sync._upsert(
+        FakeService(),
+        "primary",
+        "personal",
+        webinars,
+        write_interval=1.0,
+        sleeper=delays.append,
+    )
+
+    assert synced == 2
+    assert delays == [1.0]

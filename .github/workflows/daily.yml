@@ -31,6 +31,8 @@ jobs:
       GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
       # Multiple target accounts as one YAML secret (see config/google.example.yaml)
       GOOGLE_ACCOUNTS_YAML: ${{ secrets.GOOGLE_ACCOUNTS_YAML }}
+      # Pace writes to avoid per-user Calendar API rate limits.
+      CALENDAR_WRITE_INTERVAL_SECONDS: "1.0"
       # Per-site credentials (blank secrets => that site is skipped for registration)
       SITE_ALLSHOWTV_USER: ${{ secrets.SITE_ALLSHOWTV_USER }}
       SITE_ALLSHOWTV_PASS: ${{ secrets.SITE_ALLSHOWTV_PASS }}

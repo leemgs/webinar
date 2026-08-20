@@ -11,8 +11,10 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 import re
 import sys
+import time
 from datetime import datetime, timedelta
 
 from . import storage
@@ -23,6 +25,8 @@ log = logging.getLogger(__name__)
 
 TOKEN_URI = "https://oauth2.googleapis.com/token"
 SCOPES = ["https://www.googleapis.com/auth/calendar.events"]
+WRITE_INTERVAL_SECONDS = float(os.getenv("CALENDAR_WRITE_INTERVAL_SECONDS", "1.0"))
+MAX_RATE_LIMIT_ATTEMPTS = 7
 
 PRIZE_LABELS = {
     "survey": "설문",
@@ -94,16 +98,75 @@ def _to_event(webinar: Webinar) -> dict:
     return ev
 
 
+def _is_rate_limit_error(error: Exception) -> bool:
+    """Return whether a Google API error is safe to retry with backoff."""
+    status = getattr(getattr(error, "resp", None), "status", None)
+    if status == 429:
+        return True
+    if status != 403:
+        return False
+    content = getattr(error, "content", b"")
+    if isinstance(content, bytes):
+        content = content.decode("utf-8", errors="replace")
+    detail = f"{content} {error}".lower()
+    return "ratelimitexceeded" in detail or "userratelimitexceeded" in detail
+
+
+def _execute_with_backoff(
+    request,
+    *,
+    account_name: str,
+    webinar_title: str,
+    max_attempts: int = MAX_RATE_LIMIT_ATTEMPTS,
+    sleeper=None,
+):
+    """Execute a Calendar request, retrying quota throttles exponentially."""
+    sleeper = sleeper or time.sleep
+    for attempt in range(max_attempts):
+        try:
+            return request.execute()
+        except Exception as error:
+            if not _is_rate_limit_error(error) or attempt == max_attempts - 1:
+                raise
+            delay = 2**attempt
+            retry_after = getattr(getattr(error, "resp", None), "get", lambda *_: None)(
+                "retry-after"
+            )
+            try:
+                delay = max(delay, float(retry_after)) if retry_after else delay
+            except (TypeError, ValueError):
+                pass
+            log.warning(
+                "[%s] Calendar rate limit for %s; retrying in %.1fs (%d/%d)",
+                account_name,
+                webinar_title,
+                delay,
+                attempt + 1,
+                max_attempts - 1,
+            )
+            sleeper(delay)
+
+
 def _upsert(
-    svc, calendar_id: str, name: str, webinars: list[Webinar], strict: bool = False
+    svc,
+    calendar_id: str,
+    name: str,
+    webinars: list[Webinar],
+    strict: bool = False,
+    write_interval: float = 0.0,
+    sleeper=None,
 ) -> int:
     synced = 0
     failures = []
-    for wb in webinars:
+    sleeper = sleeper or time.sleep
+    for index, wb in enumerate(webinars):
         body = _to_event(wb)
         eid = body["id"]
         try:
-            svc.events().update(calendarId=calendar_id, eventId=eid, body=body).execute()
+            request = svc.events().update(calendarId=calendar_id, eventId=eid, body=body)
+            _execute_with_backoff(
+                request, account_name=name, webinar_title=wb.title, sleeper=sleeper
+            )
             synced += 1
         except Exception as update_error:
             # Insert only when Google explicitly reports that the deterministic
@@ -115,11 +178,16 @@ def _upsert(
                 failures.append(wb.title)
                 continue
             try:
-                svc.events().insert(calendarId=calendar_id, body=body).execute()
+                request = svc.events().insert(calendarId=calendar_id, body=body)
+                _execute_with_backoff(
+                    request, account_name=name, webinar_title=wb.title, sleeper=sleeper
+                )
                 synced += 1
             except Exception as e:
                 log.warning("[%s] calendar upsert failed for %s: %s", name, wb.title, e)
                 failures.append(wb.title)
+        if write_interval > 0 and index < len(webinars) - 1:
+            sleeper(write_interval)
     if strict and failures:
         raise RuntimeError(
             f"[{name}] failed to sync {len(failures)} webinar(s): "
@@ -171,7 +239,12 @@ def sync(
                 raise RuntimeError(f"[{acct['name']}] Google Calendar authentication failed") from e
             continue
         synced = _upsert(
-            svc, acct["calendar_id"], acct["name"], webinars, strict=strict
+            svc,
+            acct["calendar_id"],
+            acct["name"],
+            webinars,
+            strict=strict,
+            write_interval=WRITE_INTERVAL_SECONDS,
         )
         log.info("[%s] calendar synced %d events -> %s", acct["name"], synced, acct["calendar_id"])
         total += synced
