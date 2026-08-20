@@ -87,19 +87,16 @@ def run(site_keys: list[str] | None = None, publish: bool = True) -> list:
         # like a successful daily refresh. Keeping the previous dataset is safer,
         # and failing the job makes the collection outage visible immediately.
         raise RuntimeError("all configured webinar sources returned zero items")
-    if site_keys is None:
-        unexpected_empty = [
-            key
-            for key in keys
-            if source_counts.get(key, 0) == 0 and not sites[key].get("allow_empty", False)
-        ]
-        if unexpected_empty:
-            # Merging retains yesterday's records and would otherwise hide a
-            # broken selector/network failure behind apparently healthy data.
-            raise RuntimeError(
-                "configured webinar sources unexpectedly returned zero items: "
-                + ", ".join(unexpected_empty)
-            )
+    empty_sources = [key for key in keys if source_counts.get(key, 0) == 0]
+    if empty_sources:
+        # A source can legitimately have no upcoming sessions, and several sites
+        # intermittently block GitHub runner IPs. Keep the last known records for
+        # those sources via merge(), while making the degraded scrape conspicuous
+        # in logs and the Actions summary. Only a total outage is fatal above.
+        log.warning(
+            "sources returned zero items; preserving their previous data: %s",
+            ", ".join(empty_sources),
+        )
 
     # enrich prizes
     for w in scraped:

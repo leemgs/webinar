@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from webinar import pipeline
+from webinar.models import Webinar
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -62,7 +63,7 @@ def test_fresh_scrape_counts_are_written_to_actions_summary(monkeypatch, tmp_pat
     assert "| sharedit | 0 | ⚠️ 0건 |" in report
 
 
-def test_pipeline_rejects_an_unexpected_empty_source(monkeypatch):
+def test_pipeline_preserves_previous_data_when_some_sources_are_empty(monkeypatch):
     class FakeBrowser:
         def __init__(self, **kwargs):
             pass
@@ -73,18 +74,28 @@ def test_pipeline_rejects_an_unexpected_empty_source(monkeypatch):
         def __exit__(self, *args):
             pass
 
-    sites = {
-        "healthy": {"scraper": "fake"},
-        "broken": {"scraper": "fake"},
-        "idle": {"scraper": "fake", "allow_empty": True},
-    }
+    sites = {"healthy": {"scraper": "fake"}, "blocked": {"scraper": "fake"}}
     monkeypatch.setattr(pipeline, "Browser", FakeBrowser)
     monkeypatch.setattr(pipeline, "load_sites", lambda: sites)
     monkeypatch.setattr(
         pipeline,
         "scrape_site",
-        lambda browser, key, cfg: [object()] if key == "healthy" else [],
+        lambda browser, key, cfg: [
+            Webinar(source="healthy", title="new", url="https://example.com/new")
+        ] if key == "healthy" else [],
     )
 
-    with pytest.raises(RuntimeError, match="broken"):
-        pipeline.run(publish=False)
+    existing = [
+        Webinar(source="blocked", title="previous", url="https://example.com/previous")
+    ]
+    monkeypatch.setattr(pipeline.storage, "load_webinars", lambda: existing)
+    monkeypatch.setattr(pipeline.prizes, "apply", lambda webinar: None)
+    saved = []
+    monkeypatch.setattr(pipeline.storage, "save_webinars", lambda items: saved.extend(items))
+    monkeypatch.setattr(pipeline.storage, "prune_past", lambda items: items)
+
+    result = pipeline.run(publish=False)
+
+    assert result == saved
+    assert len(result) == len(existing) + 1
+    assert {webinar.source for webinar in result} == {"healthy", "blocked"}
