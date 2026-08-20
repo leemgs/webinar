@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-19T20:35:59.047541+09:00",
-  "count": 81,
+  "generated_at": "2026-08-20T20:36:36.322399+09:00",
+  "count": 82,
   "webinars": [
     {
       "source": "ddtube",
@@ -748,9 +748,7 @@
           "condition": "[첨마소 6탄] 첨단이 제안하는 2026년 하반기 특별한 이벤트"
         }
       ],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1785510484254.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-67251f8dc7d8"
     },
     {
@@ -1202,6 +1200,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "chontv-89e52513d94f"
+    },
+    {
+      "source": "talkit",
+      "title": "AI 에이전트 시대, 애플리케이션·인프라·보안을 다시 설계하라 [F5 AppWorld Seoul 컨퍼런스 핵심리뷰]",
+      "url": "https://talkit.tv/main/events/3714",
+      "start_kst": "2026-09-09T14:00:00+09:00",
+      "end_kst": "2026-09-09T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3714",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file178672120414.jpg"
+      ],
+      "id": "talkit-52dd2672b04d"
     },
     {
       "source": "e4ds",
