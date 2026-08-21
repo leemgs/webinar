@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-21T08:38:34.072327+09:00",
-  "count": 82,
+  "generated_at": "2026-08-21T20:34:29.090141+09:00",
+  "count": 83,
   "webinars": [
     {
       "source": "ddtube",
@@ -1132,6 +1132,22 @@
         "https://img.etnews.com/allshowtv/tmp_upload/2026/07/08/main_08133707630884.jpg"
       ],
       "id": "allshowtv-572f3f1d2ff0"
+    },
+    {
+      "source": "dubiz",
+      "title": "[ESG를 부탁해#1] 2026 지속가능성 공시 의무화 대응 전략 온라인 세미나",
+      "url": "https://dubiz.co.kr/Event/514",
+      "start_kst": "2026-09-03T14:00:00+09:00",
+      "end_kst": "2026-09-03T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/514",
+      "description": "",
+      "thumbnail": "https://dubiz.co.kr/images/default.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-51b614ee5147"
     },
     {
       "source": "dubiz",
