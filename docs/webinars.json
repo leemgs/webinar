@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-08-23T08:36:05.530324+09:00",
-  "count": 82,
+  "generated_at": "2026-08-23T20:28:31.295501+09:00",
+  "count": 81,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "설계는 더 빠르게, 해석은 더 쉽게, 데이터는 더 안전하게, 제조 혁신을 완성하는 시뮬레이션 프로세스",
-      "url": "https://dubiz.co.kr/Event/496",
-      "start_kst": "2026-06-24T14:00:00+09:00",
-      "end_kst": "2026-06-24T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/496",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1780666974134.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-2c02de35ad16"
-    },
     {
       "source": "dubiz",
       "title": "설비 다운타임을 줄이는 전력 품질 관리 전략",
