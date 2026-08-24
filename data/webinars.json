@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T20:36:06.617410+09:00",
+  "generated_at": "2026-08-25T08:35:48.957117+09:00",
   "count": 80,
   "webinars": [
     {
@@ -1044,9 +1044,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1786538255798.jpg"
-      ],
+      "prize_images": [],
       "id": "talkit-2ee71757edf8"
     },
     {
@@ -1130,9 +1128,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1786626077196.jpg"
-      ],
+      "prize_images": [],
       "id": "talkit-091e9d2f6089"
     },
     {
@@ -1180,9 +1176,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file178672120414.jpg"
-      ],
+      "prize_images": [],
       "id": "talkit-52dd2672b04d"
     },
     {
