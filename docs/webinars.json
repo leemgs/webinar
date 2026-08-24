@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-08-24T08:33:59.789215+09:00",
-  "count": 81,
+  "generated_at": "2026-08-24T20:36:06.617410+09:00",
+  "count": 80,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "설비 다운타임을 줄이는 전력 품질 관리 전략",
-      "url": "https://dubiz.co.kr/Event/498",
-      "start_kst": "2026-06-25T14:00:00+09:00",
-      "end_kst": "2026-06-25T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/498",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1780582603261.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-61e69e27da0b"
-    },
     {
       "source": "dubiz",
       "title": "AutoCAD 기반 도면 자동화 실전 웨비나 반복 도면 업무를 줄이는 설계 자동화 전략",
