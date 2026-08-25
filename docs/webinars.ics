@@ -6,53 +6,8 @@ METHOD:PUBLISH
 X-WR-CALNAME:웨비나 일정
 X-WR-TIMEZONE:Asia/Seoul
 BEGIN:VEVENT
-UID:allshowtv-b905b7bbb2b9@webinar
-DTSTAMP:20260824T233632Z
-DTSTART:20260825T050000Z
-DTEND:20260825T060000Z
-SUMMARY:[웨비나] AI 주권 시대\, 도시에서 데이터센터까지
-DESCRIPTION:주최: 오케스트로\n신청: https://www.allshowtv.com/detail.html?idx=1750
-URL:https://www.allshowtv.com/detail.html?idx=1750
-END:VEVENT
-BEGIN:VEVENT
-UID:chontv-2f0b47a741cd@webinar
-DTSTAMP:20260824T233632Z
-DTSTART:20260825T050000Z
-DTEND:20260825T060000Z
-SUMMARY:[웨비나] 탈(脫) 오라클\, 고객 가치를 실현하는 맞춤형 마이그레이션 전략
-DESCRIPTION:신청: https://chontv.com/event/1266
-URL:https://chontv.com/event/1266
-END:VEVENT
-BEGIN:VEVENT
-UID:dubiz-3263b0467462@webinar
-DTSTAMP:20260824T233632Z
-DTSTART:20260825T050000Z
-DTEND:20260825T060000Z
-SUMMARY:[웨비나] 현장 품질검사의 복합성을 줄이는 새로운 방안
-DESCRIPTION:신청: https://dubiz.co.kr/Event/511
-URL:https://dubiz.co.kr/Event/511
-END:VEVENT
-BEGIN:VEVENT
-UID:talkit-0e7203a5de15@webinar
-DTSTAMP:20260824T233632Z
-DTSTART:20260825T050000Z
-DTEND:20260825T060000Z
-SUMMARY:[웨비나] 설비 자동화를 넘어 자율 생산으로: 제조 Physical AI 현실적 구현 전략 [라온피플]
-DESCRIPTION:신청: https://talkit.tv/main/events/3711
-URL:https://talkit.tv/main/events/3711
-END:VEVENT
-BEGIN:VEVENT
-UID:allshowtv-1602a1092e92@webinar
-DTSTAMP:20260824T233632Z
-DTSTART:20260825T060000Z
-DTEND:20260825T070000Z
-SUMMARY:[웨비나] AI Native Enterprise를 지원하는 AI Ready Data 플랫폼 활용 전략
-DESCRIPTION:주최: 엔코아\n신청: https://www.allshowtv.com/detail.html?idx=1747
-URL:https://www.allshowtv.com/detail.html?idx=1747
-END:VEVENT
-BEGIN:VEVENT
 UID:chontv-c211ddaee8fd@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260826T050000Z
 DTEND:20260826T060000Z
 SUMMARY:[웨비나] AI 시대에 하드 드라이브 바로 알기 : 씨게이트가 제시하는 차세대 스토리지 인클로저
@@ -61,7 +16,7 @@ URL:https://chontv.com/event/1267
 END:VEVENT
 BEGIN:VEVENT
 UID:dubiz-fe006db7c408@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260826T050000Z
 DTEND:20260826T060000Z
 SUMMARY:[웨비나] AX+5G 특화망 융합 세미나 AI 대전환 인프라 5G 특화망 도입 필수 입문 가이드
@@ -70,7 +25,7 @@ URL:https://dubiz.co.kr/Event/507
 END:VEVENT
 BEGIN:VEVENT
 UID:sharedit-b537b224cafb@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260826T050000Z
 DTEND:20260826T060000Z
 SUMMARY:[웨비나] OpenAI 기반 Microsoft Enterprise AI Platform Ai 365 에이전트 소개와 기업 교육·지식관리 Agent 활용 전략
@@ -79,7 +34,7 @@ URL:https://www.sharedit.co.kr/posts/35963
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-6bef78f5ed45@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260826T050000Z
 DTEND:20260826T060000Z
 SUMMARY:[웨비나] Physical AI 시대의 휴머노이드 개발 - NX 기반 통합 설계부터 가상 검증\, AI 학습\, 양산까지
@@ -88,7 +43,7 @@ URL:https://talkit.tv/main/events/3712
 END:VEVENT
 BEGIN:VEVENT
 UID:allshowtv-33743758a6ba@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260826T060000Z
 DTEND:20260826T070000Z
 SUMMARY:[웨비나] AI 인프라 데이터 병목 개선 w/ Fusion
@@ -97,7 +52,7 @@ URL:https://www.allshowtv.com/detail.html?idx=1746
 END:VEVENT
 BEGIN:VEVENT
 UID:e4ds-81dea4e7d21e@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260826T150000Z
 DTEND:20260826T160000Z
 SUMMARY:[웨비나] 2026 고급 엔지니어 실무 마스터 클래스 - 저잡음/저전력 회로 이해 및 고급 응용 회로 설계
@@ -106,7 +61,7 @@ URL:https://www.e4ds.com/webinar_detail.asp?idx=1015
 END:VEVENT
 BEGIN:VEVENT
 UID:allshowtv-a76d8f37e323@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260827T050000Z
 DTEND:20260827T073000Z
 SUMMARY:[웨비나] 끝까지 책임지는 AI 에이전트: 도입을 넘어 운영으로
@@ -115,7 +70,7 @@ URL:https://www.allshowtv.com/detail.html?idx=1748
 END:VEVENT
 BEGIN:VEVENT
 UID:dubiz-fb590234990e@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260827T050000Z
 DTEND:20260827T060000Z
 SUMMARY:[웨비나] Physical AI 시연을 넘어\, 운영으로 — Physical AI 실전 전략
@@ -124,7 +79,7 @@ URL:https://dubiz.co.kr/Event/509
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-f13222f0af74@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260827T050000Z
 DTEND:20260827T060000Z
 SUMMARY:[웨비나] 사용자 경험으로 완성하는 디지털 워크스페이스 Omnissa Horizon과 eG Enterprise로 구현하는 차세대 VDI 전략
@@ -133,7 +88,7 @@ URL:https://talkit.tv/main/events/3710
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-c1e123d727f3@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260828T050000Z
 DTEND:20260828T060000Z
 SUMMARY:[웨비나] 우리 회사는 안전한데\, 협력사가 뚫린다면? TPRM 기반 공급망 보안 전략 [동훈아이텍\, SecurityScorecard]
@@ -142,7 +97,7 @@ URL:https://talkit.tv/main/events/3717
 END:VEVENT
 BEGIN:VEVENT
 UID:dubiz-22cdc7230fb9@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260901T050000Z
 DTEND:20260901T060000Z
 SUMMARY:[웨비나] Pickit 4.1 : AI 파운데이션모델로 혁신하는 차세대 3D 로봇비전
@@ -151,7 +106,7 @@ URL:https://dubiz.co.kr/Event/512
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-2ee71757edf8@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260901T050000Z
 DTEND:20260901T060000Z
 SUMMARY:[웨비나] Gemini Enterprise 인사이트: 기업 데이터와 AI 에이전트의 결합 [Google\, 한진정보통신]
@@ -160,7 +115,7 @@ URL:https://talkit.tv/main/events/3720
 END:VEVENT
 BEGIN:VEVENT
 UID:e4ds-a23cd0c603e0@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260902T150000Z
 DTEND:20260902T160000Z
 SUMMARY:[웨비나] 미래 자동차를 밝히는 지능형 LED 실내조명 솔루션
@@ -169,7 +124,7 @@ URL:https://www.e4ds.com/webinar_detail.asp?idx=1021
 END:VEVENT
 BEGIN:VEVENT
 UID:allshowtv-572f3f1d2ff0@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260903T050000Z
 DTEND:20260903T060000Z
 SUMMARY:[웨비나] 의료 데이터의 안전한 관리와 보호를 위한 통합 인프라 전략
@@ -178,7 +133,7 @@ URL:https://www.allshowtv.com/detail.html?idx=1740
 END:VEVENT
 BEGIN:VEVENT
 UID:dubiz-51b614ee5147@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260903T050000Z
 DTEND:20260903T060000Z
 SUMMARY:[웨비나] [ESG를 부탁해#1] 2026 지속가능성 공시 의무화 대응 전략 온라인 세미나
@@ -187,7 +142,7 @@ URL:https://dubiz.co.kr/Event/514
 END:VEVENT
 BEGIN:VEVENT
 UID:dubiz-c6a94f3dc5fc@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260904T043000Z
 DTEND:20260904T053000Z
 SUMMARY:[웨비나] AW 2027 베스트 솔루션 데이 1탄 : AI머신비전 #1 [주식회사 바이슨\, Zivid\, 코그넥스코리아]
@@ -196,7 +151,7 @@ URL:https://dubiz.co.kr/Event/513
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-091e9d2f6089@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260907T050000Z
 DTEND:20260907T060000Z
 SUMMARY:[웨비나] 메시 없이\, CAD 그대로 빠르게 검증 Simcenter SimSolid
@@ -205,7 +160,7 @@ URL:https://talkit.tv/main/events/3716
 END:VEVENT
 BEGIN:VEVENT
 UID:chontv-9726b6426103@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260908T050000Z
 DTEND:20260908T060000Z
 SUMMARY:[웨비나] 연결될수록 위험하다 —AI 팩토리 시대의 OT 보안 전략
@@ -214,7 +169,7 @@ URL:https://chontv.com/event/1274
 END:VEVENT
 BEGIN:VEVENT
 UID:chontv-89e52513d94f@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260909T050000Z
 DTEND:20260909T060000Z
 SUMMARY:[웨비나] The Ghost in the Machine : AI Agent 시대\, 보이지 않는 Machine Identity를 어떻게 통제할 것인가?
@@ -223,7 +178,7 @@ URL:https://chontv.com/event/1271
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-52dd2672b04d@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260909T050000Z
 DTEND:20260909T060000Z
 SUMMARY:[웨비나] AI 에이전트 시대\, 애플리케이션·인프라·보안을 다시 설계하라 [F5 AppWorld Seoul 컨퍼런스 핵심리뷰]
@@ -232,7 +187,7 @@ URL:https://talkit.tv/main/events/3714
 END:VEVENT
 BEGIN:VEVENT
 UID:e4ds-2bc84d59f797@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260909T150000Z
 DTEND:20260909T160000Z
 SUMMARY:[웨비나] Isolated DC-DC 컨버터 토폴로지 분석 및 최적의 선택 가이드
@@ -241,7 +196,7 @@ URL:https://www.e4ds.com/webinar_detail.asp?idx=1026
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-1cf8ee797ad3@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260910T050000Z
 DTEND:20260910T060000Z
 SUMMARY:[웨비나] 신규 공장의 최대 보안 리스크\, 설계 도면을 어떻게 지킬 것인가? 설계부터 현장 단말까지 [필라웨어]
@@ -250,7 +205,7 @@ URL:https://talkit.tv/main/events/3721
 END:VEVENT
 BEGIN:VEVENT
 UID:e4ds-26d18e18cd33@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260914T150000Z
 DTEND:20260914T160000Z
 SUMMARY:[웨비나] 다양한 입력소스 기반 전력 시스템의 신뢰성을 높이는 ADI Power protection solution
@@ -259,7 +214,7 @@ URL:https://www.e4ds.com/webinar_detail.asp?idx=1020
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-aa2e8d7855ae@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260915T050000Z
 DTEND:20260915T060000Z
 SUMMARY:[웨비나] 데이터를 옮기지 않고 AI를 가속하라: 멀티클라우드 환경에서 구현하는 AI-Ready Data 인프라 [한국넷앱]
@@ -268,7 +223,7 @@ URL:https://talkit.tv/main/events/3718
 END:VEVENT
 BEGIN:VEVENT
 UID:talkit-5e1699e3341f@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260916T050000Z
 DTEND:20260916T060000Z
 SUMMARY:[웨비나] Microsoft 365 기반 Enterprise AI Platform으로 구현하는 기업 업무 자동화 AI Agent 혁신 전략 [엠클라우드브리지]
@@ -277,7 +232,7 @@ URL:https://talkit.tv/main/events/3719
 END:VEVENT
 BEGIN:VEVENT
 UID:e4ds-68d40822f79d@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260916T150000Z
 DTEND:20260916T160000Z
 SUMMARY:[웨비나] 2026 중급 엔지니어 실무 마스터 클래스 - 회로 설계 방법과 부품 파손 이유 및 방지 대책
@@ -286,7 +241,7 @@ URL:https://www.e4ds.com/webinar_detail.asp?idx=1023
 END:VEVENT
 BEGIN:VEVENT
 UID:e4ds-eeae08a401ce@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260916T150000Z
 DTEND:20260916T160000Z
 SUMMARY:[웨비나] Power & Boot Sequence 실전 측정: 첫 신호가 시스템의 운명을 결정한다
@@ -295,7 +250,7 @@ URL:https://www.e4ds.com/webinar_detail.asp?idx=1025
 END:VEVENT
 BEGIN:VEVENT
 UID:allshowtv-c196c1481a8c@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260917T060000Z
 DTEND:20260917T070000Z
 SUMMARY:[웨비나] 금소법 시대\, AI는 어떻게 약관을 지키는가
@@ -304,7 +259,7 @@ URL:https://www.allshowtv.com/detail.html?idx=1751
 END:VEVENT
 BEGIN:VEVENT
 UID:dubiz-14581f5a10b5@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20260918T043000Z
 DTEND:20260918T053000Z
 SUMMARY:[웨비나] AW 2027 베스트 솔루션 데이 2탄 : AI로보틱스 #1 [딩스코리아 주식회사\, (주)트윔\, 스토브리코리아]
@@ -313,7 +268,7 @@ URL:https://dubiz.co.kr/Event/515
 END:VEVENT
 BEGIN:VEVENT
 UID:dubiz-6cb69539c070@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20261002T043000Z
 DTEND:20261002T053000Z
 SUMMARY:[웨비나] AW 2027 베스트 솔루션 데이 3탄 : AI팩토리 [Minitab Korea\, 에임시스템\, Octave\, KSTEC]
@@ -321,8 +276,17 @@ DESCRIPTION:신청: https://dubiz.co.kr/Event/516
 URL:https://dubiz.co.kr/Event/516
 END:VEVENT
 BEGIN:VEVENT
+UID:e4ds-8b7b8974ce16@webinar
+DTSTAMP:20260825T113559Z
+DTSTART:20261012T150000Z
+DTEND:20261012T160000Z
+SUMMARY:[웨비나] 차세대 AI 데이터센터를 위한 CDU 센싱·제어 솔루션과 액체 냉각 기술
+DESCRIPTION:신청: https://www.e4ds.com/webinar_detail.asp?idx=1028
+URL:https://www.e4ds.com/webinar_detail.asp?idx=1028
+END:VEVENT
+BEGIN:VEVENT
 UID:e4ds-a898dd4cd4f6@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20261014T150000Z
 DTEND:20261014T160000Z
 SUMMARY:[웨비나] [오프라인 실습] LTspice를 설계 검증 무기로 실전에서 바로 쓰는 법
@@ -331,11 +295,38 @@ URL:https://www.e4ds.com/webinar_detail.asp?idx=1022
 END:VEVENT
 BEGIN:VEVENT
 UID:e4ds-4002d2e23261@webinar
-DTSTAMP:20260824T233632Z
+DTSTAMP:20260825T113559Z
 DTSTART:20261014T150000Z
 DTEND:20261014T160000Z
 SUMMARY:[웨비나] LTspice\, 설치만 해두고 못 쓰고 있다면\, 지금 이 90분으로 바뀝니다
 DESCRIPTION:신청: https://www.e4ds.com/webinar_detail.asp?idx=1024
 URL:https://www.e4ds.com/webinar_detail.asp?idx=1024
+END:VEVENT
+BEGIN:VEVENT
+UID:dubiz-112e80057994@webinar
+DTSTAMP:20260825T113559Z
+DTSTART:20261030T043000Z
+DTEND:20261030T053000Z
+SUMMARY:[웨비나] AW 2027 베스트 솔루션 데이 5탄 : 산업부품(부품/안전/제어) [(주)크리버코리아\, 리어세이프티코리아\, SEW유로드라이브코리아(주)\, 여의시스템]
+DESCRIPTION:신청: https://dubiz.co.kr/Event/518
+URL:https://dubiz.co.kr/Event/518
+END:VEVENT
+BEGIN:VEVENT
+UID:dubiz-dde57a2a8328@webinar
+DTSTAMP:20260825T113559Z
+DTSTART:20261127T043000Z
+DTEND:20261127T053000Z
+SUMMARY:[웨비나] AW 2027 베스트 솔루션 데이 7탄 : AI머신비전 #2 [LUCID Vision Labs\, 클레로보틱스 주식회사\, (주)비케이인스트루먼트\, 뉴로클]
+DESCRIPTION:신청: https://dubiz.co.kr/Event/528
+URL:https://dubiz.co.kr/Event/528
+END:VEVENT
+BEGIN:VEVENT
+UID:dubiz-54c1c80c8cf8@webinar
+DTSTAMP:20260825T113559Z
+DTSTART:20261211T043000Z
+DTEND:20261211T053000Z
+SUMMARY:[웨비나] AW 2027 베스트 솔루션 데이 8탄 : AI로보틱스 #2 [피아이이(피아이이로보틱스)\, 모벤시스\, 에이딘로보틱스\, 주식회사 디에스테크코리아]
+DESCRIPTION:신청: https://dubiz.co.kr/Event/521
+URL:https://dubiz.co.kr/Event/521
 END:VEVENT
 END:VCALENDAR

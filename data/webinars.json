@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-25T08:35:48.957117+09:00",
-  "count": 80,
+  "generated_at": "2026-08-25T20:35:16.123225+09:00",
+  "count": 84,
   "webinars": [
     {
       "source": "dubiz",
@@ -802,9 +802,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file178637720961.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-3263b0467462"
     },
     {
@@ -1044,7 +1042,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786538255798.jpg"
+      ],
       "id": "talkit-2ee71757edf8"
     },
     {
@@ -1128,7 +1128,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1786626077196.jpg"
+      ],
       "id": "talkit-091e9d2f6089"
     },
     {
@@ -1176,7 +1178,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file178672120414.jpg"
+      ],
       "id": "talkit-52dd2672b04d"
     },
     {
@@ -1351,6 +1355,22 @@
     },
     {
       "source": "e4ds",
+      "title": "차세대 AI 데이터센터를 위한 CDU 센싱·제어 솔루션과 액체 냉각 기술",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1028",
+      "start_kst": "2026-10-13T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1028",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-08-13/c2316273c3e86690.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-8b7b8974ce16"
+    },
+    {
+      "source": "e4ds",
       "title": "[오프라인 실습] LTspice를 설계 검증 무기로 실전에서 바로 쓰는 법",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1022",
       "start_kst": "2026-10-15T00:00:00+09:00",
@@ -1380,6 +1400,60 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-4002d2e23261"
+    },
+    {
+      "source": "dubiz",
+      "title": "AW 2027 베스트 솔루션 데이 5탄 : 산업부품(부품/안전/제어) [(주)크리버코리아, 리어세이프티코리아, SEW유로드라이브코리아(주), 여의시스템]",
+      "url": "https://dubiz.co.kr/Event/518",
+      "start_kst": "2026-10-30T13:30:00+09:00",
+      "end_kst": "2026-10-30T14:30:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/518",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file178758627411.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1787591102618.jpg"
+      ],
+      "id": "dubiz-112e80057994"
+    },
+    {
+      "source": "dubiz",
+      "title": "AW 2027 베스트 솔루션 데이 7탄 : AI머신비전 #2 [LUCID Vision Labs, 클레로보틱스 주식회사, (주)비케이인스트루먼트, 뉴로클]",
+      "url": "https://dubiz.co.kr/Event/528",
+      "start_kst": "2026-11-27T13:30:00+09:00",
+      "end_kst": "2026-11-27T14:30:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/528",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1787588350275.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file178759136325.jpg"
+      ],
+      "id": "dubiz-dde57a2a8328"
+    },
+    {
+      "source": "dubiz",
+      "title": "AW 2027 베스트 솔루션 데이 8탄 : AI로보틱스 #2 [피아이이(피아이이로보틱스), 모벤시스, 에이딘로보틱스, 주식회사 디에스테크코리아]",
+      "url": "https://dubiz.co.kr/Event/521",
+      "start_kst": "2026-12-11T13:30:00+09:00",
+      "end_kst": "2026-12-11T14:30:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/521",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1787588478127.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1787591593863.jpg"
+      ],
+      "id": "dubiz-54c1c80c8cf8"
     }
   ]
 }
