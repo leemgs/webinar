@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T13:33:45.409162+09:00",
+  "generated_at": "2026-08-28T06:01:19.669510+09:00",
   "count": 84,
   "webinars": [
     {
@@ -970,9 +970,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1786114741109.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-fb590234990e"
     },
     {
@@ -1090,7 +1088,7 @@
       "host": "",
       "register_url": "https://dubiz.co.kr/Event/514",
       "description": "",
-      "thumbnail": "https://dubiz.co.kr/images/default.png",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file178785297375.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
