@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-08-29T13:12:13.852262+09:00",
-  "count": 87,
+  "generated_at": "2026-08-30T00:37:29.300774+09:00",
+  "count": 86,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "AutoCAD 기반 도면 자동화 실전 웨비나 반복 도면 업무를 줄이는 설계 자동화 전략",
-      "url": "https://dubiz.co.kr/Event/491",
-      "start_kst": "2026-06-30T14:00:00+09:00",
-      "end_kst": "2026-06-30T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/491",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1780418715532.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-cc445d612faf"
-    },
     {
       "source": "dubiz",
       "title": "2026 AI자율제조혁신 컨퍼런스 in 부산",
