@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-29T06:25:47.486885+09:00",
-  "count": 86,
+  "generated_at": "2026-08-29T13:12:13.852262+09:00",
+  "count": 87,
   "webinars": [
     {
       "source": "dubiz",
@@ -1348,6 +1348,22 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910527614.png"
       ],
       "id": "dubiz-14581f5a10b5"
+    },
+    {
+      "source": "talkit",
+      "title": "1990년대 개발 방식으로 AI 시대를 버틸 수 있을까? [박준성 회장/한국소프트웨어기술진흥협회]",
+      "url": "https://talkit.tv/main/events/3724",
+      "start_kst": "2026-09-22T14:00:00+09:00",
+      "end_kst": "2026-09-22T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3724",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "talkit-78cd76af978c"
     },
     {
       "source": "dubiz",
