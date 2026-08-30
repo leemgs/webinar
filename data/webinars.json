@@ -1,57 +1,7 @@
 {
-  "generated_at": "2026-08-30T10:17:36.598864+09:00",
-  "count": 86,
+  "generated_at": "2026-08-31T00:20:15.261850+09:00",
+  "count": 84,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "2026 AI자율제조혁신 컨퍼런스 in 부산",
-      "url": "https://dubiz.co.kr/Event/500",
-      "start_kst": "2026-07-01T13:30:00+09:00",
-      "end_kst": "2026-07-01T14:30:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/500",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1779465922870.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-0e9c67fa217b"
-    },
-    {
-      "source": "ddtube",
-      "title": "[코헤시티 Catalyst on Tour] 백업 데이터의 AI활용과 데이터 보안의 재정의",
-      "url": "https://www.ddtube.co.kr/d2106/",
-      "start_kst": "2026-07-01T14:00:00+09:00",
-      "end_kst": "2026-07-01T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2106/",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/EVENT_F.png"
-      ],
-      "id": "ddtube-3aeb21a7eda2"
-    },
-    {
-      "source": "dubiz",
-      "title": "Vault 기반의 도면 배포 자동화 시스템 구축 가이드",
-      "url": "https://dubiz.co.kr/Event/501",
-      "start_kst": "2026-07-01T14:00:00+09:00",
-      "end_kst": "2026-07-01T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/501",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1781109666273.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-a32e84d4bdbc"
-    },
     {
       "source": "ddtube",
       "title": "[Synology] 차세대 올플래시 NVMe 스토리지로 구현하는 핵심 워크로드 혁신",
@@ -1348,6 +1298,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "talkit-78cd76af978c"
+    },
+    {
+      "source": "talkit",
+      "title": "AI 에이전트부터 쿠버네티스까지, 새로운 보안과 인증서 관리 전략 [뉴타닉스, 지티씨코리아, 다우데이타]",
+      "url": "https://talkit.tv/main/events/3723",
+      "start_kst": "2026-09-29T14:00:00+09:00",
+      "end_kst": "2026-09-29T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3723",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1787836903314.jpg"
+      ],
+      "id": "talkit-2b53a3074c76"
     },
     {
       "source": "dubiz",
