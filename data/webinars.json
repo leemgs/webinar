@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-02T10:03:13.719561+09:00",
-  "count": 85,
+  "generated_at": "2026-09-03T00:08:35.316643+09:00",
+  "count": 86,
   "webinars": [
     {
       "source": "ddtube",
@@ -1298,6 +1298,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910527614.png"
       ],
       "id": "dubiz-14581f5a10b5"
+    },
+    {
+      "source": "talkit",
+      "title": "VMware 비용·성능 고민을 넘어, 기업 VDI 인프라 전환 전략 [크리아이티, Arcfra, Omnissa]",
+      "url": "https://talkit.tv/main/events/3725",
+      "start_kst": "2026-09-18T14:00:00+09:00",
+      "end_kst": "2026-09-18T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3725",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1788344263129.jpg"
+      ],
+      "id": "talkit-4ee3f6beefff"
     },
     {
       "source": "talkit",
