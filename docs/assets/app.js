@@ -236,6 +236,7 @@ function renderList() {
       const card = document.createElement("div");
       card.className = "list-card";
       card.onclick = () => openModal(w);
+      const cat = classify(w);
       const prizeBadges = (w.prizes || [])
         .map((p) => `<span class="badge" style="background:${PRIZES[p.type]?.hex || '#888'}">🎁 ${PRIZES[p.type]?.name || p.type}</span>`)
         .join("");
@@ -246,6 +247,7 @@ function renderList() {
           <div class="lc-meta">
             <span>🕒 ${fmtTime(w.start_kst)}</span>
             <span class="src-tag" style="background:${SRC_HEX[w.source] || '#666'}">${SOURCES[w.source]?.name || w.source}</span>
+            <span class="cat-tag" style="background:${cat.color}">${escapeHtml(cat.name)}</span>
             ${w.host ? `<span>${escapeHtml(w.host)}</span>` : ""}
           </div>
           ${prizeBadges ? `<div class="lc-prizes">${prizeBadges}</div>` : ""}

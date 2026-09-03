@@ -672,3 +672,61 @@ def test_e4ds_dday_cards():
     expected = (now_kst().date() + timedelta(days=11)).isoformat()
     assert w.start_kst.startswith(expected)
     assert w.thumbnail.endswith("360_intv_1015.png")
+
+
+# --- dubiz pagination fetch ------------------------------------------------
+def _dubiz_card(event_no, title, date_text):
+    return (
+        '<div class="onoffmix_thum_item">'
+        f'<a class="onoffmix_thum_item_image" href="/Event/{event_no}"><img src="/i.jpg"></a>'
+        '<div class="onoffmix_card_info"><a href="/Event/%d">' % event_no
+        + f'<p class="onoffmix_card_title">{title}</p>'
+        + f'<p class="onoffmix_card_date">{date_text}</p></a></div></div>'
+    )
+
+
+class _FakeBrowser:
+    """Serves canned HTML per ?CurrentPage=N and records the URLs requested."""
+
+    def __init__(self, pages):
+        self.pages = pages
+        self.calls = []
+
+    def get_html(self, url, wait_selector=None, **kw):
+        self.calls.append(url)
+        if "/Event/" in url:  # detail-page enrichment — irrelevant here
+            return ""
+        import re as _re
+        m = _re.search(r"CurrentPage=(\d+)", url)
+        return self.pages.get(int(m.group(1)) if m else 1, "")
+
+
+def test_dubiz_fetch_paginates_and_stops():
+    from datetime import timedelta
+    from webinar.scrapers.base import now_kst
+
+    today = now_kst().date()
+    def yy(d):  # date -> "YY.MM.DD (요일) 14:00"
+        return f"{str(d.year)[2:]}.{d.month:02d}.{d.day:02d} (화) 14:00"
+
+    page1 = "<section class='onoffmix_wrap'><div class='row'>" + \
+        _dubiz_card(600, "미래 웨비나", yy(today + timedelta(days=10))) + \
+        _dubiz_card(601, "최근 웨비나", yy(today - timedelta(days=5))) + "</div></section>"
+    page2 = "<section class='onoffmix_wrap'><div class='row'>" + \
+        _dubiz_card(500, "오래된 웨비나 A", yy(today - timedelta(days=80))) + \
+        _dubiz_card(501, "오래된 웨비나 B", yy(today - timedelta(days=85))) + "</div></section>"
+    page3 = "<section class='onoffmix_wrap'><div class='row'>" + \
+        _dubiz_card(400, "더 오래된 것", yy(today - timedelta(days=120))) + "</div></section>"
+
+    browser = _FakeBrowser({1: page1, 2: page2, 3: page3})
+    scraper = get_scraper("dubiz", {
+        "base_url": "https://dubiz.co.kr",
+        "listing_url": "https://dubiz.co.kr/onoffmix/",
+    })
+    items = scraper.fetch(browser)
+    ids = {w.url.rsplit("/", 1)[-1] for w in items}
+    # page 1 + page 2 collected; page 3 never fetched (page 2 was all past-window)
+    assert ids == {"600", "601", "500", "501"}
+    listing_calls = [c for c in browser.calls if "/Event/" not in c]
+    assert not any("CurrentPage=3" in c for c in listing_calls)
+    assert any("CurrentPage=2" in c for c in listing_calls)

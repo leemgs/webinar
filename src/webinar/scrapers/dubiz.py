@@ -100,11 +100,47 @@ class Scraper(BaseScraper):
         return out
 
     def fetch(self, browser):
-        # enrich each /Event/NNN detail page: 경품 안내 is <h2>경품 안내</h2><img ...>
-        # (generic filename, so match by heading proximity).
-        # dubiz is blocked on some corporate proxies; this runs in CI.
-        items = super().fetch(browser)
+        # The /onoffmix/ listing is paginated ("?CurrentPage=N", ~17 pages) and
+        # sorted newest-date-first, so a single page misses events. Walk pages
+        # until one is entirely older than the prune window (only older pages
+        # remain), adds nothing new, or is empty — de-duplicating by id.
+        from datetime import timedelta
+
+        from .base import now_kst
+
+        keep_after = (now_kst().date() - timedelta(days=70)).isoformat()
+        max_pages = int(self.cfg.get("max_pages", 6))
+        base = self.listing_url
+        sep = "&" if "?" in base else "?"
+
+        by_id: dict[str, object] = {}
+        for n in range(1, max_pages + 1):
+            url = base if n == 1 else f"{base}{sep}CurrentPage={n}"
+            html = browser.get_html(url, wait_selector=self.cfg.get("wait_selector"))
+            if not html:
+                break
+            page_items = self.parse(html)
+            if not page_items:
+                break
+            added = 0
+            for w in page_items:
+                if w.id not in by_id:
+                    by_id[w.id] = w
+                    added += 1
+            dates = [w.start_kst[:10] for w in page_items if w.start_kst]
+            log.info("[dubiz] page %d: %d cards, %d new", n, len(page_items), added)
+            # nothing new (pagination looped) or every card older than the window
+            if added == 0:
+                break
+            if dates and max(dates) < keep_after:
+                break
+
+        items = list(by_id.values())
+        # enrich only events that will survive pruning (skip old history to bound
+        # the number of detail-page visits). 경품 안내 is <h2>경품 안내</h2><img ...>.
         for w in items:
+            if w.start_kst and w.start_kst[:10] < keep_after:
+                continue
             try:
                 self.enrich_from_detail(browser, w, prize_heading="경품")
             except Exception as e:
