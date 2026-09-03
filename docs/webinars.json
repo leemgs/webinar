@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T10:10:36.374274+09:00",
-  "count": 86,
+  "generated_at": "2026-09-04T00:00:18.463230+09:00",
+  "count": 87,
   "webinars": [
     {
       "source": "ddtube",
@@ -1334,8 +1334,26 @@
       "id": "talkit-78cd76af978c"
     },
     {
+      "source": "dubiz",
+      "title": "막연한 DX는 그만, 오류는 줄이고 효율은 높이는 통합엔지니어링 환경 살펴보기 AVEVA Operations Control",
+      "url": "https://dubiz.co.kr/Event/522",
+      "start_kst": "2026-09-28T14:00:00+09:00",
+      "end_kst": "2026-09-28T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/522",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1788361106864.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file178834673989.jpg"
+      ],
+      "id": "dubiz-68df016c87e8"
+    },
+    {
       "source": "talkit",
-      "title": "AI 에이전트부터 쿠버네티스까지, 새로운 보안과 인증서 관리 전략 [뉴타닉스, 지티씨코리아, 다우데이타]",
+      "title": "AI 에이전트부터 쿠버네티스까지, 새로운 보안과 인증서 관리 전략 [Nutanix, 지티씨코리아, 다우데이타]",
       "url": "https://talkit.tv/main/events/3723",
       "start_kst": "2026-09-29T14:00:00+09:00",
       "end_kst": "2026-09-29T15:00:00+09:00",
