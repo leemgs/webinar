@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-04T00:00:18.463230+09:00",
-  "count": 87,
+  "generated_at": "2026-09-04T09:59:53.628787+09:00",
+  "count": 88,
   "webinars": [
     {
       "source": "ddtube",
@@ -1434,6 +1434,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-4002d2e23261"
+    },
+    {
+      "source": "e4ds",
+      "title": "[오프라인 실습] ESP32 제품 개발 및 펌웨어 바이브 코딩 오프라인 강의",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1029",
+      "start_kst": "2026-10-16T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1029",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-09-02/c60a033269e0bcae.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-e69f667fe11b"
     },
     {
       "source": "dubiz",
