@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T09:59:53.628787+09:00",
+  "generated_at": "2026-09-04T23:57:57.264549+09:00",
   "count": 88,
   "webinars": [
     {
@@ -1040,9 +1040,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file178791051220.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-c6a94f3dc5fc"
     },
     {
@@ -1151,8 +1149,8 @@
       "source": "dubiz",
       "title": "2026 산업단지 M.AX 혁신 서밋 AI가 바꾸는 제조업, M.AX 혁신의 시작",
       "url": "https://dubiz.co.kr/Event/523",
-      "start_kst": "2026-09-14T10:00:00+09:00",
-      "end_kst": "2026-09-14T11:00:00+09:00",
+      "start_kst": "2026-09-14T10:30:00+09:00",
+      "end_kst": "2026-09-14T11:30:00+09:00",
       "host": "",
       "register_url": "https://dubiz.co.kr/Event/523",
       "description": "",
