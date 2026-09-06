@@ -1,44 +1,7 @@
 {
-  "generated_at": "2026-09-06T09:52:50.891811+09:00",
-  "count": 88,
+  "generated_at": "2026-09-06T23:05:55.035634+09:00",
+  "count": 86,
   "webinars": [
-    {
-      "source": "ddtube",
-      "title": "[Synology] 차세대 올플래시 NVMe 스토리지로 구현하는 핵심 워크로드 혁신",
-      "url": "https://www.ddtube.co.kr/d2107/",
-      "start_kst": "2026-07-08T14:00:00+09:00",
-      "end_kst": "2026-07-08T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2107/",
-      "description": "",
-      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/06/2560-1440-1024x576.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/synology_event_ffff.jpg",
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/synology_participate.jpg"
-      ],
-      "id": "ddtube-1465547421ba"
-    },
-    {
-      "source": "allshowtv",
-      "title": "Copilot 이후, 기업은 왜 Entrerprise AI Platform 체계로 가는가? Copilot + AI Agent 활용 전략",
-      "url": "https://www.allshowtv.com/detail.html?idx=1735",
-      "start_kst": "2026-07-08T15:00:00+09:00",
-      "end_kst": "2026-07-08T16:00:00+09:00",
-      "host": "엠클라우드브리지",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1735",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/06/05/main_05104445786288.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/06/05/main_05104446063524.jpg"
-      ],
-      "id": "allshowtv-c772d7ec8ac2"
-    },
     {
       "source": "allshowtv",
       "title": "Copilot & Agent Day",
