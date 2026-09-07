@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-06T23:05:55.035634+09:00",
-  "count": 86,
+  "generated_at": "2026-09-07T09:55:54.817193+09:00",
+  "count": 87,
   "webinars": [
     {
       "source": "allshowtv",
@@ -1329,6 +1329,24 @@
         "https://talkit.tv/userfiles/images/file1787836903314.jpg"
       ],
       "id": "talkit-2b53a3074c76"
+    },
+    {
+      "source": "dubiz",
+      "title": "AI와 함께 진화하는 물류 모빌리티 화물·차량·로봇이 하나로 이어지는 물류 모빌리티의 변화",
+      "url": "https://dubiz.co.kr/Event/531",
+      "start_kst": "2026-10-01T14:00:00+09:00",
+      "end_kst": "2026-10-01T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/531",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1788444511165.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1788448927447.png"
+      ],
+      "id": "dubiz-ad28c74e97c6"
     },
     {
       "source": "dubiz",
