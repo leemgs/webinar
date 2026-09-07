@@ -1,76 +1,7 @@
 {
-  "generated_at": "2026-09-07T09:55:54.817193+09:00",
-  "count": 87,
+  "generated_at": "2026-09-08T01:25:37.166157+09:00",
+  "count": 86,
   "webinars": [
-    {
-      "source": "allshowtv",
-      "title": "Copilot & Agent Day",
-      "url": "https://www.allshowtv.com/detail.html?idx=1732",
-      "start_kst": "2026-07-09T14:00:00+09:00",
-      "end_kst": "2026-07-09T15:00:00+09:00",
-      "host": "한국마이크로소프트",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1732",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/06/01/main_01193040513119.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "allshowtv-464a7cf4f1a2"
-    },
-    {
-      "source": "ddtube",
-      "title": "[Black Duck x KMS Technology] 2026 OSSRA Report로 보는 오픈소스 보안 리스크와 대응 전략",
-      "url": "https://www.ddtube.co.kr/d2108/",
-      "start_kst": "2026-07-09T14:00:00+09:00",
-      "end_kst": "2026-07-09T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2108/",
-      "description": "",
-      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/06/썸네일_2560_F-1024x576.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/이벤트-1.jpg",
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/06/참여방법.jpg"
-      ],
-      "id": "ddtube-ab07cd0e4d50"
-    },
-    {
-      "source": "sharedit",
-      "title": "전 세계 최대 규모의 데이터+AI 컨퍼런스 Databricks Data+AI Summit 2026의 모든 것, 단 3시간 요약으로 지금 바로 확인하세요.",
-      "url": "https://www.sharedit.co.kr/seminars/2320",
-      "start_kst": "2026-07-09T14:00:00+09:00",
-      "end_kst": "2026-07-09T15:00:00+09:00",
-      "host": "Databricks",
-      "register_url": "https://www.sharedit.co.kr/seminars/2320",
-      "description": "",
-      "thumbnail": "https://shareditassets.s3.ap-northeast-2.amazonaws.com/production/uploads/tool/seminar/thumbnail_image/2320/low_db.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "sharedit-5f9d97b6d148"
-    },
-    {
-      "source": "talkit",
-      "title": "미토스가 촉발한 AI 기반 Identity 공격 위험과 Silverfort 대응 전략 [네오아이앤이]",
-      "url": "https://talkit.tv/main/events/3697",
-      "start_kst": "2026-07-09T14:00:00+09:00",
-      "end_kst": "2026-07-09T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3697",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1781960008717.jpg"
-      ],
-      "id": "talkit-a13fca0310e7"
-    },
     {
       "source": "talkit",
       "title": "AI가 공간을 읽는다 - 설계자동화 대변혁의 시작",
@@ -1280,6 +1211,22 @@
     },
     {
       "source": "talkit",
+      "title": "소프트웨어가 제조업을 다시 정의한다, Software-Defined Manufacturing [조형식의 강의마당 ep.4]",
+      "url": "https://talkit.tv/main/events/3727",
+      "start_kst": "2026-09-21T16:00:00+09:00",
+      "end_kst": "2026-09-21T17:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3727",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "talkit-fa81e75b1760"
+    },
+    {
+      "source": "talkit",
       "title": "1990년대 개발 방식으로 AI 시대를 버틸 수 있을까? [박준성 회장/한국소프트웨어기술진흥협회]",
       "url": "https://talkit.tv/main/events/3724",
       "start_kst": "2026-09-22T14:00:00+09:00",
@@ -1329,6 +1276,42 @@
         "https://talkit.tv/userfiles/images/file1787836903314.jpg"
       ],
       "id": "talkit-2b53a3074c76"
+    },
+    {
+      "source": "dubiz",
+      "title": "AI/HPC 고성능화를 위한 전원·고속통신 솔루션",
+      "url": "https://dubiz.co.kr/Event/532",
+      "start_kst": "2026-09-30T14:00:00+09:00",
+      "end_kst": "2026-09-30T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/532",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1788775295896.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1788781012507.jpg"
+      ],
+      "id": "dubiz-f4d4f50214cb"
+    },
+    {
+      "source": "talkit",
+      "title": "흩어진 데이터를 조직의 지식으로: Enterprise AI Agent Platform 현실적 구축 전략 [라온피플]",
+      "url": "https://talkit.tv/main/events/3728",
+      "start_kst": "2026-09-30T14:00:00+09:00",
+      "end_kst": "2026-09-30T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3728",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1788785224457.jpg"
+      ],
+      "id": "talkit-c62babd2097d"
     },
     {
       "source": "dubiz",
