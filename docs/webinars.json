@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-08T10:11:07.559129+09:00",
+  "generated_at": "2026-09-09T00:04:11.033852+09:00",
   "count": 86,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "AI가 공간을 읽는다 - 설계자동화 대변혁의 시작",
-      "url": "https://talkit.tv/main/events/3702",
-      "start_kst": "2026-07-10T14:00:00+09:00",
-      "end_kst": "2026-07-10T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3702",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1782989744346.jpg"
-      ],
-      "id": "talkit-c288487a78a6"
-    },
     {
       "source": "allshowtv",
       "title": "Perforce P4 Plan(Helix Plan)으로 완성하는 애자일 마스터 클래스",
@@ -1258,6 +1240,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file178834673989.jpg"
       ],
       "id": "dubiz-68df016c87e8"
+    },
+    {
+      "source": "dubiz",
+      "title": "Mission Clear : 제조 현장의 5가지 미션을 해결하라!",
+      "url": "https://dubiz.co.kr/Event/534",
+      "start_kst": "2026-09-29T14:00:00+09:00",
+      "end_kst": "2026-09-29T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/534",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1788536310210.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file178853895935.jpg"
+      ],
+      "id": "dubiz-8c3b46e3c93d"
     },
     {
       "source": "talkit",
