@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T10:03:48.619344+09:00",
-  "count": 86,
+  "generated_at": "2026-09-11T00:03:09.993653+09:00",
+  "count": 90,
   "webinars": [
     {
       "source": "allshowtv",
@@ -1412,6 +1412,74 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-e69f667fe11b"
+    },
+    {
+      "source": "e4ds",
+      "title": "산업 및 자동차 애플리케이션을 위한 차세대 MOSFET, IGBT & IPM 솔루션",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1030",
+      "start_kst": "2026-10-20T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1030",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-09-09/27583605e3ebe1b8.jpeg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-2af2ec7d1787"
+    },
+    {
+      "source": "dubiz",
+      "title": "AW 2027 베스트 솔루션 데이 4탄 : 스마트물류 [카덱스코리아, 오토스토어시스템]",
+      "url": "https://dubiz.co.kr/Event/517",
+      "start_kst": "2026-10-20T13:30:00+09:00",
+      "end_kst": "2026-10-20T14:30:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/517",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1787586055965.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1787910552359.png"
+      ],
+      "id": "dubiz-e0d070c73558"
+    },
+    {
+      "source": "talkit",
+      "title": "데이터 가치를 높여 AX 시대를 여는 히든 레이어 AIDesigner tab",
+      "url": "https://talkit.tv/main/events/3722",
+      "start_kst": "2026-10-20T14:00:00+09:00",
+      "end_kst": "2026-10-20T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3722",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1789032939360.jpg"
+      ],
+      "id": "talkit-b789362e2170"
+    },
+    {
+      "source": "dubiz",
+      "title": "INSIGHT CONNECT 2026×AMXPO AX FACTORY: AI가 재정의 하는 제조의 미래",
+      "url": "https://dubiz.co.kr/Event/535",
+      "start_kst": "2026-10-21T13:30:00+09:00",
+      "end_kst": "2026-10-21T14:30:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/535",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1788975396385.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-d46adf51ac44"
     },
     {
       "source": "dubiz",
