@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T00:03:09.993653+09:00",
-  "count": 90,
+  "generated_at": "2026-09-11T10:01:18.547552+09:00",
+  "count": 91,
   "webinars": [
     {
       "source": "allshowtv",
@@ -1412,6 +1412,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-e69f667fe11b"
+    },
+    {
+      "source": "dubiz",
+      "title": "2026 AI머신비전 컨퍼런스",
+      "url": "https://dubiz.co.kr/Event/524",
+      "start_kst": "2026-10-16T10:00:00+09:00",
+      "end_kst": "2026-10-16T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/524",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1787754955754.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-8cc93f24af0e"
     },
     {
       "source": "e4ds",
