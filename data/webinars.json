@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-12T10:06:55.185452+09:00",
-  "count": 91,
+  "generated_at": "2026-09-12T23:00:37.691344+09:00",
+  "count": 90,
   "webinars": [
-    {
-      "source": "allshowtv",
-      "title": "Perforce P4 Plan(Helix Plan)으로 완성하는 애자일 마스터 클래스",
-      "url": "https://www.allshowtv.com/detail.html?idx=1733",
-      "start_kst": "2026-07-14T14:00:00+09:00",
-      "end_kst": "2026-07-14T15:00:00+09:00",
-      "host": "플래티어",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1733",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/06/02/main_02162416918844.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/06/02/main_02162417682287.jpg"
-      ],
-      "id": "allshowtv-38e6975c1a42"
-    },
     {
       "source": "sharedit",
       "title": "Okta for AI Agent 론칭 웨비나",
