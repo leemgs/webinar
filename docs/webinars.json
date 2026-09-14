@@ -1,39 +1,7 @@
 {
-  "generated_at": "2026-09-14T09:59:39.438752+09:00",
+  "generated_at": "2026-09-15T01:56:08.385207+09:00",
   "count": 88,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "생명 과학 산업의 미래: 자동화에서 자율 운영으로",
-      "url": "https://dubiz.co.kr/Event/503",
-      "start_kst": "2026-07-16T10:30:00+09:00",
-      "end_kst": "2026-07-16T11:30:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/503",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1782813089863.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-944bcb290556"
-    },
-    {
-      "source": "sharedit",
-      "title": "[시스코 웨비나 초청] AI 자율 공격 시대, 대응 및 전략을 소개합니다.",
-      "url": "https://www.sharedit.co.kr/seminars/2321",
-      "start_kst": "2026-07-16T14:00:00+09:00",
-      "end_kst": "2026-07-16T15:00:00+09:00",
-      "host": "Cisco",
-      "register_url": "https://www.sharedit.co.kr/seminars/2321",
-      "description": "",
-      "thumbnail": "https://shareditassets.s3.ap-northeast-2.amazonaws.com/production/uploads/tool/seminar/thumbnail_image/2321/low_cisco.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "sharedit-7ba36d8d02ed"
-    },
     {
       "source": "dubiz",
       "title": "변화하는 물류환경, 어떻게 준비하고 계십니까? Dematic과 AutoStore™ 웨비나",
@@ -1306,12 +1274,30 @@
       "host": "",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1028",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-08-13/c2316273c3e86690.png",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-09-14/7dadb5ddd487632a.jpeg",
       "tags": [],
       "registered": false,
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-8b7b8974ce16"
+    },
+    {
+      "source": "talkit",
+      "title": "AI 시대, 제조업 글로벌 판매 채널 관리 어떻게 해야 할까? [현대오토에버, 세일즈포스]",
+      "url": "https://talkit.tv/main/events/3726",
+      "start_kst": "2026-10-13T14:00:00+09:00",
+      "end_kst": "2026-10-13T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3726",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1788448370563.jpg"
+      ],
+      "id": "talkit-9ac439d2f934"
     },
     {
       "source": "e4ds",
@@ -1444,6 +1430,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "dubiz-d46adf51ac44"
+    },
+    {
+      "source": "e4ds",
+      "title": "2026 고급 엔지니어 실무 마스터 클래스 - 저잡음/저전력 회로 이해 및 고급 응용 회로 설계",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1031",
+      "start_kst": "2026-10-22T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1031",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-08-26/795f265714a1aa23.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-62a4c3b69ca7"
     },
     {
       "source": "dubiz",
