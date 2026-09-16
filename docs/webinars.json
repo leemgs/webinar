@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-16T10:23:35.672640+09:00",
-  "count": 88,
+  "generated_at": "2026-09-17T00:27:39.505710+09:00",
+  "count": 89,
   "webinars": [
     {
       "source": "dubiz",
@@ -1141,7 +1141,7 @@
     },
     {
       "source": "dubiz",
-      "title": "막연한 DX는 그만, 오류는 줄이고 효율은 높이는 통합엔지니어링 환경 살펴보기 AVEVA Operations Control",
+      "title": "막연한 DX는 그만, 오류는 줄이고 효율은 높이는 통합엔지니어링 환경 살펴보기 AVEVA Unified Engineering",
       "url": "https://dubiz.co.kr/Event/522",
       "start_kst": "2026-09-28T14:00:00+09:00",
       "end_kst": "2026-09-28T15:00:00+09:00",
@@ -1298,6 +1298,22 @@
         "https://talkit.tv/userfiles/images/file1788448370563.jpg"
       ],
       "id": "talkit-9ac439d2f934"
+    },
+    {
+      "source": "dubiz",
+      "title": "HMI/SCADA 통합 운영, 어디서부터 시작해야 할까? - AVEVA Operations Control 2026으로 알아보는 스마트팩토리 전환 전략",
+      "url": "https://dubiz.co.kr/Event/540",
+      "start_kst": "2026-10-14T14:00:00+09:00",
+      "end_kst": "2026-10-14T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/540",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1789487087819.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-214e5c2a81e9"
     },
     {
       "source": "e4ds",
