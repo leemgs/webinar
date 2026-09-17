@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-17T00:27:39.505710+09:00",
-  "count": 89,
+  "generated_at": "2026-09-17T10:22:11.780715+09:00",
+  "count": 90,
   "webinars": [
     {
       "source": "dubiz",
@@ -1346,6 +1346,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-4002d2e23261"
+    },
+    {
+      "source": "talkit",
+      "title": "레거시 현대화부터 에이전트까지, 엔터프라이즈 개발 플랫폼 전환 전략: 대형 제조기업 사례 [아웃시스템즈]",
+      "url": "https://talkit.tv/main/events/3731",
+      "start_kst": "2026-10-15T14:00:00+09:00",
+      "end_kst": "2026-10-15T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3731",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1789573939365.jpg"
+      ],
+      "id": "talkit-c8cac959c682"
     },
     {
       "source": "e4ds",
