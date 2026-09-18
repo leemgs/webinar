@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-09-18T10:19:59.048613+09:00",
+  "generated_at": "2026-09-18T23:55:14.527824+09:00",
   "count": 90,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "변화하는 물류환경, 어떻게 준비하고 계십니까? Dematic과 AutoStore™ 웨비나",
-      "url": "https://dubiz.co.kr/Event/504",
-      "start_kst": "2026-07-20T14:00:00+09:00",
-      "end_kst": "2026-07-20T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/504",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1783616611101.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-5655a5711fc1"
-    },
     {
       "source": "dubiz",
       "title": "산업AX KOREA 2026 웨비나 : 제조업 디지털 전환 실전 인사이트",
@@ -1082,9 +1066,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1787910527614.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-14581f5a10b5"
     },
     {
@@ -1446,6 +1428,25 @@
         "https://talkit.tv/userfiles/images/file1789032939360.jpg"
       ],
       "id": "talkit-b789362e2170"
+    },
+    {
+      "source": "ddtube",
+      "title": "오픈 테크넷 서밋(Open Technet Summit) 2026 Online",
+      "url": "https://www.ddtube.co.kr/d2113/",
+      "start_kst": "2026-10-21T10:00:00+09:00",
+      "end_kst": "2026-10-21T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.ddtube.co.kr/d2113/",
+      "description": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/09/2560-1440-3-1024x576.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/09/261021_event.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2025/12/참여방법_Purple2.jpg"
+      ],
+      "id": "ddtube-ad081174f370"
     },
     {
       "source": "dubiz",
