@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-09-18T23:55:14.527824+09:00",
-  "count": 90,
+  "generated_at": "2026-09-19T10:12:19.032982+09:00",
+  "count": 89,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "산업AX KOREA 2026 웨비나 : 제조업 디지털 전환 실전 인사이트",
-      "url": "https://dubiz.co.kr/Event/502",
-      "start_kst": "2026-07-21T10:00:00+09:00",
-      "end_kst": "2026-07-21T11:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/502",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1782403087603.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-121a1d5fcbfe"
-    },
     {
       "source": "sharedit",
       "title": "보안 담당자들은 DLP 운영에 지치는 이유는?",
