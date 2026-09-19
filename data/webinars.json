@@ -1,41 +1,7 @@
 {
-  "generated_at": "2026-09-19T10:12:19.032982+09:00",
-  "count": 89,
+  "generated_at": "2026-09-19T23:21:04.177880+09:00",
+  "count": 87,
   "webinars": [
-    {
-      "source": "sharedit",
-      "title": "보안 담당자들은 DLP 운영에 지치는 이유는?",
-      "url": "https://www.sharedit.co.kr/seminars/2318",
-      "start_kst": "2026-07-21T14:00:00+09:00",
-      "end_kst": "2026-07-21T15:00:00+09:00",
-      "host": "지란지교소프",
-      "register_url": "https://www.sharedit.co.kr/seminars/2318",
-      "description": "",
-      "thumbnail": "https://shareditassets.s3.ap-northeast-2.amazonaws.com/production/uploads/tool/seminar/thumbnail_image/2318/low_0721_thumbnail_sharedit.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "sharedit-13201d62f18c"
-    },
-    {
-      "source": "talkit",
-      "title": "고강성 연속섬유 3D 프린팅으로 항공우주·방위산업의 제조혁신을 앞당기다!",
-      "url": "https://talkit.tv/main/events/3700",
-      "start_kst": "2026-07-21T14:00:00+09:00",
-      "end_kst": "2026-07-21T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3700",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1782816377442.jpg"
-      ],
-      "id": "talkit-2f9a51c39a78"
-    },
     {
       "source": "sharedit",
       "title": "Databricks Data + AI 러닝 페스티벌 2026",
