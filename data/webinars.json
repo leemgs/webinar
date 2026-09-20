@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-09-19T23:21:04.177880+09:00",
-  "count": 87,
+  "generated_at": "2026-09-20T10:01:59.648047+09:00",
+  "count": 86,
   "webinars": [
-    {
-      "source": "sharedit",
-      "title": "Databricks Data + AI 러닝 페스티벌 2026",
-      "url": "https://www.sharedit.co.kr/seminars/2312",
-      "start_kst": "2026-07-22T09:00:00+09:00",
-      "end_kst": "2026-07-22T10:00:00+09:00",
-      "host": "Databricks",
-      "register_url": "https://www.sharedit.co.kr/seminars/2312",
-      "description": "",
-      "thumbnail": "https://shareditassets.s3.ap-northeast-2.amazonaws.com/production/uploads/tool/seminar/thumbnail_image/2312/low_data.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "sharedit-61b2cd7d7e04"
-    },
     {
       "source": "ddtube",
       "title": "[Data Innovation for AI 2026] AI 시대 DB 전략과 데이터 플랫폼 혁신",
