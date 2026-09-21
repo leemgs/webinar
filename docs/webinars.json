@@ -1,60 +1,7 @@
 {
-  "generated_at": "2026-09-21T10:04:33.738537+09:00",
-  "count": 83,
+  "generated_at": "2026-09-22T01:55:52.403376+09:00",
+  "count": 81,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "엣지 AI 솔루션을 위한 VectorBlox™ SDK VectorBlox™ SDK for Edge AI Solution",
-      "url": "https://dubiz.co.kr/Event/469",
-      "start_kst": "2026-07-23T10:30:00+09:00",
-      "end_kst": "2026-07-23T11:30:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/469",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1782317740840.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-881c97cbf456"
-    },
-    {
-      "source": "allshowtv",
-      "title": "토큰맥싱의 역설 : 데이터 주권과 토큰맥싱 해결을 위한 최적 솔루션 CONCERTO A.I",
-      "url": "https://www.allshowtv.com/detail.html?idx=1743",
-      "start_kst": "2026-07-23T14:00:00+09:00",
-      "end_kst": "2026-07-23T15:00:00+09:00",
-      "host": "오케스트로",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1743",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/07/10/main_10170626266036.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/07/10/main_10170626660330.jpg"
-      ],
-      "id": "allshowtv-83ae91e906d4"
-    },
-    {
-      "source": "ddtube",
-      "title": "[한국IBM] 기획부터 배포까지 바이브코딩하는 AI-powered SDLC 파트너, IBM Bob",
-      "url": "https://www.ddtube.co.kr/d2110/",
-      "start_kst": "2026-07-23T14:00:00+09:00",
-      "end_kst": "2026-07-23T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2110/",
-      "description": "",
-      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260723_IBM-Bob_썸네일-2560-1024x576.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260723_IBM-Bob_event.jpg",
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/07/참여방법_Blue5.jpg"
-      ],
-      "id": "ddtube-cc77278a6d1c"
-    },
     {
       "source": "talkit",
       "title": "망분리 완화, 섀도우 AI 시대, DSPM으로 완성하는 데이터중심 보안 전략 [동훈아이텍, BigID]",
@@ -1187,6 +1134,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-4002d2e23261"
+    },
+    {
+      "source": "dubiz",
+      "title": "일본 진출, 지금 시작해야 하는 이유 제조 AI·로봇 기업을 위한 일본 시장 공략 전략",
+      "url": "https://dubiz.co.kr/Event/533",
+      "start_kst": "2026-10-15T14:00:00+09:00",
+      "end_kst": "2026-10-15T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/533",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1790002774289.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-399c1ae9ab49"
     },
     {
       "source": "talkit",
