@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-22T10:38:41.737112+09:00",
-  "count": 81,
+  "generated_at": "2026-09-23T00:33:30.083523+09:00",
+  "count": 85,
   "webinars": [
     {
       "source": "talkit",
@@ -1070,6 +1070,24 @@
       "id": "e4ds-8b7b8974ce16"
     },
     {
+      "source": "dubiz",
+      "title": "반도체 장비 분야의 새로운 패러다임 : MATLAB, Generative AI 그리고 AI Agent",
+      "url": "https://dubiz.co.kr/Event/530",
+      "start_kst": "2026-10-13T14:00:00+09:00",
+      "end_kst": "2026-10-13T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/530",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1789990692352.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1789640945855.png"
+      ],
+      "id": "dubiz-9f423f8228d7"
+    },
+    {
       "source": "talkit",
       "title": "AI 시대, 제조업 글로벌 판매 채널 관리 어떻게 해야 할까? [현대오토에버, 세일즈포스]",
       "url": "https://talkit.tv/main/events/3726",
@@ -1134,6 +1152,40 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-4002d2e23261"
+    },
+    {
+      "source": "talkit",
+      "title": "AI Agent 확산과 통제: 현실적인 전사 AI 전략 [데이터이쿠]",
+      "url": "https://talkit.tv/main/events/3730",
+      "start_kst": "2026-10-15T10:00:00+09:00",
+      "end_kst": "2026-10-15T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3730",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1790075604287.jpg"
+      ],
+      "id": "talkit-141c1f0530e7"
+    },
+    {
+      "source": "dubiz",
+      "title": "2026 AI자율제조혁신 컨퍼런스 in 창원",
+      "url": "https://dubiz.co.kr/Event/541",
+      "start_kst": "2026-10-15T10:30:00+09:00",
+      "end_kst": "2026-10-15T11:30:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/541",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1789737242849.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-86d2460702bf"
     },
     {
       "source": "dubiz",
@@ -1303,6 +1355,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-62a4c3b69ca7"
+    },
+    {
+      "source": "talkit",
+      "title": "DIOT 2026 데이터센터 인프라 운영기술",
+      "url": "https://talkit.tv/main/events/3729",
+      "start_kst": "2026-10-29T14:00:00+09:00",
+      "end_kst": "2026-10-29T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3729",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1790017262186.jpg"
+      ],
+      "id": "talkit-3114f5878763"
     },
     {
       "source": "dubiz",
