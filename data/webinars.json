@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-09-26T10:32:51.405174+09:00",
-  "count": 85,
+  "generated_at": "2026-09-27T00:04:01.700991+09:00",
+  "count": 84,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "망분리 완화, 섀도우 AI 시대, DSPM으로 완성하는 데이터중심 보안 전략 [동훈아이텍, BigID]",
-      "url": "https://talkit.tv/main/events/3704",
-      "start_kst": "2026-07-28T14:00:00+09:00",
-      "end_kst": "2026-07-28T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3704",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1783440581298.jpg"
-      ],
-      "id": "talkit-3f1df48b135e"
-    },
     {
       "source": "sharedit",
       "title": "AI 시대, 운영 가능한 보안은 어떤 모습이어야 하나?",
