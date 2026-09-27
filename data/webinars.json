@@ -1,41 +1,7 @@
 {
-  "generated_at": "2026-09-27T10:23:45.202541+09:00",
-  "count": 84,
+  "generated_at": "2026-09-28T00:41:42.499767+09:00",
+  "count": 82,
   "webinars": [
-    {
-      "source": "sharedit",
-      "title": "AI 시대, 운영 가능한 보안은 어떤 모습이어야 하나?",
-      "url": "https://www.sharedit.co.kr/seminars/2319",
-      "start_kst": "2026-07-29T14:00:00+09:00",
-      "end_kst": "2026-07-29T15:00:00+09:00",
-      "host": "지란지교소프트",
-      "register_url": "https://www.sharedit.co.kr/seminars/2319",
-      "description": "",
-      "thumbnail": "https://shareditassets.s3.ap-northeast-2.amazonaws.com/production/uploads/tool/seminar/thumbnail_image/2319/low_0729_thumbnail.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "sharedit-1ea31c53c6e6"
-    },
-    {
-      "source": "talkit",
-      "title": "쿠버네티스, 도입보다 운영이 더 어렵다: NKP 기반 현실적 운영 전략 [Nutanix, 씨티아이앤씨, 다우데이타]",
-      "url": "https://talkit.tv/main/events/3706",
-      "start_kst": "2026-07-29T14:00:00+09:00",
-      "end_kst": "2026-07-29T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3706",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1783707094581.jpg"
-      ],
-      "id": "talkit-632002031648"
-    },
     {
       "source": "talkit",
       "title": "AI 이전과 이후, 서비스 개발·출시·운영은 어떻게 달라졌나? Real Story [황상철 대표 / 에스프레소북]",
