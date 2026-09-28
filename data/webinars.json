@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T10:37:25.373193+09:00",
+  "generated_at": "2026-09-29T03:37:59.425726+09:00",
   "count": 82,
   "webinars": [
     {
@@ -888,9 +888,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file178834673989.jpg"
-      ],
+      "prize_images": [],
       "id": "dubiz-68df016c87e8"
     },
     {
