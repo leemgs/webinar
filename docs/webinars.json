@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-30T11:04:22.325427+09:00",
-  "count": 82,
+  "generated_at": "2026-10-01T01:49:00.193515+09:00",
+  "count": 83,
   "webinars": [
     {
       "source": "talkit",
@@ -938,9 +938,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1788781012507.jpg"
-      ],
+      "prize_images": [],
       "id": "dubiz-f4d4f50214cb"
     },
     {
@@ -1196,6 +1194,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "dubiz-8cc93f24af0e"
+    },
+    {
+      "source": "dubiz",
+      "title": "전장 EMC·PoC Technical Support 노이즈 분석·필터 설계부터 시뮬레이션·실측 검증까지",
+      "url": "https://dubiz.co.kr/Event/539",
+      "start_kst": "2026-10-19T14:00:00+09:00",
+      "end_kst": "2026-10-19T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/539",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1790689088827.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file179061418182.png"
+      ],
+      "id": "dubiz-aa049de7beb1"
     },
     {
       "source": "e4ds",
