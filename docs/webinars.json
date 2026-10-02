@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-02T11:14:42.084591+09:00",
-  "count": 83,
+  "generated_at": "2026-10-03T01:40:58.093830+09:00",
+  "count": 85,
   "webinars": [
     {
       "source": "talkit",
@@ -988,9 +988,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1787910540596.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-6cb69539c070"
     },
     {
@@ -1044,6 +1042,24 @@
         "https://talkit.tv/userfiles/images/file1788448370563.jpg"
       ],
       "id": "talkit-9ac439d2f934"
+    },
+    {
+      "source": "talkit",
+      "title": "AI Security의 최전선: AI 공격부터 Agentic Identity까지! Ignite on Tour Seoul Live Streaming [팔로알토 네트웍스]",
+      "url": "https://talkit.tv/main/events/3734",
+      "start_kst": "2026-10-14T12:20:00+09:00",
+      "end_kst": "2026-10-14T13:20:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3734",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1790975129142.jpg"
+      ],
+      "id": "talkit-63269cffb31f"
     },
     {
       "source": "dubiz",
@@ -1297,6 +1313,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "dubiz-d46adf51ac44"
+    },
+    {
+      "source": "talkit",
+      "title": "코딩을 넘어 딜리버리까지! AI Agent가 바꾸는 SDLC와 DevSecOps [플래티어, GitLab Duo Agent Platform]",
+      "url": "https://talkit.tv/main/events/3733",
+      "start_kst": "2026-10-21T14:00:00+09:00",
+      "end_kst": "2026-10-21T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3733",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1790941957726.jpg"
+      ],
+      "id": "talkit-a8d8079d7ab6"
     },
     {
       "source": "e4ds",
