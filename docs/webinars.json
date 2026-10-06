@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-06T11:57:24.780732+09:00",
-  "count": 85,
+  "generated_at": "2026-10-07T02:10:55.495112+09:00",
+  "count": 87,
   "webinars": [
     {
       "source": "talkit",
@@ -1349,6 +1349,24 @@
       "id": "e4ds-62a4c3b69ca7"
     },
     {
+      "source": "dubiz",
+      "title": "LoRaWAN, 산업 현장 무선 연결의 한계를 넘다!",
+      "url": "https://dubiz.co.kr/Event/538",
+      "start_kst": "2026-10-29T14:00:00+09:00",
+      "end_kst": "2026-10-29T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/538",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1791314104327.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1791299419883.jpg"
+      ],
+      "id": "dubiz-343d1861c4d7"
+    },
+    {
       "source": "talkit",
       "title": "DIOT 2026 데이터센터 인프라 운영기술",
       "url": "https://talkit.tv/main/events/3729",
@@ -1383,6 +1401,25 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910563490.png"
       ],
       "id": "dubiz-112e80057994"
+    },
+    {
+      "source": "ddtube",
+      "title": "[카우치베이스] AI, 더 쉽고 저렴하고 빠르고 안전하게",
+      "url": "https://www.ddtube.co.kr/d2112/",
+      "start_kst": "2026-11-05T14:00:00+09:00",
+      "end_kst": "2026-11-05T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.ddtube.co.kr/d2112/",
+      "description": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/09/2560_couch-2-1024x576.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/09/couchbase_event.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2024/03/참여방법_Orange2.jpg"
+      ],
+      "id": "ddtube-edfa3368a7a3"
     },
     {
       "source": "dubiz",
