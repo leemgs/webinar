@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-07T11:20:33.262184+09:00",
-  "count": 87,
+  "generated_at": "2026-10-08T02:47:57.009837+09:00",
+  "count": 88,
   "webinars": [
     {
       "source": "talkit",
@@ -1347,6 +1347,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-62a4c3b69ca7"
+    },
+    {
+      "source": "dubiz",
+      "title": "[AEROTEC 2026] 인사이트 리뷰 웨비나 우주항공 비즈니스의 미래, 현장의 열기를 넘어 실전 전략으로 항해하다",
+      "url": "https://dubiz.co.kr/Event/542",
+      "start_kst": "2026-10-28T14:00:00+09:00",
+      "end_kst": "2026-10-28T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/542",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file179025588637.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-8e5c057c8f57"
     },
     {
       "source": "dubiz",
