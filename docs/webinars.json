@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-08T11:43:51.667571+09:00",
-  "count": 88,
+  "generated_at": "2026-10-09T02:52:58.394300+09:00",
+  "count": 89,
   "webinars": [
     {
       "source": "talkit",
@@ -1436,6 +1436,22 @@
         "https://www.ddtube.co.kr/wp-content/uploads/2024/03/참여방법_Orange2.jpg"
       ],
       "id": "ddtube-edfa3368a7a3"
+    },
+    {
+      "source": "e4ds",
+      "title": "고효율 전력 변환을 위한 첫걸음, 게이트 드라이버 동작 원리와 최신 트렌드",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1036",
+      "start_kst": "2026-11-12T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1036",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-08/2947f6dc831fe861.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-c3b2f3c0fbc9"
     },
     {
       "source": "dubiz",
