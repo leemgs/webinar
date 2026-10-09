@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-10-09T11:59:56.468146+09:00",
-  "count": 89,
+  "generated_at": "2026-10-10T02:29:01.146333+09:00",
+  "count": 88,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "AI 이전과 이후, 서비스 개발·출시·운영은 어떻게 달라졌나? Real Story [황상철 대표 / 에스프레소북]",
-      "url": "https://talkit.tv/main/events/3715",
-      "start_kst": "2026-08-10T14:00:00+09:00",
-      "end_kst": "2026-08-10T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3715",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1785509605116.jpg"
-      ],
-      "id": "talkit-7eb17e1678f5"
-    },
     {
       "source": "talkit",
       "title": "가상화 인프라의 새로운 선택: VM·컨테이너 통합과 안전한 마이그레이션 [수세코리아]",
