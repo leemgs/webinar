@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-10-11T10:52:37.862288+09:00",
-  "count": 86,
+  "generated_at": "2026-10-12T01:41:25.616384+09:00",
+  "count": 85,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "Security · Migration · AI 세 가지 과제, RHEL 10이라는 하나의 답 [코오롱베니트, Red Hat]",
-      "url": "https://talkit.tv/main/events/3707",
-      "start_kst": "2026-08-12T14:00:00+09:00",
-      "end_kst": "2026-08-12T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3707",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1785176495289.jpg"
-      ],
-      "id": "talkit-84c08e710e38"
-    },
     {
       "source": "dubiz",
       "title": "[온라인 서비스] 2026 AI자율제조혁신 컨퍼런스 in 부산",
