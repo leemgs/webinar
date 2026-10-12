@@ -1,60 +1,7 @@
 {
-  "generated_at": "2026-10-12T11:20:08.842308+09:00",
-  "count": 85,
+  "generated_at": "2026-10-13T05:16:36.307180+09:00",
+  "count": 84,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "[온라인 서비스] 2026 AI자율제조혁신 컨퍼런스 in 부산",
-      "url": "https://dubiz.co.kr/Event/505",
-      "start_kst": "2026-08-13T13:00:00+09:00",
-      "end_kst": "2026-08-13T14:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/505",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file17835191923.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-9ae0b917bed9"
-    },
-    {
-      "source": "ddtube",
-      "title": "[한국IBM] 데이터 보호부터 자율 운영까지, 스토리지가 AI를 입다",
-      "url": "https://www.ddtube.co.kr/d2111/",
-      "start_kst": "2026-08-13T14:00:00+09:00",
-      "end_kst": "2026-08-13T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://www.ddtube.co.kr/d2111/",
-      "description": "",
-      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260813_IBM-FlashSystem_썸네일-2560-1-1024x576.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260813_IBM-FlashSystem_event_ff.jpg",
-        "https://www.ddtube.co.kr/wp-content/uploads/2026/07/260813_IBM-FlashSystem_참여방법.jpg"
-      ],
-      "id": "ddtube-e3df7d8f039c"
-    },
-    {
-      "source": "talkit",
-      "title": "ERP를 DX·AX 기반으로 전환하는 제조 ERP 혁신 전략 [현대오토에버]",
-      "url": "https://talkit.tv/main/events/3709",
-      "start_kst": "2026-08-13T14:00:00+09:00",
-      "end_kst": "2026-08-13T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3709",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1784729876567.jpg"
-      ],
-      "id": "talkit-12a43e7bda5c"
-    },
     {
       "source": "allshowtv",
       "title": "체계화 된 데이터가 곧 AI 시대의 경쟁력이다",
@@ -1277,8 +1224,26 @@
       "id": "e4ds-62a4c3b69ca7"
     },
     {
+      "source": "talkit",
+      "title": "AI 시대의 스마트 오피스는 무엇이 다른가? feat. 차세대 스마트 오피스 현장투어 [로지텍]",
+      "url": "https://talkit.tv/main/events/3732",
+      "start_kst": "2026-10-22T14:00:00+09:00",
+      "end_kst": "2026-10-22T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3732",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1791229266333.jpg"
+      ],
+      "id": "talkit-1eba9bcb89f0"
+    },
+    {
       "source": "dubiz",
-      "title": "[AEROTEC 2026] 인사이트 리뷰 웨비나 우주항공 비즈니스의 미래, 현장의 열기를 넘어 실전 전략으로 항해하다",
+      "title": "[AEROTEC 2026 인사이트 리뷰 웨비나] 우주항공 비즈니스의 미래, 현장의 열기를 넘어 실전 전략으로 항해하다",
       "url": "https://dubiz.co.kr/Event/542",
       "start_kst": "2026-10-28T14:00:00+09:00",
       "end_kst": "2026-10-28T15:00:00+09:00",
@@ -1293,6 +1258,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file1791801112140.png"
       ],
       "id": "dubiz-8e5c057c8f57"
+    },
+    {
+      "source": "talkit",
+      "title": "생성형 AI를 넘어 Agentic Analytics로, 신뢰할 수 있는 AI 데이터 분석 [코오롱베니트, SAS코리아]",
+      "url": "https://talkit.tv/main/events/3735",
+      "start_kst": "2026-10-28T14:00:00+09:00",
+      "end_kst": "2026-10-28T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3735",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file179129544158.jpg"
+      ],
+      "id": "talkit-f3c58757ac66"
     },
     {
       "source": "dubiz",
