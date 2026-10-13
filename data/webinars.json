@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-13T05:16:36.307180+09:00",
-  "count": 84,
+  "generated_at": "2026-10-13T12:34:58.745462+09:00",
+  "count": 85,
   "webinars": [
     {
       "source": "allshowtv",
@@ -1383,6 +1383,22 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910579303.png"
       ],
       "id": "dubiz-255ff69c6afa"
+    },
+    {
+      "source": "e4ds",
+      "title": "AI 서버의 전력 과제 ~ 시장 동향과 로옴의 차세대 전원 전략 ~",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1037",
+      "start_kst": "2026-11-17T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1037",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-12/3e58a22f6ca34265.jpeg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-babaf812cb2f"
     },
     {
       "source": "e4ds",
