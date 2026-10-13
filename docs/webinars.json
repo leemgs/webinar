@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-13T12:34:58.745462+09:00",
-  "count": 85,
+  "generated_at": "2026-10-14T03:07:23.614858+09:00",
+  "count": 86,
   "webinars": [
     {
       "source": "allshowtv",
@@ -895,9 +895,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1789640945855.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-9f423f8228d7"
     },
     {
@@ -1240,6 +1238,24 @@
         "https://talkit.tv/userfiles/images/file1791229266333.jpg"
       ],
       "id": "talkit-1eba9bcb89f0"
+    },
+    {
+      "source": "talkit",
+      "title": "제조 AX를 이끄는 피지컬 AI와 CAE의 미래",
+      "url": "https://talkit.tv/main/events/3626",
+      "start_kst": "2026-10-26T16:00:00+09:00",
+      "end_kst": "2026-10-26T17:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3626",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1791895899769.jpg"
+      ],
+      "id": "talkit-659bd5534e18"
     },
     {
       "source": "dubiz",
