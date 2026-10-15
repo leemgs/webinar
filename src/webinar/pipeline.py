@@ -12,7 +12,7 @@ import shutil
 import sys
 from pathlib import Path
 
-from . import ics_export, prizes, storage
+from . import ics_export, manual, prizes, storage
 from .browser import Browser
 from .config import DOCS_DIR, WEBINARS_JSON, load_sites, site_credentials
 from .registrar import login
@@ -62,7 +62,10 @@ def run(site_keys: list[str] | None = None, publish: bool = True) -> list:
 
     scraped = []
     source_counts: dict[str, int] = {}
-    with Browser(headless=True) as browser:
+    # WEBINAR_HEADED=1 runs a real (headed) Chromium — used in CI under Xvfb,
+    # since several sites' bot checks reject headless Chromium outright.
+    headed = os.getenv("WEBINAR_HEADED", "").strip() in {"1", "true", "yes"}
+    with Browser(headless=not headed) as browser:
         for key in keys:
             cfg = sites.get(key)
             if not cfg:
@@ -105,6 +108,8 @@ def run(site_keys: list[str] | None = None, publish: bool = True) -> list:
     # merge with existing (preserve registered flag + curated prizes), prune old
     existing = storage.load_webinars()
     merged = storage.merge(existing, scraped)
+    # webinars registered by hand for sites that block CI (scraped data wins)
+    merged = manual.apply_manual(merged, manual.load_manual())
     merged = storage.prune_past(merged)
     storage.save_webinars(merged)
     log.info("saved %d webinars -> %s", len(merged), WEBINARS_JSON)

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-15T13:22:48.052393+09:00",
-  "count": 86,
+  "generated_at": "2026-10-15T13:27:17.611516+09:00",
+  "count": 87,
   "webinars": [
     {
       "source": "allshowtv",
@@ -1256,6 +1256,24 @@
         "https://talkit.tv/userfiles/images/file1791895899769.jpg"
       ],
       "id": "talkit-659bd5534e18"
+    },
+    {
+      "source": "sharedit",
+      "title": "쉐어드IT 웨비나 (10/27 · 상세는 원문 링크)",
+      "url": "https://webinar.sharedit.co.kr/posts/36031",
+      "start_kst": "2026-10-27T00:00:00+09:00",
+      "end_kst": null,
+      "host": "",
+      "register_url": "https://webinar.sharedit.co.kr/posts/36031",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "sharedit-adcf3d99bf4c"
     },
     {
       "source": "dubiz",

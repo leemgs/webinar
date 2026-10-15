@@ -83,7 +83,12 @@ def _to_event(webinar: Webinar) -> dict:
         "description": _describe(webinar),
         "source": {"title": webinar.source, "url": webinar.url or "https://"},
     }
-    if webinar.start_kst:
+    if webinar.start_kst and webinar.is_date_only:
+        # day known, clock time unknown -> all-day event on that day
+        day = datetime.fromisoformat(webinar.start_kst).date()
+        ev["start"] = {"date": day.isoformat()}
+        ev["end"] = {"date": (day + timedelta(days=1)).isoformat()}
+    elif webinar.start_kst:
         ev["start"] = {"dateTime": webinar.start_kst, "timeZone": "Asia/Seoul"}
         end = webinar.end_kst or (
             datetime.fromisoformat(webinar.start_kst) + timedelta(hours=1)

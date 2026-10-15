@@ -49,6 +49,11 @@ WEBINAR_HOST_RE = re.compile(r"(^|\.)webinar\.sharedit\.co\.kr$", re.I)
 MAIN_HOSTS = {"sharedit.co.kr", "www.sharedit.co.kr"}
 WEBINAR_HOST = "webinar.sharedit.co.kr"
 # "일시 : 2026-10-27(화) 14:00 ~ 15:00" — the authoritative schedule on a page
+_CHALLENGE_MARKERS = (
+    "잠시만 기다리십시오", "잠시만 기다려", "just a moment",
+    "cf-chl-", "challenge-platform",
+)
+_CHALLENGE_WAIT_MS = 25000
 _SCHEDULE_RE = re.compile(r"일\s*시\s*[:：]?\s*(.{4,60})")
 MMDD_RE = re.compile(r"\[(\d{2})(\d{2})\]")  # [0729] -> 07-29
 _BG_URL = re.compile(r"url\(['\"]?([^'\")]+)")
@@ -117,14 +122,17 @@ class Scraper(BaseScraper):
             return self._fetch_clear_html(browser, alt)
         return ""
 
-    def _fetch_listing(self, browser, url: str = None, tries: int = 3) -> str:
+    def _fetch_listing(self, browser, url: str = None, tries: int = 2) -> str:
         url = url or self.listing_url
         for _ in range(tries):
             html = browser.get_html(
                 url,
                 wait_selector=self.cfg.get("wait_selector"),
                 wait_ms=3000,
+                timeout_ms=30000,
                 exhaust_listing=True,
+                challenge_markers=_CHALLENGE_MARKERS,
+                challenge_wait_ms=_CHALLENGE_WAIT_MS,
             )
             if html and not self._is_challenge(html) and re.search(
                 r'href=["\'][^"\']*/(?:posts|seminars)/\d+', html
@@ -133,9 +141,13 @@ class Scraper(BaseScraper):
         log.warning("[sharedit] listing %s remained blocked or contained no webinar links", url)
         return ""
 
-    def _fetch_clear_html(self, browser, url: str, tries: int = 3) -> str:
+    def _fetch_clear_html(self, browser, url: str, tries: int = 2) -> str:
         for _ in range(tries):
-            html = browser.get_html(url, wait_selector="body", wait_ms=3000)
+            html = browser.get_html(
+                url, wait_selector="body", wait_ms=3000,
+                challenge_markers=_CHALLENGE_MARKERS,
+                challenge_wait_ms=_CHALLENGE_WAIT_MS,
+            )
             if html and not self._is_challenge(html):
                 return html
         log.info("[sharedit] bot challenge persisted for %s", url)
@@ -144,10 +156,7 @@ class Scraper(BaseScraper):
     @staticmethod
     def _is_challenge(html: str) -> bool:
         lowered = html.lower()
-        return any(marker in lowered for marker in (
-            "잠시만 기다리십시오", "잠시만 기다려", "just a moment",
-            "cf-chl-", "challenge-platform",
-        ))
+        return any(marker in lowered for marker in _CHALLENGE_MARKERS)
 
     def _fetch_slices(self, browser, url, tries: int = 2) -> list[str]:
         html = self._fetch_clear_html(browser, url, tries)

@@ -26,6 +26,7 @@ DOCS_DIR = ROOT / "docs"
 
 SITES_YAML = CONFIG_DIR / "sites.yaml"
 PRIZES_OVERRIDE_YAML = CONFIG_DIR / "prizes_override.yaml"
+MANUAL_WEBINARS_YAML = CONFIG_DIR / "manual_webinars.yaml"
 ACCOUNTS_YAML = CONFIG_DIR / "accounts.yaml"  # local, git-ignored (see accounts.example.yaml)
 GOOGLE_YAML = CONFIG_DIR / "google.yaml"  # local, git-ignored (see google.example.yaml)
 WEBINARS_JSON = DATA_DIR / "webinars.json"

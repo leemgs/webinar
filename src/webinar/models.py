@@ -62,6 +62,16 @@ class Webinar:
         digest = hashlib.sha1(f"{source}:{key}".encode("utf-8")).hexdigest()[:12]
         return f"{source}-{digest}"
 
+    @property
+    def is_date_only(self) -> bool:
+        """True when only the day is known (start stored at 00:00 KST).
+
+        Listings like e4ds (D-day badges) and manual entries without a time
+        carry no clock time; calendars should show them as all-day events
+        rather than a misleading 00:00-01:00 slot.
+        """
+        return bool(self.start_kst) and self.start_kst[11:19] == "00:00:00"
+
     def to_dict(self) -> dict[str, Any]:
         d = asdict(self)
         d["prizes"] = [p if isinstance(p, dict) else p.to_dict() for p in self.prizes]

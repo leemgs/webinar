@@ -87,6 +87,8 @@ class Browser:
         timeout_ms: int = 45000,
         click_selector: Optional[str] = None,
         exhaust_listing: bool = False,
+        challenge_markers: Optional[tuple] = None,
+        challenge_wait_ms: int = 0,
     ) -> str:
         """Navigate to `url`, let JS render, and return the page HTML.
 
@@ -98,6 +100,12 @@ class Browser:
         "commit" strategy (resolves on the first response byte) and then let the
         selector/settle waits below render the content. As a last resort we still
         return whatever HTML is in the DOM instead of discarding the whole page.
+
+        `challenge_markers` + `challenge_wait_ms`: if the page is a bot-check
+        interstitial ("Just a moment", "잠시만 기다리십시오"), keep waiting on the
+        SAME page for it to clear instead of reloading — reloading restarts the
+        check, while staying lets it finish and set its clearance cookie on the
+        shared context for every later request.
         """
         with self.page() as page:
             try:
@@ -107,6 +115,8 @@ class Browser:
                         return page.content()
                     except Exception:
                         return ""
+                if challenge_markers and challenge_wait_ms:
+                    self._wait_challenge_clear(page, challenge_markers, challenge_wait_ms)
                 if wait_selector:
                     try:
                         page.wait_for_selector(wait_selector, timeout=timeout_ms)
@@ -127,6 +137,22 @@ class Browser:
             except Exception as e:
                 log.warning("failed to load %s: %s", url, e)
                 return ""
+
+    @staticmethod
+    def _wait_challenge_clear(page, markers: tuple, max_ms: int) -> bool:
+        """Poll the current page until no challenge marker remains (or timeout)."""
+        waited = 0
+        while waited <= max_ms:
+            try:
+                html = page.content().lower()
+            except Exception:
+                html = ""
+            if html and not any(m in html for m in markers):
+                return True
+            page.wait_for_timeout(1000)
+            waited += 1000
+        log.info("bot challenge did not clear within %d ms on %s", max_ms, page.url)
+        return False
 
     @staticmethod
     def _navigate(page, url: str, timeout_ms: int) -> bool:

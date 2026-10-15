@@ -816,3 +816,88 @@ def test_sharedit_blocked_www_detail_falls_back_to_webinar_host():
     })
     items = sc.fetch(Browser())
     assert len(items) == 1 and items[0].start_kst.startswith("2026-10-27T14:00")
+
+
+# --- manual webinars + date-only (all-day) handling -------------------------
+def test_manual_webinars_precedence(tmp_path):
+    from webinar import manual
+    from webinar.models import Webinar
+
+    y = tmp_path / "manual.yaml"
+    y.write_text(
+        "webinars:\n"
+        "  - source: sharedit\n"
+        "    url: 'https://webinar.sharedit.co.kr/posts/36031?referer=SharedIT'\n"
+        "    title: '쉐어드IT 웨비나'\n"
+        "    date: '2026-10-27'\n"
+        "  - source: sharedit\n"
+        "    url: 'https://x/2'\n"
+        "    title: 'with time'\n"
+        "    date: '2026-10-28'\n"
+        "    time: '14:00'\n"
+        "  - {source: sharedit, url: 'https://x/bad'}\n",  # missing fields -> skipped
+        encoding="utf-8",
+    )
+    items = manual.load_manual(y)
+    assert [w.url for w in items] == ["https://webinar.sharedit.co.kr/posts/36031", "https://x/2"]
+    m1, m2 = items
+    assert m1.start_kst == "2026-10-27T00:00:00+09:00" and m1.is_date_only
+    assert m2.start_kst.startswith("2026-10-28T14:00") and m2.end_kst.startswith("2026-10-28T15:00")
+    # same id as the scraper would produce for that url
+    assert m1.id == Webinar.make_id("sharedit", "https://webinar.sharedit.co.kr/posts/36031")
+
+    # absent -> added
+    out = manual.apply_manual([], [m1])
+    assert out[0].title == "쉐어드IT 웨비나"
+    # a previous manual record is refreshed by an edited YAML entry
+    old = Webinar(source="sharedit", title="old", url=m1.url, tags=["manual"], registered=True)
+    out = manual.apply_manual([old], [m1])
+    assert out[0].title == "쉐어드IT 웨비나" and out[0].registered
+    # a scraped record always wins
+    scraped = Webinar(source="sharedit", title="실제 제목", url=m1.url,
+                      start_kst="2026-10-27T14:00:00+09:00")
+    out = manual.apply_manual([scraped], [m1])
+    assert out[0].title == "실제 제목"
+
+
+def test_date_only_webinars_become_all_day_events():
+    from webinar import ics_export
+    from webinar.calendar_sync import _to_event
+    from webinar.models import Webinar
+
+    d = Webinar(source="e4ds", title="D-day only", url="https://e/1",
+                start_kst="2026-10-27T00:00:00+09:00")
+    t = Webinar(source="talkit", title="timed", url="https://t/1",
+                start_kst="2026-10-27T14:00:00+09:00", end_kst="2026-10-27T15:00:00+09:00")
+    assert d.is_date_only and not t.is_date_only
+
+    lines = ics_export._event_lines(d, "20261015T000000Z")
+    assert "DTSTART;VALUE=DATE:20261027" in lines and "DTEND;VALUE=DATE:20261028" in lines
+    assert "DTSTART:20261027T050000Z" in ics_export._event_lines(t, "20261015T000000Z")
+
+    ev = _to_event(d)
+    assert ev["start"] == {"date": "2026-10-27"} and ev["end"] == {"date": "2026-10-28"}
+    assert _to_event(t)["start"]["dateTime"].startswith("2026-10-27T14:00")
+
+
+def test_browser_waits_on_same_page_for_challenge_to_clear():
+    from webinar.browser import Browser
+
+    class Page:
+        url = "https://webinar.sharedit.co.kr/"
+        def __init__(self):
+            self.n = 0
+            self.waited = 0
+        def content(self):
+            self.n += 1
+            return "<title>Just a moment...</title>" if self.n < 3 else "<a href='/posts/1'>ok</a>"
+        def wait_for_timeout(self, ms):
+            self.waited += ms
+
+    p = Page()
+    assert Browser._wait_challenge_clear(p, ("just a moment",), 25000) is True
+    assert p.waited == 2000  # cleared on the 3rd poll, no reload
+
+    stuck = Page()
+    stuck.content = lambda: "just a moment"
+    assert Browser._wait_challenge_clear(stuck, ("just a moment",), 3000) is False

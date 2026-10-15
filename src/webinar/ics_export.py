@@ -24,6 +24,14 @@ def _fmt(dt_iso: str) -> str:
     return dt.strftime("%Y%m%dT%H%M%SZ")
 
 
+def _dt_lines(w: Webinar, end_kst: str) -> list[str]:
+    if w.is_date_only:  # unknown clock time -> all-day event
+        day = datetime.fromisoformat(w.start_kst).date()
+        return [f"DTSTART;VALUE=DATE:{day:%Y%m%d}",
+                f"DTEND;VALUE=DATE:{day + timedelta(days=1):%Y%m%d}"]
+    return [f"DTSTART:{_fmt(w.start_kst)}", f"DTEND:{_fmt(end_kst)}"]
+
+
 def _escape(text: str) -> str:
     return (
         text.replace("\\", "\\\\")
@@ -55,8 +63,7 @@ def _event_lines(w: Webinar, stamp: str) -> list[str]:
         "BEGIN:VEVENT",
         f"UID:{w.id}@webinar",
         f"DTSTAMP:{stamp}",
-        f"DTSTART:{_fmt(w.start_kst)}",
-        f"DTEND:{_fmt(end_kst)}",
+        *_dt_lines(w, end_kst),
         f"SUMMARY:{_escape('[웨비나] ' + w.title)}",
         f"DESCRIPTION:{desc}",
     ]

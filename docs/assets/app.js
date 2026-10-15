@@ -70,9 +70,12 @@ function parseDate(iso) {
   return isNaN(d) ? null : d;
 }
 
+// a start stored at exactly 00:00 KST means "day known, time unknown"
+const isDateOnly = (iso) => typeof iso === "string" && iso.slice(11, 19) === "00:00:00";
+
 function fmtTime(iso) {
   const d = parseDate(iso);
-  if (!d) return "시간 미정";
+  if (!d || isDateOnly(iso)) return "시간 미정";
   return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
@@ -187,7 +190,7 @@ function renderCalendar() {
       ev.className = "ev";
       ev.style.background = SRC_HEX[w.source] || "#666";
       const gift = (w.prizes && w.prizes.length) ? '<span class="gift">🎁</span>' : "";
-      ev.innerHTML = `${gift}<span class="ev-title">${fmtTime(w.start_kst)} ${escapeHtml(w.title)}</span>`;
+      ev.innerHTML = `${gift}<span class="ev-title">${isDateOnly(w.start_kst) ? "" : fmtTime(w.start_kst) + " "}${escapeHtml(w.title)}</span>`;
       ev.title = w.title;
       ev.onclick = () => openModal(w);
       cell.appendChild(ev);
@@ -377,10 +380,19 @@ function gcalLink(w) {
     w.host ? `주최: ${w.host}` : "",
     `신청: ${w.register_url || w.url}`,
   ].filter(Boolean).join("\n");
+  // date-only (unknown time) -> all-day: YYYYMMDD/YYYYMMDD(next day), taken
+  // from the KST date string so the viewer's own timezone can't shift the day
+  let dates = `${fmt(s)}/${fmt(e)}`;
+  if (isDateOnly(w.start_kst)) {
+    const day = w.start_kst.slice(0, 10);
+    const next = new Date(`${day}T12:00:00Z`);
+    next.setUTCDate(next.getUTCDate() + 1);
+    dates = `${day.replace(/-/g, "")}/${next.toISOString().slice(0, 10).replace(/-/g, "")}`;
+  }
   const p = new URLSearchParams({
     action: "TEMPLATE",
     text: `[웨비나] ${w.title}`,
-    dates: `${fmt(s)}/${fmt(e)}`,
+    dates,
     details,
     ctz: "Asia/Seoul",
   });

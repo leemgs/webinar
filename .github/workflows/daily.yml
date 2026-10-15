@@ -65,11 +65,18 @@ jobs:
       - name: Install Playwright Chromium
         run: python -m playwright install --with-deps chromium
 
+      # Virtual display so Chromium can run headed: several sites (sharedit's
+      # www + webinar hosts) bot-check headless Chromium from CI runner IPs.
+      - name: Install Xvfb
+        run: sudo apt-get install -y --no-install-recommends xvfb
+
       - name: Run tests
         run: pytest -q
 
       - name: Scrape webinars + publish dataset
-        run: python -m webinar.pipeline -v
+        env:
+          WEBINAR_HEADED: "1"
+        run: xvfb-run -a --server-args="-screen 0 1366x900x24" python -m webinar.pipeline -v
 
       - name: Auto-register (enabled sites only)
         run: python -m webinar.registrar ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }} -v

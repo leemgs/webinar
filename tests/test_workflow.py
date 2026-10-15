@@ -93,6 +93,8 @@ def test_pipeline_preserves_previous_data_when_some_sources_are_empty(monkeypatc
     saved = []
     monkeypatch.setattr(pipeline.storage, "save_webinars", lambda items: saved.extend(items))
     monkeypatch.setattr(pipeline.storage, "prune_past", lambda items: items)
+    # isolate from the repo's real config/manual_webinars.yaml
+    monkeypatch.setattr(pipeline.manual, "load_manual", lambda: [])
 
     result = pipeline.run(publish=False)
 
