@@ -17,12 +17,17 @@ Each webinar is a list item like:
 
 The authoritative date/time is the `일시` value in <dl class="info">. A [MMDD]
 code in the title is used as a fallback.
+
+www.sharedit.co.kr is frequently behind a bot challenge from CI runners, while
+new webinars are also published on the dedicated host webinar.sharedit.co.kr
+(e.g. /posts/36031). Both hosts' listings are scraped, a blocked detail page is
+retried on the other host, and the same post id is de-duplicated across hosts.
 """
 from __future__ import annotations
 
 import logging
 import re
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
 
 from .base import (
     BaseScraper,
@@ -31,6 +36,7 @@ from .base import (
     now_kst,
     parse_date,
     parse_time,
+    parse_time_range,
     to_iso_kst,
     add_hours_iso,
 )
@@ -40,6 +46,10 @@ log = logging.getLogger(__name__)
 
 DETAIL_RE = re.compile(r"^/(?:posts|seminars)/\d+$")
 WEBINAR_HOST_RE = re.compile(r"(^|\.)webinar\.sharedit\.co\.kr$", re.I)
+MAIN_HOSTS = {"sharedit.co.kr", "www.sharedit.co.kr"}
+WEBINAR_HOST = "webinar.sharedit.co.kr"
+# "일시 : 2026-10-27(화) 14:00 ~ 15:00" — the authoritative schedule on a page
+_SCHEDULE_RE = re.compile(r"일\s*시\s*[:：]?\s*(.{4,60})")
 MMDD_RE = re.compile(r"\[(\d{2})(\d{2})\]")  # [0729] -> 07-29
 _BG_URL = re.compile(r"url\(['\"]?([^'\")]+)")
 # sharedit renders the whole webinar (title·연사·Event/경품·안내) as image slices on
@@ -52,15 +62,31 @@ class Scraper(BaseScraper):
     def fetch(self, browser):
         # A bot-challenge document is returned with HTTP 200 intermittently.
         # Validate the DOM and retry rather than accepting it as an empty board.
-        listing_html = self._fetch_listing(browser)
-        items = self.parse(listing_html) if listing_html else []
-        by_url = {w.url.rstrip("/"): w for w in items}
+        # Scrape every configured listing (www + the webinar.* host) so one
+        # blocked host can't hide webinars published on the other.
+        listing_urls = [self.listing_url] + list(self.cfg.get("extra_listing_urls", []))
+        # canonical URL per post: a configured detail URL wins, so the stored id
+        # stays stable whichever host the listing happens to surface it on
+        canonical = {self._post_key(u): u.rstrip("/") for u in self.cfg.get("detail_urls", [])}
+        by_key: dict[str, object] = {}
+        for listing in listing_urls:
+            html = self._fetch_listing(browser, listing)
+            for w in self.parse(html, page_url=listing) if html else []:
+                key = self._post_key(w.url)
+                if key in by_key:
+                    continue
+                if key in canonical and canonical[key] != w.url:
+                    w.url = w.register_url = canonical[key]
+                    w.id = w.make_id(w.source, w.url)
+                by_key[key] = w
         for url in self.cfg.get("detail_urls", []):
-            by_url.setdefault(url.rstrip("/"), None)
+            by_key.setdefault(self._post_key(url), url.rstrip("/"))
 
         enriched = []
-        for url, webinar in by_url.items():
-            html = self._fetch_clear_html(browser, url)
+        for key, item in by_key.items():
+            url = item if isinstance(item, str) else item.url
+            html = self._fetch_detail_any_host(browser, url)
+            webinar = None if isinstance(item, str) else item
             if html:
                 if webinar is None:
                     webinar = self.parse_detail(html, url)
@@ -68,13 +94,34 @@ class Scraper(BaseScraper):
                     self._enrich_from_detail_html(webinar, html)
             if webinar:
                 enriched.append(webinar)
+                log.info("[sharedit] %s | %s | %s", webinar.start_kst, webinar.title[:50], webinar.url)
         log.info("[sharedit] scraped %d webinars", len(enriched))
         return enriched
 
-    def _fetch_listing(self, browser, tries: int = 3) -> str:
+    @staticmethod
+    def _post_key(url: str) -> str:
+        """Host-independent identity: '/posts/36031' for detail URLs, else the URL."""
+        path = urlparse(url).path.rstrip("/")
+        return path if DETAIL_RE.match(path) else url.rstrip("/")
+
+    def _fetch_detail_any_host(self, browser, url: str) -> str:
+        """Fetch a detail page; if its host is challenged, try the other host."""
+        html = self._fetch_clear_html(browser, url)
+        if html:
+            return html
+        parsed = urlparse(url)
+        if DETAIL_RE.match(parsed.path.rstrip("/")):
+            other = WEBINAR_HOST if parsed.hostname in MAIN_HOSTS else "www.sharedit.co.kr"
+            alt = parsed._replace(netloc=other, query="").geturl()
+            log.info("[sharedit] retrying blocked detail on %s", alt)
+            return self._fetch_clear_html(browser, alt)
+        return ""
+
+    def _fetch_listing(self, browser, url: str = None, tries: int = 3) -> str:
+        url = url or self.listing_url
         for _ in range(tries):
             html = browser.get_html(
-                self.listing_url,
+                url,
                 wait_selector=self.cfg.get("wait_selector"),
                 wait_ms=3000,
                 exhaust_listing=True,
@@ -83,7 +130,7 @@ class Scraper(BaseScraper):
                 r'href=["\'][^"\']*/(?:posts|seminars)/\d+', html
             ):
                 return html
-        log.warning("[sharedit] listing remained blocked or contained no webinar links")
+        log.warning("[sharedit] listing %s remained blocked or contained no webinar links", url)
         return ""
 
     def _fetch_clear_html(self, browser, url: str, tries: int = 3) -> str:
@@ -119,12 +166,9 @@ class Scraper(BaseScraper):
         if not title or is_noise_title(title):
             return None
 
-        content = soup.select_one("article, .post-content, .view-content, main") or soup.body
-        text = clean(content.get_text(" ")) if content else ""
-        d = parse_date(text) or self._mmdd_date(title)
+        d, start, end = self._detail_schedule(soup, title)
         if not d:
             return None
-        start = to_iso_kst(d, parse_time(text))
         og_img = soup.select_one("meta[property='og:image']")
         thumbnail = clean(og_img.get("content")) if og_img else ""
         webinar = self.new_webinar(
@@ -132,8 +176,8 @@ class Scraper(BaseScraper):
             url=url.rstrip("/"),
             register_url=url.rstrip("/"),
             start_kst=start,
-            end_kst=add_hours_iso(start, 1.0),
-            thumbnail=self.abs_url(thumbnail),
+            end_kst=end,
+            thumbnail=urljoin(url, thumbnail) if thumbnail else "",
         )
         self._enrich_from_detail_html(webinar, html)
         return webinar
@@ -141,17 +185,13 @@ class Scraper(BaseScraper):
     def _enrich_from_detail_html(self, webinar, html: str) -> None:
         """Replace listing-only midnight times with authoritative detail data."""
         soup = self.soup(html)
-        content = soup.select_one("article, .post-content, .view-content, main") or soup.body
-        text = clean(content.get_text(" ")) if content else ""
-        detail_date = parse_date(text)
-        detail_time = parse_time(text)
-        if detail_date or detail_time:
-            current = webinar.start_kst
-            current_date = date.fromisoformat(current[:10]) if current else None
-            start = to_iso_kst(detail_date or current_date, detail_time)
-            if start:
-                webinar.start_kst = start
-                webinar.end_kst = add_hours_iso(start, 1.0)
+        detail_date, start, end = self._detail_schedule(soup, webinar.title)
+        if detail_date and start:
+            # keep the listing's clock time if the detail page only gave a date
+            if start.endswith("T00:00:00+09:00") and webinar.start_kst and \
+                    webinar.start_kst[:10] == start[:10]:
+                start, end = webinar.start_kst, webinar.end_kst
+            webinar.start_kst, webinar.end_kst = start, end
         imgs = self.select_prize_images(soup, _SLICE_SEL)
         if imgs:
             webinar.prize_images = imgs
@@ -160,7 +200,31 @@ class Scraper(BaseScraper):
             if og_img and og_img.get("content"):
                 webinar.thumbnail = self.abs_url(og_img.get("content"))
 
-    def parse(self, html):
+    def _detail_schedule(self, soup, title: str):
+        """(date, start_iso, end_iso) for a detail page.
+
+        Prefers the labelled "일시" value, then the [MMDD] code in the title,
+        then the first date in the body — the body alone can carry unrelated
+        dates (posting date, other events), so it is only a last resort.
+        """
+        content = soup.select_one("article, .post-content, .view-content, main") or soup.body
+        text = clean(content.get_text(" ")) if content else ""
+        m = _SCHEDULE_RE.search(text)
+        snippet = m.group(1) if m else ""
+        d = (parse_date(snippet) if snippet else None) or self._mmdd_date(title) \
+            or parse_date(text)
+        if not d:
+            return None, None, None
+        t_start, t_end = parse_time_range(snippet) if snippet else (None, None)
+        if not t_start:
+            t_start, t_end = parse_time_range(text)
+        start = to_iso_kst(d, t_start)
+        end = to_iso_kst(d, t_end) if t_end else None
+        if not end or end <= start:
+            end = add_hours_iso(start, 1.0)
+        return d, start, end
+
+    def parse(self, html, page_url: str = None):
         soup = self.soup(html)
         webinars = []
         seen = set()
@@ -171,12 +235,13 @@ class Scraper(BaseScraper):
             href = clean(a.get("href", ""))
             if not self._is_webinar_href(href):
                 continue
-            parsed_href = urlparse(href)
-            if DETAIL_RE.match(parsed_href.path.rstrip("/")):
-                href = parsed_href.path.rstrip("/")
-            elif parsed_href.path.endswith("/"):
-                href = parsed_href._replace(path=parsed_href.path.rstrip("/")).geturl()
-            url = self.abs_url(href)
+            url = urljoin(page_url or (self.base_url + "/"), href)
+            parsed_url = urlparse(url)
+            # drop tracking queries (?referer=...) and trailing slashes
+            url = parsed_url._replace(path=parsed_url.path.rstrip("/"), query="",
+                                      fragment="").geturl()
+            if parsed_url.hostname == "sharedit.co.kr":
+                url = url.replace("://sharedit.co.kr", "://www.sharedit.co.kr", 1)
             if url in seen:
                 continue
 
@@ -220,10 +285,9 @@ class Scraper(BaseScraper):
     def _is_webinar_href(self, href: str) -> bool:
         parsed = urlparse(href)
         if DETAIL_RE.match(parsed.path.rstrip("/")):
-            return not parsed.netloc or parsed.hostname in {
-                "sharedit.co.kr",
-                "www.sharedit.co.kr",
-            }
+            return not parsed.netloc or parsed.hostname in MAIN_HOSTS or bool(
+                WEBINAR_HOST_RE.search(parsed.hostname or "")
+            )
         return parsed.scheme in {"", "http", "https"} and bool(
             WEBINAR_HOST_RE.search(parsed.hostname or "")
         )

@@ -730,3 +730,89 @@ def test_dubiz_fetch_paginates_and_stops():
     listing_calls = [c for c in browser.calls if "/Event/" not in c]
     assert not any("CurrentPage=3" in c for c in listing_calls)
     assert any("CurrentPage=2" in c for c in listing_calls)
+
+
+# --- sharedit: webinar.sharedit.co.kr host + blocked www -------------------
+_CHALLENGE = "<html><title>Just a moment...</title><body>cf-chl-x</body></html>"
+_SHAREDIT_DETAIL_36031 = """
+<html><head>
+  <meta property="og:title" content="[1027] AI 에이전트로 완성하는 업무 자동화 웨비나">
+  <meta property="og:image" content="/upload/thumb36031.png">
+</head><body><main>
+  <p>게시일 2026-10-01</p>
+  <h2>웨비나 안내</h2>
+  <p>일시 : 2026-10-27(화) 14:00 ~ 16:00</p>
+  <p>장소 : 온라인</p>
+</main></body></html>
+"""
+
+
+def test_sharedit_accepts_webinar_host_posts_and_keeps_host():
+    sc = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    assert sc._is_webinar_href("https://webinar.sharedit.co.kr/posts/36031?referer=SharedIT")
+    html = """
+    <ul><li><header><strong>
+      <a href="/posts/36031?referer=SharedIT" title="[1027] AI 에이전트 웨비나">x</a>
+    </strong></header>
+    <dl class="info"><dt>일시</dt><dd>2026-10-27(화) 14:00 ~ 16:00</dd></dl></li></ul>
+    """
+    items = sc.parse(html, page_url="https://webinar.sharedit.co.kr/")
+    assert [w.url for w in items] == ["https://webinar.sharedit.co.kr/posts/36031"]
+    assert items[0].start_kst.startswith("2026-10-27T14:00")
+
+
+def test_sharedit_detail_prefers_schedule_field_over_body_dates():
+    sc = get_scraper("sharedit", {"base_url": "https://www.sharedit.co.kr"})
+    w = sc.parse_detail(_SHAREDIT_DETAIL_36031, "https://webinar.sharedit.co.kr/posts/36031")
+    # the 게시일 (posting date) 10-01 must not win over 일시 10-27
+    assert w.start_kst.startswith("2026-10-27T14:00")
+    assert w.end_kst.startswith("2026-10-27T16:00")
+    assert w.title == "AI 에이전트로 완성하는 업무 자동화 웨비나"
+    assert w.thumbnail == "https://webinar.sharedit.co.kr/upload/thumb36031.png"
+
+
+def test_sharedit_fetch_survives_blocked_www():
+    """www listing + www detail are bot-challenged; the webinar host still yields 10/27."""
+    class Browser:
+        def __init__(self):
+            self.calls = []
+
+        def get_html(self, url, **kw):
+            self.calls.append(url)
+            if "www.sharedit.co.kr" in url:
+                return _CHALLENGE
+            if url.rstrip("/").endswith("webinar.sharedit.co.kr"):
+                return '<a href="/posts/36031?referer=SharedIT" title="[1027] AI 웨비나">x</a>'
+            if "webinar.sharedit.co.kr/posts/36031" in url:
+                return _SHAREDIT_DETAIL_36031
+            return ""
+
+    sc = get_scraper("sharedit", {
+        "base_url": "https://www.sharedit.co.kr",
+        "listing_url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+        "extra_listing_urls": ["https://webinar.sharedit.co.kr/"],
+        "detail_urls": ["https://webinar.sharedit.co.kr/posts/36031"],
+    })
+    items = sc.fetch(Browser())
+    assert len(items) == 1  # listing hit + configured detail URL de-duplicated by post id
+    w = items[0]
+    assert w.url == "https://webinar.sharedit.co.kr/posts/36031"
+    assert w.start_kst.startswith("2026-10-27T14:00")
+
+
+def test_sharedit_blocked_www_detail_falls_back_to_webinar_host():
+    class Browser:
+        def get_html(self, url, **kw):
+            if "www.sharedit.co.kr" in url:
+                return _CHALLENGE
+            if "webinar.sharedit.co.kr/posts/36031" in url:
+                return _SHAREDIT_DETAIL_36031
+            return ""
+
+    sc = get_scraper("sharedit", {
+        "base_url": "https://www.sharedit.co.kr",
+        "listing_url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+        "detail_urls": ["https://www.sharedit.co.kr/posts/36031"],
+    })
+    items = sc.fetch(Browser())
+    assert len(items) == 1 and items[0].start_kst.startswith("2026-10-27T14:00")

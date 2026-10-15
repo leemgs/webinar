@@ -45,10 +45,17 @@ sharedit:
   requires_js: true          # site returns 402 to plain HTTP clients
   requires_login: false
   scraper: sharedit
-  wait_selector: "a[href^='/posts/'], a[href^='/seminars/']"
+  wait_selector: "a[href*='/posts/'], a[href*='/seminars/']"
+  # www.sharedit.co.kr는 CI(GitHub Actions)에서 봇 챌린지에 막히는 경우가 많다.
+  # 웨비나 전용 도메인(webinar.sharedit.co.kr)도 함께 조회해 신규 웨비나
+  # (예: 10/27 posts/36031)가 누락되지 않게 한다. 하나가 막혀도 나머지는 진행.
+  extra_listing_urls:
+    - "https://webinar.sharedit.co.kr/"
+    - "https://webinar.sharedit.co.kr/posts?post_type_id=4"
   # 목록이 봇 챌린지에 막혀도 알려진 최신 상세 글은 직접 보강한다.
   detail_urls:
     - "https://www.sharedit.co.kr/posts/35963"
+    - "https://webinar.sharedit.co.kr/posts/36031"
   login:
     url: "https://www.sharedit.co.kr/login"
     user_selector: "input[name='email'], input[name='userid'], #userid"
