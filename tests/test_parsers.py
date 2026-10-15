@@ -901,3 +901,28 @@ def test_browser_waits_on_same_page_for_challenge_to_clear():
     stuck = Page()
     stuck.content = lambda: "just a moment"
     assert Browser._wait_challenge_clear(stuck, ("just a moment",), 3000) is False
+
+
+def test_sharedit_stops_hammering_a_blocked_host():
+    """Once a host never clears its bot check, its other pages are skipped."""
+    class Browser:
+        def __init__(self):
+            self.calls = []
+        def get_html(self, url, **kw):
+            self.calls.append(url)
+            return _CHALLENGE
+
+    b = Browser()
+    sc = get_scraper("sharedit", {
+        "base_url": "https://www.sharedit.co.kr",
+        "listing_url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+        "extra_listing_urls": ["https://webinar.sharedit.co.kr/",
+                               "https://webinar.sharedit.co.kr/posts?post_type_id=4"],
+        "detail_urls": ["https://www.sharedit.co.kr/posts/1",
+                        "https://webinar.sharedit.co.kr/posts/2"],
+    })
+    assert sc.fetch(b) == []
+    # only the first page per host is tried (with its retries); the rest of
+    # that host's listings and detail pages short-circuit
+    assert len(b.calls) == 4
+    assert {c.split("/")[2] for c in b.calls} == {"www.sharedit.co.kr", "webinar.sharedit.co.kr"}

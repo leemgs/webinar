@@ -64,7 +64,21 @@ _SLICE_SEL = "img[src*='speedgabia.com/Webinar']:not([src*='footer'])"
 
 
 class Scraper(BaseScraper):
+    def _host_blocked(self, url: str) -> bool:
+        return urlparse(url).hostname in getattr(self, "_blocked_hosts", set())
+
+    def _mark_blocked(self, url: str) -> None:
+        # Circuit breaker: sharedit blocks CI runner IPs outright (challenge
+        # never clears, connections get closed). Once a host fails, skip its
+        # remaining pages this run instead of burning minutes on retries; the
+        # first request per host each run still detects when the block lifts.
+        host = urlparse(url).hostname
+        if host:
+            self._blocked_hosts = getattr(self, "_blocked_hosts", set()) | {host}
+            log.info("[sharedit] %s is blocking this runner; skipping its other pages", host)
+
     def fetch(self, browser):
+        self._blocked_hosts = set()
         # A bot-challenge document is returned with HTTP 200 intermittently.
         # Validate the DOM and retry rather than accepting it as an empty board.
         # Scrape every configured listing (www + the webinar.* host) so one
@@ -124,6 +138,8 @@ class Scraper(BaseScraper):
 
     def _fetch_listing(self, browser, url: str = None, tries: int = 2) -> str:
         url = url or self.listing_url
+        if self._host_blocked(url):
+            return ""
         for _ in range(tries):
             html = browser.get_html(
                 url,
@@ -138,10 +154,14 @@ class Scraper(BaseScraper):
                 r'href=["\'][^"\']*/(?:posts|seminars)/\d+', html
             ):
                 return html
+        if not html or self._is_challenge(html):  # every try hit the bot check
+            self._mark_blocked(url)
         log.warning("[sharedit] listing %s remained blocked or contained no webinar links", url)
         return ""
 
     def _fetch_clear_html(self, browser, url: str, tries: int = 2) -> str:
+        if self._host_blocked(url):
+            return ""
         for _ in range(tries):
             html = browser.get_html(
                 url, wait_selector="body", wait_ms=3000,
@@ -151,6 +171,7 @@ class Scraper(BaseScraper):
             if html and not self._is_challenge(html):
                 return html
         log.info("[sharedit] bot challenge persisted for %s", url)
+        self._mark_blocked(url)
         return ""
 
     @staticmethod
