@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-15T13:27:17.611516+09:00",
-  "count": 87,
+  "generated_at": "2026-10-15T13:40:53.744015+09:00",
+  "count": 94,
   "webinars": [
     {
       "source": "allshowtv",
@@ -123,7 +123,7 @@
       "host": "",
       "register_url": "https://chontv.com/event/1266",
       "description": "",
-      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_7218cb437e0dd5913822217a4aaee334.jpg?u=1785324181",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_bc69bf82e165981a3de117c8a28c072a.png?u=1787653690",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -191,7 +191,7 @@
       "host": "",
       "register_url": "https://chontv.com/event/1267",
       "description": "",
-      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_74bb047dd11304328ef9c337648bdb36.jpg?u=1785756060",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_6fdf063db89487b8e00aa1a57d91e882.png?u=1787744496",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -493,7 +493,7 @@
       "host": "",
       "register_url": "https://chontv.com/event/1271",
       "description": "",
-      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_d0a9b93377a9ec0e34fd712515e3bda2.jpg?u=1786152682",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_657403c0fccaa0ad2e68e0ca01f4a4c9.png?u=1788950378",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -585,6 +585,22 @@
       "id": "e4ds-26d18e18cd33"
     },
     {
+      "source": "chontv",
+      "title": "대화에서 완성까지 : ZoomMate가 바꾸는 업무의 미래",
+      "url": "https://chontv.com/event/1275",
+      "start_kst": "2026-09-15T14:00:00+09:00",
+      "end_kst": "2026-09-15T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1275",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_16528da7f788148808b47a26bf4f30fe.png?u=1789461864",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-45a616179733"
+    },
+    {
       "source": "talkit",
       "title": "데이터를 옮기지 않고 AI를 가속하라: 멀티클라우드 환경에서 구현하는 AI-Ready Data 인프라 [한국넷앱]",
       "url": "https://talkit.tv/main/events/3718",
@@ -601,6 +617,22 @@
         "https://talkit.tv/userfiles/images/file178636137197.jpg"
       ],
       "id": "talkit-aa2e8d7855ae"
+    },
+    {
+      "source": "chontv",
+      "title": "다운타임 60초 전 : 사이버-물리적 위협으로부터 데이터센터 가동률을 지키는 방법",
+      "url": "https://chontv.com/event/1273",
+      "start_kst": "2026-09-16T14:00:00+09:00",
+      "end_kst": "2026-09-16T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1273",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_c6c53e09387cf08763cf3876de2b55ae.png?u=1789556933",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-835aff36fe17"
     },
     {
       "source": "talkit",
@@ -651,6 +683,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-eeae08a401ce"
+    },
+    {
+      "source": "chontv",
+      "title": "포스트 미토스 시대, AI 공격에 맞서는 보안의 골든타임 전략",
+      "url": "https://chontv.com/event/1278",
+      "start_kst": "2026-09-17T14:00:00+09:00",
+      "end_kst": "2026-09-17T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1278",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_ec3e691ec0a9bf5ea477889e8234dc0a.png?u=1789626217",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-8354f2abcb0f"
     },
     {
       "source": "dubiz",
@@ -767,6 +815,22 @@
       "id": "dubiz-68df016c87e8"
     },
     {
+      "source": "chontv",
+      "title": "N2SF 시대의 데이터 중심 제로트러스트: 문서중앙화 x AI x N2SF 통합 전략 및 고객사 구축 사례",
+      "url": "https://chontv.com/event/1281",
+      "start_kst": "2026-09-29T14:00:00+09:00",
+      "end_kst": "2026-09-29T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1281",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_9e652ca0a0c334c08f39f76eded4e263.png?u=1790676341",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-2fc36abd3042"
+    },
+    {
       "source": "dubiz",
       "title": "Mission Clear : 제조 현장의 5가지 미션을 해결하라!",
       "url": "https://dubiz.co.kr/Event/534",
@@ -865,6 +929,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "dubiz-6cb69539c070"
+    },
+    {
+      "source": "chontv",
+      "title": "위협 인텔리전스 실전 활용 전략 AI 시대, 적의 공격을 이해하는 가장 효과적인 방법",
+      "url": "https://chontv.com/event/1286",
+      "start_kst": "2026-10-08T14:00:00+09:00",
+      "end_kst": "2026-10-08T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1286",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_c7c0d5060dcd1b8ebbb0b1e59cbfef60.png?u=1791444446",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-fe60ab135909"
     },
     {
       "source": "e4ds",
@@ -1222,6 +1302,22 @@
       "id": "e4ds-62a4c3b69ca7"
     },
     {
+      "source": "chontv",
+      "title": "AI 시대의 인프라 경제학",
+      "url": "https://chontv.com/event/1282",
+      "start_kst": "2026-10-22T14:00:00+09:00",
+      "end_kst": "2026-10-22T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1282",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_8439ddb994cfe8ef8d1918d08bb4214e.png?u=1788828360",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-102720c4d8ee"
+    },
+    {
       "source": "talkit",
       "title": "AI 시대의 스마트 오피스는 무엇이 다른가? feat. 차세대 스마트 오피스 현장투어 [로지텍]",
       "url": "https://talkit.tv/main/events/3732",
@@ -1433,6 +1529,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-babaf812cb2f"
+    },
+    {
+      "source": "chontv",
+      "title": "ServiceNow AI 플랫폼의 미래 사람과 AI에이전트, 계정 권한과 자산의 워크플로우 통합 경험",
+      "url": "https://chontv.com/event/1292",
+      "start_kst": "2026-11-17T14:00:00+09:00",
+      "end_kst": "2026-11-17T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1292",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_441d54ed2fd8786d57955e5a223f10d3.png?u=1791888506",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-58a6b21266ba"
     },
     {
       "source": "e4ds",
