@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-10-18T09:57:01.143763+09:00",
-  "count": 98,
+  "generated_at": "2026-10-18T23:28:36.806086+09:00",
+  "count": 97,
   "webinars": [
-    {
-      "source": "allshowtv",
-      "title": "체계화 된 데이터가 곧 AI 시대의 경쟁력이다",
-      "url": "https://www.allshowtv.com/detail.html?idx=1745",
-      "start_kst": "2026-08-19T14:00:00+09:00",
-      "end_kst": "2026-08-19T15:00:00+09:00",
-      "host": "㈜모두솔루션",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1745",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/07/31/main_31162621328908.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03090103458193.jpg"
-      ],
-      "id": "allshowtv-71ea9e70a734"
-    },
     {
       "source": "dubiz",
       "title": "[첨마소 6탄] 첨단이 제안하는 2026년 하반기 특별한 이벤트",
