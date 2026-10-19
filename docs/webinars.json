@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-10-19T10:11:49.416317+09:00",
-  "count": 97,
+  "generated_at": "2026-10-20T02:30:19.478208+09:00",
+  "count": 96,
   "webinars": [
-    {
-      "source": "allshowtv",
-      "title": "AI 시대의 의사결정을 바꾸는 수리최적화(Optimization): 실제 산업 적용 사례와 활용 전략",
-      "url": "https://www.allshowtv.com/detail.html?idx=1749",
-      "start_kst": "2026-08-20T14:00:00+09:00",
-      "end_kst": "2026-08-20T15:00:00+09:00",
-      "host": "Gurobi",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1749",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/05/main_05163805548500.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/05/main_05162217649580.jpg"
-      ],
-      "id": "allshowtv-c0e56cf9b47a"
-    },
     {
       "source": "talkit",
       "title": "클라우드-네이티브 AI 에이전트 코딩 [박준성 회장/한국소프트웨어기술진흥협회]",
@@ -1135,9 +1117,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1791451186262.jpg"
-      ],
+      "prize_images": [],
       "id": "dubiz-aa049de7beb1"
     },
     {
