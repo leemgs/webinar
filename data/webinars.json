@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T14:13:27.212521+09:00",
+  "generated_at": "2026-10-23T01:06:33.013783+09:00",
   "count": 104,
   "webinars": [
     {
@@ -789,9 +789,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/16/main_16171649866091.jpg"
-      ],
+      "prize_images": [],
       "id": "allshowtv-9e79f223a181"
     },
     {
