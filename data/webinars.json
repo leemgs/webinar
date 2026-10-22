@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T14:04:19.741298+09:00",
+  "generated_at": "2026-10-22T14:13:27.212521+09:00",
   "count": 104,
   "webinars": [
     {
@@ -102,7 +102,7 @@
       "registered": false,
       "prizes": [],
       "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/03/main_03161326826585.jpg"
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/10/main_10111746111856.jpg"
       ],
       "id": "allshowtv-1602a1092e92"
     },
@@ -219,7 +219,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/04/main_04092747687998.jpg"
+      ],
       "id": "allshowtv-a76d8f37e323"
     },
     {
@@ -589,7 +591,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/07/main_07173701470506.jpg"
+      ],
       "id": "allshowtv-2cffb4ffaf3d"
     },
     {
@@ -735,7 +739,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/04/main_04085948626148.jpg"
+      ],
       "id": "allshowtv-fd5a2d364a9c"
     },
     {
@@ -783,7 +789,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/16/main_16171649866091.jpg"
+      ],
       "id": "allshowtv-9e79f223a181"
     },
     {
@@ -1266,7 +1274,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/21/main_21112821970268.jpg"
+      ],
       "id": "allshowtv-339ecc320980"
     },
     {
@@ -1368,7 +1378,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/10/14/main_14175916960813.jpg"
+      ],
       "id": "allshowtv-b753c7360183"
     },
     {
