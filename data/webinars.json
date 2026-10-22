@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-22T13:59:51.549956+09:00",
-  "count": 98,
+  "generated_at": "2026-10-22T14:04:19.741298+09:00",
+  "count": 104,
   "webinars": [
     {
       "source": "talkit",
@@ -577,6 +577,22 @@
       "id": "talkit-5e1699e3341f"
     },
     {
+      "source": "allshowtv",
+      "title": "고객은 언제 AI를 신뢰하는가 - AI 만족도를 높이는 전략",
+      "url": "https://www.allshowtv.com/detail.html?idx=1752",
+      "start_kst": "2026-09-16T15:00:00+09:00",
+      "end_kst": "2026-09-16T16:00:00+09:00",
+      "host": "센드버드",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1752",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/07/main_07173232197637.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-2cffb4ffaf3d"
+    },
+    {
       "source": "e4ds",
       "title": "2026 중급 엔지니어 실무 마스터 클래스 - 회로 설계 방법과 부품 파손 이유 및 방지 대책",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1023",
@@ -707,6 +723,22 @@
       "id": "talkit-fa81e75b1760"
     },
     {
+      "source": "allshowtv",
+      "title": "Hybrid-Multi 클라우드 환경의 통합 운영 및 관리를 위한 Consumption기반의 스토리지 서비스 NetApp Keystone",
+      "url": "https://www.allshowtv.com/detail.html?idx=1753",
+      "start_kst": "2026-09-22T10:30:00+09:00",
+      "end_kst": "2026-09-22T11:30:00+09:00",
+      "host": "KCC정보통신",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1753",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/07/main_07091127670753.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-fd5a2d364a9c"
+    },
+    {
       "source": "talkit",
       "title": "1990년대 개발 방식으로 AI 시대를 버틸 수 있을까? [박준성 회장/한국소프트웨어기술진흥협회]",
       "url": "https://talkit.tv/main/events/3724",
@@ -737,6 +769,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "dubiz-68df016c87e8"
+    },
+    {
+      "source": "allshowtv",
+      "title": "VMware 전환 이후, 인프라 운영의 새로운 기준 : 성공적인 전환을 위한 핵심 기능 요건과 운영 전략",
+      "url": "https://www.allshowtv.com/detail.html?idx=1754",
+      "start_kst": "2026-09-29T14:00:00+09:00",
+      "end_kst": "2026-09-29T15:00:00+09:00",
+      "host": "오케스트로",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1754",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/16/main_16171649579272.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-9e79f223a181"
     },
     {
       "source": "chontv",
@@ -1206,6 +1254,22 @@
       "id": "talkit-a8d8079d7ab6"
     },
     {
+      "source": "allshowtv",
+      "title": "Cato AI Security: AI 시대를 위한 차세대 보안 소개",
+      "url": "https://www.allshowtv.com/detail.html?idx=1755",
+      "start_kst": "2026-10-21T15:00:00+09:00",
+      "end_kst": "2026-10-21T16:00:00+09:00",
+      "host": "Cato networks",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1755",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/21/main_21104231075522.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-339ecc320980"
+    },
+    {
       "source": "e4ds",
       "title": "2026 고급 엔지니어 실무 마스터 클래스 - 저잡음/저전력 회로 이해 및 고급 응용 회로 설계",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1031",
@@ -1292,6 +1356,22 @@
       "id": "sharedit-adcf3d99bf4c"
     },
     {
+      "source": "allshowtv",
+      "title": "AI 서비스 성능 개선, GPU 부터 더 사야할까?",
+      "url": "https://www.allshowtv.com/detail.html?idx=1762",
+      "start_kst": "2026-10-27T14:00:00+09:00",
+      "end_kst": "2026-10-27T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1762",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/10/14/main_14175917106794.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-b753c7360183"
+    },
+    {
       "source": "dubiz",
       "title": "[AEROTEC 2026 인사이트 리뷰 웨비나] 우주항공 비즈니스의 미래, 현장의 열기를 넘어 실전 전략으로 항해하다",
       "url": "https://dubiz.co.kr/Event/542",
@@ -1326,6 +1406,22 @@
         "https://talkit.tv/userfiles/images/file179129544158.jpg"
       ],
       "id": "talkit-f3c58757ac66"
+    },
+    {
+      "source": "cloit",
+      "title": "'AgentGo Guard'로 완성하는 AI 거버넌스",
+      "url": "https://webinar.cloit.com/intro/b1154299-11eb-4fdb-a041-16c311b614f7",
+      "start_kst": "2026-10-29T14:00:00+09:00",
+      "end_kst": "2026-10-29T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://webinar.cloit.com/intro/b1154299-11eb-4fdb-a041-16c311b614f7",
+      "description": "생성형 AI 및 멀티 에이전트 도입 시 발생하는 프롬프트 인젝션, 민감정보 유출, 지능형 탈옥 등 새로운 보안 위협을 정의하고, '에이전트고 가드'를 통해 AI 자율성과 보안 통제를 동시에 확보하는 운영 방법을 알아보실 수 있습니다.",
+      "thumbnail": "https://nlvsdfcoktzwolqnjxnw.supabase.co/storage/v1/object/public/thumbnails/1791867979972_inydpkj.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "cloit-b9aa1143b96d"
     },
     {
       "source": "dubiz",

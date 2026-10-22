@@ -160,10 +160,10 @@ cloit:
   name: "CLOIT:ON"
   base_url: "https://webinar.cloit.com"
   listing_url: "https://webinar.cloit.com"
-  requires_js: true           # JS-rendered SPA
+  requires_js: true           # Next.js app; sessions come from Supabase REST
   requires_login: false
   scraper: cloit
-  wait_selector: "body"
+  wait_selector: "a[href*='/intro/']"   # rendered session cards
   login:
     url: "https://webinar.cloit.com/login"
     user_selector: "input[name='email'], input[type='email']"

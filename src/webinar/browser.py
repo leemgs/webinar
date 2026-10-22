@@ -171,6 +171,48 @@ class Browser:
                         pass
             return html
 
+    def get_html_and_json(self, url: str, json_match: str, **kwargs) -> tuple[str, list]:
+        """Like get_html, but also return JSON responses the page fetched.
+
+        For JS apps whose content arrives from an API (e.g. CLOIT:ON reads its
+        sessions from Supabase REST): the site's own scripts make the call
+        with whatever keys they need, and we read the response. Returns
+        (html, [(response_url, parsed_json), ...]) for responses whose URL
+        contains `json_match`.
+        """
+        import json as _json
+
+        captured: list = []
+
+        def on_response(response):
+            try:
+                if json_match in response.url and "json" in response.headers.get(
+                    "content-type", ""
+                ):
+                    captured.append((response.url, _json.loads(response.text())))
+            except Exception:
+                pass
+
+        with self.page() as page:
+            page.on("response", on_response)
+            dump = _DebugDump.for_url(url)
+            if dump:
+                page.on("response", dump.on_response)
+            try:
+                html = self._load(
+                    page, url, kwargs.get("wait_selector"), kwargs.get("wait_ms", 2500),
+                    kwargs.get("timeout_ms", 45000), kwargs.get("click_selector"),
+                    kwargs.get("exhaust_listing", False), kwargs.get("challenge_markers"),
+                    kwargs.get("challenge_wait_ms", 0),
+                )
+            finally:
+                if dump:
+                    try:
+                        dump.save_html(page.content())
+                    except Exception:
+                        pass
+        return html, captured
+
     def _load(self, page, url, wait_selector, wait_ms, timeout_ms, click_selector,
               exhaust_listing, challenge_markers, challenge_wait_ms) -> str:
         try:

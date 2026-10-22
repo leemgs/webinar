@@ -926,3 +926,107 @@ def test_sharedit_stops_hammering_a_blocked_host():
     # that host's listings and detail pages short-circuit
     assert len(b.calls) == 4
     assert {c.split("/")[2] for c in b.calls} == {"www.sharedit.co.kr", "webinar.sharedit.co.kr"}
+
+
+# --- allshowtv 2026-10 layout (captured from CI) ---------------------------
+ALLSHOW_2026_10 = """
+<main class="main ">
+  <a href="detail.html?idx=1762">
+    <div class="vi opacity0" style="background:url('//img.etnews.com/allshowtv/tmp_upload/2026/10/14/main_14175917106794.jpg')no-repeat center center;">
+      <p class="onair"><span class="tit">방송</span><span class="time" id="day_timer">D-5일</span></p>
+      <div class="vi_textWrap">
+        <span class="logo_company"><img src="//img.etnews.com/x/logo.png" alt="업체 로고"></span>
+        <div class="vi_text">
+          <span class="category">온라인 무료세미나</span>
+          <h2>AI 서비스 성능 개선, <br>GPU 부터 더 사야할까?</h2>
+          <p class="date">2026년 10월 27일(화) 14:00 ~ 15:00</p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <h3 class="icon_h3"><span>올쇼티비 지난 웨비나</span></h3>
+  <ul class="newlist listpage">
+    <li><dl class="clearfix">
+      <dd class="thumb"><a href="detail.html?idx=1755"><img src="//img.etnews.com/allshowtv/tmp_upload/2026/09/21/main_21104231075522.jpg" alt="웨비나 섬네일"></a></dd>
+      <dt><a href="detail.html?idx=1755">[Cato networks] Cato AI Security:
+AI 시대를 위한 차세대 보안 소개</a></dt>
+      <dd class="date"><a href="detail.html?idx=1755"><p>2026년 10월 21일(수) 15:00 ~ 16:00</p></a><div></div></dd>
+    </dl></li>
+    <li><dl class="clearfix">
+      <dd class="thumb"><a href="detail.html?idx=1753"><img src="//img.etnews.com/x/1753.jpg" alt="웨비나 섬네일"></a></dd>
+      <dt><a href="detail.html?idx=1753">[KCC정보통신] NetApp Keystone</a></dt>
+      <dd class="date"><a href="detail.html?idx=1753"><p>2026년 09월 22일(화) 10:30 ~ 11:30</p></a>
+        <div><button class="btn_replay"><span>다시보기</span></button></div></dd>
+    </dl></li>
+  </ul>
+</main>
+"""
+
+
+def test_allshowtv_2026_10_hero_and_dt_list():
+    sc = get_scraper("allshowtv", {"base_url": "https://www.allshowtv.com"})
+    by_idx = {w.url.rsplit("=", 1)[-1]: w for w in sc.parse(ALLSHOW_2026_10)}
+    assert set(by_idx) == {"1762", "1755", "1753"}
+    hero = by_idx["1762"]  # upcoming session lives only in the hero banner
+    assert hero.title == "AI 서비스 성능 개선, GPU 부터 더 사야할까?"
+    assert hero.start_kst.startswith("2026-10-27T14:00") and hero.end_kst.startswith("2026-10-27T15:00")
+    assert hero.thumbnail == "https://img.etnews.com/allshowtv/tmp_upload/2026/10/14/main_14175917106794.jpg"
+    cato = by_idx["1755"]  # title from <dt>, not the image-only first link
+    assert cato.host == "Cato networks"
+    assert cato.title == "Cato AI Security: AI 시대를 위한 차세대 보안 소개"
+    assert cato.start_kst.startswith("2026-10-21T15:00")
+    assert by_idx["1753"].end_kst.startswith("2026-09-22T11:30")
+
+
+# --- CLOIT:ON (Supabase REST + rendered cards, captured from CI) ------------
+CLOIT_API_ROWS = [{
+    "id": "b1154299-11eb-4fdb-a041-16c311b614f7",
+    "title": "'AgentGo Guard'로 완성하는 AI 거버넌스",
+    "description": "생성형 AI 및 멀티 에이전트 도입 시 발생하는 보안 위협…",
+    "scheduled_at": "2026-10-29T05:00:00+00:00",
+    "is_past": False,
+    "thumbnail_url": "https://nlvsdfcoktzwolqnjxnw.supabase.co/storage/v1/object/public/thumbnails/1791867979972_inydpkj.png",
+}]
+CLOIT_CARD_HTML = """
+<div class="grid grid-cols-1 md:grid-cols-2">
+  <a href="/intro/b1154299-11eb-4fdb-a041-16c311b614f7">
+    <img class="w-full h-full object-cover" src="https://nlvsdfcoktzwolqnjxnw.supabase.co/storage/v1/object/public/thumbnails/1791867979972_inydpkj.png">
+    <span class="px-3 py-1.5">모집중</span>
+    <span class="text-sm text-gray-400 font-semibold">2026년 10월 29일 오후 02:00</span>
+    <h3 class="text-xl font-extrabold">'AgentGo Guard'로 완성하는 AI 거버넌스</h3>
+    <p class="text-[15px] line-clamp-2">생성형 AI 및 멀티 에이전트 도입 시 …</p>
+    <span class="text-indigo-600">자세히 보기</span>
+  </a>
+  <a href="/intro/b1154299-11eb-4fdb-a041-16c311b614f7">자세히 보기</a>
+</div>
+"""
+_CLOIT_URL = "https://webinar.cloit.com/intro/b1154299-11eb-4fdb-a041-16c311b614f7"
+
+
+def test_cloit_api_rows_convert_utc_to_kst():
+    sc = get_scraper("cloit", {"base_url": "https://webinar.cloit.com"})
+    (w,) = sc.parse_api(CLOIT_API_ROWS)
+    assert w.url == _CLOIT_URL
+    assert w.start_kst == "2026-10-29T14:00:00+09:00"
+    assert w.end_kst.startswith("2026-10-29T15:00")
+    assert w.title == "'AgentGo Guard'로 완성하는 AI 거버넌스"
+    assert sc.parse_api({"message": "not a list"}) == []
+
+
+def test_cloit_dom_cards_fallback():
+    sc = get_scraper("cloit", {"base_url": "https://webinar.cloit.com"})
+    (w,) = sc.parse(CLOIT_CARD_HTML)  # the bare "자세히 보기" link has no <h3>
+    assert w.url == _CLOIT_URL and w.start_kst.startswith("2026-10-29T14:00")
+
+
+def test_cloit_fetch_prefers_api_and_dedupes_with_dom():
+    class Browser:
+        def get_html_and_json(self, url, match, **kw):
+            assert match == "/rest/v1/webinars"
+            return CLOIT_CARD_HTML, [("https://x.supabase.co/rest/v1/webinars?is_past=eq.false", CLOIT_API_ROWS)]
+
+    sc = get_scraper("cloit", {"base_url": "https://webinar.cloit.com",
+                               "listing_url": "https://webinar.cloit.com"})
+    items = sc.fetch(Browser())
+    assert [w.url for w in items] == [_CLOIT_URL]
+    assert items[0].description  # the API record (with description) won
