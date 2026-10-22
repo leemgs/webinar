@@ -7,7 +7,10 @@ using a real browser with a normal user-agent and Korean locale / KST timezone.
 from __future__ import annotations
 
 import logging
+import os
+import re
 from contextlib import contextmanager
+from pathlib import Path
 from typing import Iterator, Optional
 
 log = logging.getLogger(__name__)
@@ -16,6 +19,51 @@ USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
 )
+
+
+class _DebugDump:
+    """Save rendered HTML + JSON API responses for chosen hosts (CI diagnostics).
+
+    Enabled by WEBINAR_DEBUG_DIR (output dir) and WEBINAR_DEBUG_HOSTS
+    (comma-separated host substrings, e.g. "allshowtv.com,cloit.com"). The
+    workflow uploads the directory as an artifact so a scraper returning 0 can
+    be fixed against exactly what the CI browser saw — including data that a
+    JS app fetches from its API and never puts in the page source.
+    """
+
+    MAX_JSON = 2_000_000
+    MAX_FILES = 40
+
+    def __init__(self, root: Path, slug: str):
+        self.root, self.slug, self.n = root, slug, 0
+
+    @classmethod
+    def for_url(cls, url: str):
+        out = os.getenv("WEBINAR_DEBUG_DIR")
+        hosts = [h.strip() for h in os.getenv("WEBINAR_DEBUG_HOSTS", "").split(",") if h.strip()]
+        if not out or not any(h in url for h in hosts):
+            return None
+        root = Path(out)
+        root.mkdir(parents=True, exist_ok=True)
+        slug = re.sub(r"[^A-Za-z0-9]+", "_", url.split("://", 1)[-1]).strip("_")[:90]
+        return cls(root, slug)
+
+    def on_response(self, response) -> None:
+        try:
+            ctype = response.headers.get("content-type", "")
+            if "json" not in ctype or self.n >= self.MAX_FILES:
+                return
+            body = response.text()
+            if len(body) > self.MAX_JSON:
+                return
+            self.n += 1
+            (self.root / f"{self.slug}.api{self.n:02d}.json").write_text(
+                f"// {response.status} {response.url}\n{body}", encoding="utf-8")
+        except Exception:
+            pass
+
+    def save_html(self, html: str) -> None:
+        (self.root / f"{self.slug}.html").write_text(html, encoding="utf-8")
 
 
 class Browser:
@@ -108,35 +156,52 @@ class Browser:
         shared context for every later request.
         """
         with self.page() as page:
+            dump = _DebugDump.for_url(url)
+            if dump:
+                page.on("response", dump.on_response)
             try:
-                if not self._navigate(page, url, timeout_ms):
-                    # navigation never committed — salvage anything that rendered
+                html = self._load(page, url, wait_selector, wait_ms, timeout_ms,
+                                  click_selector, exhaust_listing,
+                                  challenge_markers, challenge_wait_ms)
+            finally:
+                if dump:
                     try:
-                        return page.content()
+                        dump.save_html(page.content())
                     except Exception:
-                        return ""
-                if challenge_markers and challenge_wait_ms:
-                    self._wait_challenge_clear(page, challenge_markers, challenge_wait_ms)
-                if wait_selector:
-                    try:
-                        page.wait_for_selector(wait_selector, timeout=timeout_ms)
-                    except Exception:
-                        log.warning("wait_selector %r not found on %s", wait_selector, url)
-                # optionally reveal content behind a tab/accordion (e.g. 경품 안내)
-                if click_selector:
-                    try:
-                        page.click(click_selector, timeout=5000)
-                        page.wait_for_timeout(800)
-                    except Exception:
-                        log.debug("click_selector %r not clickable on %s", click_selector, url)
-                if exhaust_listing:
-                    self._exhaust_listing(page)
-                # allow SPA XHR/hydration to settle
-                page.wait_for_timeout(wait_ms)
-                return page.content()
-            except Exception as e:
-                log.warning("failed to load %s: %s", url, e)
-                return ""
+                        pass
+            return html
+
+    def _load(self, page, url, wait_selector, wait_ms, timeout_ms, click_selector,
+              exhaust_listing, challenge_markers, challenge_wait_ms) -> str:
+        try:
+            if not self._navigate(page, url, timeout_ms):
+                # navigation never committed — salvage anything that rendered
+                try:
+                    return page.content()
+                except Exception:
+                    return ""
+            if challenge_markers and challenge_wait_ms:
+                self._wait_challenge_clear(page, challenge_markers, challenge_wait_ms)
+            if wait_selector:
+                try:
+                    page.wait_for_selector(wait_selector, timeout=timeout_ms)
+                except Exception:
+                    log.warning("wait_selector %r not found on %s", wait_selector, url)
+            # optionally reveal content behind a tab/accordion (e.g. 경품 안내)
+            if click_selector:
+                try:
+                    page.click(click_selector, timeout=5000)
+                    page.wait_for_timeout(800)
+                except Exception:
+                    log.debug("click_selector %r not clickable on %s", click_selector, url)
+            if exhaust_listing:
+                self._exhaust_listing(page)
+            # allow SPA XHR/hydration to settle
+            page.wait_for_timeout(wait_ms)
+            return page.content()
+        except Exception as e:
+            log.warning("failed to load %s: %s", url, e)
+            return ""
 
     @staticmethod
     def _wait_challenge_clear(page, markers: tuple, max_ms: int) -> bool:

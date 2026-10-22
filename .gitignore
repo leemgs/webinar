@@ -37,3 +37,6 @@ Thumbs.db
 # node (dev-only, e.g. jsdom for frontend smoke tests)
 node_modules/
 package-lock.json
+
+# CI scrape debug captures
+debug/

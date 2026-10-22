@@ -76,7 +76,20 @@ jobs:
       - name: Scrape webinars + publish dataset
         env:
           WEBINAR_HEADED: "1"
+          # Save rendered HTML + JSON API responses of these hosts for diagnosis
+          # (uploaded below as the "scrape-debug" artifact, kept 7 days).
+          WEBINAR_DEBUG_DIR: debug
+          WEBINAR_DEBUG_HOSTS: "allshowtv.com,cloit.com"
         run: xvfb-run -a --server-args="-screen 0 1366x900x24" python -m webinar.pipeline -v
+
+      - name: Upload scrape debug captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scrape-debug
+          path: debug/
+          retention-days: 7
+          if-no-files-found: ignore
 
       - name: Auto-register (enabled sites only)
         run: python -m webinar.registrar ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '--dry-run' || '' }} -v
