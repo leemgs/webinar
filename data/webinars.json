@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T01:06:33.013783+09:00",
+  "generated_at": "2026-10-23T10:31:00.144667+09:00",
   "count": 104,
   "webinars": [
     {
@@ -33,9 +33,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/06/main_06152018038929.jpg"
-      ],
+      "prize_images": [],
       "id": "allshowtv-b905b7bbb2b9"
     },
     {
@@ -673,7 +671,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/07/main_07150340523493.jpg"
+      ],
       "id": "allshowtv-c196c1481a8c"
     },
     {
@@ -789,7 +789,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/16/main_16171649866091.jpg"
+      ],
       "id": "allshowtv-9e79f223a181"
     },
     {
@@ -1272,9 +1274,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/21/main_21112821970268.jpg"
-      ],
+      "prize_images": [],
       "id": "allshowtv-339ecc320980"
     },
     {
