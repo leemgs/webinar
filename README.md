@@ -71,7 +71,7 @@ flowchart LR
 | `allshowtv` | 올쇼TV | https://www.allshowtv.com | ✅ 실서비스 검증됨 |
 | `ddtube` | DD튜브 | https://www.ddtube.co.kr | ✅ 실서비스 검증됨(상세페이지 보강) |
 | `talkit` | 토크아이티 | https://talkit.tv | ✅ 실서비스 검증됨 |
-| `sharedit` | 쉐어드IT | https://www.sharedit.co.kr | ✅ 실서비스 검증됨(제목 [MMDD] 코드 활용) |
+| `sharedit` | 쉐어드IT | https://www.sharedit.co.kr | ⚠️ GitHub 러너는 Cloudflare 챌린지로 차단 → [수동 등록](#수집이-막힌-웨비나-등록-sharedit-등) 또는 self-hosted 러너 |
 | `dubiz` | 두비즈 | https://dubiz.co.kr | 🟡 코드 작성 완료, 라이브 미검증(사내 프록시 차단) |
 | `e4ds` | e4ds | https://www.e4ds.com/webinar.asp | ⚙️ 로그인 필요 |
 | `cloit` | CLOIT:ON | https://webinar.cloit.com | ⚙️ SPA, 현재 세션 없음 |
@@ -341,6 +341,41 @@ gh secret set SITE_DDTUBE_PASS     --repo leemgs/webinar
 - 등록된 시크릿 목록: 👉 <https://github.com/leemgs/webinar/settings/secrets/actions>
 - 수동 실행(사전등록은 dry-run): 👉 <https://github.com/leemgs/webinar/actions/workflows/daily.yml>
   → **Run workflow**, 또는 CLI: `gh workflow run daily.yml`
+
+## 수집이 막힌 웨비나 등록 (sharedit 등)
+
+쉐어드IT(`www.sharedit.co.kr`, `webinar.sharedit.co.kr`)는 **GitHub Actions 러너(데이터센터 IP)에
+Cloudflare 관리형 챌린지**(`cf-mitigated: challenge`, "Just a moment...")를 띄웁니다. 그래서 일일 동기화는
+쉐어드IT의 **새 웨비나를 수집할 수 없고**, 이전에 저장된 일정만 남아 "가끔 누락"처럼 보입니다.
+(CI 로그 기준 최소 8/27 이후 매 실행 0건) 다음 두 방법으로 보완합니다.
+
+### 방법 1 — 수동 등록 (즉시, 권장)
+Actions → **웨비나 수동 등록 (Add webinar)** → *Run workflow* (GitHub 모바일 앱에서도 가능)
+
+| 입력 | 예 |
+| --- | --- |
+| 사이트 | `sharedit` |
+| URL | `https://webinar.sharedit.co.kr/posts/36031` |
+| 제목 / 날짜 | `…` / `2026-10-27` |
+| 시작·종료 (선택) | `14:00` / `15:00` — 비우면 **종일 일정** |
+
+`config/manual_webinars.yaml`에 기록되고 데이터·ICS·구글 캘린더까지 약 1분 내 반영됩니다.
+같은 사이트+URL로 다시 실행하면 해당 항목이 **수정**됩니다(예: 나중에 시간 추가).
+실제로 수집된 동일 URL의 데이터가 있으면 항상 수집 데이터가 우선합니다.
+로컬에서는: `python -m webinar.manual add --source sharedit --url … --title … --date 2026-10-27 --time 14:00`
+→ `python -m webinar.manual apply`.
+
+### 방법 2 — self-hosted 러너로 자동 수집 (선택)
+집/사무실 PC에서는 일반 브라우저로 정상 접속되므로, 그 PC를 러너로 쓰면 쉐어드IT를 자동 수집할 수 있습니다.
+1. Settings → Actions → Runners → **New self-hosted runner** 로 PC 등록, 추가 라벨 **`sharedit`** 지정
+   (PC에 Python 3.11+ 필요. 첫 실행 시 Playwright Chromium 자동 설치)
+2. Settings → Secrets and variables → Actions → **Variables** 에 `SHAREDIT_SELF_HOSTED` = `true`
+3. 이후 [`sharedit.yml`](.github/workflows/sharedit.yml)이 매일 09:40·21:40(KST)에 쉐어드IT만 수집하고,
+   일일 동기화는 쉐어드IT를 건너뜁니다. 변수를 지우면 원래대로 돌아갑니다.
+
+> ⚠️ 공개 저장소에서 self-hosted 러너를 쓸 때는 Settings → Actions → General 에서
+> **외부 기여자의 fork PR 워크플로 실행에 승인 필요**를 켜 두세요(러너 PC 보호). 이 워크플로는 PR에서 실행되지 않습니다.
+> 차단 우회 도구(캡차 풀이·프록시 회전 등)는 사용하지 않습니다 — 일반 방문자와 같은 브라우저 접속만 합니다.
 
 ## GitHub Pages
 

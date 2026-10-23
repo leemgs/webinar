@@ -16,6 +16,7 @@ from . import ics_export, manual, prizes, storage
 from .browser import Browser
 from .config import DOCS_DIR, WEBINARS_JSON, load_sites, site_credentials
 from .registrar import login
+from .models import Webinar
 from .scrapers import get_scraper
 
 log = logging.getLogger(__name__)
@@ -56,9 +57,45 @@ def scrape_site(browser: Browser, key: str, cfg: dict):
     return scraper.fetch(browser)
 
 
-def run(site_keys: list[str] | None = None, publish: bool = True) -> list:
+def merge_and_save(scraped: list, publish: bool = True) -> list:
+    """Merge scraped records + manual entries into the dataset, prune, save."""
+    existing = storage.load_webinars()
+    merged = storage.merge(existing, scraped)
+    # webinars registered by hand for sites that block CI (scraped data wins)
+    merged = manual.apply_manual(merged, manual.load_manual())
+    merged = storage.prune_past(merged)
+    storage.save_webinars(merged)
+    log.info("saved %d webinars -> %s", len(merged), WEBINARS_JSON)
+    if publish:
+        publish_docs()
+    return merged
+
+
+def merge_from_file(path: str, publish: bool = True) -> list:
+    """Re-apply a saved scrape (see --scraped-out) onto the current dataset.
+
+    Lets a workflow whose push lost a race reset to the latest main and merge
+    its results again, instead of discarding the scrape or re-scraping.
+    """
+    import json
+
+    with open(path, encoding="utf-8") as f:
+        items = [Webinar.from_dict(d) for d in json.load(f)]
+    log.info("merging %d saved webinars from %s", len(items), path)
+    return merge_and_save(items, publish=publish)
+
+
+def run(site_keys: list[str] | None = None, publish: bool = True,
+        scraped_out: str | None = None) -> list:
     sites = load_sites()
     keys = site_keys or list(sites.keys())
+    # WEBINAR_SKIP_SITES="a,b": leave these sources to another job (e.g. sharedit,
+    # which Cloudflare challenges on GitHub-hosted runners, is scraped by the
+    # opt-in self-hosted workflow). Their existing records are kept as-is.
+    skip = {k.strip() for k in os.getenv("WEBINAR_SKIP_SITES", "").split(",") if k.strip()}
+    if skip and site_keys is None:
+        keys = [k for k in keys if k not in skip]
+        log.info("skipping sources handled elsewhere: %s", ", ".join(sorted(skip)))
 
     scraped = []
     source_counts: dict[str, int] = {}
@@ -105,18 +142,14 @@ def run(site_keys: list[str] | None = None, publish: bool = True) -> list:
     for w in scraped:
         prizes.apply(w)
 
-    # merge with existing (preserve registered flag + curated prizes), prune old
-    existing = storage.load_webinars()
-    merged = storage.merge(existing, scraped)
-    # webinars registered by hand for sites that block CI (scraped data wins)
-    merged = manual.apply_manual(merged, manual.load_manual())
-    merged = storage.prune_past(merged)
-    storage.save_webinars(merged)
-    log.info("saved %d webinars -> %s", len(merged), WEBINARS_JSON)
+    if scraped_out:
+        import json
 
-    if publish:
-        publish_docs()
-    return merged
+        with open(scraped_out, "w", encoding="utf-8") as f:
+            json.dump([w.to_dict() for w in scraped], f, ensure_ascii=False)
+
+    # merge with existing (preserve registered flag + curated prizes), prune old
+    return merge_and_save(scraped, publish=publish)
 
 
 def publish_docs() -> None:
@@ -135,13 +168,18 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Scrape webinars and publish dataset")
     p.add_argument("--site", action="append", help="limit to site key(s)")
     p.add_argument("--no-publish", action="store_true", help="skip copying to docs/")
+    p.add_argument("--scraped-out", help="also write this run's scraped records (JSON)")
+    p.add_argument("--merge-from", help="no scraping: merge records saved by --scraped-out")
     p.add_argument("-v", "--verbose", action="store_true")
     args = p.parse_args(argv)
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(levelname)s %(name)s: %(message)s",
     )
-    run(site_keys=args.site, publish=not args.no_publish)
+    if args.merge_from:
+        merge_from_file(args.merge_from, publish=not args.no_publish)
+    else:
+        run(site_keys=args.site, publish=not args.no_publish, scraped_out=args.scraped_out)
     return 0
 
 

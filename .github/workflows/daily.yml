@@ -80,7 +80,10 @@ jobs:
           # (uploaded below as the "scrape-debug" artifact, kept 7 days).
           WEBINAR_DEBUG_DIR: debug
           WEBINAR_DEBUG_HOSTS: "allshowtv.com,cloit.com"
-        run: xvfb-run -a --server-args="-screen 0 1366x900x24" python -m webinar.pipeline -v
+          # sharedit is Cloudflare-challenged on GitHub-hosted runners; when the
+          # opt-in self-hosted job is enabled it owns sharedit (see sharedit.yml).
+          WEBINAR_SKIP_SITES: ${{ vars.SHAREDIT_SELF_HOSTED == 'true' && 'sharedit' || '' }}
+        run: xvfb-run -a --server-args="-screen 0 1366x900x24" python -m webinar.pipeline -v --scraped-out "$RUNNER_TEMP/scraped.json"
 
       - name: Upload scrape debug captures
         if: always()
@@ -110,15 +113,11 @@ jobs:
         if: always()
         run: python -m webinar.coverage >> "$GITHUB_STEP_SUMMARY"
 
+      # Race-safe: if another workflow pushed meanwhile, reset to the latest main
+      # and re-apply this run's saved scrape instead of failing the push.
       - name: Commit updated data
         if: always()
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/webinars.json docs/webinars.json docs/webinars.ics
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "chore: daily webinar sync $(date -u +%Y-%m-%d)"
-            git push
-          fi
+        run: >-
+          scripts/commit_data.sh "chore: daily webinar sync $(date -u +%Y-%m-%d)"
+          bash -c '[ ! -f "$RUNNER_TEMP/scraped.json" ] ||
+          python -m webinar.pipeline --merge-from "$RUNNER_TEMP/scraped.json"'

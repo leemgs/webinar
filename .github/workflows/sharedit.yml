@@ -1,0 +1,75 @@
+name: sharedit sync (self-hosted)
+
+# sharedit.co.kr answers every GitHub-hosted runner with a Cloudflare managed
+# challenge (cf-mitigated: challenge), so the daily sync can never read it. A
+# self-hosted runner on an ordinary home/office network browses it like any
+# visitor. This job is OPT-IN and does nothing until you:
+#   1. register a self-hosted runner with the extra label "sharedit"
+#      (repo Settings → Actions → Runners → New self-hosted runner), and
+#   2. set the repository variable SHAREDIT_SELF_HOSTED = true
+#      (Settings → Secrets and variables → Actions → Variables).
+# While enabled, the daily sync skips sharedit and this job owns it.
+# Security: only use a self-hosted runner on a public repo if fork pull-request
+# workflows require approval (Settings → Actions → General). This workflow
+# itself never runs on pull requests.
+on:
+  schedule:
+    - cron: "40 0 * * *"    # 09:40 KST (after the 08:00 daily sync)
+    - cron: "40 12 * * *"   # 21:40 KST (after the 20:00 daily sync)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: webinar-daily      # never overlap the daily sync
+  cancel-in-progress: false
+
+jobs:
+  sharedit:
+    if: vars.SHAREDIT_SELF_HOSTED == 'true'
+    runs-on: [self-hosted, sharedit]
+    env:
+      PYTHONPATH: src
+      WEBINAR_HEADED: "1"    # a real browser window, as a visitor would use
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+      GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
+      GOOGLE_ACCOUNTS_YAML: ${{ secrets.GOOGLE_ACCOUNTS_YAML }}
+      CALENDAR_WRITE_INTERVAL_SECONDS: "1.0"
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python environment
+        run: |
+          python3 -m venv .venv
+          . .venv/bin/activate
+          pip install -q --upgrade pip
+          pip install -q -r requirements.txt
+          python -m playwright install chromium
+
+      - name: Scrape sharedit
+        run: |
+          . .venv/bin/activate
+          cmd=(python -m webinar.pipeline --site sharedit -v --scraped-out "$RUNNER_TEMP/sharedit.json")
+          # headless Linux box without a display: use a virtual one if available
+          if [ -z "${DISPLAY:-}" ] && [ "$(uname)" = "Linux" ] && command -v xvfb-run >/dev/null; then
+            xvfb-run -a "${cmd[@]}"
+          else
+            "${cmd[@]}"
+          fi
+
+      - name: Commit and push
+        run: >-
+          . .venv/bin/activate &&
+          scripts/commit_data.sh "chore: sharedit sync $(date -u +%Y-%m-%d)"
+          bash -c '. .venv/bin/activate && python -m webinar.pipeline --merge-from "$RUNNER_TEMP/sharedit.json"'
+
+      - name: Sync Google Calendar
+        run: |
+          . .venv/bin/activate
+          python -m webinar.calendar_sync --all --strict -v

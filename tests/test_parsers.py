@@ -1030,3 +1030,68 @@ def test_cloit_fetch_prefers_api_and_dedupes_with_dom():
     items = sc.fetch(Browser())
     assert [w.url for w in items] == [_CLOIT_URL]
     assert items[0].description  # the API record (with description) won
+
+
+# --- manual add CLI, skip-sites, merge-from ---------------------------------
+def test_manual_add_entry_adds_updates_validates_and_keeps_header(tmp_path):
+    import pytest
+    from webinar import manual
+
+    y = tmp_path / "m.yaml"
+    y.write_text("# 수동 등록 웨비나\n# keep me\n\nwebinars:\n"
+                 "  - source: sharedit\n    url: 'https://webinar.sharedit.co.kr/posts/36031'\n"
+                 "    title: placeholder\n    date: '2026-10-27'\n", encoding="utf-8")
+    act = manual.add_entry(y, "sharedit", "https://webinar.sharedit.co.kr/posts/36031?referer=SharedIT",
+                           "실제 제목", "2026-10-27", "14:00", "15:30")
+    assert act == "updated"
+    assert manual.add_entry(y, "sharedit", "https://webinar.sharedit.co.kr/posts/36100",
+                            "다음 웨비나", "2026-11-05") == "added"
+    text = y.read_text(encoding="utf-8")
+    assert text.startswith("# 수동 등록 웨비나\n# keep me")
+    items = manual.load_manual(y)
+    assert [(w.title, w.start_kst[:16], (w.end_kst or "")[11:16]) for w in items] == [
+        ("실제 제목", "2026-10-27T14:00", "15:30"),
+        ("다음 웨비나", "2026-11-05T00:00", ""),
+    ]
+    for bad in [("nosuch", "https://x", "t", "2026-10-27", None),
+                ("sharedit", "ftp://x", "t", "2026-10-27", None),
+                ("sharedit", "https://x", "t", "2026-13-01", None),
+                ("sharedit", "https://x", "t", "2026-10-27", "25:00"),
+                ("sharedit", "https://x", "  ", "2026-10-27", None)]:
+        with pytest.raises(ValueError):
+            manual.add_entry(y, *bad)
+
+
+def test_pipeline_skip_sites_and_merge_from(monkeypatch, tmp_path):
+    import json
+    from webinar import pipeline
+    from webinar.models import Webinar
+
+    class FakeBrowser:
+        def __init__(self, *a, **k): pass
+        def __enter__(self): return self
+        def __exit__(self, *a): pass
+
+    scraped_keys = []
+    monkeypatch.setattr(pipeline, "Browser", FakeBrowser)
+    monkeypatch.setattr(pipeline, "load_sites", lambda: {"a": {"name": "a"}, "sharedit": {"name": "s"}})
+    def fake_scrape(browser, key, cfg):
+        scraped_keys.append(key)
+        return [Webinar(source=key, title="t", url=f"https://{key}/1",
+                        start_kst="2099-01-01T10:00:00+09:00")]
+    monkeypatch.setattr(pipeline, "scrape_site", fake_scrape)
+    monkeypatch.setattr(pipeline.prizes, "apply", lambda w: None)
+    saved = {}
+    monkeypatch.setattr(pipeline.storage, "load_webinars", lambda: saved.get("x", []))
+    monkeypatch.setattr(pipeline.storage, "save_webinars", lambda items: saved.__setitem__("x", items))
+    monkeypatch.setattr(pipeline.manual, "load_manual", lambda: [])
+    monkeypatch.setenv("WEBINAR_SKIP_SITES", "sharedit")
+
+    out = tmp_path / "scraped.json"
+    pipeline.run(publish=False, scraped_out=str(out))
+    assert scraped_keys == ["a"]  # sharedit left to the self-hosted job
+    assert [d["url"] for d in json.loads(out.read_text())] == ["https://a/1"]
+
+    saved["x"] = []  # main moved on without our data: re-merge the saved scrape
+    pipeline.merge_from_file(str(out), publish=False)
+    assert [w.url for w in saved["x"]] == ["https://a/1"]

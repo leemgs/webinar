@@ -16,7 +16,10 @@ def test_daily_workflow_scrapes_once_and_syncs_all_collected_webinars():
     # A second scrape after calendar sync could publish events that were never
     # sent to Google Calendar. All collected events must be synced because site
     # registration is currently disabled and therefore every flag is false.
-    assert workflow.count("python -m webinar.pipeline") == 1
+    # exactly one scrape; a race-retry may re-merge the SAVED scrape (--merge-from)
+    scrapes = [line for line in workflow.splitlines()
+               if "python -m webinar.pipeline" in line and "--merge-from" not in line]
+    assert len(scrapes) == 1
     assert "python -m webinar.calendar_sync --all --strict -v" in workflow
     calendar_step = workflow.split("- name: Sync Google Calendar", 1)[1].split(
         "- name:", 1
@@ -101,3 +104,69 @@ def test_pipeline_preserves_previous_data_when_some_sources_are_empty(monkeypatc
     assert result == saved
     assert len(result) == len(existing) + 1
     assert {webinar.source for webinar in result} == {"healthy", "blocked"}
+
+
+# --- manual-entry + self-hosted sharedit workflows --------------------------
+def _yaml(name):
+    import yaml
+    return yaml.safe_load((ROOT / ".github/workflows" / name).read_text(encoding="utf-8"))
+
+
+def test_add_webinar_workflow_never_interpolates_inputs_into_shell():
+    wf = _yaml("add-webinar.yml")
+    trig = wf.get("on") or wf.get(True)  # PyYAML parses bare `on:` as True
+    assert set(trig) == {"workflow_dispatch"}
+    for step in wf["jobs"]["add"]["steps"]:
+        assert "${{ inputs." not in step.get("run", ""), step.get("name")
+    env = wf["jobs"]["add"]["env"]
+    assert env["MANUAL_URL"] == "${{ inputs.url }}"
+
+
+def test_sharedit_self_hosted_workflow_is_opt_in_and_not_on_pull_requests():
+    wf = _yaml("sharedit.yml")
+    trig = wf.get("on") or wf.get(True)
+    assert "pull_request" not in trig and "pull_request_target" not in trig
+    job = wf["jobs"]["sharedit"]
+    assert job["if"] == "vars.SHAREDIT_SELF_HOSTED == 'true'"
+    assert job["runs-on"] == ["self-hosted", "sharedit"]
+    assert wf["concurrency"]["group"] == _yaml("daily.yml")["concurrency"]["group"]
+    daily = (ROOT / ".github/workflows/daily.yml").read_text(encoding="utf-8")
+    assert "WEBINAR_SKIP_SITES: ${{ vars.SHAREDIT_SELF_HOSTED == 'true' && 'sharedit' || '' }}" in daily
+
+
+def test_commit_script_survives_a_concurrent_push(tmp_path):
+    """Another writer pushes first: the script resets, rebuilds and pushes."""
+    import shutil
+    import subprocess
+
+    def git(cwd, *args):
+        return subprocess.run(["git", *args], cwd=cwd, check=True, capture_output=True, text=True).stdout
+
+    origin = tmp_path / "origin.git"
+    subprocess.run(["git", "init", "-q", "--bare", "-b", "main", str(origin)], check=True)
+    seed = tmp_path / "seed"
+    git(tmp_path, "clone", "-q", str(origin), str(seed))
+    for c in (seed,):
+        git(c, "config", "user.email", "t@t"); git(c, "config", "user.name", "t")
+    (seed / "data").mkdir(); (seed / "docs").mkdir(); (seed / "config").mkdir()
+    for f in ("data/webinars.json", "docs/webinars.json", "docs/webinars.ics", "config/manual_webinars.yaml"):
+        (seed / f).write_text("v0\n")
+    git(seed, "add", "-A"); git(seed, "commit", "-qm", "seed"); git(seed, "push", "-q", "origin", "main")
+
+    me = tmp_path / "me"
+    git(tmp_path, "clone", "-q", str(origin), str(me))
+    (me / "scripts").mkdir()
+    shutil.copy(ROOT / "scripts/commit_data.sh", me / "scripts/commit_data.sh")
+    (me / "data/webinars.json").write_text("mine\n")
+
+    # someone else pushes data first
+    (seed / "data/webinars.json").write_text("theirs\n")
+    git(seed, "commit", "-qam", "theirs"); git(seed, "push", "-q", "origin", "main")
+
+    rebuild = "printf 'theirs+mine\\n' > data/webinars.json"
+    subprocess.run(["bash", "scripts/commit_data.sh", "chore: test", "bash", "-c", rebuild],
+                   cwd=me, check=True, capture_output=True, text=True)
+    check = tmp_path / "check"
+    git(tmp_path, "clone", "-q", str(origin), str(check))
+    assert (check / "data/webinars.json").read_text() == "theirs+mine\n"
+    assert "theirs" in git(check, "log", "--format=%s")
