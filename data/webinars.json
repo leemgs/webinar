@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-10-23T10:31:00.144667+09:00",
-  "count": 104,
+  "generated_at": "2026-10-24T00:49:18.432723+09:00",
+  "count": 103,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "크리에이티브의 확장, 피지컬 AI와 에이전트가 만드는 미래",
-      "url": "https://talkit.tv/main/events/3625",
-      "start_kst": "2026-08-24T16:00:00+09:00",
-      "end_kst": "2026-08-24T17:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3625",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1786013654798.jpg"
-      ],
-      "id": "talkit-f79335575605"
-    },
     {
       "source": "allshowtv",
       "title": "AI 주권 시대, 도시에서 데이터센터까지",
@@ -1341,7 +1323,7 @@
       "registered": false,
       "prizes": [],
       "prize_images": [
-        "https://talkit.tv/userfiles/images/file1791895899769.jpg"
+        "https://talkit.tv/userfiles/images/file179279266070.jpg"
       ],
       "id": "talkit-659bd5534e18"
     },
