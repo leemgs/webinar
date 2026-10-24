@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T05:54:43.683760+09:00",
+  "generated_at": "2026-10-24T10:36:20.003967+09:00",
   "count": 103,
   "webinars": [
     {
@@ -573,9 +573,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/07/main_07173701470506.jpg"
-      ],
+      "prize_images": [],
       "id": "allshowtv-2cffb4ffaf3d"
     },
     {
@@ -773,7 +771,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/16/main_16171649866091.jpg"
+      ],
       "id": "allshowtv-9e79f223a181"
     },
     {
