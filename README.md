@@ -381,6 +381,56 @@ YAML에서 지운 수동 항목은 다음 반영 때 데이터·캘린더에서�
    화면이 없는 Linux에서는 [`scripts/with_display.sh`](scripts/with_display.sh)가 Xvfb로 실행합니다
    (Xvfb가 없으면 headless로 대체).
 
+#### (대안) systemd 서비스로 직접 등록 — 재부팅 후 자동 시작
+
+러너 PC가 Linux라면 `./svc.sh install` 대신 systemd 유닛을 직접 작성해도 됩니다.
+`run.sh`를 포그라운드로 돌리고 systemd가 프로세스 관리·자동 재시작·부팅 시 시작을 맡습니다.
+`User`/`Group`/`WorkingDirectory`/`ExecStart` 경로를 **러너가 설치된 사용자·경로에 맞게 수정**하세요.
+
+```ini
+# /etc/systemd/system/github-actions-runner-webinar.service
+[Unit]
+Description=GitHub Actions Self-hosted Runner (webinar)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# ✅ runner가 설치된 사용자/경로에 맞게 수정
+User=invain
+Group=invain
+WorkingDirectory=/var/www/invain/github-actions/webinar
+
+# run.sh는 포그라운드로 실행되며 systemd가 프로세스를 관리합니다
+ExecStart=/var/www/invain/github-actions/webinar/run.sh
+
+# 비정상 종료 시 자동 재시작
+Restart=always
+RestartSec=10
+
+# 로그는 journald로 쌓임 (journalctl로 확인)
+KillSignal=SIGINT
+TimeoutStopSec=30
+
+# (옵션) 파일 디스크립터/프로세스 제한 완화
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now github-actions-runner-webinar.service   # 부팅 시 자동 시작 + 지금 시작
+sudo systemctl status github-actions-runner-webinar.service         # 상태 확인
+journalctl -u github-actions-runner-webinar.service -f              # 실시간 로그
+```
+
+> 러너가 온라인이어야 워크플로가 실행됩니다. 위 서비스가 `active (running)`이면
+> GitHub의 **Settings → Actions → Runners** 목록에서도 러너가 **Idle/Active** 로 보입니다.
+> `./svc.sh install` 방식과 systemd 유닛 방식 중 **하나만** 쓰세요(중복 실행 금지).
+
 (선택) Variables에 `SHAREDIT_SELF_HOSTED` = `true` 를 두면 [`sharedit.yml`](.github/workflows/sharedit.yml)이
 매일 09:40·21:40(KST)에 쉐어드IT만 한 번 더 수집하고, 일일 동기화는 쉐어드IT를 건너뜁니다.
 
