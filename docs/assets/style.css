@@ -309,6 +309,8 @@ a:hover { text-decoration: underline; }
 .hbar-track { background: color-mix(in srgb, var(--text-muted) 16%, transparent); border-radius: 999px; height: 16px; overflow: hidden; }
 .hbar-fill { display: block; height: 100%; border-radius: 999px 4px 4px 999px; min-width: 3px; transition: width .5s ease; }
 .hbar-val { font-size: 0.82rem; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; min-width: 20px; text-align: right; }
+/* 기술 종목 names (e.g. 제조·자동화·로봇) are longer than site names */
+[data-period=tech] .hbar-row { grid-template-columns: 136px 1fr auto; }
 
 /* period chips above a chart (사이트별 웨비나 수: 전체 / month) */
 .month-chips { display: flex; gap: 6px; overflow-x: auto; margin: -4px 0 14px; padding-bottom: 2px; scrollbar-width: thin; }
@@ -383,6 +385,7 @@ a:hover { text-decoration: underline; }
   .dash-kpis { grid-template-columns: repeat(2, 1fr); }
   .dash-grid { grid-template-columns: 1fr; }
   .hbar-row { grid-template-columns: 80px 1fr auto; }
+  [data-period=tech] .hbar-row { grid-template-columns: 124px 1fr auto; }
 }
 
 /* footer */
