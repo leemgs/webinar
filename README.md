@@ -69,7 +69,7 @@ flowchart LR
 | 키 | 이름 | 주소 | 스크래퍼 상태 |
 |---|---|---|---|
 | `allshowtv` | 올쇼TV | https://www.allshowtv.com | ✅ 실서비스 검증됨 |
-| `ddtube` | DD튜브 | https://www.ddtube.co.kr | ✅ 실서비스 검증됨(상세페이지 보강) |
+| `ddtube` | DD튜브 | https://www.ddtube.co.kr | ✅ 홈 슬라이더 + `/webinar/`·`/conference/` 목록, 최신 24개 상세페이지(종료시각 포함) |
 | `talkit` | 토크아이티 | https://talkit.tv | ✅ 실서비스 검증됨 |
 | `sharedit` | 쉐어드IT | https://www.sharedit.co.kr | ⚠️ GitHub 러너는 Cloudflare 챌린지로 차단 → [수동 등록](#수집이-막힌-웨비나-등록-sharedit-등) 또는 self-hosted 러너 |
 | `dubiz` | 두비즈 | https://dubiz.co.kr | 🟡 코드 작성 완료, 라이브 미검증(사내 프록시 차단) |
@@ -355,13 +355,14 @@ Actions → **웨비나 수동 등록 (Add webinar)** → *Run workflow* (GitHub
 | 입력 | 예 |
 | --- | --- |
 | 사이트 | `sharedit` |
-| URL | `https://webinar.sharedit.co.kr/posts/36031` |
+| URL (선택) | `https://webinar.sharedit.co.kr/posts/36031` — 모르면 비워 두기 → 쉐어드IT 웨비나 목록으로 연결 |
 | 제목 / 날짜 | `…` / `2026-10-27` |
 | 시작·종료 (선택) | `14:00` / `15:00` — 비우면 **종일 일정** |
 
 `config/manual_webinars.yaml`에 기록되고 데이터·ICS·구글 캘린더까지 약 1분 내 반영됩니다.
-같은 사이트+URL로 다시 실행하면 해당 항목이 **수정**됩니다(예: 나중에 시간 추가).
-실제로 수집된 동일 URL의 데이터가 있으면 항상 수집 데이터가 우선합니다.
+같은 사이트+URL(URL이 없으면 같은 날짜+제목)로 다시 실행하면 해당 항목이 **수정**됩니다(예: 나중에 시간 추가).
+같은 웨비나가 실제로 수집되면(같은 URL, 또는 같은 날짜+비슷한 제목) 항상 수집 데이터가 우선하고,
+YAML에서 지운 수동 항목은 다음 반영 때 데이터·캘린더에서도 빠집니다.
 로컬에서는: `python -m webinar.manual add --source sharedit --url … --title … --date 2026-10-27 --time 14:00`
 → `python -m webinar.manual apply`.
 

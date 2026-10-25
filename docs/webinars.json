@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-24T23:28:56.777673+09:00",
-  "count": 98,
+  "generated_at": "2026-10-25T09:30:21.770896+09:00",
+  "count": 100,
   "webinars": [
     {
       "source": "chontv",
@@ -1109,7 +1109,7 @@
       "title": "오픈 테크넷 서밋(Open Technet Summit) 2026 Online",
       "url": "https://www.ddtube.co.kr/d2113/",
       "start_kst": "2026-10-21T10:00:00+09:00",
-      "end_kst": "2026-10-21T11:00:00+09:00",
+      "end_kst": "2026-10-21T15:45:00+09:00",
       "host": "",
       "register_url": "https://www.ddtube.co.kr/d2113/",
       "description": "",
@@ -1245,11 +1245,11 @@
     },
     {
       "source": "sharedit",
-      "title": "쉐어드IT 웨비나 (10/27 · 상세는 원문 링크)",
+      "title": "중소기업을 위한 CrowdStrike Falcon® Platform 도입 가이드",
       "url": "https://webinar.sharedit.co.kr/posts/36031",
       "start_kst": "2026-10-27T00:00:00+09:00",
       "end_kst": null,
-      "host": "",
+      "host": "CrowdStrike · 인성디지탈",
       "register_url": "https://webinar.sharedit.co.kr/posts/36031",
       "description": "",
       "thumbnail": "",
@@ -1314,6 +1314,24 @@
         "https://talkit.tv/userfiles/images/file179129544158.jpg"
       ],
       "id": "talkit-f3c58757ac66"
+    },
+    {
+      "source": "sharedit",
+      "title": "바이브 코딩에서 바이브 모델링으로 — OutSystems로 만나는 개발 혁신과 WMS",
+      "url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+      "start_kst": "2026-10-29T00:00:00+09:00",
+      "end_kst": null,
+      "host": "OutSystems · 에코레트리 · 플래닛",
+      "register_url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "sharedit-3b55e479ef14"
     },
     {
       "source": "cloit",
@@ -1469,6 +1487,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "chontv-58a6b21266ba"
+    },
+    {
+      "source": "sharedit",
+      "title": "AI를 가속하는 스토리지 케사르(KESAR™)",
+      "url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+      "start_kst": "2026-11-18T14:00:00+09:00",
+      "end_kst": "2026-11-18T15:00:00+09:00",
+      "host": "AIC · MangoBoost",
+      "register_url": "https://www.sharedit.co.kr/posts?post_type_id=4",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "sharedit-4b04f72a2160"
     },
     {
       "source": "e4ds",

@@ -4,7 +4,8 @@ name: 웨비나 수동 등록 (Add webinar)
 # runners with a Cloudflare challenge. Run it from the Actions tab or the
 # GitHub mobile app: it records the webinar in config/manual_webinars.yaml,
 # rebuilds the dataset/ICS, syncs Google Calendar and pushes to main. Running it
-# again with the same site + URL updates that entry (e.g. to add the time).
+# again with the same site + URL (or, without a URL, the same date + title)
+# updates that entry (e.g. to add the time).
 on:
   workflow_dispatch:
     inputs:
@@ -14,8 +15,8 @@ on:
         options: [sharedit, allshowtv, ddtube, e4ds, talkit, dubiz, chontv, cloit]
         default: sharedit
       url:
-        description: "웨비나 상세 URL (예: https://webinar.sharedit.co.kr/posts/36031)"
-        required: true
+        description: "웨비나 상세 URL (모르면 비워 두기 → 사이트 목록 페이지로 연결)"
+        required: false
         type: string
       title:
         description: "제목"
@@ -91,5 +92,5 @@ jobs:
             echo "- 사이트: $MANUAL_SOURCE"
             echo "- 제목: $MANUAL_TITLE"
             echo "- 일시: $MANUAL_DATE ${MANUAL_TIME:-(시간 미정 → 종일)}${MANUAL_END:+ ~ $MANUAL_END}"
-            echo "- URL: $MANUAL_URL"
+            echo "- URL: ${MANUAL_URL:-(미입력 → 목록 페이지)}"
           } >> "$GITHUB_STEP_SUMMARY"

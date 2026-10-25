@@ -4,10 +4,16 @@ Some sites bot-check GitHub Actions runners so hard that nothing can be scraped
 from CI (e.g. both sharedit hosts). A webinar known to exist can be listed in
 config/manual_webinars.yaml so it still reaches the calendar.
 
-Precedence: a webinar actually scraped with the same url always wins (it is
-tagged as scraped, the manual one is tagged "manual"). A manual entry replaces
-an existing record only when that record was itself manual, so editing the YAML
-(e.g. filling in the title or time later) takes effect on the next run.
+`url` is optional: when the detail link isn't known (only the listing banner
+was seen), the entry links to the site's listing page and is identified by
+source + date + title instead.
+
+Precedence: a webinar actually scraped always wins — matched by id (same url),
+or by the same source + day + a similar title (e.g. scraped from the other
+sharedit host). A manual entry replaces an existing record only when that
+record was itself manual, so editing the YAML (e.g. filling in the title or time
+later) takes effect on the next run, and a manual record whose entry was removed
+from the YAML is dropped.
 """
 from __future__ import annotations
 
@@ -34,6 +40,13 @@ def _iso(d: str, t: str | None) -> str:
     return datetime.combine(day, time(hh, mm), ZoneInfo("Asia/Seoul")).isoformat()
 
 
+def _listing_url(source: str) -> str:
+    from .config import load_sites
+
+    cfg = load_sites().get(source) or {}
+    return cfg.get("listing_url") or cfg.get("base_url") or ""
+
+
 def load_manual(path: Path = MANUAL_WEBINARS_YAML) -> list[Webinar]:
     if not path.exists():
         return []
@@ -47,7 +60,11 @@ def load_manual(path: Path = MANUAL_WEBINARS_YAML) -> list[Webinar]:
             if not end and e.get("time"):
                 end = datetime.fromisoformat(start).replace(
                     hour=(int(e["time"].split(":")[0]) + 1) % 24).isoformat()
-            url = e["url"].split("?")[0].rstrip("/")
+            if e.get("url"):
+                url, wid = normalize_url(e["url"]), ""
+            else:  # detail link unknown: point at the listing, key by date+title
+                url = _listing_url(e["source"])
+                wid = Webinar.make_id(e["source"], f"manual:{e['date']}:{_title_key(e['title'])}")
             out.append(Webinar(
                 source=e["source"],
                 title=e["title"],
@@ -58,22 +75,57 @@ def load_manual(path: Path = MANUAL_WEBINARS_YAML) -> list[Webinar]:
                 host=e.get("host", ""),
                 thumbnail=e.get("thumbnail", ""),
                 tags=[MANUAL_TAG],
+                id=wid,
             ))
         except Exception as ex:  # one bad entry must not break the run
             log.warning("manual_webinars.yaml entry #%d skipped: %s", i, ex)
     return out
 
 
+def _title_key(title: str) -> str:
+    return re.sub(r"[^0-9a-z가-힣]+", "", str(title).lower())
+
+
+def _tokens(title: str) -> set[str]:
+    return {t for t in re.split(r"[^0-9a-z가-힣]+", str(title).lower()) if len(t) >= 2}
+
+
+def _same_event(manual: Webinar, other: Webinar) -> bool:
+    """A scraped record of the same webinar: same source + day, similar title."""
+    if other.source != manual.source or not other.start_kst or not manual.start_kst:
+        return False
+    if other.start_kst[:10] != manual.start_kst[:10]:
+        return False
+    a, b = _title_key(manual.title), _title_key(other.title)
+    if a and b and (a in b or b in a):
+        return True
+    ta, tb = _tokens(manual.title), _tokens(other.title)
+    return bool(ta) and len(ta & tb) * 2 >= len(ta)
+
+
 def apply_manual(merged: list[Webinar], manual: list[Webinar]) -> list[Webinar]:
-    """Add manual entries that no scraped record supersedes."""
-    by_id = {w.id: w for w in merged}
+    """Add manual entries that no scraped record supersedes.
+
+    Manual records no longer listed in the YAML are removed, so deleting or
+    re-keying an entry never leaves a stale calendar event behind.
+    """
+    wanted = {m.id for m in manual}
+    by_id = {w.id: w for w in merged
+             if MANUAL_TAG not in (w.tags or []) or w.id in wanted}
+    scraped = [w for w in by_id.values() if MANUAL_TAG not in (w.tags or [])]
     for m in manual:
         cur = by_id.get(m.id)
-        if cur is None or MANUAL_TAG in (cur.tags or []):
-            if cur is not None:
-                m.registered = cur.registered
-            by_id[m.id] = m
-            log.info("[manual] %s | %s | %s", m.start_kst, m.title[:50], m.url)
+        if cur is not None and MANUAL_TAG not in (cur.tags or []):
+            continue  # scraped with the same url
+        dup = next((w for w in scraped if _same_event(m, w)), None)
+        if dup is not None:
+            by_id.pop(m.id, None)
+            log.info("[manual] superseded by scraped %s: %s", dup.url, m.title[:50])
+            continue
+        if cur is not None:
+            m.registered = cur.registered
+        by_id[m.id] = m
+        log.info("[manual] %s | %s | %s", m.start_kst, m.title[:50], m.url)
     return list(by_id.values())
 
 
@@ -85,9 +137,22 @@ def normalize_url(url: str) -> str:
     return url.strip().split("?")[0].split("#")[0].rstrip("/")
 
 
-def add_entry(path: Path, source: str, url: str, title: str, day: str,
+def _same_entry(a: dict, b: dict) -> bool:
+    if a.get("source") != b.get("source"):
+        return False
+    if a.get("url") and b.get("url"):
+        return normalize_url(str(a["url"])) == normalize_url(str(b["url"]))
+    return (not a.get("url") and not b.get("url")
+            and str(a.get("date")) == str(b.get("date"))
+            and _title_key(a.get("title", "")) == _title_key(b.get("title", "")))
+
+
+def add_entry(path: Path, source: str, url: str | None, title: str, day: str,
               start: str | None = None, end: str | None = None) -> str:
-    """Add (or update, matched by source + url) one entry in the YAML file.
+    """Add (or update) one entry in the YAML file.
+
+    Matched by source + url, or — for an entry without a url — by source +
+    date + title.
 
     Validates input; keeps the file's header comments (everything up to the
     `webinars:` line). Returns "added" or "updated".
@@ -97,7 +162,8 @@ def add_entry(path: Path, source: str, url: str, title: str, day: str,
     source, title = source.strip(), " ".join(title.split())
     if source not in load_sites():
         raise ValueError(f"unknown source {source!r}")
-    if not re.match(r"^https?://", url.strip()):
+    url = (url or "").strip()
+    if url and not re.match(r"^https?://", url):
         raise ValueError("url must start with http:// or https://")
     if not title:
         raise ValueError("title is required")
@@ -111,8 +177,10 @@ def add_entry(path: Path, source: str, url: str, title: str, day: str,
     header = head if sep else text.rstrip("\n")
     entries = (yaml.safe_load(text) or {}).get("webinars") or [] if text.strip() else []
 
-    entry = {"source": source, "url": normalize_url(url), "title": title,
-             "date": day.strip()}
+    entry = {"source": source}
+    if url:
+        entry["url"] = normalize_url(url)
+    entry.update(title=title, date=day.strip())
     if start:
         entry["time"] = start.strip()
     if end:
@@ -120,7 +188,7 @@ def add_entry(path: Path, source: str, url: str, title: str, day: str,
 
     action = "added"
     for i, e in enumerate(entries):
-        if e.get("source") == source and normalize_url(str(e.get("url", ""))) == entry["url"]:
+        if _same_entry(e, entry):
             entries[i], action = entry, "updated"
             break
     else:
@@ -164,7 +232,7 @@ def main(argv: list[str] | None = None) -> int:
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
     if args.cmd == "add":
-        missing = [k for k in ("source", "url", "title", "date") if not getattr(args, k)]
+        missing = [k for k in ("source", "title", "date") if not getattr(args, k)]
         if missing:
             p.error("missing: " + ", ".join(missing))
         action = add_entry(MANUAL_WEBINARS_YAML, args.source, args.url, args.title,

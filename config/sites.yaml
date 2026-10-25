@@ -74,6 +74,11 @@ ddtube:
   requires_login: false
   scraper: ddtube
   wait_selector: "body"
+  # the homepage slider shows only promoted events; the archives list the rest
+  extra_listing_urls:
+    - "https://www.ddtube.co.kr/webinar/"
+    - "https://www.ddtube.co.kr/conference/"
+  max_details: 24
   login:
     url: "https://www.ddtube.co.kr/login"
     user_selector: "input[name='email'], input[name='id']"

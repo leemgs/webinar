@@ -1062,6 +1062,82 @@ def test_manual_add_entry_adds_updates_validates_and_keeps_header(tmp_path):
             manual.add_entry(y, *bad)
 
 
+def test_manual_entries_without_url_dedupe_and_stale_cleanup(tmp_path):
+    from webinar import manual
+    from webinar.models import Webinar
+
+    y = tmp_path / "m.yaml"
+    # only the listing banner was seen: no detail url
+    assert manual.add_entry(y, "sharedit", "", "OutSystems로 만나는 개발 혁신과 WMS",
+                            "2026-10-29") == "added"
+    assert manual.add_entry(y, "sharedit", None, "AI를 가속하는 스토리지 케사르(KESAR™)",
+                            "2026-11-18", "14:00", "15:00") == "added"
+    # same date + title (spacing/punctuation aside) -> updates, not duplicates
+    assert manual.add_entry(y, "sharedit", None, "OutSystems로 만나는  개발 혁신과 WMS",
+                            "2026-10-29", "14:00") == "updated"
+    w1, w2 = manual.load_manual(y)
+    assert w1.url == "https://www.sharedit.co.kr/posts?post_type_id=4"  # the listing
+    assert w1.id != w2.id and w1.start_kst.startswith("2026-10-29T14:00")
+    assert w2.end_kst.startswith("2026-11-18T15:00")
+
+    # a manual record whose entry left the YAML is dropped; others kept
+    stale = Webinar(source="sharedit", title="쉐어드IT 웨비나 (10/27)", url="https://x/old",
+                    start_kst="2026-10-27T00:00:00+09:00", tags=["manual"])
+    other = Webinar(source="ddtube", title="scraped", url="https://d/1",
+                    start_kst="2026-11-05T14:00:00+09:00")
+    out = manual.apply_manual([stale, other], [w1, w2])
+    assert {w.id for w in out} == {other.id, w1.id, w2.id}
+
+    # the same webinar scraped later (other url, same day, similar title) wins
+    scraped = Webinar(source="sharedit", title="[1029] OutSystems로 만나는 개발 혁신과 WMS",
+                      url="https://webinar.sharedit.co.kr/posts/36100",
+                      start_kst="2026-10-29T14:00:00+09:00")
+    out = manual.apply_manual([scraped, w1], [w1, w2])
+    assert {w.id for w in out} == {scraped.id, w2.id}
+    # ...but a different webinar on the same day does not suppress it
+    diff = Webinar(source="sharedit", title="클라우드 보안 전략", url="https://x/9",
+                   start_kst="2026-10-29T10:00:00+09:00")
+    assert w1.id in {w.id for w in manual.apply_manual([diff], [w1])}
+
+
+def test_ddtube_schedule_keeps_published_end_time():
+    from webinar.scrapers.ddtube import parse_schedule
+
+    text = ("지난 웨비나 문의하기 오픈 테크넷 서밋 (Open Technet Summit) 2026 "
+            "2026-10-21 10:00~ 15:45 영상 목록 내용 오전 9시 접수")
+    assert parse_schedule(text) == ("2026-10-21T10:00:00+09:00", "2026-10-21T15:45:00+09:00")
+    # single time -> one hour; no time -> date-only (all-day)
+    assert parse_schedule("발표자 2026-11-05 14:00 내용")[1] == "2026-11-05T15:00:00+09:00"
+    assert parse_schedule("2026-11-05 내용") == ("2026-11-05T00:00:00+09:00", None)
+    assert parse_schedule("no date here") == (None, None)
+
+
+def test_ddtube_collects_from_homepage_and_archives_newest_first():
+    sc = get_scraper("ddtube", {
+        "base_url": "https://www.ddtube.co.kr",
+        "listing_url": "https://www.ddtube.co.kr",
+        "extra_listing_urls": ["https://www.ddtube.co.kr/webinar/",
+                               "https://www.ddtube.co.kr/conference/"],
+        "max_details": 3,
+    })
+    pages = {
+        "https://www.ddtube.co.kr": '<a href="/d2112/">slider</a>',
+        "https://www.ddtube.co.kr/webinar/": '<a href="/d2113/">a</a><a href="/d2111/">b</a>'
+                                             '<a href="/d2093/">old</a>',
+        "https://www.ddtube.co.kr/conference/": "",  # a failed page is skipped
+    }
+
+    class B:
+        def get_html(self, url, wait_selector=None, **kw):
+            return pages.get(url, "")
+
+    assert [w.url for w in sc.collect(B())] == [
+        "https://www.ddtube.co.kr/d2113/",
+        "https://www.ddtube.co.kr/d2112/",  # only on the homepage slider
+        "https://www.ddtube.co.kr/d2111/",
+    ]
+
+
 def test_pipeline_skip_sites_and_merge_from(monkeypatch, tmp_path):
     import json
     from webinar import pipeline
