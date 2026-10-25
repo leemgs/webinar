@@ -62,6 +62,7 @@ const state = {
   cursor: new Date(),
   activeSources: new Set(Object.keys(SOURCES)),
   activePrizes: new Set(), // empty = no prize filter
+  siteMonth: new URLSearchParams(location.search).get("month") || "", // dashboard: "" = all months
 };
 
 // --- helpers ----------------------------------------------------------------
@@ -277,7 +278,7 @@ function hbars(rows) {
   return `<div class="hbars">${rows.map((r) => `
     <div class="hbar-row" title="${escapeHtml(r.name)}: ${r.value}건">
       <span class="hbar-name"><span class="hbar-dot" style="background:${r.color}"></span>${escapeHtml(r.name)}</span>
-      <span class="hbar-track"><span class="hbar-fill" style="width:${(r.value / max) * 100}%;background:${r.color}"></span></span>
+      <span class="hbar-track"><span class="hbar-fill" style="width:${(r.value / max) * 100}%;background:${r.color}${r.value ? "" : ";min-width:0"}"></span></span>
       <span class="hbar-val" style="color:${r.color}">${r.value}</span>
     </div>`).join("")}</div>`;
 }
@@ -349,12 +350,21 @@ function renderDashboard() {
   const activeSites = new Set(all.map((w) => w.source));
   const thisMonthCount = all.filter((w) => monthKey(w.start_kst) === thisMonth).length;
 
-  // per-source counts (identity color = each site's brand color)
-  const bySite = {};
-  for (const w of all) bySite[w.source] = (bySite[w.source] || 0) + 1;
-  const siteRows = Object.keys(SOURCES)
-    .map((k) => ({ name: SOURCES[k].name, value: bySite[k] || 0, color: SRC_HEX[k] }))
-    .sort((a, b) => b.value - a.value);
+  // per-source counts (identity color = each site's brand color), for the
+  // whole period or one month (?month=YYYY-MM, picked with the month chips)
+  const siteRowsFor = (month) => {
+    const bySite = {};
+    for (const w of all) {
+      if (month && monthKey(w.start_kst) !== month) continue;
+      bySite[w.source] = (bySite[w.source] || 0) + 1;
+    }
+    return Object.keys(SOURCES)
+      .map((k) => ({ name: SOURCES[k].name, value: bySite[k] || 0, color: SRC_HEX[k] }))
+      .sort((a, b) => b.value - a.value);
+  };
+  const siteSub = (month) => month
+    ? `${month.replace("-", "년 ")}월 개최 기준 · ${siteRowsFor(month).reduce((n, r) => n + r.value, 0)}건`
+    : "출처별 수집 건수 (전체 기간)";
 
   // per-category counts (기술 종목)
   const byCat = new Map(CATEGORIES.map((c) => [c.key, 0]));
@@ -382,7 +392,7 @@ function renderDashboard() {
     for (let y = ys, m = ms; y < ye || (y === ye && m <= me); m === 12 ? (y++, m = 1) : m++) {
       const key = `${y}-${pad(m)}`;
       const parts = Object.entries(bySiteMonth[key] || {}).map(([k, v]) => ({ key: k, value: v }));
-      monthCols.push({ label: `${String(y).slice(2)}.${pad(m)}`, value: counts[key] || 0, current: key === thisMonth, parts });
+      monthCols.push({ key, label: `${String(y).slice(2)}.${pad(m)}`, value: counts[key] || 0, current: key === thisMonth, parts });
     }
   }
 
@@ -410,8 +420,12 @@ function renderDashboard() {
     <div class="dash-grid">
       <div class="card">
         <h3>사이트별 웨비나 수</h3>
-        <p class="card-sub">출처별 수집 건수 (전체 기간)</p>
-        ${hbars(siteRows)}
+        <p class="card-sub" id="site-sub">${siteSub(state.siteMonth)}</p>
+        <div class="month-chips" role="group" aria-label="기간 선택">
+          <button type="button" data-month="">전체</button>${monthCols.map((c) => `
+          <button type="button" data-month="${c.key}"${c.current ? ' class="is-current" title="이번 달"' : ""}>${escapeHtml(c.label)}</button>`).join("")}
+        </div>
+        <div id="site-bars">${hbars(siteRowsFor(state.siteMonth))}</div>
       </div>
       <div class="card">
         <h3>기술 종목 분포</h3>
@@ -430,6 +444,20 @@ function renderDashboard() {
       </div>
     </div>
     <p class="dash-note">※ 기술 종목은 웨비나 제목·주최명 키워드로 자동 분류한 추정치이며, 실제 주제와 다를 수 있습니다.</p>`;
+
+  // month chips: redraw only the site bars, and keep the choice in the URL
+  const chips = box.querySelectorAll(".month-chips button");
+  const select = (month) => {
+    state.siteMonth = month;
+    chips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.month === month)));
+    $("#site-sub").textContent = siteSub(month);
+    $("#site-bars").innerHTML = hbars(siteRowsFor(month));
+    const url = new URL(location.href);
+    if (month) url.searchParams.set("month", month); else url.searchParams.delete("month");
+    history.replaceState(null, "", url);
+  };
+  chips.forEach((b) => (b.onclick = () => select(b.dataset.month)));
+  select(monthCols.some((c) => c.key === state.siteMonth) ? state.siteMonth : "");
 }
 
 // --- modal ------------------------------------------------------------------
