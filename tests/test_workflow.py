@@ -122,6 +122,12 @@ def test_add_webinar_workflow_never_interpolates_inputs_into_shell():
     assert env["MANUAL_URL"] == "${{ inputs.url }}"
 
 
+def test_runner_setup_provides_fonts_for_chromium():
+    # no fonts on the runner => every Chromium page aborts (remote_font_face_source.cc)
+    action = (ROOT / ".github/actions/setup-runner/action.yml").read_text(encoding="utf-8")
+    assert 'FONTCONFIG_FILE=$(scripts/ensure_fonts.sh)' in action
+
+
 def test_daily_sync_scrapes_sharedit_on_the_self_hosted_runner():
     wf = _yaml("daily.yml")
     assert wf["jobs"]["sync"]["runs-on"] == "self-hosted"

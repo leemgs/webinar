@@ -25,6 +25,8 @@ runs:
         if [ "$WITH_BROWSER" = "true" ]; then
           # system libraries need root once: sudo "$venv/bin/python" -m playwright install-deps chromium
           "$venv/bin/python" -m playwright install chromium
+          # a machine without fonts crashes every Chromium page; add user fonts
+          echo "FONTCONFIG_FILE=$(scripts/ensure_fonts.sh)" >> "$GITHUB_ENV"
         fi
         # later steps' `python` / `pytest` resolve to the venv
         echo "$venv/bin" >> "$GITHUB_PATH"

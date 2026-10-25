@@ -83,8 +83,8 @@ class Browser:
         # Xvfb has no GPU; the software GPU process only costs memory there.
         "--disable-gpu",
     ]
-    # A crashed renderer usually means the machine ran short of memory; a fresh
-    # Chromium frees it. Bounded so a box that can't render at all still ends.
+    # A crashed renderer (memory pressure, a bad page) often renders fine in a
+    # fresh Chromium. Bounded so a box that can't render at all still ends.
     MAX_RESTARTS = 4
 
     def __init__(self, headless: bool = True, storage_state: Optional[str] = None):

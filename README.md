@@ -380,10 +380,14 @@ YAML에서 지운 수동 항목은 다음 반영 때 데이터·캘린더에서�
    `~/.cache/webinar-venv` 가상환경·패키지·Playwright Chromium을 만들고 이후 실행에서 재사용합니다.
    화면이 없는 Linux에서는 [`scripts/with_display.sh`](scripts/with_display.sh)가 Xvfb로 실행합니다
    (Xvfb가 없으면 headless로 대체).
-4. 러너 PC 여유 메모리는 **1.5 GB 이상** 권장. 부족하면 Chromium 페이지가 `Page crashed`로 죽어
-   거의 모든 사이트가 0건이 됩니다(이전 데이터는 유지됨). 일일 동기화의 **Runner diagnostics** 단계가
-   메모리·`/dev/shm`·디스플레이 상태를 출력하고 부족하면 경고를 띄웁니다. 크롬은 `/dev/shm` 대신 `/tmp`를 쓰고,
-   페이지가 죽으면 쿠키를 유지한 채 Chromium을 다시 띄워 한 번 재시도합니다.
+4. **글꼴**: 글꼴이 하나도 없는 서버(최소 설치 Ubuntu)에서는 웹폰트를 쓰는 모든 페이지에서 Chromium이
+   `FATAL ... remote_font_face_source.cc` 로 죽어(`Page crashed`) 거의 모든 사이트가 0건이 됩니다.
+   `setup-runner`가 sudo 없이 `fonts-nanum`·`fonts-dejavu-core`를 `~/.cache/webinar-fonts`에 풀어
+   `FONTCONFIG_FILE`로 지정하지만, 가능하면 한 번 설치해 두세요:
+   `sudo apt-get install -y fonts-nanum fonts-dejavu-core` (또는 위 2번의 `playwright install-deps chromium`).
+   일일 동기화의 **Runner diagnostics** 단계가 메모리·글꼴·디스플레이와 Chromium 시험 접속 결과를 출력합니다.
+   페이지가 죽으면 쿠키를 유지한 채 Chromium을 다시 띄워 재시도하고, 계속 죽으면 남은 페이지를 건너뜁니다
+   (이전 데이터 유지, 수집 단계는 최대 45분).
 
 #### (대안) systemd 서비스로 직접 등록 — 재부팅 후 자동 시작
 
