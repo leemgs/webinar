@@ -282,17 +282,6 @@ function hbars(rows) {
     </div>`).join("")}</div>`;
 }
 
-// vertical column chart: cols = [{label, value, current}]
-function vbars(cols) {
-  const max = Math.max(1, ...cols.map((c) => c.value));
-  return `<div class="vbars">${cols.map((c) => `
-    <div class="vbar-col${c.current ? " is-current" : ""}" title="${escapeHtml(c.label)}: ${c.value}건">
-      <span class="vbar-track"><span class="vbar-fill" style="height:${(c.value / max) * 100}%;background:${c.color || "var(--accent)"}">
-        <span class="vbar-val" style="color:${c.color || "var(--accent)"}">${c.value}</span></span></span>
-      <span class="vbar-label">${escapeHtml(c.label)}</span>
-    </div>`).join("")}</div>`;
-}
-
 // stacking order of the per-site monthly columns (bottom → top): the order whose
 // neighbouring site colors stay most distinct under color-vision deficiency
 const STACK_ORDER = ["ddtube", "allshowtv", "e4ds", "sharedit", "chontv", "talkit", "cloit", "dubiz"];
@@ -397,11 +386,18 @@ function renderDashboard() {
     }
   }
 
-  // yearly totals
+  // yearly totals, by site
   const byYear = {};
-  for (const w of all) { const y = (w.start_kst || "").slice(0, 4); if (y) byYear[y] = (byYear[y] || 0) + 1; }
-  const yearCols = Object.keys(byYear).sort()
-    .map((y) => ({ label: `${y}년`, value: byYear[y], current: y === String(now.getFullYear()) }));
+  for (const w of all) {
+    const y = (w.start_kst || "").slice(0, 4);
+    if (!y) continue;
+    byYear[y] = byYear[y] || {};
+    byYear[y][w.source] = (byYear[y][w.source] || 0) + 1;
+  }
+  const yearCols = Object.keys(byYear).sort().map((y) => {
+    const parts = Object.entries(byYear[y]).map(([k, v]) => ({ key: k, value: v }));
+    return { label: `${y}년`, value: parts.reduce((n, p) => n + p.value, 0), current: y === String(now.getFullYear()), parts };
+  });
 
   box.innerHTML = `
     <div class="dash-kpis">
@@ -429,8 +425,8 @@ function renderDashboard() {
       </div>
       <div class="card span-2">
         <h3>연도별 웨비나 수</h3>
-        <p class="card-sub">개최연도 기준 건수 (강조 = 올해)</p>
-        ${vbars(yearCols)}
+        <p class="card-sub">개최연도 기준 건수 · 색 = 사이트, 막대 위 숫자 = 합계 (강조 = 올해)</p>
+        ${stackedVbars(yearCols, 220)}
       </div>
     </div>
     <p class="dash-note">※ 기술 종목은 웨비나 제목·주최명 키워드로 자동 분류한 추정치이며, 실제 주제와 다를 수 있습니다.</p>`;
