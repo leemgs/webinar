@@ -1,14 +1,12 @@
 name: sharedit sync (self-hosted)
 
-# sharedit.co.kr answers every GitHub-hosted runner with a Cloudflare managed
-# challenge (cf-mitigated: challenge), so the daily sync can never read it. A
-# self-hosted runner on an ordinary home/office network browses it like any
-# visitor. This job is OPT-IN and does nothing until you:
-#   1. register a self-hosted runner with the extra label "sharedit"
-#      (repo Settings → Actions → Runners → New self-hosted runner), and
-#   2. set the repository variable SHAREDIT_SELF_HOSTED = true
-#      (Settings → Secrets and variables → Actions → Variables).
-# While enabled, the daily sync skips sharedit and this job owns it.
+# sharedit.co.kr answers GitHub-hosted runners with a Cloudflare managed
+# challenge (cf-mitigated: challenge); a self-hosted runner on an ordinary
+# home/office network browses it like any visitor. The daily sync already runs
+# on the self-hosted runner and scrapes sharedit itself, so this extra pass
+# (40 minutes later, sharedit only) is OPT-IN: set the repository variable
+# SHAREDIT_SELF_HOSTED = true (Settings → Secrets and variables → Actions →
+# Variables). While enabled, the daily sync skips sharedit and this job owns it.
 # Security: only use a self-hosted runner on a public repo if fork pull-request
 # workflows require approval (Settings → Actions → General). This workflow
 # itself never runs on pull requests.
@@ -28,7 +26,7 @@ concurrency:
 jobs:
   sharedit:
     if: vars.SHAREDIT_SELF_HOSTED == 'true'
-    runs-on: [self-hosted, sharedit]
+    runs-on: self-hosted
     env:
       PYTHONPATH: src
       WEBINAR_HEADED: "1"    # a real browser window, as a visitor would use
@@ -44,32 +42,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Python environment
-        run: |
-          python3 -m venv .venv
-          . .venv/bin/activate
-          pip install -q --upgrade pip
-          pip install -q -r requirements.txt
-          python -m playwright install chromium
+      - name: Python + Playwright environment
+        uses: ./.github/actions/setup-runner
 
       - name: Scrape sharedit
-        run: |
-          . .venv/bin/activate
-          cmd=(python -m webinar.pipeline --site sharedit -v --scraped-out "$RUNNER_TEMP/sharedit.json")
-          # headless Linux box without a display: use a virtual one if available
-          if [ -z "${DISPLAY:-}" ] && [ "$(uname)" = "Linux" ] && command -v xvfb-run >/dev/null; then
-            xvfb-run -a "${cmd[@]}"
-          else
-            "${cmd[@]}"
-          fi
+        run: scripts/with_display.sh python -m webinar.pipeline --site sharedit -v --scraped-out "$RUNNER_TEMP/sharedit.json"
 
       - name: Commit and push
         run: >-
-          . .venv/bin/activate &&
           scripts/commit_data.sh "chore: sharedit sync $(date -u +%Y-%m-%d)"
-          bash -c '. .venv/bin/activate && python -m webinar.pipeline --merge-from "$RUNNER_TEMP/sharedit.json"'
+          python -m webinar.pipeline --merge-from "$RUNNER_TEMP/sharedit.json"
 
       - name: Sync Google Calendar
-        run: |
-          . .venv/bin/activate
-          python -m webinar.calendar_sync --all --strict -v
+        run: python -m webinar.calendar_sync --all --strict -v

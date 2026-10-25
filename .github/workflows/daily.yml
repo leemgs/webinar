@@ -21,7 +21,12 @@ concurrency:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    # Self-hosted runner (see README "self-hosted 러너"): a home/office network
+    # is not Cloudflare-challenged the way GitHub's datacenter runners are.
+    runs-on: self-hosted
+    defaults:
+      run:
+        shell: bash
     env:
       PYTHONPATH: src
       # Google Calendar
@@ -52,23 +57,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-          cache: "pip"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Install Playwright Chromium
-        run: python -m playwright install --with-deps chromium
-
-      # Virtual display so Chromium can run headed: several sites (sharedit's
-      # www + webinar hosts) bot-check headless Chromium from CI runner IPs.
-      - name: Install Xvfb
-        run: sudo apt-get install -y --no-install-recommends xvfb
+      - name: Python + Playwright environment
+        uses: ./.github/actions/setup-runner
 
       - name: Run tests
         run: pytest -q
@@ -80,10 +70,11 @@ jobs:
           # (uploaded below as the "scrape-debug" artifact, kept 7 days).
           WEBINAR_DEBUG_DIR: debug
           WEBINAR_DEBUG_HOSTS: "allshowtv.com,cloit.com"
-          # sharedit is Cloudflare-challenged on GitHub-hosted runners; when the
-          # opt-in self-hosted job is enabled it owns sharedit (see sharedit.yml).
+          # when the opt-in sharedit-only job is enabled it owns sharedit
+          # (see sharedit.yml); otherwise this run scrapes sharedit too.
           WEBINAR_SKIP_SITES: ${{ vars.SHAREDIT_SELF_HOSTED == 'true' && 'sharedit' || '' }}
-        run: xvfb-run -a --server-args="-screen 0 1366x900x24" python -m webinar.pipeline -v --scraped-out "$RUNNER_TEMP/scraped.json"
+        # headed Chromium via the desktop session or Xvfb (scripts/with_display.sh)
+        run: scripts/with_display.sh python -m webinar.pipeline -v --scraped-out "$RUNNER_TEMP/scraped.json"
 
       - name: Upload scrape debug captures
         if: always()

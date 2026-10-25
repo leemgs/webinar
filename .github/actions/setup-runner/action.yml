@@ -1,0 +1,30 @@
+name: Set up webinar runner
+description: >-
+  Python venv + dependencies + Playwright Chromium on a self-hosted runner.
+  The venv and browser live under $HOME/.cache, so they survive the checkout's
+  workspace clean and later runs only top them up.
+inputs:
+  browser:
+    description: "Install Playwright Chromium"
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - name: Python environment
+      shell: bash
+      env:
+        WITH_BROWSER: ${{ inputs.browser }}
+      run: |
+        set -euo pipefail
+        py="$(command -v python3 || command -v python)"
+        "$py" -c 'import sys; assert sys.version_info >= (3, 10), "Python 3.10+ is required on the runner, found " + sys.version'
+        venv="$HOME/.cache/webinar-venv"
+        [ -x "$venv/bin/python" ] || "$py" -m venv "$venv"
+        "$venv/bin/python" -m pip install -q --upgrade pip
+        "$venv/bin/python" -m pip install -q -r requirements.txt
+        if [ "$WITH_BROWSER" = "true" ]; then
+          # system libraries need root once: sudo "$venv/bin/python" -m playwright install-deps chromium
+          "$venv/bin/python" -m playwright install chromium
+        fi
+        # later steps' `python` / `pytest` resolve to the venv
+        echo "$venv/bin" >> "$GITHUB_PATH"

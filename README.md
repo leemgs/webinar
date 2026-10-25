@@ -71,7 +71,7 @@ flowchart LR
 | `allshowtv` | 올쇼TV | https://www.allshowtv.com | ✅ 실서비스 검증됨 |
 | `ddtube` | DD튜브 | https://www.ddtube.co.kr | ✅ 홈 슬라이더 + `/webinar/`·`/conference/` 목록, 최신 24개 상세페이지(종료시각 포함) |
 | `talkit` | 토크아이티 | https://talkit.tv | ✅ 실서비스 검증됨 |
-| `sharedit` | 쉐어드IT | https://www.sharedit.co.kr | ⚠️ GitHub 러너는 Cloudflare 챌린지로 차단 → [수동 등록](#수집이-막힌-웨비나-등록-sharedit-등) 또는 self-hosted 러너 |
+| `sharedit` | 쉐어드IT | https://www.sharedit.co.kr | ⚠️ GitHub 호스팅 러너는 Cloudflare 챌린지로 차단 → self-hosted 러너로 수집, 필요 시 [수동 등록](#수집이-막힌-웨비나-등록-sharedit-등) |
 | `dubiz` | 두비즈 | https://dubiz.co.kr | 🟡 코드 작성 완료, 라이브 미검증(사내 프록시 차단) |
 | `e4ds` | e4ds | https://www.e4ds.com/webinar.asp | ⚙️ 로그인 필요 |
 | `cloit` | CLOIT:ON | https://webinar.cloit.com | ⚙️ SPA, 현재 세션 없음 |
@@ -366,13 +366,23 @@ YAML에서 지운 수동 항목은 다음 반영 때 데이터·캘린더에서�
 로컬에서는: `python -m webinar.manual add --source sharedit --url … --title … --date 2026-10-27 --time 14:00`
 → `python -m webinar.manual apply`.
 
-### 방법 2 — self-hosted 러너로 자동 수집 (선택)
-집/사무실 PC에서는 일반 브라우저로 정상 접속되므로, 그 PC를 러너로 쓰면 쉐어드IT를 자동 수집할 수 있습니다.
-1. Settings → Actions → Runners → **New self-hosted runner** 로 PC 등록, 추가 라벨 **`sharedit`** 지정
-   (PC에 Python 3.11+ 필요. 첫 실행 시 Playwright Chromium 자동 설치)
-2. Settings → Secrets and variables → Actions → **Variables** 에 `SHAREDIT_SELF_HOSTED` = `true`
-3. 이후 [`sharedit.yml`](.github/workflows/sharedit.yml)이 매일 09:40·21:40(KST)에 쉐어드IT만 수집하고,
-   일일 동기화는 쉐어드IT를 건너뜁니다. 변수를 지우면 원래대로 돌아갑니다.
+### 방법 2 — self-hosted 러너 (모든 워크플로 기본값)
+모든 워크플로(`daily.yml`, `add-webinar.yml`, `sharedit.yml`)는 **`runs-on: self-hosted`** 로 실행됩니다.
+집/사무실 PC는 일반 방문자처럼 접속되므로 일일 동기화가 쉐어드IT까지 직접 수집합니다.
+**러너가 등록되어 온라인 상태가 아니면 워크플로는 대기(Queued) 상태로 멈춥니다.**
+
+러너 PC 준비 (Linux 권장, macOS 가능):
+1. Settings → Actions → Runners → **New self-hosted runner** 안내대로 설치·등록 (기본 라벨 `self-hosted` 그대로)
+   후 `./svc.sh install && ./svc.sh start` 로 서비스 등록 (PC가 켜져 있어야 cron이 돕니다)
+2. **Python 3.10+** 와 `git` 설치. Linux는 최초 1회 root로 Chromium 의존 라이브러리와 Xvfb 설치:
+   `sudo apt-get install -y xvfb && sudo python3 -m pip install playwright==1.48.0 && sudo python3 -m playwright install-deps chromium`
+3. 나머지는 자동입니다 — [`setup-runner`](.github/actions/setup-runner/action.yml) 액션이
+   `~/.cache/webinar-venv` 가상환경·패키지·Playwright Chromium을 만들고 이후 실행에서 재사용합니다.
+   화면이 없는 Linux에서는 [`scripts/with_display.sh`](scripts/with_display.sh)가 Xvfb로 실행합니다
+   (Xvfb가 없으면 headless로 대체).
+
+(선택) Variables에 `SHAREDIT_SELF_HOSTED` = `true` 를 두면 [`sharedit.yml`](.github/workflows/sharedit.yml)이
+매일 09:40·21:40(KST)에 쉐어드IT만 한 번 더 수집하고, 일일 동기화는 쉐어드IT를 건너뜁니다.
 
 > ⚠️ 공개 저장소에서 self-hosted 러너를 쓸 때는 Settings → Actions → General 에서
 > **외부 기여자의 fork PR 워크플로 실행에 승인 필요**를 켜 두세요(러너 PC 보호). 이 워크플로는 PR에서 실행되지 않습니다.

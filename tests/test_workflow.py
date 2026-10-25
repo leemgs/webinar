@@ -128,7 +128,7 @@ def test_sharedit_self_hosted_workflow_is_opt_in_and_not_on_pull_requests():
     assert "pull_request" not in trig and "pull_request_target" not in trig
     job = wf["jobs"]["sharedit"]
     assert job["if"] == "vars.SHAREDIT_SELF_HOSTED == 'true'"
-    assert job["runs-on"] == ["self-hosted", "sharedit"]
+    assert job["runs-on"] == "self-hosted"
     assert wf["concurrency"]["group"] == _yaml("daily.yml")["concurrency"]["group"]
     daily = (ROOT / ".github/workflows/daily.yml").read_text(encoding="utf-8")
     assert "WEBINAR_SKIP_SITES: ${{ vars.SHAREDIT_SELF_HOSTED == 'true' && 'sharedit' || '' }}" in daily
@@ -170,3 +170,16 @@ def test_commit_script_survives_a_concurrent_push(tmp_path):
     git(tmp_path, "clone", "-q", str(origin), str(check))
     assert (check / "data/webinars.json").read_text() == "theirs+mine\n"
     assert "theirs" in git(check, "log", "--format=%s")
+
+
+def test_every_workflow_runs_on_self_hosted_without_root():
+    # GitHub-hosted runners are Cloudflare-challenged by sharedit; all jobs run
+    # on the self-hosted runner, which has no passwordless sudo/apt.
+    for path in sorted((ROOT / ".github/workflows").glob("*.yml")):
+        wf = _yaml(path.name)
+        text = path.read_text(encoding="utf-8")
+        for name, job in wf["jobs"].items():
+            assert job["runs-on"] == "self-hosted", (path.name, name)
+        assert "ubuntu-latest" not in text and "sudo " not in text, path.name
+        assert "actions/setup-python" not in text, path.name  # venv via setup-runner
+        assert "./.github/actions/setup-runner" in text, path.name
