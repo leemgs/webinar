@@ -106,7 +106,7 @@ def test_pipeline_preserves_previous_data_when_some_sources_are_empty(monkeypatc
     assert {webinar.source for webinar in result} == {"healthy", "blocked"}
 
 
-# --- manual-entry + self-hosted sharedit workflows --------------------------
+# --- manual-entry + self-hosted daily workflows -----------------------------
 def _yaml(name):
     import yaml
     return yaml.safe_load((ROOT / ".github/workflows" / name).read_text(encoding="utf-8"))
@@ -122,16 +122,12 @@ def test_add_webinar_workflow_never_interpolates_inputs_into_shell():
     assert env["MANUAL_URL"] == "${{ inputs.url }}"
 
 
-def test_sharedit_self_hosted_workflow_is_opt_in_and_not_on_pull_requests():
-    wf = _yaml("sharedit.yml")
-    trig = wf.get("on") or wf.get(True)
-    assert "pull_request" not in trig and "pull_request_target" not in trig
-    job = wf["jobs"]["sharedit"]
-    assert job["if"] == "vars.SHAREDIT_SELF_HOSTED == 'true'"
-    assert job["runs-on"] == "self-hosted"
-    assert wf["concurrency"]["group"] == _yaml("daily.yml")["concurrency"]["group"]
+def test_daily_sync_scrapes_sharedit_on_the_self_hosted_runner():
+    wf = _yaml("daily.yml")
+    assert wf["jobs"]["sync"]["runs-on"] == "self-hosted"
     daily = (ROOT / ".github/workflows/daily.yml").read_text(encoding="utf-8")
-    assert "WEBINAR_SKIP_SITES: ${{ vars.SHAREDIT_SELF_HOSTED == 'true' && 'sharedit' || '' }}" in daily
+    assert "WEBINAR_SKIP_SITES" not in daily
+    assert not (ROOT / ".github/workflows/sharedit.yml").exists()
 
 
 def test_commit_script_survives_a_concurrent_push(tmp_path):

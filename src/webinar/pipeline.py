@@ -89,9 +89,8 @@ def run(site_keys: list[str] | None = None, publish: bool = True,
         scraped_out: str | None = None) -> list:
     sites = load_sites()
     keys = site_keys or list(sites.keys())
-    # WEBINAR_SKIP_SITES="a,b": leave these sources to another job (e.g. sharedit,
-    # which Cloudflare challenges on GitHub-hosted runners, is scraped by the
-    # opt-in self-hosted workflow). Their existing records are kept as-is.
+    # WEBINAR_SKIP_SITES="a,b": leave these sources out of this run (e.g. one
+    # scraped by a separate job). Their existing records are kept as-is.
     skip = {k.strip() for k in os.getenv("WEBINAR_SKIP_SITES", "").split(",") if k.strip()}
     if skip and site_keys is None:
         keys = [k for k in keys if k not in skip]

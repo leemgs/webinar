@@ -70,9 +70,6 @@ jobs:
           # (uploaded below as the "scrape-debug" artifact, kept 7 days).
           WEBINAR_DEBUG_DIR: debug
           WEBINAR_DEBUG_HOSTS: "allshowtv.com,cloit.com"
-          # when the opt-in sharedit-only job is enabled it owns sharedit
-          # (see sharedit.yml); otherwise this run scrapes sharedit too.
-          WEBINAR_SKIP_SITES: ${{ vars.SHAREDIT_SELF_HOSTED == 'true' && 'sharedit' || '' }}
         # headed Chromium via the desktop session or Xvfb (scripts/with_display.sh)
         run: scripts/with_display.sh python -m webinar.pipeline -v --scraped-out "$RUNNER_TEMP/scraped.json"
 

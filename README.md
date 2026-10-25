@@ -367,7 +367,7 @@ YAML에서 지운 수동 항목은 다음 반영 때 데이터·캘린더에서�
 → `python -m webinar.manual apply`.
 
 ### 방법 2 — self-hosted 러너 (모든 워크플로 기본값)
-모든 워크플로(`daily.yml`, `add-webinar.yml`, `sharedit.yml`)는 **`runs-on: self-hosted`** 로 실행됩니다.
+모든 워크플로(`daily.yml`, `add-webinar.yml`)는 **`runs-on: self-hosted`** 로 실행됩니다.
 집/사무실 PC는 일반 방문자처럼 접속되므로 일일 동기화가 쉐어드IT까지 직접 수집합니다.
 **러너가 등록되어 온라인 상태가 아니면 워크플로는 대기(Queued) 상태로 멈춥니다.**
 
@@ -430,9 +430,6 @@ journalctl -u github-actions-runner-webinar.service -f              # 실시간 
 > 러너가 온라인이어야 워크플로가 실행됩니다. 위 서비스가 `active (running)`이면
 > GitHub의 **Settings → Actions → Runners** 목록에서도 러너가 **Idle/Active** 로 보입니다.
 > `./svc.sh install` 방식과 systemd 유닛 방식 중 **하나만** 쓰세요(중복 실행 금지).
-
-(선택) Variables에 `SHAREDIT_SELF_HOSTED` = `true` 를 두면 [`sharedit.yml`](.github/workflows/sharedit.yml)이
-매일 09:40·21:40(KST)에 쉐어드IT만 한 번 더 수집하고, 일일 동기화는 쉐어드IT를 건너뜁니다.
 
 > ⚠️ 공개 저장소에서 self-hosted 러너를 쓸 때는 Settings → Actions → General 에서
 > **외부 기여자의 fork PR 워크플로 실행에 승인 필요**를 켜 두세요(러너 PC 보호). 이 워크플로는 PR에서 실행되지 않습니다.
