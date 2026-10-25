@@ -142,6 +142,15 @@ def test_renderer_crash_restarts_are_bounded():
     for _ in range(Browser.MAX_RESTARTS + 2):
         assert b.get_html("https://x", wait_ms=0) == ""
     assert b.restarts == Browser.MAX_RESTARTS == len(launched)
+    assert b.broken
+
+
+def test_broken_browser_skips_pages_instead_of_touching_chromium():
+    b = Browser()
+    b.broken = True
+    b._context = None  # any Chromium call would raise
+    assert b.get_html("https://x") == ""
+    assert b.get_html_and_json("https://x", "api") == ("", [])
 
 
 def test_chromium_launch_args_survive_small_shm_and_no_gpu():

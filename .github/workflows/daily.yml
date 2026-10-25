@@ -68,6 +68,9 @@ jobs:
         run: scripts/runner_diag.sh
 
       - name: Scrape webinars + publish dataset
+        # a wedged browser must not hold the runner for hours; later steps
+        # (always()) still publish the preserved data
+        timeout-minutes: 45
         env:
           WEBINAR_HEADED: "1"
           # Save rendered HTML + JSON API responses of these hosts for diagnosis

@@ -95,6 +95,7 @@ class Browser:
         self._context = None
         self._crashed = False
         self.restarts = 0
+        self.broken = False
 
     def __enter__(self) -> "Browser":
         from playwright.sync_api import sync_playwright
@@ -171,8 +172,15 @@ class Browser:
             except Exception:
                 pass
 
-    def _recovering(self, url: str, fetch):
-        """Run `fetch()`; if the renderer crashed meanwhile, relaunch and retry once."""
+    def _recovering(self, url: str, fetch, empty):
+        """Run `fetch()`; if the renderer crashed meanwhile, relaunch and retry once.
+
+        Once the relaunch budget is spent and pages still crash, Chromium can't
+        render on this machine: later pages are skipped (empty result, so their
+        sources keep their previous data) instead of hanging on a dead target.
+        """
+        if self.broken:
+            return empty
         self._crashed = False
         result = fetch()
         if self._crashed:
@@ -180,6 +188,10 @@ class Browser:
             if self._restart():
                 self._crashed = False
                 result = fetch()
+            else:
+                self.broken = True
+                log.error("Chromium keeps crashing after %d relaunches; skipping the "
+                          "remaining pages (see the 'Runner diagnostics' step)", self.restarts)
         return result
 
     def get_html(
@@ -214,7 +226,7 @@ class Browser:
         """
         return self._recovering(url, lambda: self._get_html(
             url, wait_selector, wait_ms, timeout_ms, click_selector,
-            exhaust_listing, challenge_markers, challenge_wait_ms))
+            exhaust_listing, challenge_markers, challenge_wait_ms), "")
 
     def _get_html(self, url, wait_selector, wait_ms, timeout_ms, click_selector,
                   exhaust_listing, challenge_markers, challenge_wait_ms) -> str:
@@ -243,7 +255,8 @@ class Browser:
         (html, [(response_url, parsed_json), ...]) for responses whose URL
         contains `json_match`.
         """
-        return self._recovering(url, lambda: self._get_html_and_json(url, json_match, **kwargs))
+        return self._recovering(
+            url, lambda: self._get_html_and_json(url, json_match, **kwargs), ("", []))
 
     def _get_html_and_json(self, url: str, json_match: str, **kwargs) -> tuple[str, list]:
         import json as _json
