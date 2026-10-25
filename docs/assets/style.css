@@ -326,6 +326,8 @@ a:hover { text-decoration: underline; }
 .month-chips button.is-current { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); }
 .month-chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
 /* site chips (월별 웨비나 추이): a picked site keeps its color; the rest dim */
+/* a fixed set of 8 sites: wrap onto more lines instead of scrolling out of view */
+.site-chips { flex-wrap: wrap; overflow-x: visible; }
 .site-chips button { display: inline-flex; align-items: center; gap: 6px; }
 .site-chips button[data-site]:not([data-site=""])[aria-pressed="true"] {
   background: var(--surface-2); color: var(--text); border-color: var(--text-muted);

@@ -16,7 +16,7 @@ from html import escape
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
-ASSET_VERSION = 10  # bump to bust browser caches of assets/app.js + style.css
+ASSET_VERSION = 11  # bump to bust browser caches of assets/app.js + style.css
 
 # (key, menu label, page title, description)
 VIEWS = [
