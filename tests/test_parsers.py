@@ -674,6 +674,68 @@ def test_e4ds_dday_cards():
     assert w.thumbnail.endswith("360_intv_1015.png")
 
 
+# the public detail page's meta row: D-day, "날짜 시작~종료", "연사 / 회사"
+E4DS_DETAIL_HTML = """
+<header class="wd-head"><h1 class="wd-title">게이트 드라이버</h1>
+<div class="wd-meta"><span class="wd-meta__item wd-meta__dday"><i class="fa-regular fa-clock"></i> D<!-- -->-18</span>
+<span class="wd-meta__item"><i class="fa-regular fa-calendar"></i> <!-- -->2026.11.12 10:30~12:00</span>
+<span class="wd-meta__item"><i class="fa-solid fa-user"></i> <!-- -->노근동 이사<!-- --> / <!-- -->NOVOSENSE</span>
+</div></header>
+"""
+
+
+def test_e4ds_fetch_takes_exact_schedule_and_host_from_detail():
+    scraper = get_scraper("e4ds", {"base_url": "https://www.e4ds.com",
+                                   "listing_url": "https://www.e4ds.com/webinar.asp"})
+
+    class Browser:
+        def get_html(self, url, **kwargs):
+            return E4DS_CARD_HTML if url.endswith("webinar.asp") else E4DS_DETAIL_HTML
+
+    [w] = scraper.fetch(Browser())
+    assert w.start_kst == "2026-11-12T10:30:00+09:00"
+    assert w.end_kst == "2026-11-12T12:00:00+09:00"
+    assert w.host == "NOVOSENSE"
+
+
+def test_e4ds_fetch_adds_upcoming_banner_webinars_missing_from_grid():
+    banner = """
+    <div id="carouselWebinarBanner"><div class="carousel-inner">
+      <div class="carousel-item"><a href="/webinar_detail.asp?idx=1015"><img src="https://cdn.e4ds.com/a.png"></a></div>
+      <div class="carousel-item"><a href="/webinar_detail.asp?idx=1038"><img src="https://cdn.e4ds.com/b.png"></a></div>
+      <div class="carousel-item"><a href="/webinar_detail.asp?idx=1001"><img src="https://cdn.e4ds.com/c.png"></a></div>
+    </div></div>"""
+    listing = E4DS_CARD_HTML.replace("<body>", "<body>" + banner)
+    future = E4DS_DETAIL_HTML.replace("게이트 드라이버", "NIGEL AI").replace(
+        "2026.11.12 10:30~12:00", "2099.12.01 10:30~12:00")
+    past = E4DS_DETAIL_HTML.replace("2026.11.12", "2020.01.01")
+    pages = {"idx=1038": future, "idx=1001": past, "idx=1015": E4DS_DETAIL_HTML}
+    scraper = get_scraper("e4ds", {"base_url": "https://www.e4ds.com",
+                                   "listing_url": "https://www.e4ds.com/webinar.asp"})
+
+    class Browser:
+        def get_html(self, url, **kwargs):
+            if url.endswith("webinar.asp"):
+                return listing
+            return next(html for key, html in pages.items() if url.endswith(key))
+
+    items = scraper.fetch(Browser())
+    # grid card 1015 once (not duplicated by its banner slide) + upcoming 1038; past 1001 dropped
+    assert [w.url.rsplit("=", 1)[1] for w in items] == ["1015", "1038"]
+    extra = items[1]
+    assert extra.title == "NIGEL AI"
+    assert extra.start_kst == "2099-12-01T10:30:00+09:00"
+    assert extra.thumbnail == "https://cdn.e4ds.com/b.png"
+
+
+def test_e4ds_detail_without_meta_keeps_dday_date():
+    scraper = get_scraper("e4ds", {"base_url": "https://www.e4ds.com"})
+    [w] = scraper.parse(E4DS_CARD_HTML)
+    before = w.start_kst
+    scraper.apply_detail(w, "<html><body>로그인이 필요합니다</body></html>")
+    assert w.start_kst == before and w.end_kst is None
+
+
 # --- dubiz pagination fetch ------------------------------------------------
 def _dubiz_card(event_no, title, date_text):
     return (

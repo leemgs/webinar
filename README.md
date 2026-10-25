@@ -380,6 +380,10 @@ YAML에서 지운 수동 항목은 다음 반영 때 데이터·캘린더에서�
    `~/.cache/webinar-venv` 가상환경·패키지·Playwright Chromium을 만들고 이후 실행에서 재사용합니다.
    화면이 없는 Linux에서는 [`scripts/with_display.sh`](scripts/with_display.sh)가 Xvfb로 실행합니다
    (Xvfb가 없으면 headless로 대체).
+4. 러너 PC 여유 메모리는 **1.5 GB 이상** 권장. 부족하면 Chromium 페이지가 `Page crashed`로 죽어
+   거의 모든 사이트가 0건이 됩니다(이전 데이터는 유지됨). 일일 동기화의 **Runner diagnostics** 단계가
+   메모리·`/dev/shm`·디스플레이 상태를 출력하고 부족하면 경고를 띄웁니다. 크롬은 `/dev/shm` 대신 `/tmp`를 쓰고,
+   페이지가 죽으면 쿠키를 유지한 채 Chromium을 다시 띄워 한 번 재시도합니다.
 
 #### (대안) systemd 서비스로 직접 등록 — 재부팅 후 자동 시작
 

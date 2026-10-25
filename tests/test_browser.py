@@ -68,3 +68,82 @@ def test_navigation_salvages_dom_when_all_strategies_fail():
     html = _browser_with_page(page).get_html("https://x", wait_ms=0)
     assert html == "<html>partial</html>"
     assert page.goto_calls == ["domcontentloaded", "commit"]
+
+
+class FakeContext:
+    def __init__(self, pages=(), factory=None):
+        self.pages, self.factory = list(pages), factory
+
+    def new_page(self):
+        return self.pages.pop(0) if self.pages else self.factory()
+
+    def storage_state(self):
+        return {"cookies": [{"name": "cf_clearance"}]}
+
+    def close(self):
+        pass
+
+
+class CrashingPage(FakePage):
+    """Renderer dies on goto: fires the 'crash' event, then raises like Playwright."""
+
+    def __init__(self):
+        super().__init__(content_html="")
+        self.handlers = {}
+
+    def on(self, event, handler):
+        self.handlers[event] = handler
+
+    def goto(self, url, wait_until="load", timeout=0):
+        self.goto_calls.append(wait_until)
+        self.handlers["crash"](self)
+        raise RuntimeError("Page.goto: Page crashed")
+
+    def close(self):
+        pass
+
+
+class HealthyPage(FakePage):
+    def on(self, event, handler):
+        pass
+
+    def close(self):
+        pass
+
+
+def _browser_with_contexts(*contexts):
+    b = Browser()
+    b._context = contexts[0]
+    launched = []
+
+    def fake_launch(state):
+        launched.append(state)
+        b._context = contexts[len(launched)]
+
+    b._launch = fake_launch  # type: ignore[assignment]
+    b._close_browser = lambda: None  # type: ignore[assignment]
+    return b, launched
+
+
+def test_renderer_crash_relaunches_chromium_and_retries_with_cookies():
+    b, launched = _browser_with_contexts(
+        FakeContext([CrashingPage()]),
+        FakeContext([HealthyPage(content_html="<html>after restart</html>")]),
+    )
+    assert b.get_html("https://x", wait_ms=0) == "<html>after restart</html>"
+    assert b.restarts == 1
+    assert launched == [{"cookies": [{"name": "cf_clearance"}]}]
+
+
+def test_renderer_crash_restarts_are_bounded():
+    b, launched = _browser_with_contexts(
+        *[FakeContext(factory=CrashingPage) for _ in range(Browser.MAX_RESTARTS + 1)]
+    )
+    for _ in range(Browser.MAX_RESTARTS + 2):
+        assert b.get_html("https://x", wait_ms=0) == ""
+    assert b.restarts == Browser.MAX_RESTARTS == len(launched)
+
+
+def test_chromium_launch_args_survive_small_shm_and_no_gpu():
+    assert "--disable-dev-shm-usage" in Browser.LAUNCH_ARGS
+    assert "--disable-gpu" in Browser.LAUNCH_ARGS

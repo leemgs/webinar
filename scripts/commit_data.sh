@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Commit the generated dataset (+ manual entries) and push to main, surviving
-# concurrent writers (the daily sync, the manual-entry workflow and the
-# self-hosted sharedit job can all push data).
+# concurrent writers (the daily sync and the manual-entry workflow can both
+# push data).
 #
 # usage: scripts/commit_data.sh "<commit message>" [rebuild command ...]
 #

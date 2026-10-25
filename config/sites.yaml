@@ -94,7 +94,7 @@ e4ds:
   base_url: "https://www.e4ds.com"
   listing_url: "https://www.e4ds.com/webinar.asp"
   requires_js: true
-  requires_login: true        # details require a logged-in session
+  requires_login: true        # registration needs a session; listing + details are public
   scraper: e4ds
   wait_selector: "body"
   login:

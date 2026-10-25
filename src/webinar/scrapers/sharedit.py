@@ -76,10 +76,10 @@ class Scraper(BaseScraper):
         if host:
             self._blocked_hosts = getattr(self, "_blocked_hosts", set()) | {host}
             log.warning(
-                "[sharedit] %s answered with a Cloudflare challenge (this runner's IP "
-                "is challenged — GitHub-hosted runners always are); skipping its other "
-                "pages. Use the self-hosted 'sharedit' workflow or the manual-entry "
-                "workflow (config/manual_webinars.yaml) for new sharedit webinars.", host)
+                "[sharedit] %s stayed behind a bot challenge or failed to load "
+                "(GitHub-hosted runner IPs are always challenged); skipping its other "
+                "pages. Add new sharedit webinars with the manual-entry workflow "
+                "(add-webinar.yml → config/manual_webinars.yaml) if this persists.", host)
 
     def fetch(self, browser):
         self._blocked_hosts = set()

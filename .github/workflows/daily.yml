@@ -63,6 +63,10 @@ jobs:
       - name: Run tests
         run: pytest -q
 
+      # memory, /dev/shm, display: what decides whether Chromium can render
+      - name: Runner diagnostics
+        run: scripts/runner_diag.sh
+
       - name: Scrape webinars + publish dataset
         env:
           WEBINAR_HEADED: "1"

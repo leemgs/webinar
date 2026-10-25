@@ -74,41 +74,75 @@ class Browser:
             html = b.get_html("https://example.com", wait_selector=".card")
     """
 
+    LAUNCH_ARGS = [
+        "--no-sandbox",
+        "--disable-blink-features=AutomationControlled",
+        # /dev/shm is small in containers/VMs (a self-hosted runner may be one);
+        # once it fills, every renderer dies with "Page crashed". Use /tmp.
+        "--disable-dev-shm-usage",
+        # Xvfb has no GPU; the software GPU process only costs memory there.
+        "--disable-gpu",
+    ]
+    # A crashed renderer usually means the machine ran short of memory; a fresh
+    # Chromium frees it. Bounded so a box that can't render at all still ends.
+    MAX_RESTARTS = 4
+
     def __init__(self, headless: bool = True, storage_state: Optional[str] = None):
         self.headless = headless
         self.storage_state = storage_state
         self._pw = None
         self._browser = None
         self._context = None
+        self._crashed = False
+        self.restarts = 0
 
     def __enter__(self) -> "Browser":
         from playwright.sync_api import sync_playwright
 
         self._pw = sync_playwright().start()
+        self._launch(self.storage_state)
+        return self
+
+    def _launch(self, storage_state) -> None:
         self._browser = self._pw.chromium.launch(
-            headless=self.headless,
-            args=["--no-sandbox", "--disable-blink-features=AutomationControlled"],
+            headless=self.headless, args=self.LAUNCH_ARGS,
         )
         self._context = self._browser.new_context(
             user_agent=USER_AGENT,
             locale="ko-KR",
             timezone_id="Asia/Seoul",
             viewport={"width": 1366, "height": 900},
-            storage_state=self.storage_state,
+            storage_state=storage_state,
         )
         # Light stealth: hide webdriver flag
         self._context.add_init_script(
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
         )
-        return self
 
-    def __exit__(self, *exc) -> None:
+    def _close_browser(self) -> None:
         for closer in (self._context, self._browser):
             try:
                 if closer:
                     closer.close()
             except Exception:  # pragma: no cover
                 pass
+
+    def _restart(self) -> bool:
+        """Relaunch Chromium, keeping cookies (e.g. a cleared bot check)."""
+        if self.restarts >= self.MAX_RESTARTS:
+            return False
+        self.restarts += 1
+        try:
+            state = self._context.storage_state()
+        except Exception:
+            state = self.storage_state
+        self._close_browser()
+        self._launch(state)
+        log.warning("Chromium relaunched (%d/%d)", self.restarts, self.MAX_RESTARTS)
+        return True
+
+    def __exit__(self, *exc) -> None:
+        self._close_browser()
         try:
             if self._pw:
                 self._pw.stop()
@@ -121,11 +155,32 @@ class Browser:
 
     @contextmanager
     def page(self) -> Iterator["object"]:
-        page = self._context.new_page()
+        try:
+            page = self._context.new_page()
+        except Exception as e:  # the browser itself died (e.g. killed for memory)
+            log.warning("new page failed (%s); relaunching Chromium", e)
+            if not self._restart():
+                raise
+            page = self._context.new_page()
+        page.on("crash", lambda _page: setattr(self, "_crashed", True))
         try:
             yield page
         finally:
-            page.close()
+            try:
+                page.close()
+            except Exception:
+                pass
+
+    def _recovering(self, url: str, fetch):
+        """Run `fetch()`; if the renderer crashed meanwhile, relaunch and retry once."""
+        self._crashed = False
+        result = fetch()
+        if self._crashed:
+            log.warning("renderer crashed on %s; retrying in a fresh Chromium", url)
+            if self._restart():
+                self._crashed = False
+                result = fetch()
+        return result
 
     def get_html(
         self,
@@ -154,7 +209,15 @@ class Browser:
         SAME page for it to clear instead of reloading — reloading restarts the
         check, while staying lets it finish and set its clearance cookie on the
         shared context for every later request.
+
+        A renderer crash ("Page crashed") relaunches Chromium and retries once.
         """
+        return self._recovering(url, lambda: self._get_html(
+            url, wait_selector, wait_ms, timeout_ms, click_selector,
+            exhaust_listing, challenge_markers, challenge_wait_ms))
+
+    def _get_html(self, url, wait_selector, wait_ms, timeout_ms, click_selector,
+                  exhaust_listing, challenge_markers, challenge_wait_ms) -> str:
         with self.page() as page:
             dump = _DebugDump.for_url(url)
             if dump:
@@ -180,6 +243,9 @@ class Browser:
         (html, [(response_url, parsed_json), ...]) for responses whose URL
         contains `json_match`.
         """
+        return self._recovering(url, lambda: self._get_html_and_json(url, json_match, **kwargs))
+
+    def _get_html_and_json(self, url: str, json_match: str, **kwargs) -> tuple[str, list]:
         import json as _json
 
         captured: list = []
