@@ -18,9 +18,16 @@ fi
 echo "fonts: $(fc-list 2>/dev/null | wc -l) (FONTCONFIG_FILE=${FONTCONFIG_FILE:-<unset>}) | sans-serif → $(fc-match sans-serif 2>/dev/null || echo '?')"
 # open two listings in Chromium; the browser's own error lines explain a crash
 here="$(dirname "$0")"
-echo "--- Chromium probe"
-DEBUG=pw:browser timeout 180 "$here/with_display.sh" python "$here/chromium_probe.py" 2>&1 \
-  | grep -aE "^(open files|OK|CRASH|FAIL)|FATAL|Check failed|any font|Received signal" \
-  | awk '{ k = $0; sub(/.*\] /, "", k); if (!(k in seen)) { seen[k] = 1; print; fflush() } }' \
-  | head -30 || true
+probe() {
+  DEBUG=pw:browser timeout 180 "$here/with_display.sh" python "$here/chromium_probe.py" 2>&1 \
+    | grep -aE "^(open files|OK|CRASH|FAIL)|FATAL|Check failed|any font|Fontconfig|Received signal" \
+    | awk '{ k = $0; sub(/.*\] /, "", k); if (!(k in seen)) { seen[k] = 1; print; fflush() } }' \
+    | head -30 || true
+}
+echo "--- Chromium probe (FONTCONFIG_FILE=${FONTCONFIG_FILE:-<unset>})"
+probe
+if [ -n "${FONTCONFIG_FILE:-}" ]; then
+  echo "--- Chromium probe (system fontconfig, for comparison)"
+  (unset FONTCONFIG_FILE; probe)
+fi
 exit 0

@@ -380,11 +380,12 @@ YAML에서 지운 수동 항목은 다음 반영 때 데이터·캘린더에서�
    `~/.cache/webinar-venv` 가상환경·패키지·Playwright Chromium을 만들고 이후 실행에서 재사용합니다.
    화면이 없는 Linux에서는 [`scripts/with_display.sh`](scripts/with_display.sh)가 Xvfb로 실행합니다
    (Xvfb가 없으면 headless로 대체).
-4. **글꼴**: 글꼴이 하나도 없는 서버(최소 설치 Ubuntu)에서는 웹폰트를 쓰는 모든 페이지에서 Chromium이
+4. **글꼴**: Chromium이 글꼴을 하나도 찾지 못하면 웹폰트를 쓰는 모든 페이지에서
    `FATAL ... remote_font_face_source.cc` 로 죽어(`Page crashed`) 거의 모든 사이트가 0건이 됩니다.
-   `setup-runner`가 sudo 없이 `fonts-nanum`·`fonts-dejavu-core`를 `~/.cache/webinar-fonts`에 풀어
-   `FONTCONFIG_FILE`로 지정하지만, 가능하면 한 번 설치해 두세요:
-   `sudo apt-get install -y fonts-nanum fonts-dejavu-core` (또는 위 2번의 `playwright install-deps chromium`).
+   Chromium은 자체 내장 fontconfig를 쓰므로 `fc-list`에 글꼴이 보여도 시스템 설정(`/etc/fonts`)을 못 읽으면
+   이렇게 됩니다. `setup-runner`가 글꼴 폴더를 직접 지정한 독립 `fonts.conf`를 만들어 `FONTCONFIG_FILE`로
+   지정하고, 글꼴이 없으면 sudo 없이 `fonts-nanum`·`fonts-dejavu-core`를 `~/.cache/webinar-fonts`에 풉니다
+   (직접 설치: `sudo apt-get install -y fonts-nanum fonts-dejavu-core`).
    일일 동기화의 **Runner diagnostics** 단계가 메모리·글꼴·디스플레이와 Chromium 시험 접속 결과를 출력합니다.
    페이지가 죽으면 쿠키를 유지한 채 Chromium을 다시 띄워 재시도하고, 계속 죽으면 남은 페이지를 건너뜁니다
    (이전 데이터 유지, 수집 단계는 최대 45분).

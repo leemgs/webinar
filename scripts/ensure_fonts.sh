@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-# Chromium's renderer aborts on any page with a web font when fontconfig finds
-# no fonts at all (FATAL remote_font_face_source.cc "NOTREACHED hit" → "Page
-# crashed") — e.g. a minimal Ubuntu server used as the self-hosted runner.
-# Without sudo, unpack a Korean + a Latin font package into a user dir (once;
-# cached) and write a fontconfig file that adds it to the system fonts.
+# Chromium's renderer aborts on any page with a web font when its fontconfig
+# finds no fonts (FATAL remote_font_face_source.cc "NOTREACHED hit" → "Page
+# crashed"). Chromium uses its own bundled fontconfig, which can fail to read a
+# machine's /etc/fonts config even when fc-list lists hundreds of fonts. So
+# write a self-contained fonts.conf that names the font directories directly,
+# and — without sudo — unpack a Korean + a Latin font into a user dir (once;
+# cached) in case the machine has none.
 #
 # usage: scripts/ensure_fonts.sh   → prints the fonts.conf path for FONTCONFIG_FILE
 set -euo pipefail
@@ -39,9 +41,15 @@ cat > "$conf" <<EOF
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <fontconfig>
-  <include ignore_missing="yes">/etc/fonts/fonts.conf</include>
+  <dir>/usr/share/fonts</dir>
+  <dir>/usr/local/share/fonts</dir>
+  <dir>$HOME/.local/share/fonts</dir>
+  <dir>$HOME/.fonts</dir>
   <dir>$dir/fonts</dir>
   <cachedir>$dir/cache</cachedir>
+  <alias><family>sans-serif</family><prefer><family>NanumGothic</family><family>Noto Sans CJK KR</family><family>DejaVu Sans</family></prefer></alias>
+  <alias><family>serif</family><prefer><family>NanumMyeongjo</family><family>Noto Serif CJK KR</family><family>DejaVu Serif</family></prefer></alias>
+  <alias><family>monospace</family><prefer><family>NanumGothicCoding</family><family>DejaVu Sans Mono</family></prefer></alias>
 </fontconfig>
 EOF
 echo "$conf"
