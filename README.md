@@ -449,6 +449,17 @@ journalctl -u github-actions-runner-webinar.service -f              # 실시간 
 Settings → Pages → Source: **Deploy from a branch**, Branch: `main` / `/docs`.
 게시 후 👉 <https://leemgs.github.io/webinar/> 에서 홈페이지 확인.
 
+메뉴마다 고유 주소가 있어 바로 접속할 수 있습니다(루트 주소는 달력으로 이동):
+
+| 메뉴 | 주소 |
+|------|------|
+| 대시보드 | <https://leemgs.github.io/webinar/dashboard/> |
+| 달력 | <https://leemgs.github.io/webinar/calendar/> |
+| 목록 | <https://leemgs.github.io/webinar/list/> |
+
+페이지 HTML은 `scripts/build_pages.py`가 생성합니다. 머리글·메뉴·바닥글을 고치려면 이 스크립트를 수정한 뒤
+`python scripts/build_pages.py`를 실행하세요(`tests/test_pages.py`가 생성 결과와 커밋된 파일을 비교합니다).
+
 ## 자동 등록(register) 활성화
 
 기본적으로 모든 사이트의 등록은 **비활성**(`config/sites.yaml` 의 `register.enabled: false`)입니다.

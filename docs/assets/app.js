@@ -51,9 +51,14 @@ function classify(w) {
 }
 
 // --- state ------------------------------------------------------------------
+// each menu is its own page (dashboard/, calendar/, list/); the page says which
+// view it shows and where the site root is (for webinars.json / webinars.ics)
+const PAGE = document.body.dataset;
+const ROOT = PAGE.root || "./";
+
 const state = {
   webinars: [],
-  view: "calendar",
+  view: PAGE.view || "calendar",
   cursor: new Date(),
   activeSources: new Set(Object.keys(SOURCES)),
   activePrizes: new Set(), // empty = no prize filter
@@ -288,6 +293,61 @@ function vbars(cols) {
     </div>`).join("")}</div>`;
 }
 
+// stacking order of the per-site monthly columns (bottom → top): the order whose
+// neighbouring site colors stay most distinct under color-vision deficiency
+const STACK_ORDER = ["ddtube", "allshowtv", "e4ds", "sharedit", "chontv", "talkit", "cloit", "dubiz"];
+
+// dark or white ink, whichever reads better on a segment's fill color
+function inkOn(hex) {
+  const lin = (c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  const lum = (h) => {
+    const [r, g, b] = [1, 3, 5].map((i) => lin(parseInt(h.slice(i, i + 2), 16) / 255));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const L = lum(hex), dark = "#1a2233";
+  return (L + 0.05) / (lum(dark) + 0.05) > 1.05 / (L + 0.05) ? dark : "#ffffff";
+}
+
+// stacked column chart: cols = [{label, value, current, parts: [{key, value}]}]
+// one segment per site (site color), total on top, per-site counts inside
+// segments tall enough to hold them, and the full breakdown in each tooltip
+function stackedVbars(cols, trackPx) {
+  const max = Math.max(1, ...cols.map((c) => c.value));
+  const shown = STACK_ORDER.filter((k) => cols.some((c) => c.parts.some((p) => p.key === k && p.value)));
+  const legend = `<div class="chart-legend">${shown.map((k) => `
+    <span class="legend-item"><span class="hbar-dot" style="background:${SRC_HEX[k]}"></span>${escapeHtml(SOURCES[k]?.name || k)}</span>`).join("")}</div>`;
+  const bars = cols.map((c, i) => {
+    const parts = STACK_ORDER.map((k) => c.parts.find((p) => p.key === k)).filter((p) => p && p.value);
+    const segs = parts.map((p) => {
+      const name = SOURCES[p.key]?.name || p.key;
+      const label = (p.value / max) * trackPx >= 14 ? p.value : "";
+      return `<span class="vseg" style="flex-grow:${p.value};background:${SRC_HEX[p.key]};color:${inkOn(SRC_HEX[p.key])}" aria-label="${escapeHtml(name)} ${p.value}건">${label}</span>`;
+    }).join("");
+    const tip = parts.length ? `
+        <span class="vbar-tip" role="tooltip"><b>${escapeHtml(c.label)} · ${c.value}건</b>${parts.slice().reverse().map((p) => `
+          <span class="tip-row"><span class="hbar-dot" style="background:${SRC_HEX[p.key]}"></span>${escapeHtml(SOURCES[p.key]?.name || p.key)}<b>${p.value}</b></span>`).join("")}</span>` : "";
+    return `
+    <div class="vbar-col${c.current ? " is-current" : ""}${i >= cols.length / 2 ? " tip-left" : ""}" tabindex="0" aria-label="${escapeHtml(c.label)}: ${c.value}건${parts.map((p) => `, ${escapeHtml(SOURCES[p.key]?.name || p.key)} ${p.value}건`).join("")}">
+      <span class="vbar-track"><span class="vbar-fill vbar-stack" style="height:${(c.value / max) * 100}%">
+        <span class="vbar-val">${c.value}</span>${segs}</span></span>
+      <span class="vbar-label">${escapeHtml(c.label)}</span>${tip}
+    </div>`;
+  }).join("");
+  // table view: the same numbers for readers who can't hover or tell colors apart
+  const table = `
+    <details class="chart-table"><summary>표로 보기</summary>
+      <div class="table-scroll"><table>
+        <thead><tr><th>사이트</th>${cols.map((c) => `<th>${escapeHtml(c.label)}</th>`).join("")}</tr></thead>
+        <tbody>${shown.slice().reverse().map((k) => `<tr><th><span class="hbar-dot" style="background:${SRC_HEX[k]}"></span>${escapeHtml(SOURCES[k]?.name || k)}</th>${cols.map((c) => {
+          const v = c.parts.find((p) => p.key === k)?.value || 0;
+          return `<td>${v || "·"}</td>`;
+        }).join("")}</tr>`).join("")}
+          <tr class="total"><th>합계</th>${cols.map((c) => `<td>${c.value}</td>`).join("")}</tr></tbody>
+      </table></div>
+    </details>`;
+  return `${legend}<div class="vbars vbars-stacked" style="height:${trackPx + 40}px">${bars}</div>${table}`;
+}
+
 function renderDashboard() {
   const box = $("#dashboard-view");
   const all = state.webinars;
@@ -322,10 +382,18 @@ function renderDashboard() {
     const [ys, ms] = months[0].split("-").map(Number);
     const [ye, me] = months[months.length - 1].split("-").map(Number);
     const counts = {};
-    for (const m of months) counts[m] = (counts[m] || 0) + 1;
+    const bySiteMonth = {};
+    for (const w of all) {
+      const m = monthKey(w.start_kst);
+      if (!m) continue;
+      counts[m] = (counts[m] || 0) + 1;
+      bySiteMonth[m] = bySiteMonth[m] || {};
+      bySiteMonth[m][w.source] = (bySiteMonth[m][w.source] || 0) + 1;
+    }
     for (let y = ys, m = ms; y < ye || (y === ye && m <= me); m === 12 ? (y++, m = 1) : m++) {
       const key = `${y}-${pad(m)}`;
-      monthCols.push({ label: `${String(y).slice(2)}.${pad(m)}`, value: counts[key] || 0, current: key === thisMonth });
+      const parts = Object.entries(bySiteMonth[key] || {}).map(([k, v]) => ({ key: k, value: v }));
+      monthCols.push({ label: `${String(y).slice(2)}.${pad(m)}`, value: counts[key] || 0, current: key === thisMonth, parts });
     }
   }
 
@@ -356,8 +424,8 @@ function renderDashboard() {
       </div>
       <div class="card span-2">
         <h3>월별 웨비나 추이</h3>
-        <p class="card-sub">개최월 기준 건수 (강조 = 이번 달)</p>
-        ${vbars(monthCols)}
+        <p class="card-sub">개최월 기준 건수 · 색 = 사이트, 막대 위 숫자 = 합계 (강조 = 이번 달)</p>
+        ${stackedVbars(monthCols, 220)}
       </div>
       <div class="card span-2">
         <h3>연도별 웨비나 수</h3>
@@ -437,7 +505,7 @@ function closeModal() { $("#modal").classList.add("hidden"); }
 
 // --- ICS subscription help --------------------------------------------------
 function openIcsHelp() {
-  const icsUrl = new URL("webinars.ics", location.href).href;
+  const icsUrl = new URL(`${ROOT}webinars.ics`, location.href).href;
   const body = $("#modal-body");
   body.innerHTML = `
     <div class="modal-body ics-help">
@@ -472,19 +540,10 @@ function openIcsHelp() {
 
 // --- render orchestration ---------------------------------------------------
 function render() {
+  // the dashboard is a whole-dataset overview: its page has no source/prize filters
+  if (state.view === "dashboard") return renderDashboard();
   renderFilters();
-  const dashView = $("#dashboard-view");
-  const calView = $("#calendar-view");
-  const listView = $("#list-view");
-  const filters = document.querySelector(".filters");
-  // source/prize chips only apply to calendar & list; the dashboard is a
-  // whole-dataset overview, so hide the filters there.
-  filters.classList.toggle("hidden", state.view === "dashboard");
-  dashView.classList.toggle("hidden", state.view !== "dashboard");
-  calView.classList.toggle("hidden", state.view !== "calendar");
-  listView.classList.toggle("hidden", state.view !== "list");
-  if (state.view === "dashboard") renderDashboard();
-  else if (state.view === "calendar") renderCalendar();
+  if (state.view === "calendar") renderCalendar();
   else renderList();
 }
 
@@ -504,18 +563,11 @@ function escapeHtml(s) {
 
 // --- init -------------------------------------------------------------------
 function bindEvents() {
-  document.querySelectorAll(".view-toggle button").forEach((btn) => {
-    btn.onclick = () => {
-      state.view = btn.dataset.view;
-      document.querySelectorAll(".view-toggle button").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      render();
-      if (state.view === "list") scrollListToToday();
-    };
-  });
-  $("#prev-month").onclick = () => { state.cursor.setMonth(state.cursor.getMonth() - 1); render(); };
-  $("#next-month").onclick = () => { state.cursor.setMonth(state.cursor.getMonth() + 1); render(); };
-  $("#today-btn").onclick = () => { state.cursor = new Date(); render(); };
+  if (state.view === "calendar") {
+    $("#prev-month").onclick = () => { state.cursor.setMonth(state.cursor.getMonth() - 1); render(); };
+    $("#next-month").onclick = () => { state.cursor.setMonth(state.cursor.getMonth() + 1); render(); };
+    $("#today-btn").onclick = () => { state.cursor = new Date(); render(); };
+  }
   document.querySelectorAll("[data-close]").forEach((el) => (el.onclick = closeModal));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
   const icsHelp = $("#ics-help");
@@ -524,7 +576,7 @@ function bindEvents() {
 
 async function load() {
   try {
-    const res = await fetch("webinars.json", { cache: "no-store" });
+    const res = await fetch(`${ROOT}webinars.json`, { cache: "no-store" });
     const data = await res.json();
     state.webinars = data.webinars || data || [];
     if (data.generated_at) {
@@ -542,6 +594,7 @@ async function load() {
     $("#updated").textContent = "데이터를 불러오지 못했습니다.";
   }
   render();
+  if (state.view === "list") scrollListToToday();
 }
 
 bindEvents();
