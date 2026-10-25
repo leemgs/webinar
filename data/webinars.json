@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-25T10:08:27.308248+09:00",
-  "count": 100,
+  "generated_at": "2026-10-25T12:45:01.284360+09:00",
+  "count": 106,
   "webinars": [
     {
       "source": "chontv",
@@ -1388,6 +1388,24 @@
       "id": "talkit-3114f5878763"
     },
     {
+      "source": "allshowtv",
+      "title": "공공 AX, 데이터 주권은 어떻게 확보하는가",
+      "url": "https://www.allshowtv.com/index.html",
+      "start_kst": "2026-10-29T15:00:00+09:00",
+      "end_kst": "2026-10-29T16:00:00+09:00",
+      "host": "Enhans · Upstage",
+      "register_url": "https://www.allshowtv.com/index.html",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-cdff6f02b51d"
+    },
+    {
       "source": "dubiz",
       "title": "AW 2027 베스트 솔루션 데이 5탄 : 산업부품(부품/안전/제어) [(주)크리버코리아, 리어세이프티코리아, SEW유로드라이브코리아(주)]",
       "url": "https://dubiz.co.kr/Event/518",
@@ -1425,6 +1443,60 @@
       "id": "ddtube-edfa3368a7a3"
     },
     {
+      "source": "allshowtv",
+      "title": "하루 완성 CAE 세미나 2026 - 구조해석편",
+      "url": "https://www.allshowtv.com/index.html",
+      "start_kst": "2026-11-11T13:30:00+09:00",
+      "end_kst": "2026-11-11T17:00:00+09:00",
+      "host": "태성에스엔이",
+      "register_url": "https://www.allshowtv.com/index.html",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-ae06a52bbaf8"
+    },
+    {
+      "source": "allshowtv",
+      "title": "하루 완성 CAE 세미나 2026 - 유동해석편",
+      "url": "https://www.allshowtv.com/index.html",
+      "start_kst": "2026-11-11T13:30:00+09:00",
+      "end_kst": "2026-11-11T17:00:00+09:00",
+      "host": "태성에스엔이",
+      "register_url": "https://www.allshowtv.com/index.html",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-83ea10138dcd"
+    },
+    {
+      "source": "allshowtv",
+      "title": "하루 완성 CAE 세미나 2026 - 전자기장해석편",
+      "url": "https://www.allshowtv.com/index.html",
+      "start_kst": "2026-11-11T13:30:00+09:00",
+      "end_kst": "2026-11-11T17:00:00+09:00",
+      "host": "태성에스엔이",
+      "register_url": "https://www.allshowtv.com/index.html",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-06723232ad78"
+    },
+    {
       "source": "e4ds",
       "title": "고효율 전력 변환을 위한 첫걸음, 게이트 드라이버 동작 원리와 최신 트렌드",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1036",
@@ -1439,6 +1511,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-c3b2f3c0fbc9"
+    },
+    {
+      "source": "allshowtv",
+      "title": "Atlassian Teamwork Collection이 만드는 일하는 방식의 혁신",
+      "url": "https://www.allshowtv.com/index.html",
+      "start_kst": "2026-11-12T14:00:00+09:00",
+      "end_kst": "2026-11-12T15:00:00+09:00",
+      "host": "플래티어",
+      "register_url": "https://www.allshowtv.com/index.html",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-572456c79f58"
     },
     {
       "source": "dubiz",
@@ -1523,6 +1613,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-437c2ee352bf"
+    },
+    {
+      "source": "allshowtv",
+      "title": "Powering AI: From Data to Delivery",
+      "url": "https://www.allshowtv.com/index.html",
+      "start_kst": "2026-11-19T15:00:00+09:00",
+      "end_kst": "2026-11-19T16:00:00+09:00",
+      "host": "제이플래닛",
+      "register_url": "https://www.allshowtv.com/index.html",
+      "description": "",
+      "thumbnail": "",
+      "tags": [
+        "manual"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-25565e68699b"
     },
     {
       "source": "e4ds",
