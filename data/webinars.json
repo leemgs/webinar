@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-10-25T15:00:34.049092+09:00",
-  "count": 102,
+  "generated_at": "2026-10-26T00:03:39.567805+09:00",
+  "count": 101,
   "webinars": [
-    {
-      "source": "e4ds",
-      "title": "2026 고급 엔지니어 실무 마스터 클래스 - 저잡음/저전력 회로 이해 및 고급 응용 회로 설계",
-      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1015",
-      "start_kst": "2026-08-27T00:00:00+09:00",
-      "end_kst": null,
-      "host": "",
-      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1015",
-      "description": "",
-      "thumbnail": "https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1015.png",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "e4ds-81dea4e7d21e"
-    },
     {
       "source": "allshowtv",
       "title": "끝까지 책임지는 AI 에이전트: 도입을 넘어 운영으로",
