@@ -65,6 +65,9 @@ const state = {
   // dashboard: month picked per card ("" = all months), kept in the URL
   periodMonth: Object.fromEntries(
     [["site", "month"], ["tech", "tech-month"]].map(([card, param]) => [card, new URLSearchParams(location.search).get(param) || ""])),
+  // dashboard monthly trend: sites to stack (empty = all), kept as ?trend-sites=a,b
+  trendSites: new Set((new URLSearchParams(location.search).get("trend-sites") || "")
+    .split(",").filter((k) => k in SOURCES)),
 };
 
 // --- helpers ----------------------------------------------------------------
@@ -312,7 +315,8 @@ function stackedVbars(cols, trackPx) {
     const parts = STACK_ORDER.map((k) => c.parts.find((p) => p.key === k)).filter((p) => p && p.value);
     const segs = parts.map((p) => {
       const name = SOURCES[p.key]?.name || p.key;
-      const label = (p.value / max) * trackPx >= 14 ? p.value : "";
+      // a lone segment's count is already the total above the bar
+      const label = parts.length > 1 && (p.value / max) * trackPx >= 14 ? p.value : "";
       return `<span class="vseg" style="flex-grow:${p.value};background:${SRC_HEX[p.key]};color:${inkOn(SRC_HEX[p.key])}" aria-label="${escapeHtml(name)} ${p.value}건">${label}</span>`;
     }).join("");
     const tip = parts.length ? `
@@ -438,10 +442,14 @@ function renderDashboard() {
 
     <div class="dash-grid">
 ${periodCard("site", "사이트별 웨비나 수")}${periodCard("tech", "기술 종목 분포")}
-      <div class="card span-2">
+      <div class="card span-2" data-trend>
         <h3>월별 웨비나 추이</h3>
-        <p class="card-sub">개최월 기준 건수 · 색 = 사이트, 막대 위 숫자 = 합계 (강조 = 이번 달)</p>
-        ${stackedVbars(monthCols, 220)}
+        <p class="card-sub trend-sub"></p>
+        <div class="month-chips site-chips" role="group" aria-label="월별 웨비나 추이 사이트 선택">
+          <button type="button" data-site="">전체</button>${Object.keys(SOURCES).map((k) => `
+          <button type="button" data-site="${k}"><span class="hbar-dot" style="background:${SRC_HEX[k]}"></span>${escapeHtml(SOURCES[k].name)}</button>`).join("")}
+        </div>
+        <div class="trend-body"></div>
       </div>
       <div class="card span-2">
         <h3>연도별 웨비나 수</h3>
@@ -470,6 +478,37 @@ ${periodCard("site", "사이트별 웨비나 수")}${periodCard("tech", "기술 
     const wanted = state.periodMonth[card];
     select(monthCols.some((c) => c.key === wanted) ? wanted : "");
   });
+
+  // monthly trend: site chips pick which sites are stacked; the scale follows
+  // the selection so a small site's months stay readable, colors stay per site
+  const trend = box.querySelector("[data-trend]");
+  const siteChips = trend.querySelectorAll(".site-chips button");
+  const drawTrend = () => {
+    const on = state.trendSites; // empty = all sites
+    const cols = monthCols.map((c) => {
+      const parts = c.parts.filter((p) => !on.size || on.has(p.key));
+      return { ...c, parts, value: parts.reduce((n, p) => n + p.value, 0) };
+    });
+    trend.querySelector(".site-chips").toggleAttribute("data-filtered", on.size > 0);
+    siteChips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.site ? on.has(b.dataset.site) : !on.size)));
+    const total = cols.reduce((n, c) => n + c.value, 0);
+    trend.querySelector(".trend-sub").textContent = on.size
+      ? `개최월 기준 건수 · ${[...on].map((k) => SOURCES[k].name).join(", ")} · ${total}건 (강조 = 이번 달)`
+      : "개최월 기준 건수 · 색 = 사이트, 막대 위 숫자 = 합계 (강조 = 이번 달)";
+    trend.querySelector(".trend-body").innerHTML = stackedVbars(cols, 220);
+    const url = new URL(location.href);
+    if (on.size) url.searchParams.set("trend-sites", [...on].join(",")); else url.searchParams.delete("trend-sites");
+    history.replaceState(null, "", url.href.replace(/%2C/gi, ","));
+  };
+  siteChips.forEach((b) => (b.onclick = () => {
+    const k = b.dataset.site, on = state.trendSites;
+    if (!k) on.clear();
+    else if (on.has(k)) on.delete(k);
+    else on.add(k);
+    if (on.size === Object.keys(SOURCES).length) on.clear(); // every site = 전체
+    drawTrend();
+  }));
+  drawTrend();
 }
 
 // --- modal ------------------------------------------------------------------

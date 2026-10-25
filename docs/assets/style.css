@@ -312,6 +312,9 @@ a:hover { text-decoration: underline; }
 /* 기술 종목 names (e.g. 제조·자동화·로봇) are longer than site names */
 [data-period=tech] .hbar-row { grid-template-columns: 136px 1fr auto; }
 
+/* grid cells may shrink below their content (chip rows scroll instead) */
+.dash-grid > .card { min-width: 0; }
+
 /* period chips above a chart (사이트별 웨비나 수: 전체 / month) */
 .month-chips { display: flex; gap: 6px; overflow-x: auto; margin: -4px 0 14px; padding-bottom: 2px; scrollbar-width: thin; }
 .month-chips button {
@@ -322,6 +325,12 @@ a:hover { text-decoration: underline; }
 .month-chips button:hover { color: var(--text); }
 .month-chips button.is-current { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); }
 .month-chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+/* site chips (월별 웨비나 추이): a picked site keeps its color; the rest dim */
+.site-chips button { display: inline-flex; align-items: center; gap: 6px; }
+.site-chips button[data-site]:not([data-site=""])[aria-pressed="true"] {
+  background: var(--surface-2); color: var(--text); border-color: var(--text-muted);
+}
+.site-chips[data-filtered] button[data-site]:not([data-site=""])[aria-pressed="false"] { opacity: 0.55; }
 
 /* vertical column chart (monthly / yearly) */
 .vbars { display: flex; align-items: flex-end; gap: 8px; height: 190px; padding-top: 18px; }
