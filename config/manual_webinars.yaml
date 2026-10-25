@@ -20,3 +20,43 @@ webinars:
   date: '2026-11-18'
   time: '14:00'
   end: '15:00'
+# allshowtv serves CI/datacenter clients the "지난 세미나 리스트" page without its
+# upcoming "신규 웨비나" list, so only the hero banner is scraped. These upcoming
+# webinars are added by hand from the real index.html. (url is omitted because
+# normalize_url drops the ?idx=N query that distinguishes allshowtv detail links.)
+- source: allshowtv
+  title: 공공 AX, 데이터 주권은 어떻게 확보하는가
+  host: Enhans · Upstage
+  date: '2026-10-29'
+  time: '15:00'
+  end: '16:00'
+- source: allshowtv
+  title: 하루 완성 CAE 세미나 2026 - 구조해석편
+  host: 태성에스엔이
+  date: '2026-11-11'
+  time: '13:30'
+  end: '17:00'
+- source: allshowtv
+  title: 하루 완성 CAE 세미나 2026 - 유동해석편
+  host: 태성에스엔이
+  date: '2026-11-11'
+  time: '13:30'
+  end: '17:00'
+- source: allshowtv
+  title: 하루 완성 CAE 세미나 2026 - 전자기장해석편
+  host: 태성에스엔이
+  date: '2026-11-11'
+  time: '13:30'
+  end: '17:00'
+- source: allshowtv
+  title: Atlassian Teamwork Collection이 만드는 일하는 방식의 혁신
+  host: 플래티어
+  date: '2026-11-12'
+  time: '14:00'
+  end: '15:00'
+- source: allshowtv
+  title: 'Powering AI: From Data to Delivery'
+  host: 제이플래닛
+  date: '2026-11-19'
+  time: '15:00'
+  end: '16:00'
