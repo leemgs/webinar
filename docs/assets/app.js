@@ -65,9 +65,10 @@ const state = {
   // dashboard: month picked per card ("" = all months), kept in the URL
   periodMonth: Object.fromEntries(
     [["site", "month"], ["tech", "tech-month"]].map(([card, param]) => [card, new URLSearchParams(location.search).get(param) || ""])),
-  // dashboard monthly trend: sites to stack (empty = all), kept as ?trend-sites=a,b
-  trendSites: new Set((new URLSearchParams(location.search).get("trend-sites") || "")
-    .split(",").filter((k) => k in SOURCES)),
+  // dashboard monthly / yearly charts: sites to stack (empty = all), kept in the
+  // URL as ?trend-sites=a,b and ?year-sites=a,b
+  stackSites: Object.fromEntries([["month", "trend-sites"], ["year", "year-sites"]].map(([chart, param]) =>
+    [chart, new Set((new URLSearchParams(location.search).get(param) || "").split(",").filter((k) => k in SOURCES))])),
 };
 
 // --- helpers ----------------------------------------------------------------
@@ -432,6 +433,22 @@ function renderDashboard() {
     return { label: `${y}년`, value: parts.reduce((n, p) => n + p.value, 0), current: y === String(now.getFullYear()), parts };
   });
 
+  const STACK_CARDS = {
+    month: { param: "trend-sites", cols: monthCols, basis: "개최월 기준 건수", hint: "강조 = 이번 달" },
+    year: { param: "year-sites", cols: yearCols, basis: "개최연도 기준 건수", hint: "강조 = 올해" },
+  };
+  // a stacked-by-site column chart with site chips to filter it
+  const stackCard = (chart, title) => `
+      <div class="card span-2" data-stack="${chart}">
+        <h3>${title}</h3>
+        <p class="card-sub stack-sub"></p>
+        <div class="month-chips site-chips" role="group" aria-label="${title} 사이트 선택">
+          <button type="button" data-site="">전체</button>${Object.keys(SOURCES).map((k) => `
+          <button type="button" data-site="${k}"><span class="hbar-dot" style="background:${SRC_HEX[k]}"></span>${escapeHtml(SOURCES[k].name)}</button>`).join("")}
+        </div>
+        <div class="stack-body"></div>
+      </div>`;
+
   box.innerHTML = `
     <div class="dash-kpis">
       <div class="kpi"><span class="kpi-val">${all.length}</span><span class="kpi-label">전체 웨비나</span><span class="kpi-sub">수집 누적</span></div>
@@ -442,20 +459,7 @@ function renderDashboard() {
 
     <div class="dash-grid">
 ${periodCard("site", "사이트별 웨비나 수")}${periodCard("tech", "기술 종목 분포")}
-      <div class="card span-2" data-trend>
-        <h3>월별 웨비나 추이</h3>
-        <p class="card-sub trend-sub"></p>
-        <div class="month-chips site-chips" role="group" aria-label="월별 웨비나 추이 사이트 선택">
-          <button type="button" data-site="">전체</button>${Object.keys(SOURCES).map((k) => `
-          <button type="button" data-site="${k}"><span class="hbar-dot" style="background:${SRC_HEX[k]}"></span>${escapeHtml(SOURCES[k].name)}</button>`).join("")}
-        </div>
-        <div class="trend-body"></div>
-      </div>
-      <div class="card span-2">
-        <h3>연도별 웨비나 수</h3>
-        <p class="card-sub">개최연도 기준 건수 · 색 = 사이트, 막대 위 숫자 = 합계 (강조 = 올해)</p>
-        ${stackedVbars(yearCols, 220)}
-      </div>
+${stackCard("month", "월별 웨비나 추이")}${stackCard("year", "연도별 웨비나 수")}
     </div>
     <p class="dash-note">※ 기술 종목은 웨비나 제목·주최명 키워드로 자동 분류한 추정치이며, 실제 주제와 다를 수 있습니다.</p>`;
 
@@ -477,38 +481,50 @@ ${periodCard("site", "사이트별 웨비나 수")}${periodCard("tech", "기술 
     chips.forEach((b) => (b.onclick = () => select(b.dataset.month)));
     const wanted = state.periodMonth[card];
     select(monthCols.some((c) => c.key === wanted) ? wanted : "");
+    revealPressed(el.querySelector(".month-chips"));
   });
 
-  // monthly trend: site chips pick which sites are stacked; the scale follows
-  // the selection so a small site's months stay readable, colors stay per site
-  const trend = box.querySelector("[data-trend]");
-  const siteChips = trend.querySelectorAll(".site-chips button");
-  const drawTrend = () => {
-    const on = state.trendSites; // empty = all sites
-    const cols = monthCols.map((c) => {
-      const parts = c.parts.filter((p) => !on.size || on.has(p.key));
-      return { ...c, parts, value: parts.reduce((n, p) => n + p.value, 0) };
-    });
-    trend.querySelector(".site-chips").toggleAttribute("data-filtered", on.size > 0);
-    siteChips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.site ? on.has(b.dataset.site) : !on.size)));
-    const total = cols.reduce((n, c) => n + c.value, 0);
-    trend.querySelector(".trend-sub").textContent = on.size
-      ? `개최월 기준 건수 · ${[...on].map((k) => SOURCES[k].name).join(", ")} · ${total}건 (강조 = 이번 달)`
-      : "개최월 기준 건수 · 색 = 사이트, 막대 위 숫자 = 합계 (강조 = 이번 달)";
-    trend.querySelector(".trend-body").innerHTML = stackedVbars(cols, 220);
-    const url = new URL(location.href);
-    if (on.size) url.searchParams.set("trend-sites", [...on].join(",")); else url.searchParams.delete("trend-sites");
-    history.replaceState(null, "", url.href.replace(/%2C/gi, ","));
-  };
-  siteChips.forEach((b) => (b.onclick = () => {
-    const k = b.dataset.site, on = state.trendSites;
-    if (!k) on.clear();
-    else if (on.has(k)) on.delete(k);
-    else on.add(k);
-    if (on.size === Object.keys(SOURCES).length) on.clear(); // every site = 전체
-    drawTrend();
-  }));
-  drawTrend();
+  // monthly / yearly charts: site chips pick which sites are stacked; the scale
+  // follows the selection so a small site stays readable, colors stay per site
+  box.querySelectorAll("[data-stack]").forEach((el) => {
+    const chart = el.dataset.stack;
+    const { param, cols: allCols, basis, hint } = STACK_CARDS[chart];
+    const siteChips = el.querySelectorAll(".site-chips button");
+    const draw = () => {
+      const on = state.stackSites[chart]; // empty = all sites
+      const cols = allCols.map((c) => {
+        const parts = c.parts.filter((p) => !on.size || on.has(p.key));
+        return { ...c, parts, value: parts.reduce((n, p) => n + p.value, 0) };
+      });
+      el.querySelector(".site-chips").toggleAttribute("data-filtered", on.size > 0);
+      siteChips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.site ? on.has(b.dataset.site) : !on.size)));
+      const total = cols.reduce((n, c) => n + c.value, 0);
+      el.querySelector(".stack-sub").textContent = on.size
+        ? `${basis} · ${[...on].map((k) => SOURCES[k].name).join(", ")} · ${total}건 (${hint})`
+        : `${basis} · 색 = 사이트, 막대 위 숫자 = 합계 (${hint})`;
+      el.querySelector(".stack-body").innerHTML = stackedVbars(cols, 220);
+      const url = new URL(location.href);
+      if (on.size) url.searchParams.set(param, [...on].join(",")); else url.searchParams.delete(param);
+      history.replaceState(null, "", url.href.replace(/%2C/gi, ","));
+    };
+    siteChips.forEach((b) => (b.onclick = () => {
+      const k = b.dataset.site, on = state.stackSites[chart];
+      if (!k) on.clear();
+      else if (on.has(k)) on.delete(k);
+      else on.add(k);
+      if (on.size === Object.keys(SOURCES).length) on.clear(); // every site = 전체
+      draw();
+    }));
+    draw();
+    revealPressed(el.querySelector(".site-chips"));
+  });
+}
+
+// a chip row scrolls sideways on phones: on load, bring the first picked chip
+// (from the URL) into view instead of leaving it off-screen
+function revealPressed(row) {
+  const chip = row && [...row.querySelectorAll('[aria-pressed="true"]')].find((b) => b !== row.firstElementChild);
+  if (chip && row.scrollWidth > row.clientWidth) row.scrollLeft = chip.offsetLeft - row.offsetLeft - 8;
 }
 
 // --- modal ------------------------------------------------------------------
