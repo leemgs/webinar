@@ -1,59 +1,7 @@
 {
-  "generated_at": "2026-10-26T10:15:31.414408+09:00",
-  "count": 101,
+  "generated_at": "2026-10-27T02:20:10.830714+09:00",
+  "count": 105,
   "webinars": [
-    {
-      "source": "allshowtv",
-      "title": "끝까지 책임지는 AI 에이전트: 도입을 넘어 운영으로",
-      "url": "https://www.allshowtv.com/detail.html?idx=1748",
-      "start_kst": "2026-08-27T14:00:00+09:00",
-      "end_kst": "2026-08-27T16:30:00+09:00",
-      "host": "센드버드",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1748",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/04/main_04092747303172.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/04/main_04092747687998.jpg"
-      ],
-      "id": "allshowtv-a76d8f37e323"
-    },
-    {
-      "source": "dubiz",
-      "title": "Physical AI 시연을 넘어, 운영으로 — Physical AI 실전 전략",
-      "url": "https://dubiz.co.kr/Event/509",
-      "start_kst": "2026-08-27T14:00:00+09:00",
-      "end_kst": "2026-08-27T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/509",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file178586996769.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-fb590234990e"
-    },
-    {
-      "source": "talkit",
-      "title": "사용자 경험으로 완성하는 디지털 워크스페이스 Omnissa Horizon과 eG Enterprise로 구현하는 차세대 VDI 전략",
-      "url": "https://talkit.tv/main/events/3710",
-      "start_kst": "2026-08-27T14:00:00+09:00",
-      "end_kst": "2026-08-27T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3710",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file178613343573.jpg"
-      ],
-      "id": "talkit-f13222f0af74"
-    },
     {
       "source": "talkit",
       "title": "우리 회사는 안전한데, 협력사가 뚫린다면? 제3자(공급망) IT리스크 관리 [동훈아이텍, SecurityScorecard]",
@@ -1397,6 +1345,24 @@
       "id": "allshowtv-06723232ad78"
     },
     {
+      "source": "talkit",
+      "title": "인증을 넘어 계정·권한·세션까지! AI 시대, 기업 Identity 보안의 새로운 전략 [Okta]",
+      "url": "https://talkit.tv/main/events/3740",
+      "start_kst": "2026-11-11T14:00:00+09:00",
+      "end_kst": "2026-11-11T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3740",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1792671890574.jpg"
+      ],
+      "id": "talkit-87d9c1f65e61"
+    },
+    {
       "source": "e4ds",
       "title": "고효율 전력 변환을 위한 첫걸음, 게이트 드라이버 동작 원리와 최신 트렌드",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1036",
@@ -1432,6 +1398,24 @@
     },
     {
       "source": "dubiz",
+      "title": "우리가 알던 CATIA, 어디까지 진화했을까? AI로 그려보는 새로운 설계 경험과 협업 환경의 혁신",
+      "url": "https://dubiz.co.kr/Event/545",
+      "start_kst": "2026-11-12T14:00:00+09:00",
+      "end_kst": "2026-11-12T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/545",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1793024144171.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1793024165201.png"
+      ],
+      "id": "dubiz-e91cd393ed09"
+    },
+    {
+      "source": "dubiz",
       "title": "AW 2027 베스트 솔루션 데이 6탄 : 산업 AI [디플리, 아이벡스, (주)데키스트]",
       "url": "https://dubiz.co.kr/Event/519",
       "start_kst": "2026-11-13T13:30:00+09:00",
@@ -1447,6 +1431,22 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910579303.png"
       ],
       "id": "dubiz-255ff69c6afa"
+    },
+    {
+      "source": "dubiz",
+      "title": "AI자율제조혁신 컨퍼런스 in 대구",
+      "url": "https://dubiz.co.kr/Event/548",
+      "start_kst": "2026-11-17T10:00:00+09:00",
+      "end_kst": "2026-11-17T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/548",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1792576638297.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-2e03d0ebac1e"
     },
     {
       "source": "e4ds",
@@ -1515,6 +1515,41 @@
       "id": "e4ds-437c2ee352bf"
     },
     {
+      "source": "dubiz",
+      "title": "2026 AI자율제조혁신 컨퍼런스 in 수원",
+      "url": "https://dubiz.co.kr/Event/547",
+      "start_kst": "2026-11-19T13:00:00+09:00",
+      "end_kst": "2026-11-19T14:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/547",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file179268140790.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-6f9b1339bab3"
+    },
+    {
+      "source": "ddtube",
+      "title": "AI 위협 시대, 운영 연속성을 위한 OT 보안 전략-보이지 않는 위험의 관리부터 안전한 접근과 보안 격차 해소까지",
+      "url": "https://www.ddtube.co.kr/d2114/",
+      "start_kst": "2026-11-19T14:00:00+09:00",
+      "end_kst": "2026-11-19T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.ddtube.co.kr/d2114/",
+      "description": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/10/썸네일2560-2-1024x576.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/10/이벤트-2.jpg",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/10/참여방법-1.jpg"
+      ],
+      "id": "ddtube-f1abeab3fb96"
+    },
+    {
       "source": "allshowtv",
       "title": "Powering AI: From Data to Delivery",
       "url": "https://www.allshowtv.com/index.html",
@@ -1547,6 +1582,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-0e94679a8a34"
+    },
+    {
+      "source": "talkit",
+      "title": "당신의 AI 에이전트는 지금, 데이터를 모른 채 일하고 있다. 진단·맥락·통제로 완성하는 AI Ready Data [김선영의 AI-ready Data ep.4, 엔코아]",
+      "url": "https://talkit.tv/main/events/3743",
+      "start_kst": "2026-11-20T14:00:00+09:00",
+      "end_kst": "2026-11-20T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3743",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1793026341103.jpg"
+      ],
+      "id": "talkit-46a81cfedb8a"
     },
     {
       "source": "e4ds",
@@ -1695,6 +1748,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910602153.png"
       ],
       "id": "dubiz-54c1c80c8cf8"
+    },
+    {
+      "source": "talkit",
+      "title": "AI 에이전트, 어디까지 접근하게 할 것인가? 기업을 위한 현실적인 접근 통제 전략 [Okta]",
+      "url": "https://talkit.tv/main/events/3741",
+      "start_kst": "2026-12-15T14:00:00+09:00",
+      "end_kst": "2026-12-15T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3741",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1792672899502.jpg"
+      ],
+      "id": "talkit-762a12d676e1"
     },
     {
       "source": "e4ds",
