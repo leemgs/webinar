@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-27T02:20:10.830714+09:00",
-  "count": 105,
+  "generated_at": "2026-10-27T11:08:09.228032+09:00",
+  "count": 106,
   "webinars": [
     {
       "source": "talkit",
@@ -1479,6 +1479,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "chontv-58a6b21266ba"
+    },
+    {
+      "source": "dubiz",
+      "title": "사람·시스템·IT를 잇는 연결, 미쓰비시전기의 차세대 HMI로 현장의 변화를 만들다 생산 현장의 연결성과 모니터링 기능을 강화하는 미쓰비시전기 신제품 GOT3000 기능 및 현장 적용 사례",
+      "url": "https://dubiz.co.kr/Event/546",
+      "start_kst": "2026-11-17T14:00:00+09:00",
+      "end_kst": "2026-11-17T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/546",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1793033289498.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1793035890794.png"
+      ],
+      "id": "dubiz-948500fe5b34"
     },
     {
       "source": "sharedit",
