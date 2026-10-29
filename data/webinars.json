@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-29T02:12:32.123503+09:00",
-  "count": 106,
+  "generated_at": "2026-10-29T11:27:11.208656+09:00",
+  "count": 107,
   "webinars": [
     {
       "source": "dubiz",
@@ -1796,6 +1796,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-30b7e9b14f97"
+    },
+    {
+      "source": "e4ds",
+      "title": "AI 비전 시스템을 위한 GMSL 기반 고속 영상 전송 솔루션",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1043",
+      "start_kst": "2026-12-17T10:30:00+09:00",
+      "end_kst": "2026-12-17T12:00:00+09:00",
+      "host": "마크니카코리아",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1043",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-29/27652f44a27f39df.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-4bf20c0253ad"
     }
   ]
 }
