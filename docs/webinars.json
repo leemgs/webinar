@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-30T11:40:49.111025+09:00",
-  "count": 109,
+  "generated_at": "2026-10-31T02:08:54.053651+09:00",
+  "count": 111,
   "webinars": [
     {
       "source": "dubiz",
@@ -1244,9 +1244,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1787910563490.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-112e80057994"
     },
     {
@@ -1493,6 +1491,24 @@
       "id": "sharedit-4b04f72a2160"
     },
     {
+      "source": "talkit",
+      "title": "AI를 쓰는 회사 vs. AI가 일하는 회사: 그 차이를 만드는 플랫폼 [필라넷, Xpilot AI Platform]",
+      "url": "https://talkit.tv/main/events/3744",
+      "start_kst": "2026-11-18T14:00:00+09:00",
+      "end_kst": "2026-11-18T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3744",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1793369021538.jpg"
+      ],
+      "id": "talkit-58d00602f21e"
+    },
+    {
       "source": "e4ds",
       "title": "거리 측정을 넘어 3D 공간 인식으로, 차세대 dToF LiDAR 센서 VL53L9",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1041",
@@ -1594,6 +1610,24 @@
         "https://talkit.tv/userfiles/images/file1793026341103.jpg"
       ],
       "id": "talkit-46a81cfedb8a"
+    },
+    {
+      "source": "talkit",
+      "title": "AI 데이터 공학, 왜 지금 필요한가? [박준성 회장/한국소프트웨어기술진흥협회]",
+      "url": "https://talkit.tv/main/events/3746",
+      "start_kst": "2026-11-23T14:00:00+09:00",
+      "end_kst": "2026-11-23T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3746",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1793365055216.jpg"
+      ],
+      "id": "talkit-95889c5fd32f"
     },
     {
       "source": "e4ds",
