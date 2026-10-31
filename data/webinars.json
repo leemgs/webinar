@@ -1,41 +1,7 @@
 {
-  "generated_at": "2026-10-31T11:23:49.162087+09:00",
-  "count": 111,
+  "generated_at": "2026-11-01T01:09:37.778061+09:00",
+  "count": 109,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "Pickit 4.1 : AI 파운데이션모델로 혁신하는 차세대 3D 로봇비전",
-      "url": "https://dubiz.co.kr/Event/512",
-      "start_kst": "2026-09-01T14:00:00+09:00",
-      "end_kst": "2026-09-01T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/512",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1786440794675.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-22cdc7230fb9"
-    },
-    {
-      "source": "talkit",
-      "title": "Gemini Enterprise 인사이트: 기업 데이터와 AI 에이전트의 결합 [Google, 한진정보통신]",
-      "url": "https://talkit.tv/main/events/3720",
-      "start_kst": "2026-09-01T14:00:00+09:00",
-      "end_kst": "2026-09-01T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3720",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1786538255798.jpg"
-      ],
-      "id": "talkit-2ee71757edf8"
-    },
     {
       "source": "e4ds",
       "title": "미래 자동차를 밝히는 지능형 LED 실내조명 솔루션",
