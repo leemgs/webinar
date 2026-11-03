@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-03T05:50:24.763524+09:00",
-  "count": 107,
+  "generated_at": "2026-11-03T13:05:40.532938+09:00",
+  "count": 108,
   "webinars": [
     {
       "source": "dubiz",
@@ -1679,6 +1679,22 @@
         "https://www.ddtube.co.kr/wp-content/uploads/2026/10/참여방법_Orange6.jpg"
       ],
       "id": "ddtube-9f463141a2fd"
+    },
+    {
+      "source": "chontv",
+      "title": "AI 서비스 성공을 위한 A to Z AI큐브잇으로 시작하는 MLOps 자동화",
+      "url": "https://chontv.com/event/1296",
+      "start_kst": "2026-12-02T14:00:00+09:00",
+      "end_kst": "2026-12-02T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1296",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_d86965ba5f1c59943f4c008e7b57fcfd.png?u=1793434698",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-c86ab68e29ba"
     },
     {
       "source": "ddtube",
