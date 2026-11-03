@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-11-03T13:05:40.532938+09:00",
+  "generated_at": "2026-11-04T03:26:32.499426+09:00",
   "count": 108,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "AW 2027 베스트 솔루션 데이 1탄 : AI머신비전 #1 [주식회사 바이슨, Zivid, 코그넥스코리아]",
-      "url": "https://dubiz.co.kr/Event/513",
-      "start_kst": "2026-09-04T13:30:00+09:00",
-      "end_kst": "2026-09-04T14:30:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/513",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1786553423940.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-c6a94f3dc5fc"
-    },
     {
       "source": "talkit",
       "title": "메시 없이, CAD 그대로 빠르게 검증 Simcenter SimSolid",
@@ -1387,6 +1371,22 @@
         "https://files.dubiz.co.kr/userfiles/images/file1793035890794.png"
       ],
       "id": "dubiz-948500fe5b34"
+    },
+    {
+      "source": "chontv",
+      "title": "도입에서 성과로의 진화 Google Workspace로 완성하는 AI 업무 활용 전략",
+      "url": "https://chontv.com/event/1297",
+      "start_kst": "2026-11-18T14:00:00+09:00",
+      "end_kst": "2026-11-18T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1297",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_ff2c576d58da152873da418a3397c09d.png?u=1793674816",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-368085df8898"
     },
     {
       "source": "sharedit",
