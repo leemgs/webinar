@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T12:09:32.311120+09:00",
+  "generated_at": "2026-11-05T03:41:17.693450+09:00",
   "count": 108,
   "webinars": [
     {
@@ -1319,7 +1319,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1793801599230.png"
+      ],
       "id": "dubiz-2e03d0ebac1e"
     },
     {
@@ -1453,7 +1455,9 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1793801751192.png"
+      ],
       "id": "dubiz-6f9b1339bab3"
     },
     {
