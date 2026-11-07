@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-11-06T12:30:53.053265+09:00",
+  "generated_at": "2026-11-07T11:50:39.930053+09:00",
   "count": 108,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "메시 없이, CAD 그대로 빠르게 검증 Simcenter SimSolid",
-      "url": "https://talkit.tv/main/events/3716",
-      "start_kst": "2026-09-07T14:00:00+09:00",
-      "end_kst": "2026-09-07T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3716",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1786626077196.jpg"
-      ],
-      "id": "talkit-091e9d2f6089"
-    },
     {
       "source": "chontv",
       "title": "연결될수록 위험하다 —AI 팩토리 시대의 OT 보안 전략",
@@ -1478,6 +1460,24 @@
         "https://www.ddtube.co.kr/wp-content/uploads/2026/10/참여방법-1.jpg"
       ],
       "id": "ddtube-f1abeab3fb96"
+    },
+    {
+      "source": "talkit",
+      "title": "[위덱스정보기술 x HPE] AI가 바꾸는 네트워크 운영",
+      "url": "https://talkit.tv/main/events/3736",
+      "start_kst": "2026-11-19T14:00:00+09:00",
+      "end_kst": "2026-11-19T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3736",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1793802909150.jpg"
+      ],
+      "id": "talkit-2cdf6dd65633"
     },
     {
       "source": "allshowtv",
