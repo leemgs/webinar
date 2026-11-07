@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-11-07T11:50:39.930053+09:00",
-  "count": 108,
+  "generated_at": "2026-11-07T20:18:18.546332+09:00",
+  "count": 107,
   "webinars": [
-    {
-      "source": "chontv",
-      "title": "연결될수록 위험하다 —AI 팩토리 시대의 OT 보안 전략",
-      "url": "https://chontv.com/event/1274",
-      "start_kst": "2026-09-08T14:00:00+09:00",
-      "end_kst": "2026-09-08T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://chontv.com/event/1274",
-      "description": "",
-      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_5795dc7a84e8277470f6aa7fd91b91cb.png?u=1786692980",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "chontv-9726b6426103"
-    },
     {
       "source": "chontv",
       "title": "The Ghost in the Machine : AI Agent 시대, 보이지 않는 Machine Identity를 어떻게 통제할 것인가?",
