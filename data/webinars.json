@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-11-09T11:42:27.883563+09:00",
-  "count": 104,
+  "generated_at": "2026-11-10T06:30:30.997098+09:00",
+  "count": 105,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "신규 공장의 최대 보안 리스크, 설계 도면을 어떻게 지킬 것인가? 설계부터 현장 단말까지 [필라웨어]",
-      "url": "https://talkit.tv/main/events/3721",
-      "start_kst": "2026-09-10T14:00:00+09:00",
-      "end_kst": "2026-09-10T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3721",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1786718306959.jpg"
-      ],
-      "id": "talkit-1cf8ee797ad3"
-    },
     {
       "source": "dubiz",
       "title": "2026 산업단지 M.AX 혁신 서밋 AI가 바꾸는 제조업, M.AX 혁신의 시작",
@@ -1566,6 +1548,24 @@
       "id": "e4ds-548675f1a9f5"
     },
     {
+      "source": "talkit",
+      "title": "GPU 살 것인가, 빌릴 것인가, 연결할 것인가? 커넥티드 클라우드가 온다! [몬드리안에이아이, Runyour AI]",
+      "url": "https://talkit.tv/main/events/3747",
+      "start_kst": "2026-11-26T14:00:00+09:00",
+      "end_kst": "2026-11-26T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3747",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1794235366231.jpg"
+      ],
+      "id": "talkit-0b00e4f0bc53"
+    },
+    {
       "source": "dubiz",
       "title": "AW 2027 베스트 솔루션 데이 7탄 : AI머신비전 #2 [LUCID Vision Labs, 클레로보틱스 주식회사, (주)비케이인스트루먼트, 뉴로클]",
       "url": "https://dubiz.co.kr/Event/528",
@@ -1768,6 +1768,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-4bf20c0253ad"
+    },
+    {
+      "source": "talkit",
+      "title": "AX를 위한 프라이빗 GPU 클라우드, 가장 쉬운 구축방안 [몬드리안에이아이, Runyour Cloud]",
+      "url": "https://talkit.tv/main/events/3748",
+      "start_kst": "2026-12-22T14:00:00+09:00",
+      "end_kst": "2026-12-22T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3748",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1794235461545.jpg"
+      ],
+      "id": "talkit-1919e1b7d471"
     }
   ]
 }
