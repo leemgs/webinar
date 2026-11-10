@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-10T06:30:30.997098+09:00",
-  "count": 105,
+  "generated_at": "2026-11-10T13:45:04.085179+09:00",
+  "count": 109,
   "webinars": [
     {
       "source": "dubiz",
@@ -1500,6 +1500,22 @@
       "id": "dubiz-038eadfb78dc"
     },
     {
+      "source": "dubiz",
+      "title": "[팔로우업 웨비나] 2026 AI머신비전 컨퍼런스",
+      "url": "https://dubiz.co.kr/Event/552",
+      "start_kst": "2026-11-25T10:00:00+09:00",
+      "end_kst": "2026-11-25T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/552",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1787754955754(1).jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-0d046e936edc"
+    },
+    {
       "source": "e4ds",
       "title": "[오프라인 실습] ESP32 제품 개발 및 펌웨어 바이브 코딩 오프라인 강의",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1042",
@@ -1530,6 +1546,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-f1c7d547657b"
+    },
+    {
+      "source": "dubiz",
+      "title": "[팔로우업 웨비나] 2026 AI자율제조혁신 컨퍼런스 in 창원",
+      "url": "https://dubiz.co.kr/Event/551",
+      "start_kst": "2026-11-26T10:00:00+09:00",
+      "end_kst": "2026-11-26T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/551",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1793805738851.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-bd132c1774e9"
     },
     {
       "source": "e4ds",
@@ -1670,6 +1702,22 @@
       "id": "e4ds-2c1bbdc2e430"
     },
     {
+      "source": "chontv",
+      "title": "안전한 AI 환경, 한번에 잡히는 AI 에이전트의 행위와 권한 관리",
+      "url": "https://chontv.com/event/1299",
+      "start_kst": "2026-12-08T14:00:00+09:00",
+      "end_kst": "2026-12-08T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1299",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_eefeea5fa6d1854a554efb8b6cc9ff22.png?u=1794205387",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-9529c8beedb9"
+    },
+    {
       "source": "dubiz",
       "title": "2026년 AI 머신비전 기본 실무 교육과정",
       "url": "https://dubiz.co.kr/Event/544",
@@ -1718,6 +1766,25 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910602153.png"
       ],
       "id": "dubiz-54c1c80c8cf8"
+    },
+    {
+      "source": "ddtube",
+      "title": "[맨텍솔루션] 공공 정보시스템 등급 재분류에 대응하는 재해복구&예방점검 자동화 전략",
+      "url": "https://www.ddtube.co.kr/d2117/",
+      "start_kst": "2026-12-15T14:00:00+09:00",
+      "end_kst": "2026-12-15T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.ddtube.co.kr/d2117/",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/11/mantech_이벤트.png",
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/11/mantech_참여방법.png"
+      ],
+      "id": "ddtube-b1de7889dd68"
     },
     {
       "source": "talkit",
