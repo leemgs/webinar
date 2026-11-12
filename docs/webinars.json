@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-12T12:54:53.673491+09:00",
-  "count": 111,
+  "generated_at": "2026-11-13T07:43:15.864783+09:00",
+  "count": 114,
   "webinars": [
     {
       "source": "dubiz",
@@ -1174,10 +1174,10 @@
       "url": "https://www.allshowtv.com/detail.html?idx=1756",
       "start_kst": "2026-11-12T14:00:00+09:00",
       "end_kst": "2026-11-12T15:00:00+09:00",
-      "host": "",
+      "host": "플래티어",
       "register_url": "https://www.allshowtv.com/detail.html?idx=1756",
       "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/23/main_23134517098743.jpg",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/23/main_23135555643533.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1199,9 +1199,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1793024165201.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-e91cd393ed09"
     },
     {
@@ -1307,6 +1305,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file1793035890794.png"
       ],
       "id": "dubiz-948500fe5b34"
+    },
+    {
+      "source": "allshowtv",
+      "title": "차세대 데이터센터 액체냉각: 고밀도 CDU를 위한 펌프 솔루션",
+      "url": "https://www.allshowtv.com/detail.html?idx=1764",
+      "start_kst": "2026-11-18T14:00:00+09:00",
+      "end_kst": "2026-11-18T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1764",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/10/26/main_26165245858150.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/10/30/main_30104240750467.jpg"
+      ],
+      "id": "allshowtv-619f9073ef33"
     },
     {
       "source": "chontv",
@@ -1660,7 +1676,7 @@
       "host": "Nubicom",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1038",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-14/d625572a000f56e4.png",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-27/49493b92793141fe_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1720,6 +1736,42 @@
         "https://www.ddtube.co.kr/wp-content/uploads/2026/10/참여방법-2.jpg"
       ],
       "id": "ddtube-9d22df18fe7e"
+    },
+    {
+      "source": "dubiz",
+      "title": "모터설비 예지보전을 위한 (드라이브) 솔루션",
+      "url": "https://dubiz.co.kr/Event/553",
+      "start_kst": "2026-12-02T14:00:00+09:00",
+      "end_kst": "2026-12-02T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/553",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1794412563195.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1794411607694.png"
+      ],
+      "id": "dubiz-1658533ccd2f"
+    },
+    {
+      "source": "talkit",
+      "title": "전문 AI 컨설턴트가 주도하는 기업 AX 전환: Claude·OpenAI 기반 AI Agent 컨설팅 & PoC 실전 웨비나 [엠클라우드브리지]",
+      "url": "https://talkit.tv/main/events/3749",
+      "start_kst": "2026-12-02T14:00:00+09:00",
+      "end_kst": "2026-12-02T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3749",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1794221842115.jpg"
+      ],
+      "id": "talkit-d246799c37eb"
     },
     {
       "source": "e4ds",
