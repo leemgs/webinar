@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-11-13T07:43:15.864783+09:00",
+  "generated_at": "2026-11-13T12:30:56.489694+09:00",
   "count": 114,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "2026 산업단지 M.AX 혁신 서밋 AI가 바꾸는 제조업, M.AX 혁신의 시작",
-      "url": "https://dubiz.co.kr/Event/523",
-      "start_kst": "2026-09-14T10:30:00+09:00",
-      "end_kst": "2026-09-14T11:30:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/523",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1787928737532.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-833d3cdcf517"
-    },
     {
       "source": "e4ds",
       "title": "다양한 입력소스 기반 전력 시스템의 신뢰성을 높이는 ADI Power protection solution",
@@ -1782,7 +1766,7 @@
       "host": "STMicroelectronics",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1044",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-29/5badb8d6759e4b38.jpeg",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-29/159fbf50a2dbc826_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1836,6 +1820,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-c7fd23aacc0b"
+    },
+    {
+      "source": "e4ds",
+      "title": "[오프라인 실습] LTspice를 설계 검증 무기로 실전에서 바로 쓰는 법",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1047",
+      "start_kst": "2026-12-10T09:00:00+09:00",
+      "end_kst": "2026-12-10T17:00:00+09:00",
+      "host": "전기전자 평생교육원",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1047",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-13/e88eeaa32e83330c.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-73095378493e"
     },
     {
       "source": "dubiz",
