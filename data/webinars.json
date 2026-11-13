@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-11-13T12:30:56.489694+09:00",
-  "count": 114,
+  "generated_at": "2026-11-14T03:36:30.135114+09:00",
+  "count": 113,
   "webinars": [
-    {
-      "source": "e4ds",
-      "title": "다양한 입력소스 기반 전력 시스템의 신뢰성을 높이는 ADI Power protection solution",
-      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1020",
-      "start_kst": "2026-09-15T00:00:00+09:00",
-      "end_kst": null,
-      "host": "",
-      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1020",
-      "description": "",
-      "thumbnail": "https://cdn.e4ds.com/images/webinar/interview/thumb/360_intv_1020.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "e4ds-26d18e18cd33"
-    },
     {
       "source": "chontv",
       "title": "대화에서 완성까지 : ZoomMate가 바꾸는 업무의 미래",
@@ -1199,9 +1183,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1787910579303.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-255ff69c6afa"
     },
     {
