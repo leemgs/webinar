@@ -1,41 +1,7 @@
 {
-  "generated_at": "2026-11-14T12:11:48.185668+09:00",
-  "count": 113,
+  "generated_at": "2026-11-15T02:04:04.101440+09:00",
+  "count": 111,
   "webinars": [
-    {
-      "source": "chontv",
-      "title": "대화에서 완성까지 : ZoomMate가 바꾸는 업무의 미래",
-      "url": "https://chontv.com/event/1275",
-      "start_kst": "2026-09-15T14:00:00+09:00",
-      "end_kst": "2026-09-15T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://chontv.com/event/1275",
-      "description": "",
-      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_16528da7f788148808b47a26bf4f30fe.png?u=1789461864",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "chontv-45a616179733"
-    },
-    {
-      "source": "talkit",
-      "title": "데이터를 옮기지 않고 AI를 가속하라: 멀티클라우드 환경에서 구현하는 AI-Ready Data 인프라 [한국넷앱]",
-      "url": "https://talkit.tv/main/events/3718",
-      "start_kst": "2026-09-15T14:00:00+09:00",
-      "end_kst": "2026-09-15T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3718",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file178636137197.jpg"
-      ],
-      "id": "talkit-aa2e8d7855ae"
-    },
     {
       "source": "chontv",
       "title": "다운타임 60초 전 : 사이버-물리적 위협으로부터 데이터센터 가동률을 지키는 방법",
