@@ -1,57 +1,7 @@
 {
-  "generated_at": "2026-11-16T11:51:07.535096+09:00",
-  "count": 106,
+  "generated_at": "2026-11-17T06:01:45.260946+09:00",
+  "count": 105,
   "webinars": [
-    {
-      "source": "chontv",
-      "title": "포스트 미토스 시대, AI 공격에 맞서는 보안의 골든타임 전략",
-      "url": "https://chontv.com/event/1278",
-      "start_kst": "2026-09-17T14:00:00+09:00",
-      "end_kst": "2026-09-17T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://chontv.com/event/1278",
-      "description": "",
-      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_ec3e691ec0a9bf5ea477889e8234dc0a.png?u=1789626217",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "chontv-8354f2abcb0f"
-    },
-    {
-      "source": "dubiz",
-      "title": "고강성 연속섬유 3D 프린팅, 디지털 제조혁신으로 여는 생산 현장과 제조업의 미래!",
-      "url": "https://dubiz.co.kr/Event/510",
-      "start_kst": "2026-09-17T14:00:00+09:00",
-      "end_kst": "2026-09-17T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/510",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1787669888124.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-94ede76d745e"
-    },
-    {
-      "source": "allshowtv",
-      "title": "금소법 시대, AI는 어떻게 약관을 지키는가",
-      "url": "https://www.allshowtv.com/detail.html?idx=1751",
-      "start_kst": "2026-09-17T15:00:00+09:00",
-      "end_kst": "2026-09-17T16:00:00+09:00",
-      "host": "Enhans",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1751",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/08/07/main_07150340141077.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/08/07/main_07150340523493.jpg"
-      ],
-      "id": "allshowtv-c196c1481a8c"
-    },
     {
       "source": "dubiz",
       "title": "AW 2027 베스트 솔루션 데이 2탄 : AI로보틱스 #1 [딩스코리아 주식회사, (주)트윔, 스토브리코리아]",
@@ -1432,6 +1382,24 @@
       "id": "e4ds-e78a39af957b"
     },
     {
+      "source": "talkit",
+      "title": "현업 경험을 AX 실행력으로: 누구부터 가르치고 무엇부터 바꿀까? [양순식 실장/트루노스크루]",
+      "url": "https://talkit.tv/main/events/3750",
+      "start_kst": "2026-11-25T14:00:00+09:00",
+      "end_kst": "2026-11-25T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3750",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file179483417229.jpg"
+      ],
+      "id": "talkit-fa0de1293383"
+    },
+    {
       "source": "e4ds",
       "title": "2026 중급 엔지니어 실무 마스터 클래스 - 회로 설계 방법과 부품 파손 이유 및 방지 대책",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1032",
@@ -1754,6 +1722,24 @@
         "https://talkit.tv/userfiles/images/file1792672899502.jpg"
       ],
       "id": "talkit-762a12d676e1"
+    },
+    {
+      "source": "ddtube",
+      "title": "[Synology] 저장부터 복구까지: 공공기관을 위한 복원력 있는 데이터 인프라 전략",
+      "url": "https://www.ddtube.co.kr/d2118/",
+      "start_kst": "2026-12-16T14:00:00+09:00",
+      "end_kst": "2026-12-16T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.ddtube.co.kr/d2118/",
+      "description": "",
+      "thumbnail": "https://www.ddtube.co.kr/wp-content/uploads/2026/11/2560-1440-1024x576.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://www.ddtube.co.kr/wp-content/uploads/2026/11/synology_edm_1300_event.jpg"
+      ],
+      "id": "ddtube-707bcf25f0b6"
     },
     {
       "source": "e4ds",
