@@ -1,41 +1,7 @@
 {
-  "generated_at": "2026-11-17T06:01:45.260946+09:00",
-  "count": 105,
+  "generated_at": "2026-11-17T14:11:54.046544+09:00",
+  "count": 104,
   "webinars": [
-    {
-      "source": "dubiz",
-      "title": "AW 2027 베스트 솔루션 데이 2탄 : AI로보틱스 #1 [딩스코리아 주식회사, (주)트윔, 스토브리코리아]",
-      "url": "https://dubiz.co.kr/Event/515",
-      "start_kst": "2026-09-18T13:30:00+09:00",
-      "end_kst": "2026-09-18T14:30:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/515",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1788340659455.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-14581f5a10b5"
-    },
-    {
-      "source": "talkit",
-      "title": "VMware 비용·성능 고민을 넘어, 기업 VDI 인프라 전환 전략 [크리아이티, Arcfra, Omnissa]",
-      "url": "https://talkit.tv/main/events/3725",
-      "start_kst": "2026-09-18T14:00:00+09:00",
-      "end_kst": "2026-09-18T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3725",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1788344263129.jpg"
-      ],
-      "id": "talkit-4ee3f6beefff"
-    },
     {
       "source": "talkit",
       "title": "소프트웨어가 제조업을 다시 정의한다, Software-Defined Manufacturing [조형식의 강의마당 ep.4]",
@@ -1604,6 +1570,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-2c1bbdc2e430"
+    },
+    {
+      "source": "e4ds",
+      "title": "자율 로봇 구현을 위한 핵심 플랫폼: 피지컬 AI(Physical AI) 시대의 AMD Ryzen™ AI Embedded X100 시리즈 프로세서와 AMD Kria™ AI 솔루션",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1046",
+      "start_kst": "2026-12-08T10:30:00+09:00",
+      "end_kst": "2026-12-08T12:00:00+09:00",
+      "host": "AMD",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1046",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-13/711128e1ca0338c2.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-7757be13cc14"
     },
     {
       "source": "chontv",
