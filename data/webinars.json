@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-17T14:11:54.046544+09:00",
-  "count": 104,
+  "generated_at": "2026-11-18T04:51:00.955521+09:00",
+  "count": 105,
   "webinars": [
     {
       "source": "talkit",
@@ -1015,9 +1015,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1793801599230.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-2e03d0ebac1e"
     },
     {
@@ -1065,9 +1063,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1793035890794.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-948500fe5b34"
     },
     {
@@ -1580,7 +1576,7 @@
       "host": "AMD",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1046",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-13/711128e1ca0338c2.png",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-13/f36d0c9e3dfb147c_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1650,6 +1646,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-73095378493e"
+    },
+    {
+      "source": "chontv",
+      "title": "텔레메트리 기반 수집부터 AI 연계까지, 실제 구축 사례로 보는 인프라 장애 대응 전략",
+      "url": "https://chontv.com/event/1301",
+      "start_kst": "2026-12-10T14:00:00+09:00",
+      "end_kst": "2026-12-10T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1301",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_673ca4e1ced8141b3c169ff44e248fa2.png?u=1794442366",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-d917f9181454"
     },
     {
       "source": "dubiz",
