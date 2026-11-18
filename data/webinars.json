@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-18T04:51:00.955521+09:00",
-  "count": 105,
+  "generated_at": "2026-11-18T13:17:37.101670+09:00",
+  "count": 106,
   "webinars": [
     {
       "source": "talkit",
@@ -1566,6 +1566,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-2c1bbdc2e430"
+    },
+    {
+      "source": "talkit",
+      "title": "AI 코딩을 넘어 조직의 생산성으로, Atlassian Teamwork Foundation [아틀라시안, 플래티어]",
+      "url": "https://talkit.tv/main/events/3751",
+      "start_kst": "2026-12-03T14:00:00+09:00",
+      "end_kst": "2026-12-03T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3751",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1794999206141.jpg"
+      ],
+      "id": "talkit-ee5d8dca1b59"
     },
     {
       "source": "e4ds",
