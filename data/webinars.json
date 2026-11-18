@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-18T13:17:37.101670+09:00",
-  "count": 106,
+  "generated_at": "2026-11-18T19:28:24.342164+09:00",
+  "count": 117,
   "webinars": [
     {
       "source": "talkit",
@@ -554,6 +554,22 @@
       "id": "talkit-a8d8079d7ab6"
     },
     {
+      "source": "zdnet",
+      "title": "엔터프라이즈 AI/ML을 위한 클라우드 네이티브 인프라 구축",
+      "url": "https://itsight.zdnet.co.kr/webinar/WEnYOUTECH2610",
+      "start_kst": "2026-10-21T14:00:00+09:00",
+      "end_kst": "2026-10-21T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/WEnYOUTECH2610",
+      "description": "",
+      "thumbnail": "https://itsight.zdnet.co.kr/_172/img/172.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "zdnet-27bc1a02cc7e"
+    },
+    {
       "source": "allshowtv",
       "title": "Cato AI Security: AI 시대를 위한 차세대 보안 소개",
       "url": "https://www.allshowtv.com/detail.html?idx=1755",
@@ -778,6 +794,22 @@
       "id": "talkit-3114f5878763"
     },
     {
+      "source": "zdnet",
+      "title": "Enterprise AI Agent 운영의 모든 것: Salesforce•MuleSoft 기반 거버넌스와 자동화",
+      "url": "https://itsight.zdnet.co.kr/webinar/i2max2610",
+      "start_kst": "2026-10-29T14:00:00+09:00",
+      "end_kst": "2026-10-29T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/i2max2610",
+      "description": "",
+      "thumbnail": "https://itsight.zdnet.co.kr/_173/img/173.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "zdnet-527569a268d5"
+    },
+    {
       "source": "allshowtv",
       "title": "공공 AX, 데이터 주권은 어떻게 확보하는가",
       "url": "https://www.allshowtv.com/detail.html?idx=1761",
@@ -969,6 +1001,22 @@
       "id": "dubiz-e91cd393ed09"
     },
     {
+      "source": "zdnet",
+      "title": "글로벌 네트워크 보안, H사는 어떻게 해결했을까?",
+      "url": "https://itsight.zdnet.co.kr/webinar/insunginfo2611",
+      "start_kst": "2026-11-12T14:00:00+09:00",
+      "end_kst": "2026-11-12T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/insunginfo2611",
+      "description": "",
+      "thumbnail": "https://itsight.zdnet.co.kr/_174/img/174.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "zdnet-d5679e5ee684"
+    },
+    {
       "source": "dubiz",
       "title": "AW 2027 베스트 솔루션 데이 6탄 : 산업 AI [디플리, 아이벡스, (주)데키스트]",
       "url": "https://dubiz.co.kr/Event/519",
@@ -983,6 +1031,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "dubiz-255ff69c6afa"
+    },
+    {
+      "source": "zdnet",
+      "title": "AI속도에 아웃시스템즈 신뢰를 더해 완성된 엔터프라이즈 바이브코딩",
+      "url": "https://itsight.zdnet.co.kr/webinar/nlln2610",
+      "start_kst": "2026-11-13T14:00:00+09:00",
+      "end_kst": "2026-11-13T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/nlln2610",
+      "description": "",
+      "thumbnail": "https://itsight.zdnet.co.kr/_175/img/175.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "zdnet-2a1dc7db33c6"
     },
     {
       "source": "talkit",
@@ -1072,10 +1136,10 @@
       "url": "https://www.allshowtv.com/detail.html?idx=1764",
       "start_kst": "2026-11-18T14:00:00+09:00",
       "end_kst": "2026-11-18T15:00:00+09:00",
-      "host": "",
+      "host": "그런포스펌프",
       "register_url": "https://www.allshowtv.com/detail.html?idx=1764",
       "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/10/26/main_26165245858150.jpg",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/10/26/main_26165145844705.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1171,6 +1235,24 @@
       "id": "dubiz-6f9b1339bab3"
     },
     {
+      "source": "allshowtv",
+      "title": "우아한형제들, AI 시대에 디자인과 개발을 잇다",
+      "url": "https://www.allshowtv.com/detail.html?idx=1767",
+      "start_kst": "2026-11-19T14:00:00+09:00",
+      "end_kst": "2026-11-19T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1767",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/04/main_04135819475382.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/11/04/main_04145709262469.jpg"
+      ],
+      "id": "allshowtv-8b3415f8a67f"
+    },
+    {
       "source": "ddtube",
       "title": "AI 위협 시대, 운영 연속성을 위한 OT 보안 전략-보이지 않는 위험의 관리부터 안전한 접근과 보안 격차 해소까지",
       "url": "https://www.ddtube.co.kr/d2114/",
@@ -1206,6 +1288,36 @@
         "https://talkit.tv/userfiles/images/file1793802909150.jpg"
       ],
       "id": "talkit-2cdf6dd65633"
+    },
+    {
+      "source": "zdnet",
+      "title": "하이브리드 양자컴퓨팅, 그래서 실제로 어떻게 쓰나요?",
+      "url": "https://itsight.zdnet.co.kr/webinar/SDT2611",
+      "start_kst": "2026-11-19T14:00:00+09:00",
+      "end_kst": "2026-11-19T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/SDT2611",
+      "description": "좋은 질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 모바일 주유권(5만원) 증정 · 설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정",
+      "thumbnail": "https://itsight.zdnet.co.kr/_177/img/177.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [
+        {
+          "type": "question",
+          "item": "",
+          "condition": "하이브리드 양자컴퓨팅, 그래서 실제로 어떻게 쓰나요? 좋은 질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 모바일 주유권(5만원) 증정"
+        },
+        {
+          "type": "survey",
+          "item": "",
+          "condition": "설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정"
+        }
+      ],
+      "prize_images": [
+        "https://itsight.zdnet.co.kr/_177/img/g_img1.jpg",
+        "https://itsight.zdnet.co.kr/_177/img/g_img2.jpg"
+      ],
+      "id": "zdnet-a5b917481524"
     },
     {
       "source": "allshowtv",
@@ -1362,6 +1474,36 @@
       "id": "talkit-fa0de1293383"
     },
     {
+      "source": "zdnet",
+      "title": "개정 개인정보 보호법 시행 후 첫 연말, 우리 회사 PC는 무엇을 점검해야 할까요?",
+      "url": "https://itsight.zdnet.co.kr/webinar/exosp1125",
+      "start_kst": "2026-11-25T14:00:00+09:00",
+      "end_kst": "2026-11-25T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/exosp1125",
+      "description": "좋은질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 배달의 민족 상품권 증정 · 설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정",
+      "thumbnail": "https://itsight.zdnet.co.kr/_179/img/179.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [
+        {
+          "type": "question",
+          "item": "",
+          "condition": "개정 개인정보 보호법 시행 후 첫 연말, 우리 회사 PC는 무엇을 점검해야 할까요? 좋은질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 배달의 민족 상품권 증정"
+        },
+        {
+          "type": "survey",
+          "item": "",
+          "condition": "설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정"
+        }
+      ],
+      "prize_images": [
+        "https://itsight.zdnet.co.kr/_179/img/g_img1.jpg",
+        "https://itsight.zdnet.co.kr/_179/img/g_img2.jpg"
+      ],
+      "id": "zdnet-016e9bc238c8"
+    },
+    {
       "source": "e4ds",
       "title": "2026 중급 엔지니어 실무 마스터 클래스 - 회로 설계 방법과 부품 파손 이유 및 방지 대책",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1032",
@@ -1428,6 +1570,36 @@
       "id": "talkit-0b00e4f0bc53"
     },
     {
+      "source": "zdnet",
+      "title": "RX, 로봇만 준비하면 될까요?",
+      "url": "https://itsight.zdnet.co.kr/webinar/SamsungSDS_2611",
+      "start_kst": "2026-11-26T14:00:00+09:00",
+      "end_kst": "2026-11-26T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/SamsungSDS_2611",
+      "description": "사전등록/참여 사전등록 및 참여해주신 분들 중 20명 추첨 투썸플레이스 아메리카노 · 설문 조사 설문 조사에 참여해주신 분들 중 10명 추첨 배달의민족 상품권",
+      "thumbnail": "https://itsight.zdnet.co.kr/_176/img/176.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [
+        {
+          "type": "attendance",
+          "item": "",
+          "condition": "RX, 로봇만 준비하면 될까요? 사전등록/참여 사전등록 및 참여해주신 분들 중 20명 추첨 투썸플레이스 아메리카노"
+        },
+        {
+          "type": "survey",
+          "item": "",
+          "condition": "설문 조사 설문 조사에 참여해주신 분들 중 10명 추첨 배달의민족 상품권"
+        }
+      ],
+      "prize_images": [
+        "https://itsight.zdnet.co.kr/_176/img/g_img1.jpg",
+        "https://itsight.zdnet.co.kr/_176/img/g_img2.jpg"
+      ],
+      "id": "zdnet-ea1ed303748a"
+    },
+    {
       "source": "dubiz",
       "title": "AW 2027 베스트 솔루션 데이 7탄 : AI머신비전 #2 [LUCID Vision Labs, 클레로보틱스 주식회사, (주)비케이인스트루먼트, 뉴로클]",
       "url": "https://dubiz.co.kr/Event/528",
@@ -1444,6 +1616,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910589114.png"
       ],
       "id": "dubiz-dde57a2a8328"
+    },
+    {
+      "source": "talkit",
+      "title": "중소기업 리더의 AI 첫걸음 feat. “AI와 일하는 방식” 저자와의 만남 [나영돈 저자]",
+      "url": "https://talkit.tv/main/events/3752",
+      "start_kst": "2026-11-27T14:00:00+09:00",
+      "end_kst": "2026-11-27T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3752",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1795013771223.jpg"
+      ],
+      "id": "talkit-d3ae3a7a6d8e"
     },
     {
       "source": "e4ds",
@@ -1666,6 +1856,24 @@
       "id": "e4ds-73095378493e"
     },
     {
+      "source": "zdnet",
+      "title": "The Next Growth Engine: AI Expedition 2027",
+      "url": "https://itsight.zdnet.co.kr/conference/ACC2026",
+      "start_kst": "2026-12-10T09:00:00+09:00",
+      "end_kst": "2026-12-10T17:30:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/conference/ACC2026",
+      "description": "사전등록 77,000원 일반 사전등록 (중식 및 다과 제공) · 현장등록 165,000원 당일 등록데스크에서 접수 (사전등록 인원에 따라 현장등록이 불가할 수 있습니다.) · 단체등록 별도문의 5인 이상 사전등록 시 할인혜택 문의 : event@zdnet.co.kr",
+      "thumbnail": "https://itsight.zdnet.co.kr/_178/img/178.jpg",
+      "tags": [
+        "conference"
+      ],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "zdnet-1a7813dd81ef"
+    },
+    {
       "source": "chontv",
       "title": "텔레메트리 기반 수집부터 AI 연계까지, 실제 구축 사례로 보는 인프라 장애 대응 전략",
       "url": "https://chontv.com/event/1301",
@@ -1784,6 +1992,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-4bf20c0253ad"
+    },
+    {
+      "source": "chontv",
+      "title": "PostgreSQL for the Enterprise 안정성, 관리, 기술지원을 어떻게 확보할 것인가?",
+      "url": "https://chontv.com/event/1305",
+      "start_kst": "2026-12-17T14:00:00+09:00",
+      "end_kst": "2026-12-17T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1305",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_5bd28cfb579713923153140472b134b6.png?u=1794927970",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-e9dbef8d2d92"
     },
     {
       "source": "talkit",
