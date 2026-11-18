@@ -17,6 +17,7 @@ SCRAPER_MODULES = {
     "dubiz": "dubiz",
     "cloit": "cloit",
     "chontv": "chontv",
+    "zdnet": "zdnet",
 }
 
 

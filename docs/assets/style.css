@@ -19,6 +19,7 @@
   --c-dubiz: #0c8599;
   --c-cloit: #f08c00;
   --c-chontv: #6741d9;
+  --c-zdnet: #c92a2a;
 
   /* prize colors */
   --p-survey: #1971c2;
@@ -325,14 +326,14 @@ a:hover { text-decoration: underline; }
 .month-chips button:hover { color: var(--text); }
 .month-chips button.is-current { border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); }
 .month-chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
-/* site chips (월별 웨비나 추이): a picked site keeps its color; the rest dim */
-/* a fixed set of 8 sites: wrap onto more lines instead of scrolling out of view */
-.site-chips { flex-wrap: wrap; overflow-x: visible; }
-.site-chips button { display: inline-flex; align-items: center; gap: 6px; }
-.site-chips button[data-site]:not([data-site=""])[aria-pressed="true"] {
+/* toggle chips (sites, 기술 종목): a picked chip keeps its color dot; the rest dim */
+/* fixed sets (sites, 기술 종목): wrap onto more lines instead of scrolling out of view */
+.toggle-chips { flex-wrap: wrap; overflow-x: visible; }
+.toggle-chips button { display: inline-flex; align-items: center; gap: 6px; }
+.toggle-chips button:not([data-key=""])[aria-pressed="true"] {
   background: var(--surface-2); color: var(--text); border-color: var(--text-muted);
 }
-.site-chips[data-filtered] button[data-site]:not([data-site=""])[aria-pressed="false"] { opacity: 0.55; }
+.toggle-chips[data-filtered] button:not([data-key=""])[aria-pressed="false"] { opacity: 0.55; }
 
 /* vertical column chart (monthly / yearly) */
 .vbars { display: flex; align-items: flex-end; gap: 8px; height: 190px; padding-top: 18px; }

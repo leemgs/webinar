@@ -1233,3 +1233,88 @@ def test_pipeline_skip_sites_and_merge_from(monkeypatch, tmp_path):
     saved["x"] = []  # main moved on without our data: re-merge the saved scrape
     pipeline.merge_from_file(str(out), publish=False)
     assert [w.url for w in saved["x"]] == ["https://a/1"]
+
+
+# --- ZDNet IT'Sight: home .blogs cards + detail EVENT section ---------------
+def _zdnet_card(href, tag, title, date_text, time_text, img):
+    return f"""
+  <div class="blogs mb-30">
+    <div class="blogs__thumb pos-rel mb-30">
+      <div class="blogs__thumb--img"><a href="{href}"><img alt="" src="{img}"/></a></div>
+      <p class="blog-tag">{tag}</p>
+    </div>
+    <div class="blogs__content">
+      <h4 class="mb-15"><a href="{href}">{title}</a></h4>
+      <div class="blogs__content--meta">
+        <p><i class="far fa-calendar-alt"></i>{date_text}</p>
+        <p><i class="far fa-alarm-clock"></i>{time_text}</p>
+      </div>
+    </div>
+  </div>"""
+
+
+ZDNET_HOME_HTML = "<html><body>" + "".join([
+    _zdnet_card("conference/ACC2099", "conference", "The Next Growth Engine:\n   AI Expedition 2027",
+                "2099-12-10 (목)", "09:00~17:30", "/_178/img/178.jpg"),
+    _zdnet_card("webinar/SDT2611", "실시간 웨비나", "하이브리드 양자컴퓨팅, 그래서 실제로 어떻게 쓰나요?",
+                "2099-11-19 (목)", "14:00~15:00", "/_177/img/177.jpg"),
+    _zdnet_card("/webinar/redhat_2609", "온디맨드 웨비나", "AI시대의 하이브리드 클라우드",
+                "2026-09-08(화)", "1시간4분", "/_170/img/170.jpg"),
+    _zdnet_card("/webinar/Oracle_2608", "실시간 웨비나", "한솥과 스누아이랩은 왜 OCI를 선택했을까?",
+                "2020-09-03(목)", "14:00~15:00", "/_168/img/168.jpg"),
+]) + "</body></html>"
+
+ZDNET_DETAIL_HTML = """
+<section class="about2 pricingg" id="pricing"><div class="container">
+  <header><h2><i class="fa fa-gift"></i> EVENT <span>하기 이미지는 실제와 다를 수 있습니다.</span></h2></header>
+  <div class="row">
+    <div class="col-md-6"><div class="plan"><div class="header"><h4>좋은 질문</h4></div>
+      <figure><img src="/_177/img/g_img1.jpg"/><figcaption><div class="hotel-details">
+        <p>실시간 댓글을 통해 <span>질문을 남겨 주신 분들 중</span> 추첨을 통해</p><h4>모바일 주유권(5만원) 증정</h4>
+      </div></figcaption></figure></div></div>
+    <div class="col-md-6"><div class="plan"><div class="header"><h4>설문 조사</h4></div>
+      <figure><img src="/_177/img/g_img2.jpg"/><figcaption><div class="hotel-details">
+        <p>사전 등록 및 설문 조사에 <span>참여해주신 분들 중</span> 추첨을 통해</p><h4>스타벅스 아메리카노 증정</h4>
+      </div></figcaption></figure></div></div>
+  </div>
+</div></section>
+"""
+
+
+def _zdnet():
+    return get_scraper("zdnet", {"base_url": "https://itsight.zdnet.co.kr",
+                                 "listing_url": "https://itsight.zdnet.co.kr/"})
+
+
+def test_zdnet_home_cards_skip_on_demand_and_keep_schedule():
+    items = _zdnet().parse(ZDNET_HOME_HTML)
+    assert [w.url for w in items] == [
+        "https://itsight.zdnet.co.kr/conference/ACC2099",
+        "https://itsight.zdnet.co.kr/webinar/SDT2611",
+        "https://itsight.zdnet.co.kr/webinar/Oracle_2608",
+    ]  # the on-demand recording (running time, no schedule) is skipped
+    conf, live, past = items
+    assert conf.title == "The Next Growth Engine: AI Expedition 2027" and conf.tags == ["conference"]
+    assert (conf.start_kst, conf.end_kst) == ("2099-12-10T09:00:00+09:00", "2099-12-10T17:30:00+09:00")
+    assert live.start_kst == "2099-11-19T14:00:00+09:00" and live.end_kst == "2099-11-19T15:00:00+09:00"
+    assert live.thumbnail == "https://itsight.zdnet.co.kr/_177/img/177.jpg"
+    assert past.start_kst == "2020-09-03T14:00:00+09:00"
+
+
+def test_zdnet_fetch_enriches_only_upcoming_from_detail_event_section():
+    fetched = []
+
+    class Browser:
+        def get_html(self, url, **kwargs):
+            fetched.append(url)
+            return ZDNET_HOME_HTML if url.endswith(".co.kr/") else ZDNET_DETAIL_HTML
+
+    items = _zdnet().fetch(Browser())
+    # the listing + the two 2099 events; the 2020 one is past, not re-fetched
+    assert fetched[1:] == ["https://itsight.zdnet.co.kr/conference/ACC2099",
+                           "https://itsight.zdnet.co.kr/webinar/SDT2611"]
+    live = items[1]
+    assert live.prize_images == ["https://itsight.zdnet.co.kr/_177/img/g_img1.jpg",
+                                 "https://itsight.zdnet.co.kr/_177/img/g_img2.jpg"]
+    prizes.apply(live)
+    assert {p.type for p in live.prizes} == {"question", "survey"}

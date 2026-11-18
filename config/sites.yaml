@@ -178,3 +178,17 @@ cloit:
     enabled: false
     button_selector: "button:has-text('신청'), a:has-text('신청')"
     confirm_selector: "button:has-text('확인')"
+
+zdnet:
+  name: "ZDNet"
+  base_url: "https://itsight.zdnet.co.kr"
+  # IT'Sight home: .blogs cards (실시간 웨비나 / 온디맨드 웨비나 / conference)
+  listing_url: "https://itsight.zdnet.co.kr/"
+  requires_js: true
+  requires_login: false
+  scraper: zdnet
+  wait_selector: "body"         # server-rendered; .blogs cards are in the HTML
+  register:
+    enabled: false
+    button_selector: "a:has-text('등록하기')"
+    confirm_selector: "button:has-text('확인')"

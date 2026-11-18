@@ -10,10 +10,12 @@ const SOURCES = {
   dubiz: { name: "두비즈", color: "var(--c-dubiz)", url: "https://dubiz.co.kr/onoffmix/" },
   cloit: { name: "CLOIT:ON", color: "var(--c-cloit)", url: "https://webinar.cloit.com" },
   chontv: { name: "채널온TV", color: "var(--c-chontv)", url: "https://chontv.com" },
+  zdnet: { name: "ZDNet", color: "var(--c-zdnet)", url: "https://itsight.zdnet.co.kr/" },
 };
 const SRC_HEX = {
   allshowtv: "#e8590c", sharedit: "#2f9e44", ddtube: "#1971c2", e4ds: "#9c36b5",
   talkit: "#e8478b", dubiz: "#0c8599", cloit: "#f08c00", chontv: "#6741d9",
+  zdnet: "#c92a2a",
 };
 const PRIZES = {
   survey: { name: "설문", color: "var(--p-survey)", hex: "#1971c2" },
@@ -67,6 +69,9 @@ const state = {
     [["site", "month"], ["tech", "tech-month"]].map(([card, param]) => [card, new URLSearchParams(location.search).get(param) || ""])),
   // dashboard: sites picked per chart (empty = all), kept in the URL as
   // ?trend-sites=a,b (monthly), ?year-sites= (yearly), ?tech-sites= (기술 종목)
+  // and 기술 종목 picked for the site card (?site-techs=security,ai)
+  catFilter: { site: new Set((new URLSearchParams(location.search).get("site-techs") || "")
+    .split(",").filter((k) => CATEGORIES.some((c) => c.key === k))) },
   siteFilter: Object.fromEntries([["month", "trend-sites"], ["year", "year-sites"], ["tech", "tech-sites"]].map(([chart, param]) =>
     [chart, new Set((new URLSearchParams(location.search).get(param) || "").split(",").filter((k) => k in SOURCES))])),
 };
@@ -291,7 +296,7 @@ function hbars(rows) {
 
 // stacking order of the per-site monthly columns (bottom → top): the order whose
 // neighbouring site colors stay most distinct under color-vision deficiency
-const STACK_ORDER = ["ddtube", "allshowtv", "e4ds", "sharedit", "chontv", "talkit", "cloit", "dubiz"];
+const STACK_ORDER = ["ddtube", "sharedit", "e4ds", "zdnet", "chontv", "allshowtv", "dubiz", "cloit", "talkit"];
 
 // dark or white ink, whichever reads better on a segment's fill color
 function inkOn(hex) {
@@ -361,9 +366,12 @@ function renderDashboard() {
   const inMonth = (month) => (month ? all.filter((w) => monthKey(w.start_kst) === month) : all);
 
   // per-source counts (identity color = each site's brand color)
-  const siteRowsFor = (month) => {
+  const siteRowsFor = (month, _sites, cats) => {
     const bySite = {};
-    for (const w of inMonth(month)) bySite[w.source] = (bySite[w.source] || 0) + 1;
+    for (const w of inMonth(month)) {
+      if (cats?.size && !cats.has(classify(w).key)) continue;
+      bySite[w.source] = (bySite[w.source] || 0) + 1;
+    }
     return Object.keys(SOURCES)
       .map((k) => ({ name: SOURCES[k].name, value: bySite[k] || 0, color: SRC_HEX[k] }))
       .sort((a, b) => b.value - a.value);
@@ -384,20 +392,22 @@ function renderDashboard() {
   };
 
   const PERIOD_CARDS = {
-    site: { param: "month", rowsFor: siteRowsFor, allSub: "출처별 수집 건수 (전체 기간)" },
+    site: { param: "month", cats: true, rowsFor: siteRowsFor, allSub: "출처별 수집 건수 (전체 기간)" },
     tech: { param: "tech-month", sites: true, rowsFor: catRowsFor, allSub: "제목 키워드 기반 자동 분류 · 기술 트렌드 (전체 기간)" },
   };
-  const periodSub = (card, month, sites) => {
-    if (!month && !sites?.size) return PERIOD_CARDS[card].allSub;
-    const n = inMonth(month).filter((w) => !sites?.size || sites.has(w.source)).length;
+  const periodSub = (card, month, sites, cats) => {
+    if (!month && !sites?.size && !cats?.size) return PERIOD_CARDS[card].allSub;
+    const n = inMonth(month).filter((w) =>
+      (!sites?.size || sites.has(w.source)) && (!cats?.size || cats.has(classify(w).key))).length;
     return [
       month ? `${month.replace("-", "년 ")}월 개최 기준` : "전체 기간",
       sites?.size ? [...sites].map((k) => SOURCES[k].name).join(", ") : "",
+      cats?.size ? CATEGORIES.filter((c) => cats.has(c.key)).map((c) => c.name).join(", ") : "",
       `${n}건`,
     ].filter(Boolean).join(" · ");
   };
   // a card whose bars can be shown for 전체 or one month (chips above the bars),
-  // and — for 기술 종목 — for some sites only (a second chip row)
+  // and narrowed by a second chip row: sites (기술 종목 card) or 기술 종목 (site card)
   const periodCard = (card, title) => `
       <div class="card" data-period="${card}">
         <h3>${title}</h3>
@@ -405,7 +415,7 @@ function renderDashboard() {
         <div class="month-chips period-chips" role="group" aria-label="${title} 기간 선택">
           <button type="button" data-month="">전체</button>${monthCols.map((c) => `
           <button type="button" data-month="${c.key}"${c.current ? ' class="is-current" title="이번 달"' : ""}>${escapeHtml(c.label)}</button>`).join("")}
-        </div>${PERIOD_CARDS[card].sites ? siteChipsHtml(title) : ""}
+        </div>${PERIOD_CARDS[card].sites ? siteChipsHtml(title) : ""}${PERIOD_CARDS[card].cats ? catChipsHtml(title) : ""}
         <div class="period-bars"></div>
       </div>`;
 
@@ -475,23 +485,28 @@ ${stackCard("month", "월별 웨비나 추이")}${stackCard("year", "연도별 �
     const card = el.dataset.period;
     const { param, rowsFor } = PERIOD_CARDS[card];
     const siteRow = el.querySelector(".site-chips");
+    const catRow = el.querySelector(".cat-chips");
     const sites = siteRow ? state.siteFilter[card] : null;
+    const cats = catRow ? state.catFilter[card] : null;
     const chips = el.querySelectorAll(".period-chips button");
     const draw = () => {
       const month = state.periodMonth[card];
       chips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.month === month)));
-      el.querySelector(".period-sub").textContent = periodSub(card, month, sites);
-      const rows = rowsFor(month, sites);
+      el.querySelector(".period-sub").textContent = periodSub(card, month, sites, cats);
+      const rows = rowsFor(month, sites, cats);
       el.querySelector(".period-bars").innerHTML = rows.length ? hbars(rows) : '<p class="empty">해당 웨비나가 없습니다.</p>';
       setParam(param, month);
       if (sites) setParam(PERIOD_SITE_PARAM[card], [...sites].join(","));
+      if (cats) setParam(PERIOD_CAT_PARAM[card], [...cats].join(","));
     };
     chips.forEach((b) => (b.onclick = () => { state.periodMonth[card] = b.dataset.month; draw(); }));
-    if (siteRow) bindSiteChips(siteRow, sites, draw);
+    if (siteRow) bindToggleChips(siteRow, sites, Object.keys(SOURCES).length, draw);
+    if (catRow) bindToggleChips(catRow, cats, CATEGORIES.length, draw);
     if (!monthCols.some((c) => c.key === state.periodMonth[card])) state.periodMonth[card] = "";
     draw();
     revealPressed(el.querySelector(".period-chips"));
     revealPressed(siteRow);
+    revealPressed(catRow);
   });
 
   // monthly / yearly charts: site chips pick which sites are stacked; the scale
@@ -512,13 +527,14 @@ ${stackCard("month", "월별 웨비나 추이")}${stackCard("year", "연도별 �
       el.querySelector(".stack-body").innerHTML = stackedVbars(cols, 220);
       setParam(param, [...on].join(","));
     };
-    bindSiteChips(el.querySelector(".site-chips"), on, draw);
+    bindToggleChips(el.querySelector(".site-chips"), on, Object.keys(SOURCES).length, draw);
     draw();
     revealPressed(el.querySelector(".site-chips"));
   });
 }
 
 const PERIOD_SITE_PARAM = { tech: "tech-sites" };
+const PERIOD_CAT_PARAM = { site: "site-techs" };
 
 // update one dashboard query parameter in place ("" removes it; commas stay readable)
 function setParam(name, value) {
@@ -527,29 +543,40 @@ function setParam(name, value) {
   history.replaceState(null, "", url.href.replace(/%2C/gi, ","));
 }
 
-// site chips: 전체 + one per site (site color dot)
-function siteChipsHtml(title) {
+// a row of toggle chips: 전체 + one per item (key, name, dot color)
+function toggleChipsHtml(cls, label, items) {
   return `
-        <div class="month-chips site-chips" role="group" aria-label="${title} 사이트 선택">
-          <button type="button" data-site="">전체</button>${Object.keys(SOURCES).map((k) => `
-          <button type="button" data-site="${k}"><span class="hbar-dot" style="background:${SRC_HEX[k]}"></span>${escapeHtml(SOURCES[k].name)}</button>`).join("")}
+        <div class="month-chips toggle-chips ${cls}" role="group" aria-label="${label}">
+          <button type="button" data-key="">전체</button>${items.map((it) => `
+          <button type="button" data-key="${it.key}"><span class="hbar-dot" style="background:${it.color}"></span>${escapeHtml(it.name)}</button>`).join("")}
         </div>`;
 }
 
-// picking a site toggles it in `sites` (a Set, empty = all); 전체 — or every
-// site picked — clears it. Calls onChange after each click.
-function bindSiteChips(row, sites, onChange) {
+// site chips: one per site (site color dot)
+function siteChipsHtml(title) {
+  return toggleChipsHtml("site-chips", `${title} 사이트 선택`,
+    Object.keys(SOURCES).map((k) => ({ key: k, name: SOURCES[k].name, color: SRC_HEX[k] })));
+}
+
+// 기술 종목 chips: one per category (category color dot)
+function catChipsHtml(title) {
+  return toggleChipsHtml("cat-chips", `${title} 기술 종목 선택`, CATEGORIES);
+}
+
+// picking a chip toggles its key in `picked` (a Set, empty = all); 전체 — or
+// every item picked (`total`) — clears it. Calls onChange after each click.
+function bindToggleChips(row, picked, total, onChange) {
   const chips = row.querySelectorAll("button");
   const sync = () => {
-    row.toggleAttribute("data-filtered", sites.size > 0);
-    chips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.site ? sites.has(b.dataset.site) : !sites.size)));
+    row.toggleAttribute("data-filtered", picked.size > 0);
+    chips.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.key ? picked.has(b.dataset.key) : !picked.size)));
   };
   chips.forEach((b) => (b.onclick = () => {
-    const k = b.dataset.site;
-    if (!k) sites.clear();
-    else if (sites.has(k)) sites.delete(k);
-    else sites.add(k);
-    if (sites.size === Object.keys(SOURCES).length) sites.clear();
+    const k = b.dataset.key;
+    if (!k) picked.clear();
+    else if (picked.has(k)) picked.delete(k);
+    else picked.add(k);
+    if (picked.size === total) picked.clear();
     sync();
     onChange();
   }));

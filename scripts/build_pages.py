@@ -16,7 +16,7 @@ from html import escape
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
-ASSET_VERSION = 11  # bump to bust browser caches of assets/app.js + style.css
+ASSET_VERSION = 12  # bump to bust browser caches of assets/app.js + style.css
 
 # (key, menu label, page title, description)
 VIEWS = [
@@ -35,6 +35,7 @@ SITES = [  # (name, color, url) — the "웨비나 사이트 바로가기" links
     ("두비즈", "#0c8599", "https://dubiz.co.kr/onoffmix/"),
     ("CLOIT:ON", "#f08c00", "https://webinar.cloit.com"),
     ("채널온TV", "#6741d9", "https://chontv.com"),
+    ("ZDNet", "#c92a2a", "https://itsight.zdnet.co.kr/"),
 ]
 
 FILTERS = """
@@ -85,7 +86,7 @@ def page(view: str) -> str:
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} · 웨비나 허브</title>
-  <meta name="description" content="{escape(desc)} (올쇼TV, 쉐어드IT, DD튜브, e4ds, 토크아이티, 두비즈, CLOIT:ON, 채널온TV)" />
+  <meta name="description" content="{escape(desc)} (올쇼TV, 쉐어드IT, DD튜브, e4ds, 토크아이티, 두비즈, CLOIT:ON, 채널온TV, ZDNet)" />
   <link rel="stylesheet" href="{root}assets/style.css?v={ASSET_VERSION}" />
 </head>
 <body data-view="{view}" data-root="{root}">
