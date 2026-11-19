@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-19T04:27:14.342898+09:00",
-  "count": 117,
+  "generated_at": "2026-11-19T13:15:11.685415+09:00",
+  "count": 118,
   "webinars": [
     {
       "source": "talkit",
@@ -1838,6 +1838,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-c7fd23aacc0b"
+    },
+    {
+      "source": "chontv",
+      "title": "[Recap +] AI가 줄인 시간, 비즈니스의 성장까지 가속하려면? 3인 전문가들의 AI 적용 전략 공개 라이브",
+      "url": "https://chontv.com/event/1304",
+      "start_kst": "2026-12-09T14:00:00+09:00",
+      "end_kst": "2026-12-09T15:30:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1304",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_d128df33d7b4c70cc8e08d0750cc3c7a.png?u=1794885152",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-ae7788f12b75"
     },
     {
       "source": "e4ds",
