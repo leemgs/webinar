@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-19T13:15:11.685415+09:00",
-  "count": 118,
+  "generated_at": "2026-11-20T04:34:46.953765+09:00",
+  "count": 122,
   "webinars": [
     {
       "source": "talkit",
@@ -1002,7 +1002,7 @@
     },
     {
       "source": "zdnet",
-      "title": "글로벌 네트워크 보안, H사는 어떻게 해결했을까?",
+      "title": "글로벌 네트워크 보안,H사는 어떻게 해결했을까?",
       "url": "https://itsight.zdnet.co.kr/webinar/insunginfo2611",
       "start_kst": "2026-11-12T14:00:00+09:00",
       "end_kst": "2026-11-12T15:00:00+09:00",
@@ -1240,10 +1240,10 @@
       "url": "https://www.allshowtv.com/detail.html?idx=1767",
       "start_kst": "2026-11-19T14:00:00+09:00",
       "end_kst": "2026-11-19T15:00:00+09:00",
-      "host": "",
+      "host": "Figma",
       "register_url": "https://www.allshowtv.com/detail.html?idx=1767",
       "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/04/main_04135819475382.jpg",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/04/main_04144502974819.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1297,7 +1297,7 @@
       "end_kst": "2026-11-19T15:00:00+09:00",
       "host": "",
       "register_url": "https://itsight.zdnet.co.kr/webinar/SDT2611",
-      "description": "좋은 질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 모바일 주유권(5만원) 증정 · 설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정",
+      "description": "",
       "thumbnail": "https://itsight.zdnet.co.kr/_177/img/177.jpg",
       "tags": [],
       "registered": false,
@@ -1313,10 +1313,7 @@
           "condition": "설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정"
         }
       ],
-      "prize_images": [
-        "https://itsight.zdnet.co.kr/_177/img/g_img1.jpg",
-        "https://itsight.zdnet.co.kr/_177/img/g_img2.jpg"
-      ],
+      "prize_images": [],
       "id": "zdnet-a5b917481524"
     },
     {
@@ -1336,6 +1333,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "allshowtv-25565e68699b"
+    },
+    {
+      "source": "allshowtv",
+      "title": "[IBM] AI 시대, 기업 경쟁력을 바꾸는 두 가지 혁신: AI 데이터 인프라와 AI 개발 자동화",
+      "url": "https://www.allshowtv.com/detail.html?idx=1763",
+      "start_kst": "2026-11-19T15:00:00+09:00",
+      "end_kst": "2026-11-19T16:00:00+09:00",
+      "host": "제이플래닛",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1763",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/10/30/main_30161443284303.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/10/23/main_23080258741698.jpg"
+      ],
+      "id": "allshowtv-9565714530f5"
     },
     {
       "source": "e4ds",
@@ -1404,6 +1419,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-a2754c9487c6"
+    },
+    {
+      "source": "allshowtv",
+      "title": "검증된 VMware 대안, 왜 CONTRABASS인가? : 기술 경쟁력과 도입 성과부터 CONTRABASS Lite 출시, 연말 특별 프로모션까지",
+      "url": "https://www.allshowtv.com/detail.html?idx=1775",
+      "start_kst": "2026-11-24T14:00:00+09:00",
+      "end_kst": "2026-11-24T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1775",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/16/main_16171943586893.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/11/16/main_16171943444849.jpg"
+      ],
+      "id": "allshowtv-af928bd6cc1c"
     },
     {
       "source": "dubiz",
@@ -1671,6 +1704,24 @@
       "id": "ddtube-9f463141a2fd"
     },
     {
+      "source": "dubiz",
+      "title": "셀룰러 IoT 제품, 칩 선택부터 국내 인증·양산까지 한 번에 - Nordic nRF91 시리즈로 시작하는 LTE-M / NB-IoT 개발 가이드",
+      "url": "https://dubiz.co.kr/Event/556",
+      "start_kst": "2026-12-01T14:00:00+09:00",
+      "end_kst": "2026-12-01T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/556",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1794927747673.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1795002247822.jpg"
+      ],
+      "id": "dubiz-50b879041d43"
+    },
+    {
       "source": "chontv",
       "title": "AI 서비스 성공을 위한 A to Z AI큐브잇으로 시작하는 MLOps 자동화",
       "url": "https://chontv.com/event/1296",
@@ -1832,7 +1883,7 @@
       "host": "전기전자 평생교육원",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1034",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-07/d097124a580629b4.png",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-07/a671ce1dfcff406a_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -2024,6 +2075,22 @@
       "prizes": [],
       "prize_images": [],
       "id": "chontv-e9dbef8d2d92"
+    },
+    {
+      "source": "e4ds",
+      "title": "산업용 이더넷으로 구현하는 스마트 팩토리와 ADI 솔루션",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1045",
+      "start_kst": "2026-12-22T10:30:00+09:00",
+      "end_kst": "2026-12-22T12:00:00+09:00",
+      "host": "ADI",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1045",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-03/c76ce267f2c47b11.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-acc4e4d59c06"
     },
     {
       "source": "talkit",
