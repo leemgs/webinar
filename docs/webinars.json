@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-20T04:34:46.953765+09:00",
-  "count": 122,
+  "generated_at": "2026-11-20T13:07:36.976163+09:00",
+  "count": 123,
   "webinars": [
     {
       "source": "talkit",
@@ -1827,6 +1827,24 @@
       "id": "talkit-ee5d8dca1b59"
     },
     {
+      "source": "talkit",
+      "title": "AI 에이전트, 실행 권한은 어떻게 통제하나? feat. 권한통제 사각지대 [테이텀]",
+      "url": "https://talkit.tv/main/events/3753",
+      "start_kst": "2026-12-04T14:00:00+09:00",
+      "end_kst": "2026-12-04T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3753",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1795094458448.jpg"
+      ],
+      "id": "talkit-57226452acaf"
+    },
+    {
       "source": "e4ds",
       "title": "자율 로봇 구현을 위한 핵심 플랫폼: 피지컬 AI(Physical AI) 시대의 AMD Ryzen™ AI Embedded X100 시리즈 프로세서와 AMD Kria™ AI 솔루션",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1046",
@@ -1915,7 +1933,7 @@
       "host": "전기전자 평생교육원",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1047",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-13/e88eeaa32e83330c.png",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-13/364e4cecf8f9517a_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
