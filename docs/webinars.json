@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-11-20T13:07:36.976163+09:00",
+  "generated_at": "2026-11-21T04:10:32.608217+09:00",
   "count": 123,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "소프트웨어가 제조업을 다시 정의한다, Software-Defined Manufacturing [조형식의 강의마당 ep.4]",
-      "url": "https://talkit.tv/main/events/3727",
-      "start_kst": "2026-09-21T16:00:00+09:00",
-      "end_kst": "2026-09-21T17:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3727",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "talkit-fa81e75b1760"
-    },
     {
       "source": "allshowtv",
       "title": "Hybrid-Multi 클라우드 환경의 통합 운영 및 관리를 위한 Consumption기반의 스토리지 서비스 NetApp Keystone",
@@ -1229,9 +1213,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1793801751192.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-6f9b1339bab3"
     },
     {
@@ -1991,6 +1973,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910602153.png"
       ],
       "id": "dubiz-54c1c80c8cf8"
+    },
+    {
+      "source": "dubiz",
+      "title": "도면을 데이터로, 지능형 P&ID를 활용한 도면 데이터 관리 - AVEVA Unified Engineering(NGPID)",
+      "url": "https://dubiz.co.kr/Event/554",
+      "start_kst": "2026-12-14T14:00:00+09:00",
+      "end_kst": "2026-12-14T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/554",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1795189146483.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1795095547554.jpg"
+      ],
+      "id": "dubiz-7fe310820b3d"
     },
     {
       "source": "ddtube",
