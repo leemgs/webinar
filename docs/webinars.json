@@ -1,23 +1,7 @@
 {
-  "generated_at": "2026-11-21T13:04:23.931532+09:00",
-  "count": 122,
+  "generated_at": "2026-11-22T03:05:43.728302+09:00",
+  "count": 121,
   "webinars": [
-    {
-      "source": "talkit",
-      "title": "1990년대 개발 방식으로 AI 시대를 버틸 수 있을까? [박준성 회장/한국소프트웨어기술진흥협회]",
-      "url": "https://talkit.tv/main/events/3724",
-      "start_kst": "2026-09-22T14:00:00+09:00",
-      "end_kst": "2026-09-22T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3724",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "talkit-78cd76af978c"
-    },
     {
       "source": "dubiz",
       "title": "막연한 DX는 그만, 오류는 줄이고 효율은 높이는 통합엔지니어링 환경 살펴보기 AVEVA Unified Engineering",
