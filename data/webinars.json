@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-11-21T04:10:32.608217+09:00",
-  "count": 123,
+  "generated_at": "2026-11-21T13:04:23.931532+09:00",
+  "count": 122,
   "webinars": [
-    {
-      "source": "allshowtv",
-      "title": "Hybrid-Multi 클라우드 환경의 통합 운영 및 관리를 위한 Consumption기반의 스토리지 서비스 NetApp Keystone",
-      "url": "https://www.allshowtv.com/detail.html?idx=1753",
-      "start_kst": "2026-09-22T10:30:00+09:00",
-      "end_kst": "2026-09-22T11:30:00+09:00",
-      "host": "KCC정보통신",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1753",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/07/main_07091127670753.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/04/main_04085948626148.jpg"
-      ],
-      "id": "allshowtv-fd5a2d364a9c"
-    },
     {
       "source": "talkit",
       "title": "1990년대 개발 방식으로 AI 시대를 버틸 수 있을까? [박준성 회장/한국소프트웨어기술진흥협회]",
