@@ -16,7 +16,7 @@ from html import escape
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parent.parent / "docs"
-ASSET_VERSION = 12  # bump to bust browser caches of assets/app.js + style.css
+ASSET_VERSION = 13  # bump to bust browser caches of assets/app.js, site.js + style.css
 
 # (key, menu label, page title, description)
 VIEWS = [
@@ -88,6 +88,8 @@ def page(view: str) -> str:
   <title>{title} · 웨비나 허브</title>
   <meta name="description" content="{escape(desc)} (올쇼TV, 쉐어드IT, DD튜브, e4ds, 토크아이티, 두비즈, CLOIT:ON, 채널온TV, ZDNet)" />
   <link rel="stylesheet" href="{root}assets/style.css?v={ASSET_VERSION}" />
+  <!-- access-code gate: runs before the body renders (see assets/site.js) -->
+  <script src="{root}assets/site.js?v={ASSET_VERSION}"></script>
 </head>
 <body data-view="{view}" data-root="{root}">
   <header class="site-header">

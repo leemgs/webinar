@@ -35,3 +35,20 @@ def test_each_menu_page_holds_only_its_own_view():
 def test_site_root_forwards_to_the_default_view():
     html = (ROOT / "docs/index.html").read_text(encoding="utf-8")
     assert 'url=calendar/' in html and 'location.replace("calendar/"' in html
+
+
+def test_every_menu_page_loads_the_access_gate_before_the_app():
+    for key, *_ in _build_pages().VIEWS:
+        html = (ROOT / "docs" / key / "index.html").read_text(encoding="utf-8")
+        gate = html.index('src="../assets/site.js')
+        assert gate < html.index("<body") < html.index('src="../assets/app.js'), key
+
+
+def test_access_config_holds_only_a_sha256_digest():
+    import json
+    import re
+
+    cfg = json.loads((ROOT / "docs/config/access.json").read_text(encoding="utf-8"))
+    assert set(cfg) == {"version", "algorithm", "digest"}
+    assert cfg["algorithm"] == "SHA-256" and isinstance(cfg["version"], int)
+    assert re.fullmatch(r"[0-9a-f]{64}", cfg["digest"])

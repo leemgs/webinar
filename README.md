@@ -461,6 +461,31 @@ Settings → Pages → Source: **Deploy from a branch**, Branch: `main` / `/docs
 페이지 HTML은 `scripts/build_pages.py`가 생성합니다. 머리글·메뉴·바닥글을 고치려면 이 스크립트를 수정한 뒤
 `python scripts/build_pages.py`를 실행하세요(`tests/test_pages.py`가 생성 결과와 커밋된 파일을 비교합니다).
 
+### 접근 제한 (접속 코드)
+
+홈페이지는 초대받은 사용자를 위한 정보 공간이라, 모든 메뉴 페이지가 열리기 전에 **접속 코드**를 묻습니다.
+
+- 구현: [`docs/assets/site.js`](docs/assets/site.js)의 `initAuth()` / `unlock()`
+- 설정: [`docs/config/access.json`](docs/config/access.json)에 접속 코드의 **SHA-256 해시만** 저장 (평문 코드는 저장하지 않음)
+- 동작: 입력한 코드를 브라우저에서 SHA-256으로 해시한 뒤 `access.json`의 `digest` 값과 비교해, 일치하면
+  `sessionStorage`에 접근 허용 상태를 기록합니다(같은 탭에서는 메뉴를 옮겨도 다시 묻지 않음, 탭을 닫으면 다시 입력).
+  `version`이나 `digest`가 바뀌면 이미 입장한 사용자도 새 코드를 다시 입력해야 합니다.
+
+> ⚠️ 정적 사이트의 **간단한 접근 제한**이며, 민감정보 보호 목적이 아닙니다. 해시와 데이터 파일
+> (`webinars.json`, `webinars.ics`)이 클라이언트에 그대로 노출되므로 진짜 보안 경계로 사용하지 마세요.
+
+**접속 코드 변경 방법**
+
+1. 새 코드를 정합니다.
+2. SHA-256 해시를 계산합니다.
+   ```bash
+   node -e "const c=require('crypto');console.log(c.createHash('sha256').update('새코드').digest('hex'))"
+   ```
+3. `docs/config/access.json`의 `digest` 값을 교체하고 `version`을 올립니다.
+   ```json
+   { "version": 2, "algorithm": "SHA-256", "digest": "<위에서 계산한 64자리 해시>" }
+   ```
+
 ## 자동 등록(register) 활성화
 
 기본적으로 모든 사이트의 등록은 **비활성**(`config/sites.yaml` 의 `register.enabled: false`)입니다.

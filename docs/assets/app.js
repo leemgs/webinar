@@ -751,5 +751,8 @@ async function load() {
   if (state.view === "list") scrollListToToday();
 }
 
-bindEvents();
-load();
+// start once the access-code gate (assets/site.js) has unlocked the site
+(window.siteUnlocked || Promise.resolve()).then(() => {
+  bindEvents();
+  load();
+});
