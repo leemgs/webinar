@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-23T12:49:38.026853+09:00",
-  "count": 122,
+  "generated_at": "2026-11-24T07:39:39.324655+09:00",
+  "count": 124,
   "webinars": [
     {
       "source": "dubiz",
@@ -1855,6 +1855,24 @@
       "id": "chontv-9529c8beedb9"
     },
     {
+      "source": "talkit",
+      "title": "우리 조직을 제대로 아는 AI, 관계 기반 AX가 만드는 변화 [플렉스]",
+      "url": "https://talkit.tv/main/events/3754",
+      "start_kst": "2026-12-08T14:00:00+09:00",
+      "end_kst": "2026-12-08T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3754",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1795095690750.jpg"
+      ],
+      "id": "talkit-3b67d22466a0"
+    },
+    {
       "source": "dubiz",
       "title": "2026년 AI 머신비전 기본 실무 교육과정",
       "url": "https://dubiz.co.kr/Event/544",
@@ -1923,7 +1941,7 @@
       "title": "The Next Growth Engine: AI Expedition 2027",
       "url": "https://itsight.zdnet.co.kr/conference/ACC2026",
       "start_kst": "2026-12-10T09:00:00+09:00",
-      "end_kst": "2026-12-10T17:30:00+09:00",
+      "end_kst": "2026-12-10T17:20:00+09:00",
       "host": "",
       "register_url": "https://itsight.zdnet.co.kr/conference/ACC2026",
       "description": "사전등록 77,000원 일반 사전등록 (중식 및 다과 제공) · 현장등록 165,000원 당일 등록데스크에서 접수 (사전등록 인원에 따라 현장등록이 불가할 수 있습니다.) · 단체등록 별도문의 5인 이상 사전등록 시 할인혜택 문의 : event@zdnet.co.kr",
@@ -1969,6 +1987,24 @@
         "https://files.dubiz.co.kr/userfiles/images/file1787910602153.png"
       ],
       "id": "dubiz-54c1c80c8cf8"
+    },
+    {
+      "source": "talkit",
+      "title": "2027 스마트 제조혁신 지원사업 맞춤형 활용 전략: 상생형 AX부터 피지컬 AI까지 [코오롱베니트]",
+      "url": "https://talkit.tv/main/events/3756",
+      "start_kst": "2026-12-11T14:00:00+09:00",
+      "end_kst": "2026-12-11T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3756",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1795454195535.jpg"
+      ],
+      "id": "talkit-5edb9cfde753"
     },
     {
       "source": "dubiz",
