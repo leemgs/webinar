@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-23T03:28:33.597024+09:00",
-  "count": 121,
+  "generated_at": "2026-11-23T12:49:38.026853+09:00",
+  "count": 122,
   "webinars": [
     {
       "source": "dubiz",
@@ -1668,6 +1668,36 @@
         "https://files.dubiz.co.kr/userfiles/images/file1795002247822.jpg"
       ],
       "id": "dubiz-50b879041d43"
+    },
+    {
+      "source": "zdnet",
+      "title": "AI 시대의 데이터 인프라 혁신, 자율 운영부터 가상화 워크로드까지",
+      "url": "https://itsight.zdnet.co.kr/webinar/IBM2612",
+      "start_kst": "2026-12-01T14:00:00+09:00",
+      "end_kst": "2026-12-01T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://itsight.zdnet.co.kr/webinar/IBM2612",
+      "description": "좋은 질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 배달의 민족 상품권 증정 · 설문 조사 설문 조사에 참여해주신 분들 중 추첨을 통해 투썸플레이스 아메리카노 증정",
+      "thumbnail": "https://itsight.zdnet.co.kr/_180/img/180.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [
+        {
+          "type": "question",
+          "item": "",
+          "condition": "AI 시대의 데이터 인프라 혁신, 자율 운영부터 가상화 워크로드까지 좋은 질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 배달의 민족 상품권 증정"
+        },
+        {
+          "type": "survey",
+          "item": "",
+          "condition": "설문 조사 설문 조사에 참여해주신 분들 중 추첨을 통해 투썸플레이스 아메리카노 증정"
+        }
+      ],
+      "prize_images": [
+        "https://itsight.zdnet.co.kr/_180/img/g_img1.jpg",
+        "https://itsight.zdnet.co.kr/_180/img/g_img2.jpg"
+      ],
+      "id": "zdnet-b5f17c72cb7e"
     },
     {
       "source": "chontv",
