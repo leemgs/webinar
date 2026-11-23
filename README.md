@@ -466,10 +466,11 @@ Settings → Pages → Source: **Deploy from a branch**, Branch: `main` / `/docs
 홈페이지는 초대받은 사용자를 위한 정보 공간이라, 모든 메뉴 페이지가 열리기 전에 **접속 코드**를 묻습니다.
 
 - 구현: [`docs/assets/site.js`](docs/assets/site.js)의 `initAuth()` / `unlock()`
-- 설정: [`docs/config/access.json`](docs/config/access.json)에 접속 코드의 **SHA-256 해시만** 저장 (평문 코드는 저장하지 않음)
+- 설정: [`docs/config/access.json`](docs/config/access.json)에 접속 코드의 **SHA-256 해시만** 저장 (평문 코드는 저장하지 않음).
+  `digest`는 해시 1개(문자열) 또는 여러 개(목록)이며, 목록의 **어느 코드로든** 입장할 수 있습니다(기본 코드 2개).
 - 동작: 입력한 코드를 브라우저에서 SHA-256으로 해시한 뒤 `access.json`의 `digest` 값과 비교해, 일치하면
   `sessionStorage`에 접근 허용 상태를 기록합니다(같은 탭에서는 메뉴를 옮겨도 다시 묻지 않음, 탭을 닫으면 다시 입력).
-  `version`이나 `digest`가 바뀌면 이미 입장한 사용자도 새 코드를 다시 입력해야 합니다.
+  `version`을 올리면 이미 입장한 사용자도 모두 다시 입력해야 하고, 목록에서 해시를 빼면 그 코드로 입장한 사용자만 다시 묻습니다.
 
 > ⚠️ 정적 사이트의 **간단한 접근 제한**이며, 민감정보 보호 목적이 아닙니다. 해시와 데이터 파일
 > (`webinars.json`, `webinars.ics`)이 클라이언트에 그대로 노출되므로 진짜 보안 경계로 사용하지 마세요.
@@ -482,8 +483,16 @@ Settings → Pages → Source: **Deploy from a branch**, Branch: `main` / `/docs
    node -e "const c=require('crypto');console.log(c.createHash('sha256').update('새코드').digest('hex'))"
    ```
 3. `docs/config/access.json`의 `digest` 값을 교체하고 `version`을 올립니다.
+   코드를 여러 개 쓰려면 `digest`에 해시를 목록으로 넣습니다(바꿀 코드의 해시만 교체).
    ```json
-   { "version": 2, "algorithm": "SHA-256", "digest": "<위에서 계산한 64자리 해시>" }
+   {
+     "version": 3,
+     "algorithm": "SHA-256",
+     "digest": [
+       "<코드 1의 64자리 해시>",
+       "<코드 2의 64자리 해시>"
+     ]
+   }
    ```
 
 ## 자동 등록(register) 활성화

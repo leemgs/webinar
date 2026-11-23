@@ -1,5 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
   "algorithm": "SHA-256",
-  "digest": "5a17bdfc6cc7949085c64939c3e458fe386865e0059274a33262a29a9a4a8bb8"
+  "digest": [
+    "af36ce4dfe30e46821f11b640e9cc2d178a9c04a66f0d18cb21273358abeefaa",
+    "a05f757677aa59387f11e957a42ed160dfab5539f7ce9f968daa66b7a29c0950"
+  ]
 }

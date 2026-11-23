@@ -2,9 +2,10 @@
 //
 // initAuth() shows a code prompt until the visitor unlocks the site; unlock()
 // hashes the typed code with SHA-256 in the browser and compares it with the
-// digest in config/access.json. A match is remembered in sessionStorage (this
-// tab only), together with the config version, so bumping `version` or
-// replacing `digest` asks everyone for the code again.
+// digest(s) in config/access.json — `digest` is one hash or a list of them,
+// one per valid code. A match is remembered in sessionStorage (this tab only)
+// with the config version and the matched digest, so bumping `version` asks
+// everyone for the code again, and removing a digest revokes that code.
 //
 // ⚠️ This is a light access restriction for a static site, NOT a security
 // boundary: the digest, the data (webinars.json) and every page are public
@@ -39,14 +40,17 @@ function readGrant() {
   try { return JSON.parse(sessionStorage.getItem(ACCESS_KEY) || "null"); } catch { return null; }
 }
 
-function writeGrant(cfg) {
+function writeGrant(cfg, digest) {
   try {
-    sessionStorage.setItem(ACCESS_KEY, JSON.stringify({ version: cfg.version, digest: cfg.digest }));
+    sessionStorage.setItem(ACCESS_KEY, JSON.stringify({ version: cfg.version, digest }));
   } catch { /* storage blocked (e.g. private mode): unlocked for this page view only */ }
 }
 
+// the valid code hashes: `digest` may be a single hex string or a list
+const digestsOf = (cfg) => [].concat(cfg.digest || []).map((d) => String(d).toLowerCase());
+
 const isGranted = (grant, cfg) =>
-  !!grant && grant.version === cfg.version && grant.digest === String(cfg.digest).toLowerCase();
+  !!grant && grant.version === cfg.version && digestsOf(cfg).includes(grant.digest);
 
 let resolveUnlocked;
 // app.js waits on this before loading data and rendering
@@ -63,8 +67,8 @@ function openSite() {
 async function unlock(code) {
   const cfg = await loadAccessConfig();
   const typed = await sha256Hex(String(code || "").trim());
-  if (typed !== String(cfg.digest).toLowerCase()) return false;
-  writeGrant(cfg);
+  if (!digestsOf(cfg).includes(typed)) return false;
+  writeGrant(cfg, typed);
   openSite();
   return true;
 }

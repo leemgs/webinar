@@ -51,4 +51,5 @@ def test_access_config_holds_only_a_sha256_digest():
     cfg = json.loads((ROOT / "docs/config/access.json").read_text(encoding="utf-8"))
     assert set(cfg) == {"version", "algorithm", "digest"}
     assert cfg["algorithm"] == "SHA-256" and isinstance(cfg["version"], int)
-    assert re.fullmatch(r"[0-9a-f]{64}", cfg["digest"])
+    digests = [cfg["digest"]] if isinstance(cfg["digest"], str) else cfg["digest"]
+    assert digests and all(re.fullmatch(r"[0-9a-f]{64}", d) for d in digests)
