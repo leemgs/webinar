@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-24T07:39:39.324655+09:00",
-  "count": 124,
+  "generated_at": "2026-11-24T16:05:21.251611+09:00",
+  "count": 125,
   "webinars": [
     {
       "source": "dubiz",
@@ -1374,10 +1374,10 @@
       "url": "https://www.allshowtv.com/detail.html?idx=1775",
       "start_kst": "2026-11-24T14:00:00+09:00",
       "end_kst": "2026-11-24T15:00:00+09:00",
-      "host": "",
+      "host": "오케스트로",
       "register_url": "https://www.allshowtv.com/detail.html?idx=1775",
       "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/16/main_16171943586893.jpg",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/16/main_16171943032850.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1399,9 +1399,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1793378843862.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-038eadfb78dc"
     },
     {
@@ -1435,6 +1433,24 @@
       "prizes": [],
       "prize_images": [],
       "id": "e4ds-e78a39af957b"
+    },
+    {
+      "source": "allshowtv",
+      "title": "막는 보안에서, 대응하는 보안으로: Kaspersky",
+      "url": "https://www.allshowtv.com/detail.html?idx=1766",
+      "start_kst": "2026-11-25T14:00:00+09:00",
+      "end_kst": "2026-11-25T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1766",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/03/main_03101239225954.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/11/03/main_03142405627191.jpg"
+      ],
+      "id": "allshowtv-b2a5fd70bf92"
     },
     {
       "source": "talkit",
