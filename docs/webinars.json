@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-25T06:12:34.420411+09:00",
-  "count": 125,
+  "generated_at": "2026-11-25T14:32:25.352970+09:00",
+  "count": 128,
   "webinars": [
     {
       "source": "dubiz",
@@ -1987,6 +1987,24 @@
       "id": "chontv-d917f9181454"
     },
     {
+      "source": "talkit",
+      "title": "Autonomous Enterprise를 위한 SAP AI의 진화 [ASPN, SAP]",
+      "url": "https://talkit.tv/main/events/3757",
+      "start_kst": "2026-12-10T14:00:00+09:00",
+      "end_kst": "2026-12-10T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3757",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1795455529182.jpg"
+      ],
+      "id": "talkit-b69934a18fe7"
+    },
+    {
       "source": "dubiz",
       "title": "AW 2027 베스트 솔루션 데이 8탄 : AI로보틱스 #2 [피아이이(피아이이로보틱스), 모벤시스, 에이딘로보틱스, 주식회사 디에스테크코리아]",
       "url": "https://dubiz.co.kr/Event/521",
@@ -2077,6 +2095,22 @@
       "id": "talkit-762a12d676e1"
     },
     {
+      "source": "chontv",
+      "title": "[Recap+] AI 혁신을 가속하는 보안 설계: 안전한 AI 사용부터 AI 애플리케이션 보호까지",
+      "url": "https://chontv.com/event/1306",
+      "start_kst": "2026-12-16T14:00:00+09:00",
+      "end_kst": "2026-12-16T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1306",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_d4df73a0ea0b02711343d6b5bdd166c8.png?u=1795502548",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-cad9cf9b2714"
+    },
+    {
       "source": "ddtube",
       "title": "[Synology] 저장부터 복구까지: 공공기관을 위한 복원력 있는 데이터 인프라 전략",
       "url": "https://www.ddtube.co.kr/d2118/",
@@ -2093,6 +2127,24 @@
         "https://www.ddtube.co.kr/wp-content/uploads/2026/11/synology_edm_1300_event.jpg"
       ],
       "id": "ddtube-707bcf25f0b6"
+    },
+    {
+      "source": "dubiz",
+      "title": "자동화에서 자율화로: 자동차 제조의 다음 단계",
+      "url": "https://dubiz.co.kr/Event/558",
+      "start_kst": "2026-12-16T14:00:00+09:00",
+      "end_kst": "2026-12-16T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/558",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1795520421411.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1795529520645.png"
+      ],
+      "id": "dubiz-0a0a6f2ac815"
     },
     {
       "source": "e4ds",
