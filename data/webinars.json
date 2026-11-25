@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-25T14:32:25.352970+09:00",
-  "count": 128,
+  "generated_at": "2026-11-26T05:35:27.946269+09:00",
+  "count": 131,
   "webinars": [
     {
       "source": "dubiz",
@@ -1440,10 +1440,10 @@
       "url": "https://www.allshowtv.com/detail.html?idx=1766",
       "start_kst": "2026-11-25T14:00:00+09:00",
       "end_kst": "2026-11-25T15:00:00+09:00",
-      "host": "",
+      "host": "KCC정보통신",
       "register_url": "https://www.allshowtv.com/detail.html?idx=1766",
       "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/03/main_03101239225954.jpg",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/03/main_03165933589272.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1478,7 +1478,7 @@
       "end_kst": "2026-11-25T15:00:00+09:00",
       "host": "",
       "register_url": "https://itsight.zdnet.co.kr/webinar/exosp1125",
-      "description": "좋은질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 배달의 민족 상품권 증정 · 설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정",
+      "description": "",
       "thumbnail": "https://itsight.zdnet.co.kr/_179/img/179.jpg",
       "tags": [],
       "registered": false,
@@ -1494,11 +1494,26 @@
           "condition": "설문 조사 사전 등록 및 설문 조사에 참여해주신 분들 중 추첨을 통해 스타벅스 아메리카노 증정"
         }
       ],
-      "prize_images": [
-        "https://itsight.zdnet.co.kr/_179/img/g_img1.jpg",
-        "https://itsight.zdnet.co.kr/_179/img/g_img2.jpg"
-      ],
+      "prize_images": [],
       "id": "zdnet-016e9bc238c8"
+    },
+    {
+      "source": "allshowtv",
+      "title": "답만 하는 AI를 넘어, Agentic AI가 연결하는 엔드-투-엔드 고객 경험",
+      "url": "https://www.allshowtv.com/detail.html?idx=1771",
+      "start_kst": "2026-11-25T15:00:00+09:00",
+      "end_kst": "2026-11-25T15:40:00+09:00",
+      "host": "제네시스코리아",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1771",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/05/main_05135652574635.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/11/05/main_05134153006572.jpg"
+      ],
+      "id": "allshowtv-f7fd958e2472"
     },
     {
       "source": "e4ds",
@@ -1595,6 +1610,24 @@
         "https://itsight.zdnet.co.kr/_176/img/g_img2.jpg"
       ],
       "id": "zdnet-ea1ed303748a"
+    },
+    {
+      "source": "allshowtv",
+      "title": "AI 시대의 차세대 클라우드 보안 전략",
+      "url": "https://www.allshowtv.com/detail.html?idx=1774",
+      "start_kst": "2026-11-26T15:00:00+09:00",
+      "end_kst": "2026-11-26T16:00:00+09:00",
+      "host": "",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1774",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/17/main_17091523193344.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://img.etnews.com/allshowtv/tmp_upload/2026/11/16/main_16154325606066.jpg"
+      ],
+      "id": "allshowtv-aed7e7aafd0e"
     },
     {
       "source": "dubiz",
@@ -2059,6 +2092,22 @@
       "id": "dubiz-7fe310820b3d"
     },
     {
+      "source": "chontv",
+      "title": "프론티어 AI 공격의 실체를 목격하라 PHP2Shell을 포함한 실제 프론티어 AI 공격사례 분석과 대응 전략",
+      "url": "https://chontv.com/event/1308",
+      "start_kst": "2026-12-15T14:00:00+09:00",
+      "end_kst": "2026-12-15T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://chontv.com/event/1308",
+      "description": "",
+      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_9793a955f1b6cd9218b2005b98b221aa.png?u=1795541943",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "chontv-c4134ed8faff"
+    },
+    {
       "source": "ddtube",
       "title": "[맨텍솔루션] 공공 정보시스템 등급 재분류에 대응하는 재해복구&예방점검 자동화 전략",
       "url": "https://www.ddtube.co.kr/d2117/",
@@ -2155,7 +2204,7 @@
       "host": "전기전자 평생교육원",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1035",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-07/e6407ddbdd708093.png",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-07/bf89cce164962241_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
