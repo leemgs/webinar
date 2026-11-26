@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-26T05:35:27.946269+09:00",
-  "count": 131,
+  "generated_at": "2026-11-26T14:03:34.243381+09:00",
+  "count": 132,
   "webinars": [
     {
       "source": "dubiz",
@@ -2276,6 +2276,22 @@
         "https://talkit.tv/userfiles/images/file1794235461545.jpg"
       ],
       "id": "talkit-1919e1b7d471"
+    },
+    {
+      "source": "e4ds",
+      "title": "SDV 시대의 엣지 커넥티비티: 카메라와 디스플레이 연결을 위한 개방형 표준 ASA Motion Link(ASA-ML)",
+      "url": "https://www.e4ds.com/webinar_detail.asp?idx=1048",
+      "start_kst": "2027-01-21T10:30:00+09:00",
+      "end_kst": "2027-01-21T12:00:00+09:00",
+      "host": "Microchip Technology Inc.",
+      "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1048",
+      "description": "",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-25/518d3313be52cbe6.png",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "e4ds-c0cd730e6976"
     }
   ]
 }
