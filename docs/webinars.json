@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-26T14:03:34.243381+09:00",
-  "count": 132,
+  "generated_at": "2026-11-27T05:12:03.540845+09:00",
+  "count": 137,
   "webinars": [
     {
       "source": "dubiz",
@@ -1589,7 +1589,7 @@
       "end_kst": "2026-11-26T15:00:00+09:00",
       "host": "",
       "register_url": "https://itsight.zdnet.co.kr/webinar/SamsungSDS_2611",
-      "description": "사전등록/참여 사전등록 및 참여해주신 분들 중 20명 추첨 투썸플레이스 아메리카노 · 설문 조사 설문 조사에 참여해주신 분들 중 10명 추첨 배달의민족 상품권",
+      "description": "",
       "thumbnail": "https://itsight.zdnet.co.kr/_176/img/176.jpg",
       "tags": [],
       "registered": false,
@@ -1605,10 +1605,7 @@
           "condition": "설문 조사 설문 조사에 참여해주신 분들 중 10명 추첨 배달의민족 상품권"
         }
       ],
-      "prize_images": [
-        "https://itsight.zdnet.co.kr/_176/img/g_img1.jpg",
-        "https://itsight.zdnet.co.kr/_176/img/g_img2.jpg"
-      ],
+      "prize_images": [],
       "id": "zdnet-ea1ed303748a"
     },
     {
@@ -1617,10 +1614,10 @@
       "url": "https://www.allshowtv.com/detail.html?idx=1774",
       "start_kst": "2026-11-26T15:00:00+09:00",
       "end_kst": "2026-11-26T16:00:00+09:00",
-      "host": "",
+      "host": "베스핀글로벌",
       "register_url": "https://www.allshowtv.com/detail.html?idx=1774",
       "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/17/main_17091523193344.jpg",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/17/main_17091630824481.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -1922,6 +1919,22 @@
       "id": "talkit-3b67d22466a0"
     },
     {
+      "source": "allshowtv",
+      "title": "Microsoft Ignite: 새로운 가능성의 시작",
+      "url": "https://www.allshowtv.com/detail.html?idx=1773",
+      "start_kst": "2026-12-08T15:00:00+09:00",
+      "end_kst": "2026-12-08T16:30:00+09:00",
+      "host": "",
+      "register_url": "https://www.allshowtv.com/detail.html?idx=1773",
+      "description": "",
+      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/11/09/main_09113458746026.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "allshowtv-721ed160635c"
+    },
+    {
       "source": "dubiz",
       "title": "2026년 AI 머신비전 기본 실무 교육과정",
       "url": "https://dubiz.co.kr/Event/544",
@@ -1939,14 +1952,14 @@
     },
     {
       "source": "e4ds",
-      "title": "[오프라인 실습] ESP32 제품 개발 및 펌웨어 바이브 코딩 오프라인 강의",
+      "title": "[오프라인 실습] ESP32 왕초보 입문: LED부터 Wi-Fi 제어까지 하루 만에",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1034",
       "start_kst": "2026-12-09T10:00:00+09:00",
       "end_kst": "2026-12-09T17:00:00+09:00",
       "host": "전기전자 평생교육원",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1034",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-10-07/a671ce1dfcff406a_w720.jpg",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-26/8a399e3887abe38b_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
@@ -2092,6 +2105,22 @@
       "id": "dubiz-7fe310820b3d"
     },
     {
+      "source": "dubiz",
+      "title": "[팔로우업 웨비나] 2026 AI자율제조혁신 컨퍼런스 in 대구",
+      "url": "https://dubiz.co.kr/Event/561",
+      "start_kst": "2026-12-15T10:00:00+09:00",
+      "end_kst": "2026-12-15T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/561",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1795691018249.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-ecc0b30601ce"
+    },
+    {
       "source": "chontv",
       "title": "프론티어 AI 공격의 실체를 목격하라 PHP2Shell을 포함한 실제 프론티어 AI 공격사례 분석과 대응 전략",
       "url": "https://chontv.com/event/1308",
@@ -2142,6 +2171,24 @@
         "https://talkit.tv/userfiles/images/file1792672899502.jpg"
       ],
       "id": "talkit-762a12d676e1"
+    },
+    {
+      "source": "dubiz",
+      "title": "고정밀 3D 비전을 위한 간접 비행시간(iToF) 기술의 이해",
+      "url": "https://dubiz.co.kr/Event/557",
+      "start_kst": "2026-12-16T10:00:00+09:00",
+      "end_kst": "2026-12-16T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/557",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1795440319352.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://files.dubiz.co.kr/userfiles/images/file1795535102214.jpg"
+      ],
+      "id": "dubiz-d9656acda28f"
     },
     {
       "source": "chontv",
@@ -2244,6 +2291,40 @@
       "id": "chontv-e9dbef8d2d92"
     },
     {
+      "source": "talkit",
+      "title": "토큰 비용, 보안, 데이터까지 놓치지 않는 AI 플랫폼 구축 전략 [HPE Private Cloud AI]",
+      "url": "https://talkit.tv/main/events/3755",
+      "start_kst": "2026-12-17T14:00:00+09:00",
+      "end_kst": "2026-12-17T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3755",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1795441545185.jpg"
+      ],
+      "id": "talkit-3a6c9242d6e2"
+    },
+    {
+      "source": "dubiz",
+      "title": "[팔로우업 웨비나] 2026 AI자율제조혁신 컨퍼런스 in 수원",
+      "url": "https://dubiz.co.kr/Event/562",
+      "start_kst": "2026-12-18T10:00:00+09:00",
+      "end_kst": "2026-12-18T11:00:00+09:00",
+      "host": "",
+      "register_url": "https://dubiz.co.kr/Event/562",
+      "description": "",
+      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1795701010407.jpg",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [],
+      "id": "dubiz-3067246f4eec"
+    },
+    {
       "source": "e4ds",
       "title": "산업용 이더넷으로 구현하는 스마트 팩토리와 ADI 솔루션",
       "url": "https://www.e4ds.com/webinar_detail.asp?idx=1045",
@@ -2252,7 +2333,7 @@
       "host": "ADI",
       "register_url": "https://www.e4ds.com/webinar_detail.asp?idx=1045",
       "description": "",
-      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-03/c76ce267f2c47b11.png",
+      "thumbnail": "https://cdn.e4ds.com/uploads/2026-11-13/b55a9d4ba336e81c_w720.jpg",
       "tags": [],
       "registered": false,
       "prizes": [],
