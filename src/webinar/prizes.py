@@ -62,8 +62,10 @@ def _classify(chunk: str) -> str | None:
 
 def apply(webinar: Webinar) -> Webinar:
     """Populate webinar.prizes from scraped text + overrides (override wins)."""
+    # title and description are separate texts: a newline keeps the title from
+    # being glued onto the description's first clause (and into its condition)
     scraped = extract_prizes(
-        " ".join(filter(None, [webinar.title, webinar.description]))
+        "\n".join(filter(None, [webinar.title, webinar.description]))
     )
     by_type: dict[str, Prize] = {p.type: p for p in scraped}
 

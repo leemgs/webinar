@@ -1318,3 +1318,14 @@ def test_zdnet_fetch_enriches_only_upcoming_from_detail_event_section():
                                  "https://itsight.zdnet.co.kr/_177/img/g_img2.jpg"]
     prizes.apply(live)
     assert {p.type for p in live.prizes} == {"question", "survey"}
+
+
+def test_prize_condition_does_not_start_with_the_title():
+    from webinar.models import Webinar
+
+    w = Webinar(source="x", title="데이터 인프라 혁신", url="https://x/1",
+                description="좋은 질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 상품권 증정")
+    prizes.apply(w)
+    assert [(p.type, p.condition) for p in w.prizes] == [
+        ("question", "좋은 질문 실시간 댓글을 통해 질문을 남겨 주신 분들 중 추첨을 통해 상품권 증정")]
+
