@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-27T14:06:58.372882+09:00",
-  "count": 136,
+  "generated_at": "2026-11-28T05:02:04.321651+09:00",
+  "count": 137,
   "webinars": [
     {
       "source": "allshowtv",
@@ -1623,9 +1623,7 @@
       "tags": [],
       "registered": false,
       "prizes": [],
-      "prize_images": [
-        "https://files.dubiz.co.kr/userfiles/images/file1787910589114.png"
-      ],
+      "prize_images": [],
       "id": "dubiz-dde57a2a8328"
     },
     {
@@ -2341,6 +2339,24 @@
         "https://talkit.tv/userfiles/images/file1794235461545.jpg"
       ],
       "id": "talkit-1919e1b7d471"
+    },
+    {
+      "source": "talkit",
+      "title": "VMware 전환의 4가지 장벽 해소, Proxmox 엔터프라이즈 가상화 전략 [매커스시스템즈 MOAVI]",
+      "url": "https://talkit.tv/main/events/3758",
+      "start_kst": "2026-12-23T14:00:00+09:00",
+      "end_kst": "2026-12-23T15:00:00+09:00",
+      "host": "",
+      "register_url": "https://talkit.tv/main/events/3758",
+      "description": "",
+      "thumbnail": "",
+      "tags": [],
+      "registered": false,
+      "prizes": [],
+      "prize_images": [
+        "https://talkit.tv/userfiles/images/file1795617928930.jpg"
+      ],
+      "id": "talkit-ed8b8d5f3674"
     },
     {
       "source": "e4ds",
