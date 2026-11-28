@@ -1,75 +1,7 @@
 {
-  "generated_at": "2026-11-28T13:51:12.686843+09:00",
-  "count": 137,
+  "generated_at": "2026-11-29T03:55:14.327032+09:00",
+  "count": 133,
   "webinars": [
-    {
-      "source": "allshowtv",
-      "title": "VMware 전환 이후, 인프라 운영의 새로운 기준 : 성공적인 전환을 위한 핵심 기능 요건과 운영 전략",
-      "url": "https://www.allshowtv.com/detail.html?idx=1754",
-      "start_kst": "2026-09-29T14:00:00+09:00",
-      "end_kst": "2026-09-29T15:00:00+09:00",
-      "host": "오케스트로",
-      "register_url": "https://www.allshowtv.com/detail.html?idx=1754",
-      "description": "",
-      "thumbnail": "https://img.etnews.com/allshowtv/tmp_upload/2026/09/16/main_16171649579272.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://img.etnews.com/allshowtv/tmp_upload/2026/09/16/main_16171649866091.jpg"
-      ],
-      "id": "allshowtv-9e79f223a181"
-    },
-    {
-      "source": "chontv",
-      "title": "N2SF 시대의 데이터 중심 제로트러스트: 문서중앙화 x AI x N2SF 통합 전략 및 고객사 구축 사례",
-      "url": "https://chontv.com/event/1281",
-      "start_kst": "2026-09-29T14:00:00+09:00",
-      "end_kst": "2026-09-29T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://chontv.com/event/1281",
-      "description": "",
-      "thumbnail": "https://chontv.com/assets/data/event/thumb__event_image_9e652ca0a0c334c08f39f76eded4e263.png?u=1790676341",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "chontv-2fc36abd3042"
-    },
-    {
-      "source": "dubiz",
-      "title": "Mission Clear : 제조 현장의 5가지 미션을 해결하라!",
-      "url": "https://dubiz.co.kr/Event/534",
-      "start_kst": "2026-09-29T14:00:00+09:00",
-      "end_kst": "2026-09-29T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://dubiz.co.kr/Event/534",
-      "description": "",
-      "thumbnail": "https://files.dubiz.co.kr/userfiles/images/file1788536310210.jpg",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [],
-      "id": "dubiz-8c3b46e3c93d"
-    },
-    {
-      "source": "talkit",
-      "title": "AI 에이전트부터 쿠버네티스까지, 새로운 보안과 인증서 관리 전략 [Nutanix, 지티씨코리아, 다우데이타]",
-      "url": "https://talkit.tv/main/events/3723",
-      "start_kst": "2026-09-29T14:00:00+09:00",
-      "end_kst": "2026-09-29T15:00:00+09:00",
-      "host": "",
-      "register_url": "https://talkit.tv/main/events/3723",
-      "description": "",
-      "thumbnail": "",
-      "tags": [],
-      "registered": false,
-      "prizes": [],
-      "prize_images": [
-        "https://talkit.tv/userfiles/images/file1787836903314.jpg"
-      ],
-      "id": "talkit-2b53a3074c76"
-    },
     {
       "source": "dubiz",
       "title": "AI/HPC 고성능화를 위한 전원·고속통신 솔루션",
